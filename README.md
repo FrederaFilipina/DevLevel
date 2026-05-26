@@ -1,8 +1,8 @@
-# DevLevel 🚀
+# 🚀 Pojeto: DevLevel
 
 ## 📖 Sobre o Projeto
 
-O DevLevel é uma plataforma gamificada de aprendizado de programação focada no desenvolvimento de conhecimento prático, habilidades técnicas e preparação para o mercado de trabalho.
+O `DevLevel` é uma plataforma gamificada de aprendizado de programação focada no desenvolvimento de conhecimento prático, habilidades técnicas e preparação para o mercado de trabalho.
 
 A proposta do projeto é unir gamificação, desafios interativos e projetos reais para tornar o aprendizado de programação mais envolvente, eficiente e aplicado ao contexto profissional.
 
@@ -10,41 +10,44 @@ A proposta do projeto é unir gamificação, desafios interativos e projetos rea
 
 # 🎯 Problema / Desafio Abordado
 
-Muitas plataformas de ensino de programação conseguem engajar usuários através de gamificação, porém falham em transformar esse aprendizado em experiência prática real para o mercado de trabalho.
+Muitas plataformas de ensino de programação conseguem engajar usuários por meio da gamificação, porém falham em transformar o aprendizado em experiências práticas reais e em validar de forma clara as habilidades desenvolvidas para o mercado de trabalho.
 
-O DevLevel busca resolver esse problema oferecendo:
+O `DevLevel` busca resolver esse problema oferecendo:
+- trilhas de aprendizado estruturadas;
 - aprendizado gamificado;
 - desafios práticos;
-- evolução por níveis;
-- construção de projetos reais;
-- acompanhamento de progresso técnico.
+- desenvolvimento de projetos reais;
+- pontuação baseada em boas práticas e Clean Code;
+- progressão técnica por níveis.
+
 
 ---
 
 # 👨‍💻 Integrantes da Equipe
 
-- Frederico Campos
-- Nome integrante 2
-- Nome integrante 3
+- Felipe
+- Frederico
+- Gabriel
+- Gustavo
 
 ---
 
 # 🛠️ Tecnologias Utilizadas
 
-## Frontend
+### Frontend
 - React
 - Vite
 - TailwindCSS
 
-## Backend
+### Backend
 - Node.js
 - Express
 
-## Banco de Dados
+### Banco de Dados
 - PostgreSQL
 - Prisma ORM
 
-## Outras Ferramentas
+### Outras Ferramentas
 - Git
 - GitHub
 - Figma
@@ -55,15 +58,14 @@ O DevLevel busca resolver esse problema oferecendo:
 # ✨ Funcionalidades Implementadas
 
 - ✅ Sistema de cadastro e login
-- ✅ Sistema de níveis e XP
-- ✅ Desafios de programação
-- ✅ Trilhas de aprendizado
-- ✅ Ranking de usuários
-- ✅ Sistema de conquistas
-- ✅ Editor de código integrado
-- ✅ Dashboard de progresso
-- ✅ Gamificação por missões
 - ✅ Perfil do usuário
+- ✅ Dashboard de progresso
+
+- ✅ Sistema de níveis e XP
+- ✅ Trilhas de aprendizado
+- ✅ Desafios de programação
+- ✅ Sistema de conquistas
+- ✅ Ranking de usuários
 
 ---
 
@@ -106,20 +108,17 @@ O DevLevel busca resolver esse problema oferecendo:
 
 # 💰 Modelo de Monetização
 
-O projeto poderá utilizar os seguintes modelos de monetização:
+O DevLevel utilizará um modelo de monetização baseado em anúncios segmentados, exibindo conteúdos relevantes de acordo com os interesses e perfil de aprendizado dos usuários.
 
-- Plano gratuito com funcionalidades básicas
-- Plano premium com:
-  - trilhas avançadas;
-  - IA mentora;
-  - desafios exclusivos;
-  - certificados;
-  - projetos profissionais.
+Os anúncios poderão ser relacionados a:
+- cursos de tecnologia;
+- vagas de estágio e emprego;
+- eventos da área de TI;
+- ferramentas para desenvolvedores;
+- plataformas educacionais;
+- produtos tecnológicos.
 
-Também poderá haver:
-- parcerias educacionais;
-- licenciamento para escolas técnicas;
-- versão empresarial.
+Esse modelo permite manter a plataforma acessível gratuitamente, ao mesmo tempo em que gera receita para manutenção e evolução do sistema.
 
 ---
 
