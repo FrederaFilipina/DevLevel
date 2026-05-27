@@ -1,252 +1,369 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../prisma/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Usuario {
-  id         String   @id @default(uuid())
-  username   String
-  email      String   @unique
-  password   String
-  avatar_url String?
-  bio        String?
-  xp         Int      @default(0)
-  level      Int      @default(1)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id                    String                    @id @default(uuid())
 
-  respostas_usuario RespostaUsuario[]
-  progresso_trilha  ProgressoTrilhaUsuario[]
-  bloqueios_trilha  BloqueioTrilhaUsuario[]
-  conquistas        ConquistaUsuario[]
-  rankings          Ranking[]
-  habilidades       HabilidadeUsuario[]
+  nome                  String
+  email                 String                    @unique
+  senha                 String
 
-  @@map("usuarios")
+  avatarUrl             String?
+  bio                   String?
+
+  xp                    Int                       @default(0)
+  nivel                 Int                       @default(1)
+
+  pontuacaoTotal        Int                       @default(0)
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  trilhasUsuario        TrilhaUsuario[]
+  respostasUsuario      RespostaUsuario[]
+
+  temasUsuario          TemaUsuario[]
+
+  conquistasUsuario     ConquistaUsuario[]
+  habilidadesUsuario    HabilidadeUsuario[]
+  insigniasUsuario      InsigniaUsuario[]
+
+  rankings              Ranking[]
+
+  @@map("usuario")
 }
 
-enum NameAssunto {
-  JS
+model Tema {
+  id                    String                    @id @default(uuid())
+
+  nome                  String                    @unique
+  descricao             String?
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  trilhas               Trilha[]
+  usuarios              TemaUsuario[]
+
+  insignias             InsigniaUsuario[]
+
+  @@map("tema")
 }
 
-model Assunto {
-  id          String      @id @default(uuid())
-  name        NameAssunto @default(JS)
-  description String?
-  created_at  DateTime    @default(now())
+model TemaUsuario {
+  id                    String                    @id @default(uuid())
 
-  trilhas TrilhaAprendizado[]
+  usuarioId             String
+  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
 
-  @@map("assuntos")
+  temaId                String
+  tema                  Tema                      @relation(fields: [temaId], references: [id])
+
+  pontuacaoTotal        Int                       @default(0)
+
+  trilhasConcluidas     Int                       @default(0)
+
+  nivelAtual            NivelDificuldade         @default(INICIANTE)
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  @@unique([usuarioId, temaId])
+
+  @@map("tema_usuario")
 }
 
-model TrilhaAprendizado {
-  id               String   @id @default(uuid())
-  subject_id       String
-  title            String
-  description      String?
-  difficulty_level Int
-  minimum_score    Int
-  order_index      Int
-  is_locked        Boolean  @default(true)
-  created_at       DateTime @default(now())
+model Trilha {
+  id                    String                    @id @default(uuid())
 
-  assunto   Assunto                  @relation(fields: [subject_id], references: [id])
-  modulos   Modulo[]
-  progresso ProgressoTrilhaUsuario[]
-  bloqueios BloqueioTrilhaUsuario[]
+  temaId                String
+  tema                  Tema                      @relation(fields: [temaId], references: [id])
 
-  @@map("trilhas_aprendizado")
+  titulo                String
+  descricao             String?
+
+  nivel                 NivelDificuldade
+
+  ordem                 Int
+
+  pontuacaoMinima       Int
+
+  trilhaAnteriorId      String?
+  trilhaAnterior        Trilha?                   @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
+
+  proximasTrilhas       Trilha[]                  @relation("ProgressaoTrilha")
+
+  modulos               Modulo[]
+  usuarios              TrilhaUsuario[]
+
+  insignias             InsigniaUsuario[]
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  @@map("trilha")
+}
+
+enum NivelDificuldade {
+  INICIANTE
+  INTERMEDIARIO
+  AVANCADO
 }
 
 model Modulo {
-  id          String   @id @default(uuid())
-  track_id    String
-  title       String
-  description String?
-  order_index Int
-  created_at  DateTime @default(now())
+  id                    String                    @id @default(uuid())
 
-  trilha   TrilhaAprendizado @relation(fields: [track_id], references: [id])
-  questoes Questao[]
+  trilhaId              String
+  trilha                Trilha                    @relation(fields: [trilhaId], references: [id])
 
-  @@map("modulos")
+  titulo                String
+  descricao             String?
+
+  ordem                 Int
+
+  questoes              Questao[]
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  @@map("modulo")
 }
 
 model Questao {
-  id            String   @id @default(uuid())
-  module_id     String
-  title         String
-  description   String
-  difficulty    Int
-  xp_reward     Int
-  minimum_score Int
-  order_index   Int
-  created_at    DateTime @default(now())
+  id                    String                    @id @default(uuid())
 
-  modulo            Modulo            @relation(fields: [module_id], references: [id])
-  respostas         Resposta[]
-  respostas_usuario RespostaUsuario[]
+  moduloId              String
+  modulo                Modulo                    @relation(fields: [moduloId], references: [id])
 
-  @@map("questoes")
+  titulo                String
+  descricao             String                    @db.Text
+
+  dificuldade           Int
+
+  xpRecompensa          Int
+
+  ordem                 Int
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  respostas             RespostaQuestao[]
+  respostasUsuario      RespostaUsuario[]
+
+  @@map("questao")
 }
 
-model Resposta {
-  id                String   @id @default(uuid())
-  question_id       String
-  answer_content    String
-  is_correct        Boolean
-  clean_code_score  Int
-  performance_score Int
-  readability_score Int
-  created_at        DateTime @default(now())
+model RespostaQuestao {
+  id                    String                    @id @default(uuid())
 
-  questao           Questao           @relation(fields: [question_id], references: [id])
-  respostas_usuario RespostaUsuario[]
+  questaoId             String
+  questao               Questao                   @relation(fields: [questaoId], references: [id])
 
-  @@map("respostas")
+  titulo                String
+
+  codigoResposta        String                    @db.Text
+
+  explicacao            String?                   @db.Text
+
+  pontuacao             Int
+
+  cleanCodeScore        Int
+  performanceScore      Int
+  legibilidadeScore     Int
+
+  pontosPositivos       String?                   @db.Text
+  pontosNegativos       String?                   @db.Text
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  respostasUsuarios     RespostaUsuario[]
+
+  @@map("resposta_questao")
 }
 
 model RespostaUsuario {
-  id                String   @id @default(uuid())
-  user_id           String
-  question_id       String
-  answer_id         String
-  final_score       Int
-  positive_feedback String?
-  negative_feedback String?
-  is_completed      Boolean  @default(false)
-  answered_at       DateTime @default(now())
+  id                    String                    @id @default(uuid())
 
-  usuario  Usuario  @relation(fields: [user_id], references: [id])
-  questao  Questao  @relation(fields: [question_id], references: [id])
-  resposta Resposta @relation(fields: [answer_id], references: [id])
+  usuarioId             String
+  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
 
-  avaliacoes AvaliacaoResposta[]
+  questaoId             String
+  questao               Questao                   @relation(fields: [questaoId], references: [id])
 
-  @@map("respostas_usuario")
+  respostaQuestaoId     String
+  respostaQuestao       RespostaQuestao           @relation(fields: [respostaQuestaoId], references: [id])
+
+  pontuacaoRecebida     Int
+
+  respondidaEm          DateTime                  @default(now())
+
+  @@unique([usuarioId, questaoId])
+
+  @@map("resposta_usuario")
 }
 
-model ProgressoTrilhaUsuario {
-  id                  String    @id @default(uuid())
-  user_id             String
-  track_id            String
-  current_module_id   String?
-  current_question_id String?
-  progress_percentage Int
-  is_completed        Boolean   @default(false)
-  started_at          DateTime  @default(now())
-  completed_at        DateTime?
+model TrilhaUsuario {
+  id                    String                    @id @default(uuid())
 
-  usuario Usuario           @relation(fields: [user_id], references: [id])
-  trilha  TrilhaAprendizado @relation(fields: [track_id], references: [id])
+  usuarioId             String
+  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
 
-  @@map("progresso_trilha_usuario")
+  trilhaId              String
+  trilha                Trilha                    @relation(fields: [trilhaId], references: [id])
+
+  status                StatusTrilhaUsuario       @default(EM_ANDAMENTO)
+
+  pontuacaoAtual        Int                       @default(0)
+
+  pontuacaoNecessaria   Int
+
+  percentualConclusao   Int                       @default(0)
+
+  podeDesbloquear       Boolean                   @default(false)
+
+  moduloAtualId         String?
+  questaoAtualId        String?
+
+  iniciadaEm            DateTime                  @default(now())
+  concluidaEm           DateTime?
+
+  @@unique([usuarioId, trilhaId])
+
+  @@map("trilha_usuario")
 }
 
-model BloqueioTrilhaUsuario {
-  id          String    @id @default(uuid())
-  user_id     String
-  track_id    String
-  is_unlocked Boolean   @default(false)
-  unlocked_at DateTime?
-
-  usuario Usuario           @relation(fields: [user_id], references: [id])
-  trilha  TrilhaAprendizado @relation(fields: [track_id], references: [id])
-
-  @@map("bloqueios_trilha_usuario")
+enum StatusTrilhaUsuario {
+  EM_ANDAMENTO
+  CONCLUIDA
+  AGUARDANDO_REVISAO
+  BLOQUEADA
 }
 
 model Conquista {
-  id          String   @id @default(uuid())
-  title       String
-  description String?
-  icon        String?
-  xp_reward   Int
-  created_at  DateTime @default(now())
+  id                    String                    @id @default(uuid())
 
-  usuarios ConquistaUsuario[]
+  titulo                String
+  descricao             String?
 
-  @@map("conquistas")
+  icone                 String?
+
+  xpRecompensa          Int
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  usuarios              ConquistaUsuario[]
+
+  @@map("conquista")
 }
 
 model ConquistaUsuario {
-  id             String   @id @default(uuid())
-  user_id        String
-  achievement_id String
-  unlocked_at    DateTime @default(now())
+  id                    String                    @id @default(uuid())
 
-  usuario   Usuario   @relation(fields: [user_id], references: [id])
-  conquista Conquista @relation(fields: [achievement_id], references: [id])
+  usuarioId             String
+  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
 
-  @@map("conquistas_usuario")
-}
+  conquistaId           String
+  conquista             Conquista                 @relation(fields: [conquistaId], references: [id])
 
-model Ranking {
-  id         String   @id @default(uuid())
-  user_id    String
-  total_xp   Int
-  position   Int
-  updated_at DateTime @updatedAt
+  desbloqueadaEm        DateTime                  @default(now())
 
-  usuario Usuario @relation(fields: [user_id], references: [id])
-
-  @@map("rankings")
+  @@map("conquista_usuario")
 }
 
 model Habilidade {
-  id          String  @id @default(uuid())
-  name        String
-  description String?
+  id                    String                    @id @default(uuid())
 
-  usuarios HabilidadeUsuario[]
+  nome                  String
+  descricao             String?
 
-  @@map("habilidades")
+  usuarios              HabilidadeUsuario[]
+
+  @@map("habilidade")
 }
 
 model HabilidadeUsuario {
-  id         String   @id @default(uuid())
-  user_id    String
-  skill_id   String
-  score      Int
-  level      Int
-  updated_at DateTime @updatedAt
+  id                    String                    @id @default(uuid())
 
-  usuario    Usuario    @relation(fields: [user_id], references: [id])
-  habilidade Habilidade @relation(fields: [skill_id], references: [id])
+  usuarioId             String
+  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
 
-  @@map("habilidades_usuario")
+  habilidadeId          String
+  habilidade            Habilidade                @relation(fields: [habilidadeId], references: [id])
+
+  pontuacao             Int                       @default(0)
+
+  nivel                 Int                       @default(1)
+
+  updatedAt             DateTime                  @updatedAt
+
+  @@map("habilidade_usuario")
 }
 
-model CriterioAvaliacao {
-  id          String  @id @default(uuid())
-  name        String
-  description String?
-  weight      Int
+model Insignia {
+  id                    String                    @id @default(uuid())
 
-  avaliacoes AvaliacaoResposta[]
+  titulo                String
+  descricao             String?
 
-  @@map("criterios_avaliacao")
+  icone                 String?
+
+  tipo                  TipoInsignia
+
+  xpRecompensa          Int                       @default(0)
+
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  usuarios              InsigniaUsuario[]
+
+  @@map("insignia")
 }
 
-model AvaliacaoResposta {
-  id             String  @id @default(uuid())
-  user_answer_id String
-  criteria_id    String
-  score          Int
-  feedback       String?
+enum TipoInsignia {
+  CONCLUSAO_TRILHA
+  APROVACAO_TRILHA
+  MESTRE_TEMA
+}
 
-  resposta_usuario RespostaUsuario   @relation(fields: [user_answer_id], references: [id])
-  criterio         CriterioAvaliacao @relation(fields: [criteria_id], references: [id])
+model InsigniaUsuario {
+  id                    String                    @id @default(uuid())
 
-  @@map("avaliacoes_resposta")
+  usuarioId             String
+  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+
+  insigniaId            String
+  insignia              Insignia                  @relation(fields: [insigniaId], references: [id])
+
+  temaId                String?
+  tema                  Tema?                     @relation(fields: [temaId], references: [id])
+
+  trilhaId              String?
+  trilha                Trilha?                   @relation(fields: [trilhaId], references: [id])
+
+  desbloqueadaEm        DateTime                  @default(now())
+
+  @@map("insignia_usuario")
+}
+
+model Ranking {
+  id                    String                    @id @default(uuid())
+
+  usuarioId             String
+  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+
+  xpTotal               Int
+
+  posicao               Int
+
+  updatedAt             DateTime                  @updatedAt
+
+  @@map("ranking")
 }
