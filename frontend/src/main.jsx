@@ -1,11 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router'
+import Login from './pages/Login/index.jsx'
 
 export const router = createBrowserRouter([
-    {path:"/", element: <App/>},
+    {path:"/", element: <Login/>},
 ])
 
 createRoot(document.getElementById('root')).render(
