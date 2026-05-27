@@ -1,5 +1,9 @@
 # 🚀 Pojeto: DevLevel
 
+## 💡 Ideia Fundamental
+
+Criar uma plataforma onde o usuário vai poder aprender programação (definir um recorte) seguindo uma trilha que vai dificultando o nível conforme o avanço, na qual para avançar será preciso atingir uma pontuação especifica baseano no quão Clean Code e boa prática a resposta tem, sendo que das opções de respostas, mais de uma vai estar certa. Uma vez respondido, a aplicação vai mostrar os pontos positivos e negativos da respota selecionada, porém só será possivel retornar e selecionar outra resposta após terminar a trilha e para selecionar o próximo nivel de dificuldade é preciso terminar a trilha iniciada, sendo que pode iniciar mais de uma trilha por assunto.
+
 ## 📖 Sobre o Projeto
 
 O `DevLevel` é uma plataforma gamificada de aprendizado de programação focada no desenvolvimento de conhecimento prático, habilidades técnicas e preparação para o mercado de trabalho.
@@ -7,6 +11,7 @@ O `DevLevel` é uma plataforma gamificada de aprendizado de programação focada
 A proposta do projeto é unir gamificação, desafios interativos e projetos reais para tornar o aprendizado de programação mais envolvente, eficiente e aplicado ao contexto profissional.
 
 ---
+<br>
 
 # 🎯 Problema / Desafio Abordado
 
@@ -22,6 +27,7 @@ O `DevLevel` busca resolver esse problema oferecendo:
 
 
 ---
+<br>
 
 # 👨‍💻 Integrantes da Equipe
 
@@ -31,6 +37,7 @@ O `DevLevel` busca resolver esse problema oferecendo:
 - Gustavo
 
 ---
+<br>
 
 # 🛠️ Tecnologias Utilizadas
 
@@ -54,6 +61,7 @@ O `DevLevel` busca resolver esse problema oferecendo:
 - Insomnia/Postman
 
 ---
+<br>
 
 # ✨ Funcionalidades Implementadas
 
@@ -68,43 +76,16 @@ O `DevLevel` busca resolver esse problema oferecendo:
 - ✅ Ranking de usuários
 
 ---
+<br>
 
 # 🗄️ Estrutura do Banco de Dados
 
-## Entidades principais
+## DER - Diagrama Entidade Relacionamento
 
-### Usuário
-- id
-- nome
-- email
-- senha
-- nível
-- xp
-
-### Curso
-- id
-- título
-- descrição
-- dificuldade
-
-### Desafio
-- id
-- título
-- descrição
-- xp_recompensa
-
-### Conquista
-- id
-- nome
-- descrição
-
-### Progresso
-- id
-- usuário_id
-- curso_id
-- porcentagem
+### Aqui vai ficar a IMAGEM
 
 ---
+<br>
 
 # 💰 Modelo de Monetização
 
@@ -121,6 +102,7 @@ Os anúncios poderão ser relacionados a:
 Esse modelo permite manter a plataforma acessível gratuitamente, ao mesmo tempo em que gera receita para manutenção e evolução do sistema.
 
 ---
+<br>
 
 # ▶️ Instruções para Execução Local
 
