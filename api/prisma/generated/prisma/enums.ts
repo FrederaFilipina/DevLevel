@@ -14,3 +14,11 @@ export const NameAssunto = {
 } as const
 
 export type NameAssunto = (typeof NameAssunto)[keyof typeof NameAssunto]
+
+
+export const Role = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
