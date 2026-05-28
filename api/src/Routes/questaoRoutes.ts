@@ -1,13 +1,10 @@
 import { Router } from 'express';
-import { QuestaoController } from '../controllers/questaoController';
+import { QuestaoController } from '../Controller/questaoController';
 
 const router = Router();
 const controller = new QuestaoController();
 
-router.post('/', controller.criar);
-router.get('/:id', controller.obter);
 router.get('/modulo/:moduloId', controller.listarPorModulo);
-router.put('/:id', controller.atualizar);
-router.delete('/:id', controller.deletar);
+router.get('/:id', controller.obter);
 
 export default router;

@@ -1,94 +1,96 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import { prisma } from '../prisma/prisma';
+import { getParam, handleError, removeUndefined } from './utils';
+// import { HabilidadeService } from '../Service/habilidadeService';
+
+// const habilidadeService = new HabilidadeService();
 
 export class HabilidadeController {
-  async criar(req: Request, res: Response) {
-    try {
-      const { nome, descricao } = req.body;
-      // Implementar lógica com HabilidadeService
-      res.status(201).json({ message: 'Habilidade criada com sucesso' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao criar habilidade' });
-    }
-  }
-
   async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com HabilidadeService
-      res.json({ message: `Obtendo habilidade ${id}` });
+      const id = getParam(req, 'id');
+      // const habilidade = await habilidadeService.obter(id);
+      const habilidade = await prisma.habilidade.findUnique({ where: { id } });
+      if (!habilidade) return res.status(404).json({ erro: 'Habilidade não encontrada' });
+      return res.json(habilidade);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao obter habilidade' });
+      return handleError(res, erro, 'Erro ao obter habilidade');
     }
   }
 
-  async listar(req: Request, res: Response) {
+  async listar(_req: Request, res: Response) {
     try {
-      // Implementar lógica com HabilidadeService
-      res.json({ message: 'Listando habilidades' });
+      // const habilidades = await habilidadeService.listar();
+      const habilidades = await prisma.habilidade.findMany({ orderBy: { nome: 'asc' } });
+      return res.json(habilidades);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar habilidades' });
-    }
-  }
-
-  async atualizar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { nome, descricao } = req.body;
-      // Implementar lógica com HabilidadeService
-      res.json({ message: `Habilidade ${id} atualizada` });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar habilidade' });
-    }
-  }
-
-  async deletar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      // Implementar lógica com HabilidadeService
-      res.status(204).send();
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar habilidade' });
+      return handleError(res, erro, 'Erro ao listar habilidades');
     }
   }
 
   async vincularUsuario(req: Request, res: Response) {
     try {
       const { usuarioId, habilidadeId } = req.body;
-      // Implementar lógica com HabilidadeService
-      res.status(201).json({ message: 'Habilidade vinculada ao usuário' });
+      if (!usuarioId || !habilidadeId) {
+        return res.status(400).json({ erro: 'usuarioId e habilidadeId são obrigatórios' });
+      }
+
+      // const habilidadeUsuario = await habilidadeService.vincularUsuario({ usuarioId, habilidadeId });
+      const habilidadeUsuario = await prisma.habilidadeUsuario.create({
+        data: { usuarioId, habilidadeId },
+        include: { habilidade: true },
+      });
+
+      return res.status(201).json(habilidadeUsuario);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao vincular habilidade' });
+      return handleError(res, erro, 'Erro ao vincular habilidade');
     }
   }
 
   async habilidadesDoUsuario(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      // Implementar lógica com HabilidadeService
-      res.json({ message: `Habilidades do usuário ${usuarioId}` });
+      const usuarioId = getParam(req, 'usuarioId');
+      // const habilidades = await habilidadeService.habilidadesDoUsuario(usuarioId);
+      const habilidades = await prisma.habilidadeUsuario.findMany({
+        where: { usuarioId },
+        include: { habilidade: true },
+        orderBy: { updatedAt: 'desc' },
+      });
+
+      return res.json(habilidades);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar habilidades do usuário' });
+      return handleError(res, erro, 'Erro ao listar habilidades do usuário');
     }
   }
 
   async atualizarPontuacao(req: Request, res: Response) {
     try {
-      const { id } = req.params;
+      const id = getParam(req, 'id');
       const { pontuacao, nivel } = req.body;
-      // Implementar lógica com HabilidadeService
-      res.json({ message: `Habilidade do usuário ${id} atualizada` });
+      // const habilidade = await habilidadeService.atualizarPontuacao(id, { pontuacao, nivel });
+      const habilidade = await prisma.habilidadeUsuario.update({
+        where: { id },
+        data: removeUndefined({ pontuacao, nivel }),
+        include: { habilidade: true },
+      });
+
+      return res.json(habilidade);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar pontuação' });
+      return handleError(res, erro, 'Erro ao atualizar pontuação');
     }
   }
 
   async desvincularUsuario(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com HabilidadeService   
-      res.status(204).send();
+      const id = getParam(req, 'id');
+      // await habilidadeService.desvincularUsuario(id);
+      await prisma.habilidadeUsuario.delete({ where: { id } });
+      return res.status(204).send();
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao desvincular habilidade' });
+      return handleError(res, erro, 'Erro ao desvincular habilidade');
     }
   }
 }
+
+
+// export const habilidadeController = new HabilidadeController(habilidadeService);

@@ -1,83 +1,94 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import { prisma } from '../prisma/prisma';
+import { getParam, handleError } from './utils';
+// import { InsigniaService } from '../Service/insigniaService';
+
+// const insigniaService = new InsigniaService();
 
 export class InsigniaController {
-  async criar(req: Request, res: Response) {
-    try {
-      const { titulo, descricao, icone, tipo, xpRecompensa } = req.body;
-      // Implementar lógica com InsigniaService
-      res.status(201).json({ message: 'Insígnia criada com sucesso' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao criar insígnia' });
-    }
-  }
-
   async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com InsigniaService
-      res.json({ message: `Obtendo insígnia ${id}` });
+      const id = getParam(req, 'id');
+      // const insignia = await insigniaService.obter(id);
+      const insignia = await prisma.insignia.findUnique({ where: { id } });
+      if (!insignia) return res.status(404).json({ erro: 'Insígnia não encontrada' });
+      return res.json(insignia);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao obter insígnia' });
+      return handleError(res, erro, 'Erro ao obter insígnia');
     }
   }
 
-  async listar(req: Request, res: Response) {
+  async listar(_req: Request, res: Response) {
     try {
-      // Implementar lógica com InsigniaService
-      res.json({ message: 'Listando insígnias' });
+      // const insignias = await insigniaService.listar();
+      const insignias = await prisma.insignia.findMany({ orderBy: { createdAt: 'asc' } });
+      return res.json(insignias);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar insígnias' });
-    }
-  }
-
-  async atualizar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { titulo, descricao, icone, tipo, xpRecompensa } = req.body;
-      // Implementar lógica com InsigniaService
-      res.json({ message: `Insígnia ${id} atualizada` });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar insígnia' });
-    }
-  }
-
-  async deletar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      // Implementar lógica com InsigniaService
-      res.status(204).send();
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar insígnia' });
+      return handleError(res, erro, 'Erro ao listar insígnias');
     }
   }
 
   async desbloquearInsignia(req: Request, res: Response) {
     try {
       const { usuarioId, insigniaId, temaId, trilhaId } = req.body;
-      // Implementar lógica com InsigniaService
-      res.status(201).json({ message: 'Insígnia desbloqueada' });
+      if (!usuarioId || !insigniaId) {
+        return res.status(400).json({ erro: 'usuarioId e insigniaId são obrigatórios' });
+      }
+
+      // const desbloqueio = await insigniaService.desbloquearInsignia({ usuarioId, insigniaId, temaId, trilhaId });
+      const desbloqueio = await prisma.$transaction(async (tx) => {
+        const insignia = await tx.insignia.findUnique({ where: { id: insigniaId } });
+        if (!insignia) throw new Error('INSIGNIA_NAO_ENCONTRADA');
+
+        const criada = await tx.insigniaUsuario.create({
+          data: { usuarioId, insigniaId, temaId, trilhaId },
+          include: { insignia: true, tema: true, trilha: true },
+        });
+
+        await tx.usuario.update({
+          where: { id: usuarioId },
+          data: { xp: { increment: insignia.xpRecompensa } },
+        });
+
+        return criada;
+      });
+
+      return res.status(201).json(desbloqueio);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao desbloquear insígnia' });
+      if (erro instanceof Error && erro.message === 'INSIGNIA_NAO_ENCONTRADA') {
+        return res.status(404).json({ erro: 'Insígnia não encontrada' });
+      }
+
+      return handleError(res, erro, 'Erro ao desbloquear insígnia');
     }
   }
 
   async insigniasDoUsuario(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      // Implementar lógica com InsigniaService
-      res.json({ message: `Insígnias do usuário ${usuarioId}` });
+      const usuarioId = getParam(req, 'usuarioId');
+      // const insignias = await insigniaService.insigniasDoUsuario(usuarioId);
+      const insignias = await prisma.insigniaUsuario.findMany({
+        where: { usuarioId },
+        include: { insignia: true, tema: true, trilha: true },
+        orderBy: { desbloqueadaEm: 'desc' },
+      });
+
+      return res.json(insignias);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar insígnias do usuário' });
+      return handleError(res, erro, 'Erro ao listar insígnias do usuário');
     }
   }
 
   async deletarDesbloqueio(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com InsigniaService
-      res.status(204).send();
+      const id = getParam(req, 'id');
+      // await insigniaService.deletarDesbloqueio(id);
+      await prisma.insigniaUsuario.delete({ where: { id } });
+      return res.status(204).send();
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar desbloqueio de insígnia' });
+      return handleError(res, erro, 'Erro ao deletar desbloqueio de insígnia');
     }
   }
 }
+
+// export const insigniaController = new InsigniaController(insigniaService);

@@ -1,14 +1,14 @@
 import express from "express"
-import usuarioRoutes from './usuarioRoutes';
-import temaRoutes from './temaRoutes';
-import trilhaRoutes from './trilhaRoutes';
-import moduloRoutes from './moduloRoutes';
-import questaoRoutes from './questaoRoutes';
-import respostaRoutes from './respostaRoutes';
-import conquistaRoutes from './conquistaRoutes';
-import habilidadeRoutes from './habilidadeRoutes';
-import insigniaRoutes from './insigniaRoutes';
-import rankingRoutes from './rankingRoutes';
+import usuarioRoutes from './Routes/usuarioRouter';
+import temaRoutes from './Routes/temaRoutes';
+import trilhaRoutes from './Routes/trilhaRoutes';
+import moduloRoutes from './Routes/moduloRoutes';
+import questaoRoutes from './Routes/questaoRoutes';
+import respostaRoutes from './Routes/respostaRoutes';
+import conquistaRoutes from './Routes/conquistaRoutes';
+import habilidadeRoutes from './Routes/habilidadeRoutes';
+import insigniaRoutes from './Routes/insigniaRoutes';
+import rankingRoutes from './Routes/rankingRoutes';
 
 
 

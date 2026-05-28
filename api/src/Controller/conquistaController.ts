@@ -1,83 +1,94 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import { prisma } from '../prisma/prisma';
+import { getParam, handleError } from './utils';
+// import { ConquistaService } from '../Service/conquistaService';
+
+// const conquistaService = new ConquistaService();
 
 export class ConquistaController {
-  async criar(req: Request, res: Response) {
-    try {
-      const { titulo, descricao, icone, xpRecompensa } = req.body;
-      // Implementar lógica com ConquistaService
-      res.status(201).json({ message: 'Conquista criada com sucesso' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao criar conquista' });
-    }
-  }
-
   async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com ConquistaService
-      res.json({ message: `Obtendo conquista ${id}` });
+      const id = getParam(req, 'id');
+      // const conquista = await conquistaService.obter(id);
+      const conquista = await prisma.conquista.findUnique({ where: { id } });
+      if (!conquista) return res.status(404).json({ erro: 'Conquista não encontrada' });
+      return res.json(conquista);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao obter conquista' });
+      return handleError(res, erro, 'Erro ao obter conquista');
     }
   }
 
-  async listar(req: Request, res: Response) {
+  async listar(_req: Request, res: Response) {
     try {
-      // Implementar lógica com ConquistaService
-      res.json({ message: 'Listando conquistas' });
+      // const conquistas = await conquistaService.listar();
+      const conquistas = await prisma.conquista.findMany({ orderBy: { createdAt: 'asc' } });
+      return res.json(conquistas);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar conquistas' });
-    }
-  }
-
-  async atualizar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { titulo, descricao, icone, xpRecompensa } = req.body;
-      // Implementar lógica com ConquistaService
-      res.json({ message: `Conquista ${id} atualizada` });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar conquista' });
-    }
-  }
-
-  async deletar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      // Implementar lógica com ConquistaService
-      res.status(204).send();
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar conquista' });
+      return handleError(res, erro, 'Erro ao listar conquistas');
     }
   }
 
   async desbloquearConquista(req: Request, res: Response) {
     try {
       const { usuarioId, conquistaId } = req.body;
-      // Implementar lógica com ConquistaService
-      res.status(201).json({ message: 'Conquista desbloqueada' });
+      if (!usuarioId || !conquistaId) {
+        return res.status(400).json({ erro: 'usuarioId e conquistaId são obrigatórios' });
+      }
+
+      // const desbloqueio = await conquistaService.desbloquearConquista({ usuarioId, conquistaId });
+      const desbloqueio = await prisma.$transaction(async (tx) => {
+        const conquista = await tx.conquista.findUnique({ where: { id: conquistaId } });
+        if (!conquista) throw new Error('CONQUISTA_NAO_ENCONTRADA');
+
+        const criada = await tx.conquistaUsuario.create({
+          data: { usuarioId, conquistaId },
+          include: { conquista: true },
+        });
+
+        await tx.usuario.update({
+          where: { id: usuarioId },
+          data: { xp: { increment: conquista.xpRecompensa } },
+        });
+
+        return criada;
+      });
+
+      return res.status(201).json(desbloqueio);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao desbloquear conquista' });
+      if (erro instanceof Error && erro.message === 'CONQUISTA_NAO_ENCONTRADA') {
+        return res.status(404).json({ erro: 'Conquista não encontrada' });
+      }
+
+      return handleError(res, erro, 'Erro ao desbloquear conquista');
     }
   }
 
   async conquistasDoUsuario(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      // Implementar lógica com ConquistaService
-      res.json({ message: `Conquistas do usuário ${usuarioId}` });
+      const usuarioId = getParam(req, 'usuarioId');
+      // const conquistas = await conquistaService.conquistasDoUsuario(usuarioId);
+      const conquistas = await prisma.conquistaUsuario.findMany({
+        where: { usuarioId },
+        include: { conquista: true },
+        orderBy: { desbloqueadaEm: 'desc' },
+      });
+
+      return res.json(conquistas);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar conquistas do usuário' });
+      return handleError(res, erro, 'Erro ao listar conquistas do usuário');
     }
   }
 
   async deletarDesbloqueio(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com ConquistaService
-      res.status(204).send();
+      const id = getParam(req, 'id');
+      // await conquistaService.deletarDesbloqueio(id);
+      await prisma.conquistaUsuario.delete({ where: { id } });
+      return res.status(204).send();
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar desbloqueio de conquista' });
+      return handleError(res, erro, 'Erro ao deletar desbloqueio de conquista');
     }
   }
 }
+
+// export const conquistaController = new ConquistaController(conquistaService);

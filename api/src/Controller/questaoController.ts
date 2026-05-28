@@ -1,54 +1,60 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import { prisma } from '../prisma/prisma';
+import { getParam, handleError } from './utils';
+// import { QuestaoService } from '../Service/questaoService';
+
+// const questaoService = new QuestaoService();
+
+const respostaPublicaSelect = {
+  id: true,
+  titulo: true,
+  codigoResposta: true,
+};
 
 export class QuestaoController {
-  async criar(req: Request, res: Response) {
-    try {
-      const { moduloId, titulo, descricao, dificuldade, xpRecompensa, ordem } = req.body;
-      // Implementar lógica com QuestaoService
-      res.status(201).json({ message: 'Questão criada com sucesso' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao criar questão' });
-    }
-  }
-
   async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com QuestaoService
-      res.json({ message: `Obtendo questão ${id}` });
+      const id = getParam(req, 'id');
+      // const questao = await questaoService.obter(id);
+      const questao = await prisma.questao.findUnique({
+        where: { id },
+        include: {
+          modulo: { include: { trilha: true } },
+          respostas: {
+            orderBy: { createdAt: 'asc' },
+            select: respostaPublicaSelect,
+          },
+        },
+      });
+
+      if (!questao) return res.status(404).json({ erro: 'Questão não encontrada' });
+
+      return res.json(questao);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao obter questão' });
+      return handleError(res, erro, 'Erro ao obter questão');
     }
   }
 
   async listarPorModulo(req: Request, res: Response) {
     try {
-      const { moduloId } = req.params;
-      // Implementar lógica com QuestaoService
-      res.json({ message: `Questões do módulo ${moduloId}` });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar questões' });
-    }
-  }
+      const moduloId = getParam(req, 'moduloId');
+      // const questoes = await questaoService.listarPorModulo(moduloId);
+      const questoes = await prisma.questao.findMany({
+        where: { moduloId },
+        orderBy: { ordem: 'asc' },
+        include: {
+          respostas: {
+            orderBy: { createdAt: 'asc' },
+            select: respostaPublicaSelect,
+          },
+        },
+      });
 
-  async atualizar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { titulo, descricao, dificuldade, xpRecompensa, ordem } = req.body;
-      // Implementar lógica com QuestaoService
-      res.json({ message: `Questão ${id} atualizada` });
+      return res.json(questoes);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar questão' });
-    }
-  }
-
-  async deletar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      // Implementar lógica com QuestaoService
-      res.status(204).send();
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar questão' });
+      return handleError(res, erro, 'Erro ao listar questões');
     }
   }
 }
+
+// export const questaoController = new QuestaoController(questaoService);

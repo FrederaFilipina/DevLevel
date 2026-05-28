@@ -1,54 +1,43 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import { prisma } from '../prisma/prisma';
+import { getParam, handleError } from './utils';
+// import { ModuloService } from '../Service/moduloService';
+
+// const moduloService = new ModuloService();
 
 export class ModuloController {
-  async criar(req: Request, res: Response) {
-    try {
-      const { trilhaId, titulo, descricao, ordem } = req.body;
-      // Implementar lógica com ModuloService
-      res.status(201).json({ message: 'Módulo criado com sucesso' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao criar módulo' });
-    }
-  }
-
   async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com ModuloService
-      res.json({ message: `Obtendo módulo ${id}` });
+      const id = getParam(req, 'id');
+      // const modulo = await moduloService.obter(id);
+      const modulo = await prisma.modulo.findUnique({
+        where: { id },
+        include: { trilha: true, questoes: { orderBy: { ordem: 'asc' } } },
+      });
+
+      if (!modulo) return res.status(404).json({ erro: 'Módulo não encontrado' });
+
+      return res.json(modulo);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao obter módulo' });
+      return handleError(res, erro, 'Erro ao obter módulo');
     }
   }
 
   async listarPorTrilha(req: Request, res: Response) {
     try {
-      const { trilhaId } = req.params;
-      // Implementar lógica com ModuloService
-      res.json({ message: `Módulos da trilha ${trilhaId}` });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar módulos' });
-    }
-  }
+      const trilhaId = getParam(req, 'trilhaId');
+      // const modulos = await moduloService.listarPorTrilha(trilhaId);
+      const modulos = await prisma.modulo.findMany({
+        where: { trilhaId },
+        orderBy: { ordem: 'asc' },
+        include: { questoes: { orderBy: { ordem: 'asc' } } },
+      });
 
-  async atualizar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { titulo, descricao, ordem } = req.body;
-      // Implementar lógica com ModuloService
-      res.json({ message: `Módulo ${id} atualizado` });
+      return res.json(modulos);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar módulo' });
-    }
-  }
-
-  async deletar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      // Implementar lógica com ModuloService
-      res.status(204).send();
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar módulo' });
+      return handleError(res, erro, 'Erro ao listar módulos');
     }
   }
 }
+
+// export const moduloController = new ModuloController(moduloService);

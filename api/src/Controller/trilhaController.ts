@@ -1,104 +1,150 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import { prisma } from '../prisma/prisma';
+import { getParam, handleError, removeUndefined } from './utils';
+// import { TrilhaService } from '../Service/trilhaService';
+
+// const trilhaService = new TrilhaService();
 
 export class TrilhaController {
-  async criar(req: Request, res: Response) {
-    try {
-      const { temaId, titulo, descricao, nivel, ordem, pontuacaoMinima, trilhaAnteriorId } = req.body;
-      // Implementar lógica com TrilhaService
-      res.status(201).json({ message: 'Trilha criada com sucesso' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao criar trilha' });
-    }
-  }
-
   async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com TrilhaService
-      res.json({ message: `Obtendo trilha ${id}` });
+      const id = getParam(req, 'id');
+      // const trilha = await trilhaService.obter(id);
+      const trilha = await prisma.trilha.findUnique({
+        where: { id },
+        include: {
+          tema: true,
+          trilhaAnterior: true,
+          proximasTrilhas: true,
+          modulos: {
+            orderBy: { ordem: 'asc' },
+            include: { questoes: { orderBy: { ordem: 'asc' } } },
+          },
+        },
+      });
+
+      if (!trilha) return res.status(404).json({ erro: 'Trilha não encontrada' });
+
+      return res.json(trilha);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao obter trilha' });
+      return handleError(res, erro, 'Erro ao obter trilha');
     }
   }
 
   async listarPorTema(req: Request, res: Response) {
     try {
-      const { temaId } = req.params;
-      // Implementar lógica com TrilhaService
-      res.json({ message: `Trilhas do tema ${temaId}` });
+      const temaId = getParam(req, 'temaId');
+      // const trilhas = await trilhaService.listarPorTema(temaId);
+      const trilhas = await prisma.trilha.findMany({
+        where: { temaId },
+        orderBy: { ordem: 'asc' },
+        include: { modulos: { orderBy: { ordem: 'asc' } } },
+      });
+
+      return res.json(trilhas);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar trilhas' });
+      return handleError(res, erro, 'Erro ao listar trilhas');
     }
   }
 
-  async listar(req: Request, res: Response) {
+  async listar(_req: Request, res: Response) {
     try {
-      // Implementar lógica com TrilhaService
-      res.json({ message: 'Listando trilhas' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar trilhas' });
-    }
-  }
+      // const trilhas = await trilhaService.listar();
+      const trilhas = await prisma.trilha.findMany({
+        orderBy: [{ temaId: 'asc' }, { ordem: 'asc' }],
+        include: { tema: true, modulos: { orderBy: { ordem: 'asc' } } },
+      });
 
-  async atualizar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { titulo, descricao, nivel, ordem, pontuacaoMinima } = req.body;
-      // Implementar lógica com TrilhaService
-      res.json({ message: `Trilha ${id} atualizada` });
+      return res.json(trilhas);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar trilha' });
-    }
-  }
-
-  async deletar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      // Implementar lógica com TrilhaService
-      res.status(204).send();
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar trilha' });
+      return handleError(res, erro, 'Erro ao listar trilhas');
     }
   }
 
   async iniciarTrilha(req: Request, res: Response) {
     try {
-      const { usuarioId, trilhaId, pontuacaoNecessaria } = req.body;
-      // Implementar lógica com TrilhaService
-      res.status(201).json({ message: 'Trilha iniciada' });
+      const { usuarioId, trilhaId } = req.body;
+      if (!usuarioId || !trilhaId) return res.status(400).json({ erro: 'usuarioId e trilhaId são obrigatórios' });
+
+      // const progresso = await trilhaService.iniciarTrilha({ usuarioId, trilhaId });
+      const trilha = await prisma.trilha.findUnique({ where: { id: trilhaId } });
+      if (!trilha) return res.status(404).json({ erro: 'Trilha não encontrada' });
+
+      const progresso = await prisma.trilhaUsuario.upsert({
+        where: { usuarioId_trilhaId: { usuarioId, trilhaId } },
+        update: {},
+        create: {
+          usuarioId,
+          trilhaId,
+          pontuacaoNecessaria: trilha.pontuacaoMinima,
+          podeDesbloquear: trilha.pontuacaoMinima === 0,
+        },
+        include: { trilha: true },
+      });
+
+      return res.status(201).json(progresso);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao iniciar trilha' });
+      return handleError(res, erro, 'Erro ao iniciar trilha');
     }
   }
 
   async trilhasDoUsuario(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      // Implementar lógica com TrilhaService
-      res.json({ message: `Trilhas do usuário ${usuarioId}` });
+      const usuarioId = getParam(req, 'usuarioId');
+      // const trilhas = await trilhaService.trilhasDoUsuario(usuarioId);
+      const trilhas = await prisma.trilhaUsuario.findMany({
+        where: { usuarioId },
+        include: { trilha: { include: { tema: true, modulos: { orderBy: { ordem: 'asc' } } } } },
+        orderBy: { iniciadaEm: 'desc' },
+      });
+
+      return res.json(trilhas);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar trilhas do usuário' });
+      return handleError(res, erro, 'Erro ao listar trilhas do usuário');
     }
   }
 
   async atualizarProgresso(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const { status, pontuacaoAtual, percentualConclusao, podeDesbloquear, moduloAtualId, questaoAtualId } = req.body;
-      // Implementar lógica com TrilhaService
-      res.json({ message: `Progresso da trilha ${id} atualizado` });
+      const id = getParam(req, 'id');
+      const { status, pontuacaoAtual, pontuacaoNecessaria, percentualConclusao, podeDesbloquear, moduloAtualId, questaoAtualId } = req.body;
+      // const progresso = await trilhaService.atualizarProgresso(id, { status, pontuacaoAtual, pontuacaoNecessaria, percentualConclusao, podeDesbloquear, moduloAtualId, questaoAtualId });
+      const progresso = await prisma.trilhaUsuario.update({
+        where: { id },
+        data: removeUndefined({
+          status,
+          pontuacaoAtual,
+          pontuacaoNecessaria,
+          percentualConclusao,
+          podeDesbloquear,
+          moduloAtualId,
+          questaoAtualId,
+        }),
+        include: { trilha: true },
+      });
+
+      return res.json(progresso);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar progresso' });
+      return handleError(res, erro, 'Erro ao atualizar progresso');
     }
   }
 
   async concluirTrilha(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com TrilhaService
-      res.json({ message: `Trilha ${id} concluída` });
+      const id = getParam(req, 'id');
+      // const progresso = await trilhaService.concluirTrilha(id);
+      const progresso = await prisma.trilhaUsuario.update({
+        where: { id },
+        data: { status: 'CONCLUIDA', percentualConclusao: 100, concluidaEm: new Date() },
+        include: { trilha: true },
+      });
+
+      return res.json(progresso);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao concluir trilha' });
+      return handleError(res, erro, 'Erro ao concluir trilha');
     }
   }
 }
+
+
+// export const trilhaController = new TrilhaController(trilhaService);

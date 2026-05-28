@@ -1,83 +1,89 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import { prisma } from '../prisma/prisma';
+import { getParam, handleError } from './utils';
+// import { TemaService } from '../Service/temaService';
+
+// const temaService = new TemaService();
 
 export class TemaController {
-  async criar(req: Request, res: Response) {
-    try {
-      const { nome, descricao } = req.body;
-      // Implementar lógica com TemaService
-      res.status(201).json({ message: 'Tema criado com sucesso' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao criar tema' });
-    }
-  }
-
   async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com TemaService
-      res.json({ message: `Obtendo tema ${id}` });
+      const id = getParam(req, 'id');
+      // const tema = await temaService.obter(id);
+      const tema = await prisma.tema.findUnique({
+        where: { id },
+        include: {
+          trilhas: { orderBy: { ordem: 'asc' }, include: { modulos: { orderBy: { ordem: 'asc' } } } },
+        },
+      });
+
+      if (!tema) return res.status(404).json({ erro: 'Tema não encontrado' });
+
+      return res.json(tema);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao obter tema' });
+      return handleError(res, erro, 'Erro ao obter tema');
     }
   }
 
-  async listar(req: Request, res: Response) {
+  async listar(_req: Request, res: Response) {
     try {
-      // Implementar lógica com TemaService
-      res.json({ message: 'Listando temas' });
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar temas' });
-    }
-  }
+      // const temas = await temaService.listar();
+      const temas = await prisma.tema.findMany({
+        orderBy: { nome: 'asc' },
+        include: { trilhas: { orderBy: { ordem: 'asc' } } },
+      });
 
-  async atualizar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { nome, descricao } = req.body;
-      // Implementar lógica com TemaService
-      res.json({ message: `Tema ${id} atualizado` });
+      return res.json(temas);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao atualizar tema' });
-    }
-  }
-
-  async deletar(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      // Implementar lógica com TemaService
-      res.status(204).send();
-    } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao deletar tema' });
+      return handleError(res, erro, 'Erro ao listar temas');
     }
   }
 
   async vincularUsuario(req: Request, res: Response) {
     try {
       const { usuarioId, temaId } = req.body;
-      // Implementar lógica com TemaService
-      res.status(201).json({ message: 'Tema vinculado ao usuário' });
+      if (!usuarioId || !temaId) return res.status(400).json({ erro: 'usuarioId e temaId são obrigatórios' });
+
+      // const temaUsuario = await temaService.vincularUsuario({ usuarioId, temaId });
+      const temaUsuario = await prisma.temaUsuario.upsert({
+        where: { usuarioId_temaId: { usuarioId, temaId } },
+        update: {},
+        create: { usuarioId, temaId },
+        include: { tema: true },
+      });
+
+      return res.status(201).json(temaUsuario);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao vincular tema' });
+      return handleError(res, erro, 'Erro ao vincular tema');
     }
   }
 
   async temasDoUsuario(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      // Implementar lógica com TemaService
-      res.json({ message: `Temas do usuário ${usuarioId}` });
+      const usuarioId = getParam(req, 'usuarioId');
+      // const temas = await temaService.temasDoUsuario(usuarioId);
+      const temas = await prisma.temaUsuario.findMany({
+        where: { usuarioId },
+        include: { tema: { include: { trilhas: { orderBy: { ordem: 'asc' } } } } },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      return res.json(temas);
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao listar temas do usuário' });
+      return handleError(res, erro, 'Erro ao listar temas do usuário');
     }
   }
 
   async desvincularUsuario(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      // Implementar lógica com TemaService
-      res.status(204).send();
+      const id = getParam(req, 'id');
+      // await temaService.desvincularUsuario(id);
+      await prisma.temaUsuario.delete({ where: { id } });
+      return res.status(204).send();
     } catch (erro) {
-      res.status(500).json({ erro: 'Erro ao desvincular tema' });
+      return handleError(res, erro, 'Erro ao desvincular tema');
     }
   }
 }
+
+// export const temaController = new TemaController(temaService);
