@@ -1,1 +1,267 @@
 @import "tailwindcss";
+
+@theme {
+    /* Cores Personalizadas */
+    --color-inverse-primary: #00696f;
+    --color-on-error-container: #ffdad6;
+    --color-surface-tint: #00dce6;
+    --color-on-error: #690005;
+    --color-outline-variant: #3a494b;
+    --color-secondary: #ffabf3;
+    --color-on-primary: #00373a;
+    --color-surface-container-low: #1b1b1d;
+    --color-secondary-fixed: #ffd7f5;
+    --color-tertiary-fixed: #e6eb00;
+    --color-secondary-fixed-dim: #ffabf3;
+    --color-on-secondary: #5b005b;
+    --color-on-primary-fixed-variant: #004f53;
+    --color-primary-fixed: #6ff6ff;
+    --color-tertiary-fixed-dim: #cace00;
+    --color-surface-container-high: #2a2a2c;
+    --color-on-surface-variant: #b9cacb;
+    --color-background: #050505;
+    --color-surface-container-highest: #353437;
+    --color-on-secondary-fixed-variant: #810081;
+    --color-error-container: #93000a;
+    --color-primary-container: #00f3ff;
+    --color-on-secondary-fixed: #380038;
+    --color-surface-variant: #353437;
+    --color-on-tertiary: #313300;
+    --color-on-surface: #e5e1e4;
+    --color-on-tertiary-fixed-variant: #484a00;
+    --color-on-primary-fixed: #002022;
+    --color-surface-container-lowest: #0e0e10;
+    --color-primary-fixed-dim: #00dce6;
+    --color-inverse-on-surface: #313032;
+    --color-error: #ffb4ab;
+    --color-on-background: #e5e1e4;
+    --color-on-tertiary-container: #626400;
+    --color-on-primary-container: #006b71;
+    --inverse-surface: #e5e1e4;
+    --color-surface-dim: #131315;
+    --color-surface-container: #201f21;
+    --color-surface: #131315;
+    --color-on-tertiary-fixed: #1c1d00;
+    --color-secondary-container: #fe00fe;
+    --color-primary: #e3fdff;
+    --color-outline: #849495;
+    --color-tertiary: #fcff87;
+    --color-surface-bright: #39393b;
+    --color-tertiary-container: #e0e400;
+    --color-on-secondary-container: #500050;
+
+    /* Arredondamento de Bordas (Zerados conforme seu config) */
+    --radius-default: 0px;
+    --radius-lg: 0px;
+    --radius-xl: 0px;
+    --radius-full: 9999px;
+
+    /* Espaçamentos (Spacing) */
+    --spacing-unit: 4px;
+    --spacing-gutter: 24px;
+    --spacing-margin-desktop: 48px;
+    --spacing-margin-mobile: 16px;
+    --spacing-container-max: 1440px;
+
+    /* Fontes */
+    --font-headline-lg-mobile: "Geist", sans-serif;
+    --font-body-md: "Geist", sans-serif;
+    --font-code-md: "JetBrains Mono", monospace;
+    --font-headline-lg: "Geist", sans-serif;
+    --font-headline-xl: "Geist", sans-serif;
+    --font-label-sm: "JetBrains Mono", monospace;
+}
+
+/* Suas Animações Customizadas */
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 1;
+    }
+
+    5% {
+        opacity: 0.4;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0) skew(0deg);
+        clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+    }
+    20% {
+        transform: translate(-5px, 2px) skew(2deg);
+        clip-path: polygon(0 15%, 100% 15%, 100% 18%, 0 18%);
+    }
+    40% {
+        transform: translate(5px, -2px) skew(-2deg);
+        clip-path: polygon(0 40%, 100% 40%, 100% 45%, 0 45%);
+    }
+    60% {
+        transform: translate(-2px, 5px) scale(1.02);
+        clip-path: polygon(0 70%, 100% 70%, 100% 72%, 0 72%);
+    }
+    80% {
+        transform: translate(5px, 2px) skew(3deg);
+        clip-path: polygon(0 80%, 100% 80%, 100% 85%, 0 85%);
+    }
+    100% {
+        transform: translate(0) skew(0deg);
+        clip-path: none;
+    }
+}
+
+@keyframes drop-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.95);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.glitch-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    background: rgba(0, 243, 255, 0.03);
+    animation: glitch 0.2s linear infinite;
+    will-change: transform, clip-path;
+}
+
+.glitch-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 243, 255, 0.1),
+        rgba(0, 243, 255, 0.1) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+}
+
+.animate-drop-in {
+    animation: drop-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity, filter;
+}
+
+@keyframes slow-fade-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.98) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.animate-slow-fade-in {
+    animation: slow-fade-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes slow-fade-out {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.98) translateY(10px);
+    }
+}
+
+.animate-slow-fade-out {
+    animation: slow-fade-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: transform, opacity;
+}
+
+.gpu-accelerated {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+/* Classes de utilitários manuais */
+.scanline-effect {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.05), transparent);
+    height: 40px;
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+}
+
+.iris-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.flicker-hover:hover {
+    animation: flicker 0.2s infinite;
+}
+
+.glitch-border {
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3), inset 0 0 10px rgba(0, 243, 255, 0.1);
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.2em;
+    background-color: #00f3ff;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    margin-left: 4px;
+}
