@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "./generated/prisma"
 }
 
 datasource db {
@@ -13,7 +14,7 @@ model Usuario {
   email String @unique
   senha String
 
-  role  Role    @default(USER)
+  role Role @default(USER)
 
   avatarUrl String?
   bio       String?
@@ -25,8 +26,6 @@ model Usuario {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  
 
   trilhasUsuario   TrilhaUsuario[]
   respostasUsuario RespostaUsuario[]
