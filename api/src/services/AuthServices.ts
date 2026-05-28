@@ -3,6 +3,7 @@ import { authRepository, AuthRepository } from "../repositories/authRepository";
 import z, { email } from "zod";
 import bcrypt from"bcrypt"
 import { signTokenAcesso, signTokenRefresh } from "../utils/jwt";
+import { createHash } from "../utils/createHash";
 
 
 export class AuthServices{
@@ -15,15 +16,17 @@ export class AuthServices{
     async createUser(dadosUser:Omit<Usuario,"id">){
 
         const createUserSchema = z.object({
-            nome:z.string().min(4),
-            email:z.email(),
-            senha:z.minLength(6)
+            nome:z.string(),
+            email:z.email("Email invalido"),
+            senha:z.string().min(6,"Senha precisa ter no mínimo 6 carácteres")
         })
 
 
         const dataValidation = createUserSchema.parse(dadosUser)
 
-        const response = await this.repository.createUser(dadosUser)
+        const hash = await createHash(dadosUser.senha)
+
+        const response = await this.repository.createUser({...dadosUser,senha:hash})
 
         return response
 
@@ -32,8 +35,8 @@ export class AuthServices{
     async login(dadosUser:Partial<Usuario>){
 
         const createUserSchema = z.object({
-            email:z.email(),
-            senha:z.minLength(6)
+            email:z.email("Email invalido"),
+            senha:z.string().min(6,"Senha precisa ter no mínimo 6 carácteres")
 
         })
 
@@ -55,13 +58,11 @@ export class AuthServices{
             const tokenAcesso = signTokenAcesso({
                 id: userExists.id,
                 email: userExists.email,
-                senha: userExists.senha,
                 role: userExists.role
             })
             const tokenRefresh = signTokenRefresh({
                id: userExists.id,
                 email: userExists.email,
-                senha: userExists.senha,
                 role: userExists.role
             }) 
 

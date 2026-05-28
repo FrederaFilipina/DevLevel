@@ -32,8 +32,9 @@ export class AuthRepository{
     }
 
     async createToken(dadosToken:Omit<Token,"id"|"revoked">){
+        
         return await this.prisma.token.create({
-            data:dadosToken
+            data:{...dadosToken}
         })
     }
 
