@@ -4,108 +4,106 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Usuario {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  nome                  String
-  email                 String                    @unique
-  senha                 String
+  nome  String
+  email String @unique
+  senha String
 
-  avatarUrl             String?
-  bio                   String?
+  avatarUrl String?
+  bio       String?
 
-  xp                    Int                       @default(0)
-  nivel                 Int                       @default(1)
+  xp    Int @default(0)
+  nivel Int @default(1)
 
-  pontuacaoTotal        Int                       @default(0)
+  pontuacaoTotal Int @default(0)
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  trilhasUsuario        TrilhaUsuario[]
-  respostasUsuario      RespostaUsuario[]
+  trilhasUsuario   TrilhaUsuario[]
+  respostasUsuario RespostaUsuario[]
 
-  temasUsuario          TemaUsuario[]
+  temasUsuario TemaUsuario[]
 
-  conquistasUsuario     ConquistaUsuario[]
-  habilidadesUsuario    HabilidadeUsuario[]
-  insigniasUsuario      InsigniaUsuario[]
+  conquistasUsuario  ConquistaUsuario[]
+  habilidadesUsuario HabilidadeUsuario[]
+  insigniasUsuario   InsigniaUsuario[]
 
-  rankings              Ranking[]
+  rankings Ranking[]
 
   @@map("usuario")
 }
 
 model Tema {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  nome                  String                    @unique
-  descricao             String?
+  nome      String  @unique
+  descricao String?
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  trilhas               Trilha[]
-  usuarios              TemaUsuario[]
+  trilhas  Trilha[]
+  usuarios TemaUsuario[]
 
-  insignias             InsigniaUsuario[]
+  insignias InsigniaUsuario[]
 
   @@map("tema")
 }
 
 model TemaUsuario {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  usuarioId             String
-  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  temaId                String
-  tema                  Tema                      @relation(fields: [temaId], references: [id])
+  temaId String
+  tema   Tema   @relation(fields: [temaId], references: [id])
 
-  pontuacaoTotal        Int                       @default(0)
+  pontuacaoTotal Int @default(0)
 
-  trilhasConcluidas     Int                       @default(0)
+  trilhasConcluidas Int @default(0)
 
-  nivelAtual            NivelDificuldade         @default(INICIANTE)
+  nivelAtual NivelDificuldade @default(INICIANTE)
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([usuarioId, temaId])
-
   @@map("tema_usuario")
 }
 
 model Trilha {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  temaId                String
-  tema                  Tema                      @relation(fields: [temaId], references: [id])
+  temaId String
+  tema   Tema   @relation(fields: [temaId], references: [id])
 
-  titulo                String
-  descricao             String?
+  titulo    String
+  descricao String?
 
-  nivel                 NivelDificuldade
+  nivel NivelDificuldade
 
-  ordem                 Int
+  ordem Int
 
-  pontuacaoMinima       Int
+  pontuacaoMinima Int
 
-  trilhaAnteriorId      String?
-  trilhaAnterior        Trilha?                   @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
+  trilhaAnteriorId String?
+  trilhaAnterior   Trilha? @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
 
-  proximasTrilhas       Trilha[]                  @relation("ProgressaoTrilha")
+  proximasTrilhas Trilha[] @relation("ProgressaoTrilha")
 
-  modulos               Modulo[]
-  usuarios              TrilhaUsuario[]
+  modulos  Modulo[]
+  usuarios TrilhaUsuario[]
 
-  insignias             InsigniaUsuario[]
+  insignias InsigniaUsuario[]
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("trilha")
 }
@@ -117,125 +115,123 @@ enum NivelDificuldade {
 }
 
 model Modulo {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  trilhaId              String
-  trilha                Trilha                    @relation(fields: [trilhaId], references: [id])
+  trilhaId String
+  trilha   Trilha @relation(fields: [trilhaId], references: [id])
 
-  titulo                String
-  descricao             String?
+  titulo    String
+  descricao String?
 
-  ordem                 Int
+  ordem Int
 
-  questoes              Questao[]
+  questoes Questao[]
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("modulo")
 }
 
 model Questao {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  moduloId              String
-  modulo                Modulo                    @relation(fields: [moduloId], references: [id])
+  moduloId String
+  modulo   Modulo @relation(fields: [moduloId], references: [id])
 
-  titulo                String
-  descricao             String                    @db.Text
+  titulo    String
+  descricao String @db.Text
 
-  dificuldade           Int
+  dificuldade Int
 
-  xpRecompensa          Int
+  xpRecompensa Int
 
-  ordem                 Int
+  ordem Int
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  respostas             RespostaQuestao[]
-  respostasUsuario      RespostaUsuario[]
+  respostas        RespostaQuestao[]
+  respostasUsuario RespostaUsuario[]
 
   @@map("questao")
 }
 
 model RespostaQuestao {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  questaoId             String
-  questao               Questao                   @relation(fields: [questaoId], references: [id])
+  questaoId String
+  questao   Questao @relation(fields: [questaoId], references: [id])
 
-  titulo                String
+  titulo String
 
-  codigoResposta        String                    @db.Text
+  codigoResposta String @db.Text
 
-  explicacao            String?                   @db.Text
+  explicacao String? @db.Text
 
-  pontuacao             Int
+  pontuacao Int
 
-  cleanCodeScore        Int
-  performanceScore      Int
-  legibilidadeScore     Int
+  cleanCodeScore    Int
+  performanceScore  Int
+  legibilidadeScore Int
 
-  pontosPositivos       String?                   @db.Text
-  pontosNegativos       String?                   @db.Text
+  pontosPositivos String? @db.Text
+  pontosNegativos String? @db.Text
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  respostasUsuarios     RespostaUsuario[]
+  respostasUsuarios RespostaUsuario[]
 
   @@map("resposta_questao")
 }
 
 model RespostaUsuario {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  usuarioId             String
-  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  questaoId             String
-  questao               Questao                   @relation(fields: [questaoId], references: [id])
+  questaoId String
+  questao   Questao @relation(fields: [questaoId], references: [id])
 
-  respostaQuestaoId     String
-  respostaQuestao       RespostaQuestao           @relation(fields: [respostaQuestaoId], references: [id])
+  respostaQuestaoId String
+  respostaQuestao   RespostaQuestao @relation(fields: [respostaQuestaoId], references: [id])
 
-  pontuacaoRecebida     Int
+  pontuacaoRecebida Int
 
-  respondidaEm          DateTime                  @default(now())
+  respondidaEm DateTime @default(now())
 
   @@unique([usuarioId, questaoId])
-
   @@map("resposta_usuario")
 }
 
 model TrilhaUsuario {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  usuarioId             String
-  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  trilhaId              String
-  trilha                Trilha                    @relation(fields: [trilhaId], references: [id])
+  trilhaId String
+  trilha   Trilha @relation(fields: [trilhaId], references: [id])
 
-  status                StatusTrilhaUsuario       @default(EM_ANDAMENTO)
+  status StatusTrilhaUsuario @default(EM_ANDAMENTO)
 
-  pontuacaoAtual        Int                       @default(0)
+  pontuacaoAtual Int @default(0)
 
-  pontuacaoNecessaria   Int
+  pontuacaoNecessaria Int
 
-  percentualConclusao   Int                       @default(0)
+  percentualConclusao Int @default(0)
 
-  podeDesbloquear       Boolean                   @default(false)
+  podeDesbloquear Boolean @default(false)
 
-  moduloAtualId         String?
-  questaoAtualId        String?
+  moduloAtualId  String?
+  questaoAtualId String?
 
-  iniciadaEm            DateTime                  @default(now())
-  concluidaEm           DateTime?
+  iniciadaEm  DateTime  @default(now())
+  concluidaEm DateTime?
 
   @@unique([usuarioId, trilhaId])
-
   @@map("trilha_usuario")
 }
 
@@ -247,82 +243,82 @@ enum StatusTrilhaUsuario {
 }
 
 model Conquista {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  titulo                String
-  descricao             String?
+  titulo    String
+  descricao String?
 
-  icone                 String?
+  icone String?
 
-  xpRecompensa          Int
+  xpRecompensa Int
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  usuarios              ConquistaUsuario[]
+  usuarios ConquistaUsuario[]
 
   @@map("conquista")
 }
 
 model ConquistaUsuario {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  usuarioId             String
-  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  conquistaId           String
-  conquista             Conquista                 @relation(fields: [conquistaId], references: [id])
+  conquistaId String
+  conquista   Conquista @relation(fields: [conquistaId], references: [id])
 
-  desbloqueadaEm        DateTime                  @default(now())
+  desbloqueadaEm DateTime @default(now())
 
   @@map("conquista_usuario")
 }
 
 model Habilidade {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  nome                  String
-  descricao             String?
+  nome      String
+  descricao String?
 
-  usuarios              HabilidadeUsuario[]
+  usuarios HabilidadeUsuario[]
 
   @@map("habilidade")
 }
 
 model HabilidadeUsuario {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  usuarioId             String
-  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  habilidadeId          String
-  habilidade            Habilidade                @relation(fields: [habilidadeId], references: [id])
+  habilidadeId String
+  habilidade   Habilidade @relation(fields: [habilidadeId], references: [id])
 
-  pontuacao             Int                       @default(0)
+  pontuacao Int @default(0)
 
-  nivel                 Int                       @default(1)
+  nivel Int @default(1)
 
-  updatedAt             DateTime                  @updatedAt
+  updatedAt DateTime @updatedAt
 
   @@map("habilidade_usuario")
 }
 
 model Insignia {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  titulo                String
-  descricao             String?
+  titulo    String
+  descricao String?
 
-  icone                 String?
+  icone String?
 
-  tipo                  TipoInsignia
+  tipo TipoInsignia
 
-  xpRecompensa          Int                       @default(0)
+  xpRecompensa Int @default(0)
 
-  createdAt             DateTime                  @default(now())
-  updatedAt             DateTime                  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  usuarios              InsigniaUsuario[]
+  usuarios InsigniaUsuario[]
 
   @@map("insignia")
 }
@@ -334,36 +330,36 @@ enum TipoInsignia {
 }
 
 model InsigniaUsuario {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  usuarioId             String
-  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  insigniaId            String
-  insignia              Insignia                  @relation(fields: [insigniaId], references: [id])
+  insigniaId String
+  insignia   Insignia @relation(fields: [insigniaId], references: [id])
 
-  temaId                String?
-  tema                  Tema?                     @relation(fields: [temaId], references: [id])
+  temaId String?
+  tema   Tema?   @relation(fields: [temaId], references: [id])
 
-  trilhaId              String?
-  trilha                Trilha?                   @relation(fields: [trilhaId], references: [id])
+  trilhaId String?
+  trilha   Trilha? @relation(fields: [trilhaId], references: [id])
 
-  desbloqueadaEm        DateTime                  @default(now())
+  desbloqueadaEm DateTime @default(now())
 
   @@map("insignia_usuario")
 }
 
 model Ranking {
-  id                    String                    @id @default(uuid())
+  id String @id @default(uuid())
 
-  usuarioId             String
-  usuario               Usuario                   @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  xpTotal               Int
+  xpTotal Int
 
-  posicao               Int
+  posicao Int
 
-  updatedAt             DateTime                  @updatedAt
+  updatedAt DateTime @updatedAt
 
   @@map("ranking")
 }
