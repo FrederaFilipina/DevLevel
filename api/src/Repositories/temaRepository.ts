@@ -1,13 +1,8 @@
-import { PrismaClient, type Tema } from "@prisma/client";
+import type { PrismaClient, Tema } from "../prisma/generated/prisma";
+
 
 export class TemaRepository {
-  constructor(private prisma: PrismaClient) {}
-
-  async criar(dados: Omit<Tema, "id" | "createdAt" | "updatedAt">): Promise<Tema> {
-    return await this.prisma.tema.create({
-      data: dados,
-    });
-  }
+  constructor(private readonly prisma: PrismaClient) {}
 
   async buscarPorId(id: string): Promise<Tema | null> {
     return await this.prisma.tema.findUnique({
@@ -15,21 +10,17 @@ export class TemaRepository {
     });
   }
 
-  async buscarTodos(): Promise<Tema[]> {
-    return await this.prisma.tema.findMany();
-  }
-
-  async atualizar(id: string, dados: Partial<Tema>): Promise<Tema> {
-    return await this.prisma.tema.update({
-      where: { id },
-      data: dados,
+  async buscarPorNome(nome: string): Promise<Tema | null> {
+    return await this.prisma.tema.findUnique({
+      where: { nome },
     });
   }
 
-  async deletar(id: string): Promise<boolean> {
-    await this.prisma.tema.delete({
-      where: { id },
+  async listarTodos(): Promise<Tema[]> {
+    return await this.prisma.tema.findMany({
+      orderBy: {
+        nome: "asc",
+      },
     });
-    return true;
   }
 }

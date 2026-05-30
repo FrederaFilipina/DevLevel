@@ -23279,6 +23279,7 @@ export namespace Prisma {
 
   export type TrilhaWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    temaId_ordem?: TrilhaTemaIdOrdemCompoundUniqueInput
     AND?: TrilhaWhereInput | TrilhaWhereInput[]
     OR?: TrilhaWhereInput[]
     NOT?: TrilhaWhereInput | TrilhaWhereInput[]
@@ -23297,7 +23298,7 @@ export namespace Prisma {
     modulos?: ModuloListRelationFilter
     usuarios?: TrilhaUsuarioListRelationFilter
     insignias?: InsigniaUsuarioListRelationFilter
-  }, "id">
+  }, "id" | "temaId_ordem">
 
   export type TrilhaOrderByWithAggregationInput = {
     id?: SortOrder
@@ -23362,6 +23363,7 @@ export namespace Prisma {
 
   export type ModuloWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    trilhaId_ordem?: ModuloTrilhaIdOrdemCompoundUniqueInput
     AND?: ModuloWhereInput | ModuloWhereInput[]
     OR?: ModuloWhereInput[]
     NOT?: ModuloWhereInput | ModuloWhereInput[]
@@ -23373,7 +23375,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Modulo"> | Date | string
     trilha?: XOR<TrilhaScalarRelationFilter, TrilhaWhereInput>
     questoes?: QuestaoListRelationFilter
-  }, "id">
+  }, "id" | "trilhaId_ordem">
 
   export type ModuloOrderByWithAggregationInput = {
     id?: SortOrder
@@ -23438,6 +23440,7 @@ export namespace Prisma {
 
   export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    moduloId_ordem?: QuestaoModuloIdOrdemCompoundUniqueInput
     AND?: QuestaoWhereInput | QuestaoWhereInput[]
     OR?: QuestaoWhereInput[]
     NOT?: QuestaoWhereInput | QuestaoWhereInput[]
@@ -23452,7 +23455,7 @@ export namespace Prisma {
     modulo?: XOR<ModuloScalarRelationFilter, ModuloWhereInput>
     respostas?: RespostaQuestaoListRelationFilter
     respostasUsuario?: RespostaUsuarioListRelationFilter
-  }, "id">
+  }, "id" | "moduloId_ordem">
 
   export type QuestaoOrderByWithAggregationInput = {
     id?: SortOrder
@@ -23778,17 +23781,17 @@ export namespace Prisma {
 
   export type ConquistaWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    titulo?: string
     AND?: ConquistaWhereInput | ConquistaWhereInput[]
     OR?: ConquistaWhereInput[]
     NOT?: ConquistaWhereInput | ConquistaWhereInput[]
-    titulo?: StringFilter<"Conquista"> | string
     descricao?: StringNullableFilter<"Conquista"> | string | null
     icone?: StringNullableFilter<"Conquista"> | string | null
     xpRecompensa?: IntFilter<"Conquista"> | number
     createdAt?: DateTimeFilter<"Conquista"> | Date | string
     updatedAt?: DateTimeFilter<"Conquista"> | Date | string
     usuarios?: ConquistaUsuarioListRelationFilter
-  }, "id">
+  }, "id" | "titulo">
 
   export type ConquistaOrderByWithAggregationInput = {
     id?: SortOrder
@@ -23890,13 +23893,13 @@ export namespace Prisma {
 
   export type HabilidadeWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    nome?: string
     AND?: HabilidadeWhereInput | HabilidadeWhereInput[]
     OR?: HabilidadeWhereInput[]
     NOT?: HabilidadeWhereInput | HabilidadeWhereInput[]
-    nome?: StringFilter<"Habilidade"> | string
     descricao?: StringNullableFilter<"Habilidade"> | string | null
     usuarios?: HabilidadeUsuarioListRelationFilter
-  }, "id">
+  }, "id" | "nome">
 
   export type HabilidadeOrderByWithAggregationInput = {
     id?: SortOrder
@@ -23943,6 +23946,7 @@ export namespace Prisma {
 
   export type HabilidadeUsuarioWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    usuarioId_habilidadeId?: HabilidadeUsuarioUsuarioIdHabilidadeIdCompoundUniqueInput
     AND?: HabilidadeUsuarioWhereInput | HabilidadeUsuarioWhereInput[]
     OR?: HabilidadeUsuarioWhereInput[]
     NOT?: HabilidadeUsuarioWhereInput | HabilidadeUsuarioWhereInput[]
@@ -23953,7 +23957,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"HabilidadeUsuario"> | Date | string
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     habilidade?: XOR<HabilidadeScalarRelationFilter, HabilidadeWhereInput>
-  }, "id">
+  }, "id" | "usuarioId_habilidadeId">
 
   export type HabilidadeUsuarioOrderByWithAggregationInput = {
     id?: SortOrder
@@ -24010,10 +24014,10 @@ export namespace Prisma {
 
   export type InsigniaWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    titulo?: string
     AND?: InsigniaWhereInput | InsigniaWhereInput[]
     OR?: InsigniaWhereInput[]
     NOT?: InsigniaWhereInput | InsigniaWhereInput[]
-    titulo?: StringFilter<"Insignia"> | string
     descricao?: StringNullableFilter<"Insignia"> | string | null
     icone?: StringNullableFilter<"Insignia"> | string | null
     tipo?: EnumTipoInsigniaFilter<"Insignia"> | $Enums.TipoInsignia
@@ -24021,7 +24025,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Insignia"> | Date | string
     updatedAt?: DateTimeFilter<"Insignia"> | Date | string
     usuarios?: InsigniaUsuarioListRelationFilter
-  }, "id">
+  }, "id" | "titulo">
 
   export type InsigniaOrderByWithAggregationInput = {
     id?: SortOrder
@@ -24084,6 +24088,7 @@ export namespace Prisma {
 
   export type InsigniaUsuarioWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    usuarioId_insigniaId?: InsigniaUsuarioUsuarioIdInsigniaIdCompoundUniqueInput
     AND?: InsigniaUsuarioWhereInput | InsigniaUsuarioWhereInput[]
     OR?: InsigniaUsuarioWhereInput[]
     NOT?: InsigniaUsuarioWhereInput | InsigniaUsuarioWhereInput[]
@@ -24096,7 +24101,7 @@ export namespace Prisma {
     insignia?: XOR<InsigniaScalarRelationFilter, InsigniaWhereInput>
     tema?: XOR<TemaNullableScalarRelationFilter, TemaWhereInput> | null
     trilha?: XOR<TrilhaNullableScalarRelationFilter, TrilhaWhereInput> | null
-  }, "id">
+  }, "id" | "usuarioId_insigniaId">
 
   export type InsigniaUsuarioOrderByWithAggregationInput = {
     id?: SortOrder
@@ -24145,15 +24150,15 @@ export namespace Prisma {
 
   export type RankingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    usuarioId?: string
     AND?: RankingWhereInput | RankingWhereInput[]
     OR?: RankingWhereInput[]
     NOT?: RankingWhereInput | RankingWhereInput[]
-    usuarioId?: StringFilter<"Ranking"> | string
     xpTotal?: IntFilter<"Ranking"> | number
     posicao?: IntFilter<"Ranking"> | number
     updatedAt?: DateTimeFilter<"Ranking"> | Date | string
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
-  }, "id">
+  }, "id" | "usuarioId">
 
   export type RankingOrderByWithAggregationInput = {
     id?: SortOrder
@@ -25951,6 +25956,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type TrilhaTemaIdOrdemCompoundUniqueInput = {
+    temaId: string
+    ordem: number
+  }
+
   export type TrilhaCountOrderByAggregateInput = {
     id?: SortOrder
     temaId?: SortOrder
@@ -26015,6 +26025,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type ModuloTrilhaIdOrdemCompoundUniqueInput = {
+    trilhaId: string
+    ordem: number
+  }
+
   export type ModuloCountOrderByAggregateInput = {
     id?: SortOrder
     trilhaId?: SortOrder
@@ -26066,6 +26081,11 @@ export namespace Prisma {
 
   export type RespostaQuestaoOrderByRelationAggregateInput = {
     _count?: SortOrder
+  }
+
+  export type QuestaoModuloIdOrdemCompoundUniqueInput = {
+    moduloId: string
+    ordem: number
   }
 
   export type QuestaoCountOrderByAggregateInput = {
@@ -26432,6 +26452,11 @@ export namespace Prisma {
     isNot?: HabilidadeWhereInput
   }
 
+  export type HabilidadeUsuarioUsuarioIdHabilidadeIdCompoundUniqueInput = {
+    usuarioId: string
+    habilidadeId: string
+  }
+
   export type HabilidadeUsuarioCountOrderByAggregateInput = {
     id?: SortOrder
     usuarioId?: SortOrder
@@ -26535,6 +26560,11 @@ export namespace Prisma {
   export type TemaNullableScalarRelationFilter = {
     is?: TemaWhereInput | null
     isNot?: TemaWhereInput | null
+  }
+
+  export type InsigniaUsuarioUsuarioIdInsigniaIdCompoundUniqueInput = {
+    usuarioId: string
+    insigniaId: string
   }
 
   export type InsigniaUsuarioCountOrderByAggregateInput = {
