@@ -9,7 +9,9 @@ import conquistaRoutes from './Routes/conquistaRoutes';
 import habilidadeRoutes from './Routes/habilidadeRoutes';
 import insigniaRoutes from './Routes/insigniaRoutes';
 import rankingRoutes from './Routes/rankingRoutes';
-
+import cors from "cors"
+import { authRoutes } from "./routes/AuthRoutes"
+import { auth } from "./middleware/auth"
 
 
 const port = 3000
