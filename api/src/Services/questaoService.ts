@@ -1,0 +1,50 @@
+import { type Questao } from "../prisma/generated/prisma";
+import { QuestaoRepository } from "../Repositories/questaoRepository";
+
+export class QuestaoService {
+    constructor(
+        private readonly questaoRepository: QuestaoRepository
+    ) {}
+
+    async listarTodas(): Promise<Questao[]> {
+        return await this.questaoRepository.listarTodas();
+    }
+
+    async buscarPorId(id: string): Promise<Questao> {
+        const questao = await this.questaoRepository.buscarPorId(id);
+
+        if (!questao) {
+            throw new Error("Questão não encontrada.");
+        }
+
+        return questao;
+    }
+
+    async listarPorModulo(moduloId: string): Promise<Questao[]> {
+        return await this.questaoRepository.listarPorModulo(moduloId);
+    }
+
+    async buscarPorModuloEOrdem(
+        moduloId: string,
+        ordem: number
+    ): Promise<Questao> {
+        const questao = await this.questaoRepository.buscarPorModuloEOrdem(
+            moduloId,
+            ordem
+        );
+
+        if (!questao) {
+            throw new Error("Questão não encontrada.");
+        }
+
+        return questao;
+    }
+
+    async listarPorDificuldade(
+        dificuldade: number
+    ): Promise<Questao[]> {
+        return await this.questaoRepository.listarPorDificuldade(
+            dificuldade
+        );
+    }
+}
