@@ -353,7 +353,7 @@ model InsigniaUsuario {
   trilha   Trilha? @relation(fields: [trilhaId], references: [id])
 
   desbloqueadaEm DateTime @default(now())
-  
+
   @@unique([usuarioId, insigniaId])
   @@map("insignia_usuario")
 }
@@ -361,7 +361,7 @@ model InsigniaUsuario {
 model Ranking {
   id String @id @default(uuid())
 
-  usuarioId String @unique
+  usuarioId String  @unique
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   xpTotal Int

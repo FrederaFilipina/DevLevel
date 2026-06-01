@@ -19,6 +19,12 @@ const app = express()
 
 app.use(express.json())
 
+app.use(cors())
+
+app.use(authRoutes)
+
+app.use(auth)
+
 
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/temas', temaRoutes);
