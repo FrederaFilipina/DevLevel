@@ -261,34 +261,6 @@ exports.Prisma.HabilidadeUsuarioScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.InsigniaScalarFieldEnum = {
-  id: 'id',
-  titulo: 'titulo',
-  descricao: 'descricao',
-  icone: 'icone',
-  tipo: 'tipo',
-  xpRecompensa: 'xpRecompensa',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.InsigniaUsuarioScalarFieldEnum = {
-  id: 'id',
-  usuarioId: 'usuarioId',
-  insigniaId: 'insigniaId',
-  temaId: 'temaId',
-  trilhaId: 'trilhaId',
-  desbloqueadaEm: 'desbloqueadaEm'
-};
-
-exports.Prisma.RankingScalarFieldEnum = {
-  id: 'id',
-  usuarioId: 'usuarioId',
-  xpTotal: 'xpTotal',
-  posicao: 'posicao',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.TokenScalarFieldEnum = {
   id: 'id',
   token: 'token',
@@ -330,12 +302,6 @@ exports.StatusTrilhaUsuario = exports.$Enums.StatusTrilhaUsuario = {
   BLOQUEADA: 'BLOQUEADA'
 };
 
-exports.TipoInsignia = exports.$Enums.TipoInsignia = {
-  CONCLUSAO_TRILHA: 'CONCLUSAO_TRILHA',
-  APROVACAO_TRILHA: 'APROVACAO_TRILHA',
-  MESTRE_TEMA: 'MESTRE_TEMA'
-};
-
 exports.TypeToken = exports.$Enums.TypeToken = {
   ACCESS: 'ACCESS',
   REFRESH: 'REFRESH'
@@ -355,9 +321,6 @@ exports.Prisma.ModelName = {
   ConquistaUsuario: 'ConquistaUsuario',
   Habilidade: 'Habilidade',
   HabilidadeUsuario: 'HabilidadeUsuario',
-  Insignia: 'Insignia',
-  InsigniaUsuario: 'InsigniaUsuario',
-  Ranking: 'Ranking',
   Token: 'Token'
 };
 

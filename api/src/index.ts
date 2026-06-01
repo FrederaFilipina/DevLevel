@@ -10,7 +10,7 @@ import habilidadeRoutes from './Routes/habilidadeRoutes';
 import insigniaRoutes from './Routes/insigniaRoutes';
 import rankingRoutes from './Routes/rankingRoutes';
 import cors from "cors"
-import { authRoutes } from "./routes/AuthRoutes"
+import { authRoutes } from "./Routes/AuthRoutes"
 import { auth } from "./middleware/auth"
 
 

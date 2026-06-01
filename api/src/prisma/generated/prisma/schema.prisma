@@ -34,10 +34,8 @@ model Usuario {
 
   conquistasUsuario  ConquistaUsuario[]
   habilidadesUsuario HabilidadeUsuario[]
-  insigniasUsuario   InsigniaUsuario[]
 
-  rankings Ranking[]
-  tokens   Token[]
+  tokens Token[]
 
   @@map("usuario")
 }
@@ -53,8 +51,6 @@ model Tema {
 
   trilhas  Trilha[]
   usuarios TemaUsuario[]
-
-  insignias InsigniaUsuario[]
 
   @@map("tema")
 }
@@ -103,8 +99,6 @@ model Trilha {
 
   modulos  Modulo[]
   usuarios TrilhaUsuario[]
-
-  insignias InsigniaUsuario[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -311,68 +305,6 @@ model HabilidadeUsuario {
   @@map("habilidade_usuario")
 }
 
-model Insignia {
-  id String @id @default(uuid())
-
-  titulo    String  @unique
-  descricao String?
-
-  icone String?
-
-  tipo TipoInsignia
-
-  xpRecompensa Int @default(0)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  usuarios InsigniaUsuario[]
-
-  @@map("insignia")
-}
-
-enum TipoInsignia {
-  CONCLUSAO_TRILHA
-  APROVACAO_TRILHA
-  MESTRE_TEMA
-}
-
-model InsigniaUsuario {
-  id String @id @default(uuid())
-
-  usuarioId String
-  usuario   Usuario @relation(fields: [usuarioId], references: [id])
-
-  insigniaId String
-  insignia   Insignia @relation(fields: [insigniaId], references: [id])
-
-  temaId String?
-  tema   Tema?   @relation(fields: [temaId], references: [id])
-
-  trilhaId String?
-  trilha   Trilha? @relation(fields: [trilhaId], references: [id])
-
-  desbloqueadaEm DateTime @default(now())
-
-  @@unique([usuarioId, insigniaId])
-  @@map("insignia_usuario")
-}
-
-model Ranking {
-  id String @id @default(uuid())
-
-  usuarioId String  @unique
-  usuario   Usuario @relation(fields: [usuarioId], references: [id])
-
-  xpTotal Int
-
-  posicao Int
-
-  updatedAt DateTime @updatedAt
-
-  @@map("ranking")
-}
-
 enum Role {
   USER
   ADMIN
@@ -384,11 +316,16 @@ enum TypeToken {
 }
 
 model Token {
-  id        Int       @id @default(autoincrement())
-  token     String    @db.Text
-  type      TypeToken @default(ACCESS)
-  revoked   Boolean   @default(false)
+  id Int @id @default(autoincrement())
+
+  token String @db.Text
+
+  type TypeToken @default(ACCESS)
+
+  revoked Boolean @default(false)
+
   expiresAt DateTime
+
   usuarioId String
 
   usuario Usuario @relation(fields: [usuarioId], references: [id])
