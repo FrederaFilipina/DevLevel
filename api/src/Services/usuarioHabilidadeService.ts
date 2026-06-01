@@ -1,0 +1,61 @@
+import { type HabilidadeUsuario } from "../prisma/generated/prisma";
+import type { HabilidadeUsuarioRepository } from "../Repositories/usuarioHabilidadeRepository";
+
+
+export class HabilidadeUsuarioService {
+    constructor(
+        private readonly habilidadeUsuarioRepository: HabilidadeUsuarioRepository
+    ) {}
+
+    async buscarPorId(id: string): Promise<HabilidadeUsuario> {
+        const habilidadeUsuario =
+            await this.habilidadeUsuarioRepository.buscarPorId(id);
+
+        if (!habilidadeUsuario) {
+            throw new Error("Habilidade do usuário não encontrada.");
+        }
+
+        return habilidadeUsuario;
+    }
+
+    async buscarPorUsuarioEHabilidade(
+        usuarioId: string,
+        habilidadeId: string
+    ): Promise<HabilidadeUsuario> {
+        const habilidadeUsuario =
+            await this.habilidadeUsuarioRepository.buscarPorUsuarioEHabilidade(
+                usuarioId,
+                habilidadeId
+            );
+
+        if (!habilidadeUsuario) {
+            throw new Error("Habilidade do usuário não encontrada.");
+        }
+
+        return habilidadeUsuario;
+    }
+
+    async listarPorUsuario(
+        usuarioId: string
+    ): Promise<HabilidadeUsuario[]> {
+        return await this.habilidadeUsuarioRepository.listarPorUsuario(
+            usuarioId
+        );
+    }
+
+    async listarPorHabilidade(
+        habilidadeId: string
+    ): Promise<HabilidadeUsuario[]> {
+        return await this.habilidadeUsuarioRepository.listarPorHabilidade(
+            habilidadeId
+        );
+    }
+
+    async listarPorNivel(
+        nivel: number
+    ): Promise<HabilidadeUsuario[]> {
+        return await this.habilidadeUsuarioRepository.listarPorNivel(
+            nivel
+        );
+    }
+}

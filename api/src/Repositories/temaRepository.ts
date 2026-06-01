@@ -4,6 +4,14 @@ import type { PrismaClient, Tema } from "../prisma/generated/prisma";
 export class TemaRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
+  async listarTodos(): Promise<Tema[]> {
+    return await this.prisma.tema.findMany({
+      orderBy: {
+        nome: "asc",
+      },
+    });
+  }
+  
   async buscarPorId(id: string): Promise<Tema | null> {
     return await this.prisma.tema.findUnique({
       where: { id },
@@ -16,11 +24,5 @@ export class TemaRepository {
     });
   }
 
-  async listarTodos(): Promise<Tema[]> {
-    return await this.prisma.tema.findMany({
-      orderBy: {
-        nome: "asc",
-      },
-    });
-  }
+  
 }
