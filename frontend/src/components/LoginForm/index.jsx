@@ -28,7 +28,7 @@ const LoginForm = ({ onRegisterClick }) => {
             value={email}
             setValue={setEmail}
             required
-            hasArrow={true}
+            hasArrow
         />
 
       </div>
@@ -48,7 +48,7 @@ const LoginForm = ({ onRegisterClick }) => {
             value={password}
             setValue={setPassword}
             required
-            hasArrow={true}
+            hasArrow
         />
 
       </div>
@@ -58,7 +58,7 @@ const LoginForm = ({ onRegisterClick }) => {
           onClick={handleRegisterClick}
           className="text-[12px] font-label-sm text-primary-container/80 hover:text-primary-container transition-colors uppercase tracking-widest cursor-pointer"
         >
-          _NOT_REGISTERED_YET?
+          NÃO_POSSUI_CADASTRO_?
         </button>
       </div>
 
