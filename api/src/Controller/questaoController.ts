@@ -1,97 +1,126 @@
-import { Router, Request, Response } from "express";
-import { QuestaoService } from "../Services/questaoService";
-import { QuestaoRepository } from "../Repositories/questaoRepository";
-import { prisma } from "../prisma/prisma";
+import type { Request, Response } from "express";
+import type { QuestaoService } from "../Services/questaoService";
 
 export class QuestaoController {
-  private router: Router;
-  private questaoService: QuestaoService;
+  constructor(
+    private readonly questaoService: QuestaoService
+  ) {}
 
-  constructor() {
-    this.router = Router();
-    const questaoRepository = new QuestaoRepository(prisma);
-    this.questaoService = new QuestaoService(questaoRepository);
-    this.initRoutes();
-  }
-
-  private initRoutes(): void {
-    this.router.get("/", this.listarTodas.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-    this.router.get("/modulo/:moduloId", this.listarPorModulo.bind(this));
-    this.router.get("/dificuldade/:dificuldade", this.listarPorDificuldade.bind(this));
-  }
-
-  private async listarTodas(req: Request, res: Response): Promise<void> {
+  async listar(_req: Request, res: Response) {
     try {
-      const questoes = await this.questaoService.listarTodas();
-      res.status(200).json({
-        success: true,
-        data: questoes,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar questões",
+      const questoes =
+        await this.questaoService.listarTodas();
+
+      return res.status(200).json(questoes);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar questoes",
       });
     }
   }
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+  async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const questao = await this.questaoService.buscarPorId(id);
+      const id = Number(req.params.id);
 
-      res.status(200).json({
-        success: true,
-        data: questao,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Questão não encontrada",
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID invalido.",
+        });
+      }
+
+      const questao =
+        await this.questaoService.buscarPorId(id);
+
+      return res.status(200).json(questao);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter questao",
       });
     }
   }
 
-  private async listarPorModulo(req: Request, res: Response): Promise<void> {
+  async listarPorModulo(req: Request, res: Response) {
     try {
-      const { moduloId } = req.params;
-      const questoes = await this.questaoService.listarPorModulo(moduloId);
+      const moduloId = Number(req.params.moduloId);
 
-      res.status(200).json({
-        success: true,
-        data: questoes,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar questões",
+      if (isNaN(moduloId)) {
+        return res.status(400).json({
+          erro: "ID do modulo invalido.",
+        });
+      }
+
+      const questoes =
+        await this.questaoService.listarPorModulo(
+          moduloId
+        );
+
+      return res.status(200).json(questoes);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar questoes do modulo",
       });
     }
   }
 
-  private async listarPorDificuldade(req: Request, res: Response): Promise<void> {
+  async buscarPorModuloEOrdem(
+    req: Request,
+    res: Response
+  ) {
     try {
-      const { dificuldade } = req.params;
-      const questoes = await this.questaoService.listarPorDificuldade(
-        Number(dificuldade)
-      );
+      const moduloId = Number(req.params.moduloId);
 
-      res.status(200).json({
-        success: true,
-        data: questoes,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar questões",
+      if (isNaN(moduloId)) {
+        return res.status(400).json({
+          erro: "ID do modulo invalido.",
+        });
+      }
+
+      const ordem = Number(req.params.ordem);
+
+      if (isNaN(ordem)) {
+        return res.status(400).json({
+          erro: "Ordem invalida.",
+        });
+      }
+
+      const questao =
+        await this.questaoService.buscarPorModuloEOrdem(
+          moduloId,
+          ordem
+        );
+
+      return res.status(200).json(questao);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar questao por modulo e ordem",
       });
     }
   }
 
-  public getRouter(): Router {
-    return this.router;
+  async listarPorDificuldade(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const dificuldade = Number(req.params.dificuldade);
+
+      if (isNaN(dificuldade)) {
+        return res.status(400).json({
+          erro: "Dificuldade invalida.",
+        });
+      }
+
+      const questoes =
+        await this.questaoService.listarPorDificuldade(
+          dificuldade
+        );
+
+      return res.status(200).json(questoes);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar questoes por dificuldade",
+      });
+    }
   }
 }
-
-export const questaoController = new QuestaoController()

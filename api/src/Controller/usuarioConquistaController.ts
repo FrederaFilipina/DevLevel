@@ -1,4 +1,5 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import type { Request, Response } from "express";
 import { ConquistaUsuarioService } from "../Services/usuarioConquistaService";
 import { ConquistaUsuarioRepository } from "../Repositories/usuarioConquistaRepository";
 import { prisma } from "../prisma/prisma";

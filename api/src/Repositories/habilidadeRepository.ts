@@ -11,15 +11,19 @@ export class HabilidadeRepository {
     });
   }
 
-  async buscarPorId(id: string): Promise<Habilidade | null> {
+  async buscarPorId(id: number): Promise<Habilidade | null> {
     return await this.prisma.habilidade.findUnique({
-      where: { id },
+      where: {
+        id,
+      },
     });
   }
 
   async buscarPorNome(nome: string): Promise<Habilidade | null> {
     return await this.prisma.habilidade.findUnique({
-      where: { nome },
+      where: {
+        nome,
+      },
     });
   }
 }

@@ -1,69 +1,76 @@
 import { type RespostaQuestao } from "../prisma/generated/prisma";
 import type { RespostaQuestaoRepository } from "../Repositories/questaoRespostaRepository";
 
-
 export class RespostaQuestaoService {
-    constructor(
-        private readonly respostaQuestaoRepository: RespostaQuestaoRepository
-    ) {}
+  constructor(
+    private readonly respostaQuestaoRepository: RespostaQuestaoRepository
+  ) {}
 
-    async buscarPorId(id: string): Promise<RespostaQuestao> {
-        const respostaQuestao =
-            await this.respostaQuestaoRepository.buscarPorId(id);
+  async buscarPorId(
+    id: number
+  ): Promise<RespostaQuestao> {
+    const respostaQuestao =
+      await this.respostaQuestaoRepository.buscarPorId(
+        id
+      );
 
-        if (!respostaQuestao) {
-            throw new Error("Resposta da questão não encontrada.");
-        }
-
-        return respostaQuestao;
+    if (!respostaQuestao) {
+      throw new Error(
+        "Resposta da questão não encontrada."
+      );
     }
 
-    async listarPorQuestao(
-        questaoId: string
-    ): Promise<RespostaQuestao[]> {
-        return await this.respostaQuestaoRepository.listarPorQuestao(
-            questaoId
-        );
+    return respostaQuestao;
+  }
+
+  async listarPorQuestao(
+    questaoId: number
+  ): Promise<RespostaQuestao[]> {
+    return await this.respostaQuestaoRepository.listarPorQuestao(
+      questaoId
+    );
+  }
+
+  async buscarPorQuestaoETitulo(
+    questaoId: number,
+    titulo: string
+  ): Promise<RespostaQuestao> {
+    const respostaQuestao =
+      await this.respostaQuestaoRepository.buscarPorQuestaoETitulo(
+        questaoId,
+        titulo
+      );
+
+    if (!respostaQuestao) {
+      throw new Error(
+        "Resposta da questão não encontrada."
+      );
     }
 
-    async buscarPorQuestaoETitulo(
-        questaoId: string,
-        titulo: string
-    ): Promise<RespostaQuestao> {
-        const respostaQuestao =
-            await this.respostaQuestaoRepository.buscarPorQuestaoETitulo(
-                questaoId,
-                titulo
-            );
+    return respostaQuestao;
+  }
 
-        if (!respostaQuestao) {
-            throw new Error("Resposta da questão não encontrada.");
-        }
+  async listarMelhoresRespostas(
+    questaoId: number
+  ): Promise<RespostaQuestao[]> {
+    return await this.respostaQuestaoRepository.listarMelhoresRespostas(
+      questaoId
+    );
+  }
 
-        return respostaQuestao;
-    }
+  async listarPorPerformance(
+    questaoId: number
+  ): Promise<RespostaQuestao[]> {
+    return await this.respostaQuestaoRepository.listarPorPerformance(
+      questaoId
+    );
+  }
 
-    async listarMelhoresRespostas(
-        questaoId: string
-    ): Promise<RespostaQuestao[]> {
-        return await this.respostaQuestaoRepository.listarMelhoresRespostas(
-            questaoId
-        );
-    }
-
-    async listarPorPerformance(
-        questaoId: string
-    ): Promise<RespostaQuestao[]> {
-        return await this.respostaQuestaoRepository.listarPorPerformance(
-            questaoId
-        );
-    }
-
-    async listarPorCleanCode(
-        questaoId: string
-    ): Promise<RespostaQuestao[]> {
-        return await this.respostaQuestaoRepository.listarPorCleanCode(
-            questaoId
-        );
-    }
+  async listarPorCleanCode(
+    questaoId: number
+  ): Promise<RespostaQuestao[]> {
+    return await this.respostaQuestaoRepository.listarPorCleanCode(
+      questaoId
+    );
+  }
 }

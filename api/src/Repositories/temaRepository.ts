@@ -1,5 +1,7 @@
-import type { PrismaClient, Tema } from "../prisma/generated/prisma";
-
+import type {
+  PrismaClient,
+  Tema,
+} from "../prisma/generated/prisma";
 
 export class TemaRepository {
   constructor(private readonly prisma: PrismaClient) {}
@@ -11,18 +13,20 @@ export class TemaRepository {
       },
     });
   }
-  
-  async buscarPorId(id: string): Promise<Tema | null> {
+
+  async buscarPorId(id: number): Promise<Tema | null> {
     return await this.prisma.tema.findUnique({
-      where: { id },
+      where: {
+        id,
+      },
     });
   }
 
   async buscarPorNome(nome: string): Promise<Tema | null> {
     return await this.prisma.tema.findUnique({
-      where: { nome },
+      where: {
+        nome,
+      },
     });
   }
-
-  
 }

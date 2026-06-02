@@ -1,77 +1,59 @@
-import { Router, Request, Response } from "express";
-import { ConquistaService } from "../Services/conquistaService";
-import { ConquistaRepository } from "../Repositories/conquistaRepository";
-import { prisma } from "../prisma/prisma";
+import type { Request, Response } from "express";
+import type { ConquistaService } from "../Services/conquistaService";
 
 export class ConquistaController {
-  private router: Router;
-  private conquistaService: ConquistaService;
+  constructor(
+    private readonly conquistaService: ConquistaService
+  ) {}
 
-  constructor() {
-    this.router = Router();
-    const conquistaRepository = new ConquistaRepository(prisma);
-    this.conquistaService = new ConquistaService(conquistaRepository);
-    this.initRoutes();
-  }
-
-  private initRoutes(): void {
-    this.router.get("/", this.listarTodas.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-    this.router.get("/titulo/:titulo", this.buscarPorTitulo.bind(this));
-  }
-
-  private async listarTodas(req: Request, res: Response): Promise<void> {
+  async listar(_req: Request, res: Response) {
     try {
-      const conquistas = await this.conquistaService.listarTodas();
-      res.status(200).json({
-        success: true,
-        data: conquistas,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar conquistas",
+      const conquistas =
+        await this.conquistaService.listarTodas();
+
+      return res.status(200).json(conquistas);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar conquistas",
       });
     }
   }
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+  async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const conquista = await this.conquistaService.buscarPorId(id);
+      const id = Number(req.params.id);
 
-      res.status(200).json({
-        success: true,
-        data: conquista,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Conquista não encontrada",
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID invalido.",
+        });
+      }
+
+      const conquista =
+        await this.conquistaService.buscarPorId(id);
+
+      return res.status(200).json(conquista);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter conquista",
       });
     }
   }
 
-  private async buscarPorTitulo(req: Request, res: Response): Promise<void> {
+  async buscarPorTitulo(req: Request, res: Response) {
     try {
-      const { titulo } = req.params;
-      const conquista = await this.conquistaService.buscarPorTitulo(titulo);
+      const titulo = String(req.params.titulo ?? "");
 
-      res.status(200).json({
-        success: true,
-        data: conquista,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Conquista não encontrada",
+      const conquista =
+        await this.conquistaService.buscarPorTitulo(
+          titulo
+        );
+
+      return res.status(200).json(conquista);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar conquista por titulo",
       });
     }
-  }
-
-  public getRouter(): Router {
-    return this.router;
   }
 }
-
-export const conquistaController = new ConquistaController()

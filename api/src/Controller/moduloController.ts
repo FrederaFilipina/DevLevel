@@ -1,77 +1,100 @@
-import { Router, Request, Response } from "express";
-import { ModuloService } from "../Services/moduloService";
-import { ModuloRepository } from "../Repositories/moduloRepository";
-import { prisma } from "../prisma/prisma";
+import type { Request, Response } from "express";
+import type { ModuloService } from "../Services/moduloService";
 
 export class ModuloController {
-  private router: Router;
-  private moduloService: ModuloService;
+  constructor(
+    private readonly moduloService: ModuloService
+  ) {}
 
-  constructor() {
-    this.router = Router();
-    const moduloRepository = new ModuloRepository(prisma);
-    this.moduloService = new ModuloService(moduloRepository);
-    this.initRoutes();
-  }
-
-  private initRoutes(): void {
-    this.router.get("/", this.listarTodos.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-    this.router.get("/trilha/:trilhaId", this.listarPorTrilha.bind(this));
-  }
-
-  private async listarTodos(req: Request, res: Response): Promise<void> {
+  async listar(_req: Request, res: Response) {
     try {
-      const modulos = await this.moduloService.listarTodos();
-      res.status(200).json({
-        success: true,
-        data: modulos,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar módulos",
+      const modulos =
+        await this.moduloService.listarTodos();
+
+      return res.status(200).json(modulos);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar modulos",
       });
     }
   }
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+  async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const modulo = await this.moduloService.buscarPorId(id);
+      const id = Number(req.params.id);
 
-      res.status(200).json({
-        success: true,
-        data: modulo,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Módulo não encontrado",
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID invalido.",
+        });
+      }
+
+      const modulo =
+        await this.moduloService.buscarPorId(id);
+
+      return res.status(200).json(modulo);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter modulo",
       });
     }
   }
 
-  private async listarPorTrilha(req: Request, res: Response): Promise<void> {
+  async listarPorTrilha(req: Request, res: Response) {
     try {
-      const { trilhaId } = req.params;
-      const modulos = await this.moduloService.listarPorTrilha(trilhaId);
+      const trilhaId = Number(req.params.trilhaId);
 
-      res.status(200).json({
-        success: true,
-        data: modulos,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar módulos",
+      if (isNaN(trilhaId)) {
+        return res.status(400).json({
+          erro: "ID da trilha invalido.",
+        });
+      }
+
+      const modulos =
+        await this.moduloService.listarPorTrilha(
+          trilhaId
+        );
+
+      return res.status(200).json(modulos);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar modulos da trilha",
       });
     }
   }
 
-  public getRouter(): Router {
-    return this.router;
+  async buscarPorTrilhaEOrdem(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const trilhaId = Number(req.params.trilhaId);
+
+      if (isNaN(trilhaId)) {
+        return res.status(400).json({
+          erro: "ID da trilha invalido.",
+        });
+      }
+
+      const ordem = Number(req.params.ordem);
+
+      if (isNaN(ordem)) {
+        return res.status(400).json({
+          erro: "Ordem invalida.",
+        });
+      }
+
+      const modulo =
+        await this.moduloService.buscarPorTrilhaEOrdem(
+          trilhaId,
+          ordem
+        );
+
+      return res.status(200).json(modulo);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar modulo por trilha e ordem",
+      });
+    }
   }
 }
-
-export const moduloController = new ModuloController()

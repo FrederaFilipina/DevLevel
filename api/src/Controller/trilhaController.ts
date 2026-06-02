@@ -1,113 +1,152 @@
-import { Router, Request, Response } from "express";
-import { TrilhaService } from "../services/trilhaService";
-import { TrilhaRepository } from "../Repositories/trilhaRepository";
-import { prisma } from "../prisma/prisma";
+import type { Request, Response } from "express";
+import type { TrilhaService } from "../Services/trilhaService";
 
 export class TrilhaController {
-  private router: Router;
-  private trilhaService: TrilhaService;
+  constructor(
+    private readonly trilhaService: TrilhaService
+  ) {}
 
-  constructor() {
-    this.router = Router();
-    const trilhaRepository = new TrilhaRepository(prisma);
-    this.trilhaService = new TrilhaService(trilhaRepository);
-    this.initRoutes();
-  }
-
-  private initRoutes(): void {
-    this.router.get("/", this.listarTodas.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-    this.router.get("/tema/:temaId", this.listarPorTema.bind(this));
-    this.router.get("/:id/anterior", this.buscarTrilhaAnterior.bind(this));
-    this.router.get("/:id/proximas", this.buscarProximasTrilhas.bind(this));
-  }
-
-  private async listarTodas(req: Request, res: Response): Promise<void> {
+  async listar(_req: Request, res: Response) {
     try {
-      const trilhas = await this.trilhaService.listarTodas();
-      res.status(200).json({
-        success: true,
-        data: trilhas,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar trilhas",
+      const trilhas =
+        await this.trilhaService.listarTodas();
+
+      return res.status(200).json(trilhas);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar trilhas",
       });
     }
   }
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+  async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const trilha = await this.trilhaService.buscarPorId(id);
+      const id = Number(req.params.id);
 
-      res.status(200).json({
-        success: true,
-        data: trilha,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Trilha não encontrada",
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID invalido.",
+        });
+      }
+
+      const trilha =
+        await this.trilhaService.buscarPorId(id);
+
+      return res.status(200).json(trilha);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter trilha",
       });
     }
   }
 
-  private async listarPorTema(req: Request, res: Response): Promise<void> {
+  async listarPorTema(req: Request, res: Response) {
     try {
-      const { temaId } = req.params;
-      const trilhas = await this.trilhaService.listarPorTema(temaId);
+      const temaId = Number(req.params.temaId);
 
-      res.status(200).json({
-        success: true,
-        data: trilhas,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar trilhas",
+      if (isNaN(temaId)) {
+        return res.status(400).json({
+          erro: "ID do tema invalido.",
+        });
+      }
+
+      const trilhas =
+        await this.trilhaService.listarPorTema(
+          temaId
+        );
+
+      return res.status(200).json(trilhas);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar trilhas por tema",
       });
     }
   }
 
-  private async buscarTrilhaAnterior(req: Request, res: Response): Promise<void> {
+  async buscarPorTemaEOrdem(
+    req: Request,
+    res: Response
+  ) {
     try {
-      const { id } = req.params;
-      const trilha = await this.trilhaService.buscarTrilhaAnterior(id);
+      const temaId = Number(req.params.temaId);
 
-      res.status(200).json({
-        success: true,
-        data: trilha,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Trilha anterior não encontrada",
+      if (isNaN(temaId)) {
+        return res.status(400).json({
+          erro: "ID do tema invalido.",
+        });
+      }
+
+      const ordem = Number(req.params.ordem);
+
+      if (isNaN(ordem)) {
+        return res.status(400).json({
+          erro: "Ordem invalida.",
+        });
+      }
+
+      const trilha =
+        await this.trilhaService.buscarPorTemaEOrdem(
+          temaId,
+          ordem
+        );
+
+      return res.status(200).json(trilha);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar trilha por tema e ordem",
       });
     }
   }
 
-  private async buscarProximasTrilhas(req: Request, res: Response): Promise<void> {
+  async buscarTrilhaAnterior(
+    req: Request,
+    res: Response
+  ) {
     try {
-      const { id } = req.params;
-      const trilhas = await this.trilhaService.buscarProximasTrilhas(id);
+      const id = Number(req.params.id);
 
-      res.status(200).json({
-        success: true,
-        data: trilhas,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao buscar próximas trilhas",
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID invalido.",
+        });
+      }
+
+      const trilhaAnterior =
+        await this.trilhaService.buscarTrilhaAnterior(
+          id
+        );
+
+      return res.status(200).json(trilhaAnterior);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar trilha anterior",
       });
     }
   }
 
-  public getRouter(): Router {
-    return this.router;
+  async buscarProximasTrilhas(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const id = Number(req.params.id);
+
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID invalido.",
+        });
+      }
+
+      const proximasTrilhas =
+        await this.trilhaService.buscarProximasTrilhas(
+          id
+        );
+
+      return res.status(200).json(proximasTrilhas);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar proximas trilhas",
+      });
+    }
   }
 }
-
-export const trilhaController = new TrilhaController()

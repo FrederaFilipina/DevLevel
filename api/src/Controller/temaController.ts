@@ -1,87 +1,57 @@
-import { Router, Request, Response } from "express";
-import { TemaService } from "../Services/temaService";
-import { TemaRepository } from "../Repositories/temaRepository";
-import { prisma } from "../prisma/prisma";
+import type { Request, Response } from "express";
+import type { TemaService } from "../Services/temaService";
 
 export class TemaController {
-  private router: Router;
-  private temaService: TemaService;
+  constructor(
+    private readonly temaService: TemaService
+  ) {}
 
-  constructor() {
-    this.router = Router();
-    const temaRepository = new TemaRepository(prisma);
-    this.temaService = new TemaService(temaRepository);
-    this.initRoutes();
-  }
-
-  private initRoutes(): void {
-    this.router.get("/nome/:nome", this.buscarPorNome.bind(this));  // ← Específico primeiro
-    this.router.get("/:id", this.buscarPorId.bind(this));
-    this.router.get("/", this.listarTodos.bind(this));
-  }
-
-  private async listarTodos(req: Request, res: Response): Promise<void> {
+  async listar(_req: Request, res: Response) {
     try {
-      const temas = await this.temaService.listarTodos();
-      res.status(200).json({
-        success: true,
-        data: temas,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar temas",
+      const temas =
+        await this.temaService.listarTodos();
+
+      return res.status(200).json(temas);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar temas",
       });
     }
   }
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+  async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const idNumero = Number(id);  // ← Converte string para number
-      
-      if (isNaN(idNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "ID deve ser um número",
+      const id = Number(req.params.id);
+
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID invalido.",
         });
-        return;
       }
 
-      const tema = await this.temaService.buscarPorId(idNumero);
+      const tema =
+        await this.temaService.buscarPorId(id);
 
-      res.status(200).json({
-        success: true,
-        data: tema,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Tema não encontrado",
+      return res.status(200).json(tema);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter tema",
       });
     }
   }
 
-  private async buscarPorNome(req: Request, res: Response): Promise<void> {
+  async buscarPorNome(req: Request, res: Response) {
     try {
-      const { nome } = req.params;
-      const tema = await this.temaService.buscarPorNome(nome);
+      const nome = String(req.params.nome ?? "");
 
-      res.status(200).json({
-        success: true,
-        data: tema,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Tema não encontrado",
+      const tema =
+        await this.temaService.buscarPorNome(nome);
+
+      return res.status(200).json(tema);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar tema por nome",
       });
     }
-  }
-
-  public getRouter(): Router {
-    return this.router;
   }
 }
-
-export const temaController = new TemaController();

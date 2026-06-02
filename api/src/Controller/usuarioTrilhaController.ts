@@ -1,4 +1,5 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import type { Request, Response } from "express";
 import { TrilhaUsuarioService } from "../Services/usuarioTrilhaService";
 import { TrilhaUsuarioRepository } from "../Repositories/usuarioTrilhaRepository";
 import { prisma } from "../prisma/prisma";

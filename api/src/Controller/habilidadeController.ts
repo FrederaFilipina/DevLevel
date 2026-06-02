@@ -1,77 +1,59 @@
-import { Router, Request, Response } from "express";
-import { HabilidadeService } from "../Services/habilidadeService";
-import { HabilidadeRepository } from "../Repositories/habilidadeRepository";
-import { prisma } from "../prisma/prisma";
+import type { Request, Response } from "express";
+import type { HabilidadeService } from "../Services/habilidadeService";
 
 export class HabilidadeController {
-  private router: Router;
-  private habilidadeService: HabilidadeService;
+  constructor(
+    private readonly habilidadeService: HabilidadeService
+  ) {}
 
-  constructor() {
-    this.router = Router();
-    const habilidadeRepository = new HabilidadeRepository(prisma);
-    this.habilidadeService = new HabilidadeService(habilidadeRepository);
-    this.initRoutes();
-  }
-
-  private initRoutes(): void {
-    this.router.get("/", this.listarTodas.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-    this.router.get("/nome/:nome", this.buscarPorNome.bind(this));
-  }
-
-  private async listarTodas(req: Request, res: Response): Promise<void> {
+  async listar(_req: Request, res: Response) {
     try {
-      const habilidades = await this.habilidadeService.listarTodas();
-      res.status(200).json({
-        success: true,
-        data: habilidades,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar habilidades",
+      const habilidades =
+        await this.habilidadeService.listarTodas();
+
+      return res.status(200).json(habilidades);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar habilidades",
       });
     }
   }
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+  async obter(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const habilidade = await this.habilidadeService.buscarPorId(id);
+      const id = Number(req.params.id);
 
-      res.status(200).json({
-        success: true,
-        data: habilidade,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Habilidade não encontrada",
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID invalido.",
+        });
+      }
+
+      const habilidade =
+        await this.habilidadeService.buscarPorId(id);
+
+      return res.status(200).json(habilidade);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter habilidade",
       });
     }
   }
 
-  private async buscarPorNome(req: Request, res: Response): Promise<void> {
+  async buscarPorNome(req: Request, res: Response) {
     try {
-      const { nome } = req.params;
-      const habilidade = await this.habilidadeService.buscarPorNome(nome);
+      const nome = String(req.params.nome ?? "");
 
-      res.status(200).json({
-        success: true,
-        data: habilidade,
-      });
-    } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Habilidade não encontrada",
+      const habilidade =
+        await this.habilidadeService.buscarPorNome(
+          nome
+        );
+
+      return res.status(200).json(habilidade);
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar habilidade por nome",
       });
     }
-  }
-
-  public getRouter(): Router {
-    return this.router;
   }
 }
-
-export const habilidadeController = new HabilidadeController()

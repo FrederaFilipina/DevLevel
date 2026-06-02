@@ -1,4 +1,5 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import type { Request, Response } from "express";
 import { HabilidadeUsuarioService } from "../Services/usuarioHabilidadeService";
 import { HabilidadeUsuarioRepository } from "../Repositories/usuarioHabilidadeRepository";
 import { prisma } from "../prisma/prisma";

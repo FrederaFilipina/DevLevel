@@ -12,15 +12,21 @@ export class QuestaoRepository {
     });
   }
 
-  async buscarPorId(id: string): Promise<Questao | null> {
+  async buscarPorId(id: number): Promise<Questao | null> {
     return await this.prisma.questao.findUnique({
-      where: { id },
+      where: {
+        id,
+      },
     });
   }
 
-  async listarPorModulo(moduloId: string): Promise<Questao[]> {
+  async listarPorModulo(
+    moduloId: number
+  ): Promise<Questao[]> {
     return await this.prisma.questao.findMany({
-      where: { moduloId },
+      where: {
+        moduloId,
+      },
       orderBy: {
         ordem: "asc",
       },
@@ -28,7 +34,7 @@ export class QuestaoRepository {
   }
 
   async buscarPorModuloEOrdem(
-    moduloId: string,
+    moduloId: number,
     ordem: number
   ): Promise<Questao | null> {
     return await this.prisma.questao.findUnique({
