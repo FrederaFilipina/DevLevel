@@ -1,9 +1,11 @@
 ﻿import { createContext, useContext, useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const dadosUsuario = jwtDecode(localStorage.getItem("tokenAcesso"))
   const [tokens, setTokens] = useState({
     accessToken: null,
     refreshToken: null,
@@ -18,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     if (accessToken && refreshToken) {
       setTokens({ accessToken, refreshToken });
       if (email) {
-        setUser({ email });
+        setUser(dadosUsuario);
       }
     }
   }, []);
@@ -28,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("tokenAcesso", tokenAcesso);
     localStorage.setItem("tokenRefresh", tokenRefresh);
 
-    setUser({ email });
+    setUser(dadosUsuario);
     setTokens({ accessToken: tokenAcesso, refreshToken: tokenRefresh });
   };
 

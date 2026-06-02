@@ -1,6 +1,7 @@
 ﻿import { useState } from "react";
 import { CustomInput } from "../CustomInput";
 import axios from "axios"
+import { toast } from "react-toastify"
 
 const RegisterModal = ({ isOpen, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
@@ -13,7 +14,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
     setTimeout(() => {
       setIsClosing(false);
       onClose();
-    }, 600); // Duration matches animation (slightly shorter to feel snappier)
+    }, 600);
   };
 
   const registrar = async(e) => {
@@ -25,12 +26,22 @@ const RegisterModal = ({ isOpen, onClose }) => {
         senha: password
       })
       if(response?.data) {
-        alert("Usuário cadastrado com sucesso")
+        toast.success("✅ Operador registrado com sucesso!", {
+          position: "top-right",
+          autoClose: 2000,
+          pauseOnHover: false
+        })
         limparInputs()
+        setTimeout(() => handleClose(), 2000);
       }
     } catch (error) {
       console.log(error.response)
-      alert(error.response.data.message)      
+      const errorMsg = error?.response?.data?.message || "ERRO_NO_REGISTRO"
+      toast.error(`Registro falhou: ${errorMsg}`, {
+        position: "top-right",
+        autoClose: 3000,
+        pauseOnHover: false
+      })      
     }
   }
 
@@ -46,12 +57,12 @@ const RegisterModal = ({ isOpen, onClose }) => {
     <form onSubmit={registrar} className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div 
-        className={`absolute inset-0 bg-background/90 transition-opacity duration-100 ${isClosing ? 'opacity-0' : 'opacity-100'}`}
+        className={`absolute inset-0 bg-background/90 transition-opacity duration-100 ${isClosing ? "opacity-0" : "opacity-100"}`}
         onClick={handleClose}
       />
 
       {/* Modal Content - Essential Cyberpunk Style */}
-      <div className={`bg-surface-container-low border border-primary-container/40 p-8 glitch-border relative sm:w-96 w-full max-w-md z-10 gpu-accelerated ${isClosing ? 'animate-slow-fade-out' : 'animate-slow-fade-in'}`}>
+      <div className={`bg-surface-container-low border border-primary-container/40 p-8 glitch-border relative sm:w-96 w-full max-w-md z-10 gpu-accelerated ${isClosing ? "animate-slow-fade-out" : "animate-slow-fade-in"}`}>
         {/* Decorative Corner Accents */}
         <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary-container"></div>
         <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary-container"></div>
@@ -63,7 +74,6 @@ const RegisterModal = ({ isOpen, onClose }) => {
         >
           [X]
         </button>
-
 
         <h2 className="text-code-md text-primary-container mb-4 mt-2 text-center tracking-[0.2em] uppercase">
           New Operator Registration

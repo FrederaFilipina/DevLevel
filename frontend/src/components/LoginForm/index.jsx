@@ -40,18 +40,23 @@ const LoginForm = ({ onRegisterClick }) => {
         login(email, tokenAcesso, tokenRefresh)
         localStorage.setItem("tokenAcesso", tokenAcesso)
         localStorage.setItem("tokenRefresh", tokenRefresh)
-        toast.success("Usuário logado com sucesso!", {
+        toast.success("Acesso garantido!", {
           progress: true,
-          autoClose: 500,
+          autoClose: 2000,
           position: "top-right",
           pauseOnHover: false
         })
         limparInputs()
-        setTimeout(() => navigate(("/dashboard"), 2000));
+        setTimeout(() => navigate("/dashboard"), 2000);
       }
     } catch (error) {
       console.log(error)
-      alert(error?.response?.data?.message)
+      const errorMsg = error?.response?.data?.message || "FALHA_NA_AUTENTICACAO"
+      toast.error(`Acesso negado: ${errorMsg}`, {
+        position: "top-right",
+        autoClose: 3000,
+        pauseOnHover: false
+      })
     }
   }
 
@@ -116,7 +121,7 @@ const LoginForm = ({ onRegisterClick }) => {
           <span className="relative z-10">Initiate Linkage</span>
 
           {/* Glitch Hover Effect Overlay */}
-          <div className="absolute inset-0 bg-secondary translate-x-full group-hover:translate-x-formansition-transform duration-300 opacity-20" />
+          <div className="absolute inset-0 bg-secondary translate-x-full group-hover:translate-x-0 transition-transform duration-300 opacity-20" />
         </button>
       </div>
     </div>
