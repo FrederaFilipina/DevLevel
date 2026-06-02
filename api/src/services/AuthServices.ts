@@ -1,5 +1,5 @@
-import type { Usuario } from "@prisma/client";
-import { authRepository, AuthRepository } from "../repositories/authRepository";
+import type { Usuario } from "../prisma/generated/prisma";
+import { authRepository, AuthRepository } from "../Repositories/authRepository";
 import z, { email } from "zod";
 import bcrypt from"bcrypt"
 import { signTokenAcesso, signTokenRefresh } from "../utils/jwt";

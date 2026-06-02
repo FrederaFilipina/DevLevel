@@ -1,89 +1,87 @@
-import type { Request, Response } from 'express';
-import { prisma } from '../prisma/prisma';
-import { getParam, handleError } from './utils';
-// import { TemaService } from '../Service/temaService';
-
-// const temaService = new TemaService();
+import { Router, Request, Response } from "express";
+import { TemaService } from "../Services/temaService";
+import { TemaRepository } from "../Repositories/temaRepository";
+import { prisma } from "../prisma/prisma";
 
 export class TemaController {
-  async obter(req: Request, res: Response) {
+  private router: Router;
+  private temaService: TemaService;
+
+  constructor() {
+    this.router = Router();
+    const temaRepository = new TemaRepository(prisma);
+    this.temaService = new TemaService(temaRepository);
+    this.initRoutes();
+  }
+
+  private initRoutes(): void {
+    this.router.get("/nome/:nome", this.buscarPorNome.bind(this));  // ← Específico primeiro
+    this.router.get("/:id", this.buscarPorId.bind(this));
+    this.router.get("/", this.listarTodos.bind(this));
+  }
+
+  private async listarTodos(req: Request, res: Response): Promise<void> {
     try {
-      const id = getParam(req, 'id');
-      // const tema = await temaService.obter(id);
-      const tema = await prisma.tema.findUnique({
-        where: { id },
-        include: {
-          trilhas: { orderBy: { ordem: 'asc' }, include: { modulos: { orderBy: { ordem: 'asc' } } } },
-        },
+      const temas = await this.temaService.listarTodos();
+      res.status(200).json({
+        success: true,
+        data: temas,
       });
-
-      if (!tema) return res.status(404).json({ erro: 'Tema não encontrado' });
-
-      return res.json(tema);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao obter tema');
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Erro ao listar temas",
+      });
     }
   }
 
-  async listar(_req: Request, res: Response) {
+  private async buscarPorId(req: Request, res: Response): Promise<void> {
     try {
-      // const temas = await temaService.listar();
-      const temas = await prisma.tema.findMany({
-        orderBy: { nome: 'asc' },
-        include: { trilhas: { orderBy: { ordem: 'asc' } } },
-      });
+      const { id } = req.params;
+      const idNumero = Number(id);  // ← Converte string para number
+      
+      if (isNaN(idNumero)) {
+        res.status(400).json({
+          success: false,
+          message: "ID deve ser um número",
+        });
+        return;
+      }
 
-      return res.json(temas);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar temas');
+      const tema = await this.temaService.buscarPorId(idNumero);
+
+      res.status(200).json({
+        success: true,
+        data: tema,
+      });
+    } catch (error) {
+      res.status(404).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Tema não encontrado",
+      });
     }
   }
 
-  async vincularUsuario(req: Request, res: Response) {
+  private async buscarPorNome(req: Request, res: Response): Promise<void> {
     try {
-      const { usuarioId, temaId } = req.body;
-      if (!usuarioId || !temaId) return res.status(400).json({ erro: 'usuarioId e temaId são obrigatórios' });
+      const { nome } = req.params;
+      const tema = await this.temaService.buscarPorNome(nome);
 
-      // const temaUsuario = await temaService.vincularUsuario({ usuarioId, temaId });
-      const temaUsuario = await prisma.temaUsuario.upsert({
-        where: { usuarioId_temaId: { usuarioId, temaId } },
-        update: {},
-        create: { usuarioId, temaId },
-        include: { tema: true },
+      res.status(200).json({
+        success: true,
+        data: tema,
       });
-
-      return res.status(201).json(temaUsuario);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao vincular tema');
+    } catch (error) {
+      res.status(404).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Tema não encontrado",
+      });
     }
   }
 
-  async temasDoUsuario(req: Request, res: Response) {
-    try {
-      const usuarioId = getParam(req, 'usuarioId');
-      // const temas = await temaService.temasDoUsuario(usuarioId);
-      const temas = await prisma.temaUsuario.findMany({
-        where: { usuarioId },
-        include: { tema: { include: { trilhas: { orderBy: { ordem: 'asc' } } } } },
-        orderBy: { createdAt: 'desc' },
-      });
-
-      return res.json(temas);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar temas do usuário');
-    }
-  }
-
-  async desvincularUsuario(req: Request, res: Response) {
-    try {
-      const id = getParam(req, 'id');
-      // await temaService.desvincularUsuario(id);
-      await prisma.temaUsuario.delete({ where: { id } });
-      return res.status(204).send();
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao desvincular tema');
-    }
+  public getRouter(): Router {
+    return this.router;
   }
 }
 
-// export const temaController = new TemaController(temaService);
+export const temaController = new TemaController();

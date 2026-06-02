@@ -1,96 +1,77 @@
-import type { Request, Response } from 'express';
-import { prisma } from '../prisma/prisma';
-import { getParam, handleError, removeUndefined } from './utils';
-// import { HabilidadeService } from '../Service/habilidadeService';
-
-// const habilidadeService = new HabilidadeService();
+import { Router, Request, Response } from "express";
+import { HabilidadeService } from "../Services/habilidadeService";
+import { HabilidadeRepository } from "../Repositories/habilidadeRepository";
+import { prisma } from "../prisma/prisma";
 
 export class HabilidadeController {
-  async obter(req: Request, res: Response) {
-    try {
-      const id = getParam(req, 'id');
-      // const habilidade = await habilidadeService.obter(id);
-      const habilidade = await prisma.habilidade.findUnique({ where: { id } });
-      if (!habilidade) return res.status(404).json({ erro: 'Habilidade não encontrada' });
-      return res.json(habilidade);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao obter habilidade');
-    }
+  private router: Router;
+  private habilidadeService: HabilidadeService;
+
+  constructor() {
+    this.router = Router();
+    const habilidadeRepository = new HabilidadeRepository(prisma);
+    this.habilidadeService = new HabilidadeService(habilidadeRepository);
+    this.initRoutes();
   }
 
-  async listar(_req: Request, res: Response) {
-    try {
-      // const habilidades = await habilidadeService.listar();
-      const habilidades = await prisma.habilidade.findMany({ orderBy: { nome: 'asc' } });
-      return res.json(habilidades);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar habilidades');
-    }
+  private initRoutes(): void {
+    this.router.get("/", this.listarTodas.bind(this));
+    this.router.get("/:id", this.buscarPorId.bind(this));
+    this.router.get("/nome/:nome", this.buscarPorNome.bind(this));
   }
 
-  async vincularUsuario(req: Request, res: Response) {
+  private async listarTodas(req: Request, res: Response): Promise<void> {
     try {
-      const { usuarioId, habilidadeId } = req.body;
-      if (!usuarioId || !habilidadeId) {
-        return res.status(400).json({ erro: 'usuarioId e habilidadeId são obrigatórios' });
-      }
-
-      // const habilidadeUsuario = await habilidadeService.vincularUsuario({ usuarioId, habilidadeId });
-      const habilidadeUsuario = await prisma.habilidadeUsuario.create({
-        data: { usuarioId, habilidadeId },
-        include: { habilidade: true },
+      const habilidades = await this.habilidadeService.listarTodas();
+      res.status(200).json({
+        success: true,
+        data: habilidades,
       });
-
-      return res.status(201).json(habilidadeUsuario);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao vincular habilidade');
-    }
-  }
-
-  async habilidadesDoUsuario(req: Request, res: Response) {
-    try {
-      const usuarioId = getParam(req, 'usuarioId');
-      // const habilidades = await habilidadeService.habilidadesDoUsuario(usuarioId);
-      const habilidades = await prisma.habilidadeUsuario.findMany({
-        where: { usuarioId },
-        include: { habilidade: true },
-        orderBy: { updatedAt: 'desc' },
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Erro ao listar habilidades",
       });
-
-      return res.json(habilidades);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar habilidades do usuário');
     }
   }
 
-  async atualizarPontuacao(req: Request, res: Response) {
+  private async buscarPorId(req: Request, res: Response): Promise<void> {
     try {
-      const id = getParam(req, 'id');
-      const { pontuacao, nivel } = req.body;
-      // const habilidade = await habilidadeService.atualizarPontuacao(id, { pontuacao, nivel });
-      const habilidade = await prisma.habilidadeUsuario.update({
-        where: { id },
-        data: removeUndefined({ pontuacao, nivel }),
-        include: { habilidade: true },
+      const { id } = req.params;
+      const habilidade = await this.habilidadeService.buscarPorId(id);
+
+      res.status(200).json({
+        success: true,
+        data: habilidade,
       });
-
-      return res.json(habilidade);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao atualizar pontuação');
+    } catch (error) {
+      res.status(404).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Habilidade não encontrada",
+      });
     }
   }
 
-  async desvincularUsuario(req: Request, res: Response) {
+  private async buscarPorNome(req: Request, res: Response): Promise<void> {
     try {
-      const id = getParam(req, 'id');
-      // await habilidadeService.desvincularUsuario(id);
-      await prisma.habilidadeUsuario.delete({ where: { id } });
-      return res.status(204).send();
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao desvincular habilidade');
+      const { nome } = req.params;
+      const habilidade = await this.habilidadeService.buscarPorNome(nome);
+
+      res.status(200).json({
+        success: true,
+        data: habilidade,
+      });
+    } catch (error) {
+      res.status(404).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Habilidade não encontrada",
+      });
     }
+  }
+
+  public getRouter(): Router {
+    return this.router;
   }
 }
 
-
-// export const habilidadeController = new HabilidadeController(habilidadeService);
+export const habilidadeController = new HabilidadeController()

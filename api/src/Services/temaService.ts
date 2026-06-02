@@ -1,4 +1,4 @@
-import { type Tema } from "@prisma/client";
+import { type Tema } from "../prisma/generated/prisma";
 import type { TemaRepository } from "../Repositories/temaRepository";
 
 

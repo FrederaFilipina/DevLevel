@@ -1,4 +1,4 @@
-import { type Trilha } from "@prisma/client";
+import { type Trilha } from "../prisma/generated/prisma";
 import { TrilhaRepository } from "../Repositories/trilhaRepository";
 
 export class TrilhaService {
@@ -55,3 +55,4 @@ export class TrilhaService {
         return await this.trilhaRepository.buscarProximasTrilhas(id);
     }
 }
+

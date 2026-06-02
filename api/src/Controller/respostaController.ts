@@ -1,118 +1,123 @@
-import type { Request, Response } from 'express';
-import { prisma } from '../prisma/prisma';
-import { getParam, handleError } from './utils';
-// import { RespostaService } from '../Service/respostaService';
+import { Router, Request, Response } from "express";
+import { RespostaQuestaoService } from "../Services/questaoRespostaService";
+import { RespostaQuestaoRepository } from "../Repositories/questaoRespostaRepository";
+import { prisma } from "../prisma/prisma";
 
-// const respostaService = new RespostaService();
+export class RespostaQuestaoController {
+  private router: Router;
+  private respostaQuestaoService: RespostaQuestaoService;
 
-const respostaPublicaSelect = {
-  id: true,
-  titulo: true,
-  codigoResposta: true,
-};
+  constructor() {
+    this.router = Router();
+    const respostaQuestaoRepository = new RespostaQuestaoRepository(prisma);
+    this.respostaQuestaoService = new RespostaQuestaoService(
+      respostaQuestaoRepository
+    );
+    this.initRoutes();
+  }
 
-export class RespostaController {
-  async submeterResposta(req: Request, res: Response) {
+  private initRoutes(): void {
+    this.router.get("/:id", this.buscarPorId.bind(this));
+    this.router.get("/questao/:questaoId", this.listarPorQuestao.bind(this));
+    this.router.get("/questao/:questaoId/melhores", this.listarMelhoresRespostas.bind(this));
+    this.router.get("/questao/:questaoId/performance", this.listarPorPerformance.bind(this));
+    this.router.get("/questao/:questaoId/clean-code", this.listarPorCleanCode.bind(this));
+  }
+
+  private async buscarPorId(req: Request, res: Response): Promise<void> {
     try {
-      const { usuarioId, questaoId, respostaQuestaoId } = req.body;
-      if (!usuarioId || !questaoId || !respostaQuestaoId) {
-        return res.status(400).json({ erro: 'usuarioId, questaoId e respostaQuestaoId são obrigatórios' });
-      }
+      const { id } = req.params;
+      const resposta = await this.respostaQuestaoService.buscarPorId(id);
 
-      // const resposta = await respostaService.submeterResposta({ usuarioId, questaoId, respostaQuestaoId });
-      const respostaQuestao = await prisma.respostaQuestao.findUnique({
-        where: { id: respostaQuestaoId },
-        include: { questao: true },
+      res.status(200).json({
+        success: true,
+        data: resposta,
       });
-
-      if (!respostaQuestao || respostaQuestao.questaoId !== questaoId) {
-        return res.status(404).json({ erro: 'Resposta da questão não encontrada' });
-      }
-
-      const respostaExistente = await prisma.respostaUsuario.findUnique({
-        where: { usuarioId_questaoId: { usuarioId, questaoId } },
+    } catch (error) {
+      res.status(404).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Resposta não encontrada",
       });
-
-      if (respostaExistente) {
-        return res.status(409).json({ erro: 'Questão já respondida pelo usuário' });
-      }
-
-      const resposta = await prisma.$transaction(async (tx) => {
-        const criada = await tx.respostaUsuario.create({
-          data: {
-            usuarioId,
-            questaoId,
-            respostaQuestaoId,
-            pontuacaoRecebida: respostaQuestao.pontuacao,
-          },
-          include: { respostaQuestao: true, questao: true },
-        });
-
-        await tx.usuario.update({
-          where: { id: usuarioId },
-          data: {
-            xp: { increment: respostaQuestao.questao.xpRecompensa },
-            pontuacaoTotal: { increment: respostaQuestao.pontuacao },
-          },
-        });
-
-        return criada;
-      });
-
-      return res.status(201).json(resposta);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao submeter resposta');
     }
   }
 
-  async obter(req: Request, res: Response) {
+  private async listarPorQuestao(req: Request, res: Response): Promise<void> {
     try {
-      const id = getParam(req, 'id');
-      // const resposta = await respostaService.obter(id);
-      const resposta = await prisma.respostaUsuario.findUnique({
-        where: { id },
-        include: { usuario: true, questao: true, respostaQuestao: true },
+      const { questaoId } = req.params;
+      const respostas = await this.respostaQuestaoService.listarPorQuestao(questaoId);
+
+      res.status(200).json({
+        success: true,
+        data: respostas,
       });
-
-      if (!resposta) return res.status(404).json({ erro: 'Resposta não encontrada' });
-
-      return res.json(resposta);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao obter resposta');
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Erro ao listar respostas",
+      });
     }
   }
 
-  async respostasDoUsuario(req: Request, res: Response) {
+  private async listarMelhoresRespostas(req: Request, res: Response): Promise<void> {
     try {
-      const usuarioId = getParam(req, 'usuarioId');
-      // const respostas = await respostaService.respostasDoUsuario(usuarioId);
-      const respostas = await prisma.respostaUsuario.findMany({
-        where: { usuarioId },
-        include: { questao: true, respostaQuestao: true },
-        orderBy: { respondidaEm: 'desc' },
-      });
+      const { questaoId } = req.params;
+      const respostas = await this.respostaQuestaoService.listarMelhoresRespostas(
+        questaoId
+      );
 
-      return res.json(respostas);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar respostas do usuário');
+      res.status(200).json({
+        success: true,
+        data: respostas,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Erro ao listar respostas",
+      });
     }
   }
 
-  async listarOpcoes(req: Request, res: Response) {
+  private async listarPorPerformance(req: Request, res: Response): Promise<void> {
     try {
-      const questaoId = getParam(req, 'questaoId');
-      // const respostas = await respostaService.listarOpcoes(questaoId);
-      const respostas = await prisma.respostaQuestao.findMany({
-        where: { questaoId },
-        orderBy: { createdAt: 'asc' },
-        select: respostaPublicaSelect,
-      });
+      const { questaoId } = req.params;
+      const respostas = await this.respostaQuestaoService.listarPorPerformance(
+        questaoId
+      );
 
-      return res.json(respostas);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar opções de resposta');
+      res.status(200).json({
+        success: true,
+        data: respostas,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Erro ao listar respostas",
+      });
     }
+  }
+
+  private async listarPorCleanCode(req: Request, res: Response): Promise<void> {
+    try {
+      const { questaoId } = req.params;
+      const respostas = await this.respostaQuestaoService.listarPorCleanCode(
+        questaoId
+      );
+
+      res.status(200).json({
+        success: true,
+        data: respostas,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error instanceof Error ? error.message : "Erro ao listar respostas",
+      });
+    }
+  }
+
+  public getRouter(): Router {
+    return this.router;
   }
 }
 
-// export const respostaController = new RespostaController(respostaService);
+export const respostaController = new RespostaQuestaoController()
