@@ -80,6 +80,19 @@
 }
 
 /* Suas Animações Customizadas */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-150%) skewX(-45deg);
+    }
+    100% {
+        transform: translateX(250%) skewX(-45deg);
+    }
+}
+
+.animate-shimmer {
+    animation: shimmer 2s infinite;
+}
+
 @keyframes scanline {
     0% {
         transform: translateY(-100%);

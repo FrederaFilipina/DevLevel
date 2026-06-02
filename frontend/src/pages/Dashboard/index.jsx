@@ -174,16 +174,13 @@ const Dashboard = () => {
                 </div>
             </section>
 
-            {/* Status and Welcome Message */}
-            <div className='flex items-start flex-col gap-4 mb-8 pl-2 border-l-2 border-primary-fixed-dim/30'>
-                <h1 className="flex flex-row items-center font-headline-lg text-primary uppercase tracking-tighter gap-3 text-2xl flex-wrap">
-                    <span className='font-black border-b-2 border-primary-fixed-dim'>MAINFRAME_STATUS:</span>
-                    <div className='flex flex-wrap items-center gap-3'>
-                        <span className="text-primary-fixed-dim font-bold animate-pulse drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">ONLINE</span>
-                        <div className="flex gap-1">
-                            <span className="w-1.5 h-1.5 bg-primary-fixed-dim"></span>
-                            <span className="w-1.5 h-1.5 bg-primary-fixed-dim/40"></span>
-                        </div>
+            <div className='flex items-start flex-col gap-4 mb-4 pl-2 border-l-2 border-primary-fixed-dim/30'>
+                <h1 className="flex flex-row items-center font-headline-lg text-primary uppercase tracking-tighter gap-3 text-2xl">
+                    <span className='font-black border-b-2 border-primary-fixed-dim'>MAINFRAME_STATUS:</span> 
+                    <span className="text-primary-fixed-dim font-bold animate-pulse drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">ONLINE</span>
+                    <div className="flex gap-1">
+                        <span className="w-1.5 h-1.5 bg-primary-fixed-dim"></span>
+                        <span className="w-1.5 h-1.5 bg-primary-fixed-dim/40"></span>
                     </div>
                 </h1>
 
@@ -192,7 +189,29 @@ const Dashboard = () => {
                 </h3>
             </div>
 
-            <CourseCard />
+            <div className="flex flex-col gap-6">
+                <CourseCard 
+                    id="TR-00" 
+                    title="INTRODUÇÃO AO TERMINAL" 
+                    status="CONCLUIDA" 
+                    progress={100} 
+                    difficulty="EASY" 
+                />
+                <CourseCard 
+                    id="TR-01" 
+                    title="FUNDAMENTOS DE SEGURANÇA" 
+                    status="EM_CURSO" 
+                    progress={35} 
+                    difficulty="EASY" 
+                />
+                <CourseCard 
+                    id="TR-02" 
+                    title="CRIPTOGRAFIA AVANÇADA" 
+                    status="BLOQUEADO" 
+                    progress={0} 
+                    difficulty="HARD" 
+                />
+            </div>
         </main>
     )
 }
