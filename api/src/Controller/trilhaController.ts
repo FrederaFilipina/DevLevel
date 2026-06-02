@@ -4,7 +4,7 @@ import type { TrilhaService } from "../Services/trilhaService";
 export class TrilhaController {
   constructor(
     private readonly trilhaService: TrilhaService
-  ) {}
+  ) { }
 
   async listar(_req: Request, res: Response) {
     try {
@@ -31,6 +31,12 @@ export class TrilhaController {
 
       const trilha =
         await this.trilhaService.buscarPorId(id);
+
+      if (!trilha) {
+        return res.status(404).json({
+          erro: "Trilha não encontrada."
+        });
+      }
 
       return res.status(200).json(trilha);
     } catch {
@@ -78,7 +84,7 @@ export class TrilhaController {
 
       const ordem = Number(req.params.ordem);
 
-      if (isNaN(ordem)) {
+      if (isNaN(ordem) || ordem <= 0) {
         return res.status(400).json({
           erro: "Ordem invalida.",
         });
@@ -89,6 +95,11 @@ export class TrilhaController {
           temaId,
           ordem
         );
+      if (!trilha) {
+        return res.status(404).json({
+          erro: "Trilha não encontrada."
+        });
+      }
 
       return res.status(200).json(trilha);
     } catch {

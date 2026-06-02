@@ -4,7 +4,7 @@ import type { RespostaQuestaoService } from "../Services/questaoRespostaService"
 export class QuestaoRespostaController {
   constructor(
     private readonly respostaQuestaoService: RespostaQuestaoService
-  ) {}
+  ) { }
 
   async obter(req: Request, res: Response) {
     try {
@@ -20,6 +20,12 @@ export class QuestaoRespostaController {
         await this.respostaQuestaoService.buscarPorId(
           id
         );
+
+      if (!respostaQuestao) {
+        return res.status(404).json({
+          erro: "Resposta não encontrada."
+        });
+      }
 
       return res.status(200).json(respostaQuestao);
     } catch {
@@ -67,11 +73,17 @@ export class QuestaoRespostaController {
 
       const titulo = String(req.params.titulo ?? "");
 
+
       const resposta =
         await this.respostaQuestaoService.buscarPorQuestaoETitulo(
           questaoId,
           titulo
         );
+      if (!resposta) {
+        return res.status(404).json({
+          erro: "Resposta não encontrada."
+        });
+      }
 
       return res.status(200).json(resposta);
     } catch {

@@ -4,7 +4,7 @@ import type { HabilidadeService } from "../Services/habilidadeService";
 export class HabilidadeController {
   constructor(
     private readonly habilidadeService: HabilidadeService
-  ) {}
+  ) { }
 
   async listar(_req: Request, res: Response) {
     try {
@@ -31,6 +31,11 @@ export class HabilidadeController {
 
       const habilidade =
         await this.habilidadeService.buscarPorId(id);
+      if (!habilidade) {
+        return res.status(404).json({
+          erro: "Habilidade não encontrada."
+        });
+      }
 
       return res.status(200).json(habilidade);
     } catch {
@@ -43,11 +48,23 @@ export class HabilidadeController {
   async buscarPorNome(req: Request, res: Response) {
     try {
       const nome = String(req.params.nome ?? "");
+if (!nome.trim()) {
+        return res.status(400).json({
+          erro: "Nome inválido."
+        });
+      }
 
       const habilidade =
         await this.habilidadeService.buscarPorNome(
           nome
         );
+
+
+      if (!habilidade) {
+        return res.status(404).json({
+          erro: "Habilidade não encontrada."
+        });
+      }
 
       return res.status(200).json(habilidade);
     } catch {

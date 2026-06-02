@@ -4,7 +4,7 @@ import type { ModuloService } from "../Services/moduloService";
 export class ModuloController {
   constructor(
     private readonly moduloService: ModuloService
-  ) {}
+  ) { }
 
   async listar(_req: Request, res: Response) {
     try {
@@ -31,6 +31,12 @@ export class ModuloController {
 
       const modulo =
         await this.moduloService.buscarPorId(id);
+
+      if (!modulo) {
+        return res.status(404).json({
+          erro: "Módulo não encontrado."
+        });
+      }
 
       return res.status(200).json(modulo);
     } catch {
@@ -78,7 +84,8 @@ export class ModuloController {
 
       const ordem = Number(req.params.ordem);
 
-      if (isNaN(ordem)) {
+
+      if (isNaN(ordem) || ordem <= 0) {
         return res.status(400).json({
           erro: "Ordem invalida.",
         });
@@ -89,6 +96,12 @@ export class ModuloController {
           trilhaId,
           ordem
         );
+
+      if (!modulo) {
+        return res.status(404).json({
+          erro: "Módulo não encontrado."
+        });
+      }
 
       return res.status(200).json(modulo);
     } catch {

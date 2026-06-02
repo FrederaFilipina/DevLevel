@@ -4,7 +4,7 @@ import type { QuestaoService } from "../Services/questaoService";
 export class QuestaoController {
   constructor(
     private readonly questaoService: QuestaoService
-  ) {}
+  ) { }
 
   async listar(_req: Request, res: Response) {
     try {
@@ -31,6 +31,12 @@ export class QuestaoController {
 
       const questao =
         await this.questaoService.buscarPorId(id);
+
+      if (!questao) {
+        return res.status(404).json({
+          erro: "Questão não encontrada."
+        });
+      }
 
       return res.status(200).json(questao);
     } catch {
@@ -78,7 +84,7 @@ export class QuestaoController {
 
       const ordem = Number(req.params.ordem);
 
-      if (isNaN(ordem)) {
+      if (isNaN(ordem) || ordem <= 0) {
         return res.status(400).json({
           erro: "Ordem invalida.",
         });
@@ -89,6 +95,12 @@ export class QuestaoController {
           moduloId,
           ordem
         );
+
+      if (!questao) {
+        return res.status(404).json({
+          erro: "Questão não encontrada."
+        });
+      }
 
       return res.status(200).json(questao);
     } catch {
