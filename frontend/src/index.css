@@ -79,6 +79,46 @@
     --font-label-sm: "JetBrains Mono", monospace;
 }
 
+/* Light Mode Overrides (High-Contrast Tech) */
+.light {
+    --color-background: #f0f0f0;
+    --color-on-background: #020202;
+
+    --color-primary: #020202;
+    --color-on-primary: #fcee0a;
+    --color-primary-container: #020202;
+    --color-on-primary-container: #fcee0a;
+    --color-primary-fixed: #020202;
+    --color-primary-fixed-dim: #008b94;
+
+    --color-secondary: #008b94;
+    --color-on-secondary: #ffffff;
+    --color-secondary-container: #b2ebed;
+    --color-on-secondary-container: #005a60;
+
+    --color-tertiary: #b3002a;
+    --color-on-tertiary: #ffffff;
+    --color-tertiary-container: #ffd9df;
+    --color-on-tertiary-container: #7a001d;
+
+    --color-surface: #ffffff;
+    --color-on-surface: #020202;
+    --color-surface-variant: #e0e0e0;
+    --color-on-surface-variant: #020202;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f7f7f7;
+    --color-surface-container: #efefef;
+    --color-surface-container-high: #e5e5e5;
+    --color-surface-container-highest: #dadada;
+    
+    --color-outline: #020202;
+    --color-outline-variant: #008b94;
+
+    --color-error: #b3002a;
+    
+    --inverse-surface: #020202;
+}
+
 /* Suas Animações Customizadas */
 @keyframes shimmer {
     0% {
