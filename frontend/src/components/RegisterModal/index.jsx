@@ -134,7 +134,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
           <div className="pt-4">
             <button
               type="submit"
-              className="w-full group relative overflow-hidden bg-primary-container text-on-primary font-label-sm text-label-sm py-4 tracking-[0.2em] uppercase transition-all hover:scale-[1.02] active:scale-95 active:skew-x-2 flicker-hover"
+              className="w-full group relative overflow-hidden bg-primary-container text-on-primary font-label-sm text-label-sm py-4 tracking-[0.2em] uppercase transition-all hover:scale-[1.02] active:scale-95 active:skew-x-2"
             >
               <span className="relative z-10">Authorize Access</span>
               <div className="absolute inset-0 bg-secondary translate-x-full group-hover:translate-x-0 transition-transform duration-300 opacity-20" />

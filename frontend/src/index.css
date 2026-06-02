@@ -1,54 +1,61 @@
 @import "tailwindcss";
 
 @theme {
-    /* Cores Personalizadas */
-    --color-inverse-primary: #00696f;
-    --color-on-error-container: #ffdad6;
-    --color-surface-tint: #00dce6;
-    --color-on-error: #690005;
-    --color-outline-variant: #3a494b;
-    --color-secondary: #ffabf3;
-    --color-on-primary: #00373a;
-    --color-surface-container-low: #1b1b1d;
-    --color-secondary-fixed: #ffd7f5;
-    --color-tertiary-fixed: #e6eb00;
-    --color-secondary-fixed-dim: #ffabf3;
-    --color-on-secondary: #5b005b;
-    --color-on-primary-fixed-variant: #004f53;
-    --color-primary-fixed: #6ff6ff;
-    --color-tertiary-fixed-dim: #cace00;
-    --color-surface-container-high: #2a2a2c;
-    --color-on-surface-variant: #b9cacb;
-    --color-background: #050505;
-    --color-surface-container-highest: #353437;
-    --color-on-secondary-fixed-variant: #810081;
-    --color-error-container: #93000a;
-    --color-primary-container: #00f3ff;
-    --color-on-secondary-fixed: #380038;
-    --color-surface-variant: #353437;
-    --color-on-tertiary: #313300;
-    --color-on-surface: #e5e1e4;
-    --color-on-tertiary-fixed-variant: #484a00;
-    --color-on-primary-fixed: #002022;
-    --color-surface-container-lowest: #0e0e10;
-    --color-primary-fixed-dim: #00dce6;
-    --color-inverse-on-surface: #313032;
-    --color-error: #ffb4ab;
-    --color-on-background: #e5e1e4;
-    --color-on-tertiary-container: #626400;
-    --color-on-primary-container: #006b71;
-    --inverse-surface: #e5e1e4;
-    --color-surface-dim: #131315;
-    --color-surface-container: #201f21;
-    --color-surface: #131315;
-    --color-on-tertiary-fixed: #1c1d00;
-    --color-secondary-container: #fe00fe;
-    --color-primary: #e3fdff;
-    --color-outline: #849495;
-    --color-tertiary: #fcff87;
-    --color-surface-bright: #39393b;
-    --color-tertiary-container: #e0e400;
-    --color-on-secondary-container: #500050;
+    /* Cyberpunk 2077 Palette */
+    --color-background: #020202;
+    --color-on-background: #fcee0a;
+
+    --color-primary: #fcee0a;
+    --color-on-primary: #000000;
+    --color-primary-container: #fcee0a;
+    --color-on-primary-container: #000000;
+    --color-primary-fixed: #fcee0a;
+    --color-primary-fixed-dim: #00f3ff;
+    --color-on-primary-fixed: #000000;
+    --color-on-primary-fixed-variant: #000000;
+
+    --color-secondary: #00f3ff;
+    --color-on-secondary: #000000;
+    --color-secondary-container: #004444;
+    --color-on-secondary-container: #00f3ff;
+    --color-secondary-fixed: #00f3ff;
+    --color-secondary-fixed-dim: #00b0ba;
+    --color-on-secondary-fixed: #000000;
+    --color-on-secondary-fixed-variant: #000000;
+
+    --color-tertiary: #ff003c;
+    --color-on-tertiary: #ffffff;
+    --color-tertiary-container: #440011;
+    --color-on-tertiary-container: #ff003c;
+    --color-tertiary-fixed: #ff003c;
+    --color-tertiary-fixed-dim: #ba002c;
+    --color-on-tertiary-fixed: #ffffff;
+    --color-on-tertiary-fixed-variant: #ffffff;
+
+    --color-surface: #0d0d0d;
+    --color-on-surface: #00f3ff;
+    --color-surface-variant: #1a1a1a;
+    --color-on-surface-variant: #00f3ff;
+    --color-surface-dim: #050505;
+    --color-surface-bright: #151515;
+    --color-surface-container-lowest: #020202;
+    --color-surface-container-low: #080808;
+    --color-surface-container: #0d0d0d;
+    --color-surface-container-high: #121212;
+    --color-surface-container-highest: #1a1a1a;
+    --color-surface-tint: #fcee0a;
+
+    --color-outline: #fcee0a;
+    --color-outline-variant: #00f3ff;
+
+    --color-error: #ff003c;
+    --color-on-error: #ffffff;
+    --color-error-container: #440011;
+    --color-on-error-container: #ff003c;
+
+    --inverse-surface: #fcee0a;
+    --color-inverse-on-surface: #000000;
+    --color-inverse-primary: #000000;
 
     /* Arredondamento de Bordas (Zerados conforme seu config) */
     --radius-default: 0px;
@@ -227,6 +234,75 @@
 .animate-slow-fade-out {
     animation: slow-fade-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: transform, opacity;
+}
+
+/* Novas Animações Cyberpunk para Fundo */
+@keyframes crt-flicker {
+  0% { opacity: 0.1; }
+  5% { opacity: 0.15; }
+  10% { opacity: 0.1; }
+  15% { opacity: 0.2; }
+  20% { opacity: 0.15; }
+  25% { opacity: 0.1; }
+  30% { opacity: 0.15; }
+  100% { opacity: 0.1; }
+}
+
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  25% { opacity: 0.5; }
+  50% { transform: translateY(-100px) translateX(20px); opacity: 0.8; }
+  75% { opacity: 0.5; }
+}
+
+@keyframes cyber-grid-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(40px); }
+}
+
+body {
+  background-color: var(--color-background, #020202);
+  color: var(--color-on-background);
+}
+
+.crt-grid-overlay {
+  background: 
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  animation: crt-flicker 0.15s infinite;
+}
+
+.cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+  animation: cyber-grid-scroll 2s linear infinite;
+}
+
+.cyber-particle {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: var(--color-secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-secondary);
+  pointer-events: none;
+}
+
+@keyframes neon-pulse {
+  0%, 100% { opacity: 0.2; filter: brightness(1); }
+  50% { opacity: 0.5; filter: brightness(1.5); }
+}
+
+.neon-pulse-line {
+  position: fixed;
+  background: var(--color-primary);
+  box-shadow: 0 0 15px var(--color-primary), 0 0 30px var(--color-primary);
+  animation: neon-pulse 4s ease-in-out infinite;
 }
 
 .gpu-accelerated {

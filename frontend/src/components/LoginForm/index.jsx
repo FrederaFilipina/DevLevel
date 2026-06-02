@@ -33,10 +33,10 @@ const LoginForm = ({ onRegisterClick }) => {
         senha: password
        })
 
-       const tokenAcesso = response.data.data.tokenRefresh
-       const tokenRefresh = response.data.data.tokenAcesso
+       const tokenAcesso = response.data.data.tokenAcesso
+       const tokenRefresh = response.data.data.tokenRefresh
 
-       if(response?.data) {
+       if(tokenAcesso && tokenRefresh) {
         login(email, tokenAcesso, tokenRefresh)
         localStorage.setItem("tokenAcesso", tokenAcesso)
         localStorage.setItem("tokenRefresh", tokenRefresh)
@@ -61,7 +61,7 @@ const LoginForm = ({ onRegisterClick }) => {
   }
 
   return (
-    <div className="space-y-3">
+    <form onSubmit={handleLogin} className="space-y-3">
       {/* Neural Node Address Label */}
       <div>
         <label className="font-label-sm text-label-sm text-primary-container flex items-center justify-between">
@@ -105,6 +105,7 @@ const LoginForm = ({ onRegisterClick }) => {
 
       <div className="text-left mb-2">
         <button 
+          type="button"
           onClick={handleRegisterClick}
           className="text-[12px] font-label-sm text-primary-container/80 hover:text-primary-container transition-colors uppercase tracking-widest cursor-pointer"
         >
@@ -115,7 +116,6 @@ const LoginForm = ({ onRegisterClick }) => {
       <div className="pt-4">
         <button
           type="submit"
-          onClick={handleLogin}
           className="w-full group relative overflow-hidden bg-primary-container cursor-pointer text-on-primary font-label-sm text-label-sm py-4 tracking-[0.2em] uppercase transition-all hover:scale-[1.02] active:scale-95 active:skew-x-2"
         >
           <span className="relative z-10">Initiate Linkage</span>
@@ -124,7 +124,7 @@ const LoginForm = ({ onRegisterClick }) => {
           <div className="absolute inset-0 bg-secondary translate-x-full group-hover:translate-x-0 transition-transform duration-300 opacity-20" />
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 

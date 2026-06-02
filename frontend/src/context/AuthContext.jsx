@@ -5,7 +5,6 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const dadosUsuario = jwtDecode(localStorage.getItem("tokenAcesso"))
   const [tokens, setTokens] = useState({
     accessToken: null,
     refreshToken: null,
@@ -15,12 +14,15 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const accessToken = localStorage.getItem("tokenAcesso");
     const refreshToken = localStorage.getItem("tokenRefresh");
-    const email = localStorage.getItem("email");
 
     if (accessToken && refreshToken) {
-      setTokens({ accessToken, refreshToken });
-      if (email) {
-        setUser(dadosUsuario);
+      try {
+        const decoded = jwtDecode(accessToken);
+        setUser(decoded);
+        setTokens({ accessToken, refreshToken });
+      } catch (error) {
+        console.error("Invalid token found in localStorage:", error);
+        logout();
       }
     }
   }, []);
@@ -30,8 +32,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("tokenAcesso", tokenAcesso);
     localStorage.setItem("tokenRefresh", tokenRefresh);
 
-    setUser(dadosUsuario);
-    setTokens({ accessToken: tokenAcesso, refreshToken: tokenRefresh });
+    try {
+      const decoded = jwtDecode(tokenAcesso);
+      setUser(decoded);
+      setTokens({ accessToken: tokenAcesso, refreshToken: tokenRefresh });
+    } catch (error) {
+      console.error("Failed to decode token during login:", error);
+    }
   };
 
   const logout = () => {
