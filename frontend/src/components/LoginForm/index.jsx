@@ -8,8 +8,12 @@ import {toast} from "react-toastify"
 const LoginForm = ({ onRegisterClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {login} = useAuth()
+  const {login, user} = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user) navigate("/dashboard");
+  }, [user, navigate]);
 
   const handleRegisterClick = (e) => {
     e.preventDefault();
