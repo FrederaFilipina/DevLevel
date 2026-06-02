@@ -2,14 +2,15 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
-const urlDataBase = process.env.DATABASE_URL || ""
+import {env} from "./src/env"
+ env.dbDevLevel
 
 export default defineConfig({
-  schema: "prisma/schema.prisma",
+  schema: "src/prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },
   datasource: {
-    url: urlDataBase
+    url:  env.dbDevLevel
   }
 });

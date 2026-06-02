@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Usuario {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement()) 
 
   nome  String
   email String @unique
@@ -62,7 +62,7 @@ model Tema {
 model TemaUsuario {
   id String @id @default(uuid())
 
-  usuarioId String
+  usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   temaId String
@@ -193,7 +193,7 @@ model RespostaQuestao {
 model RespostaUsuario {
   id String @id @default(uuid())
 
-  usuarioId String
+  usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   questaoId String
@@ -213,7 +213,7 @@ model RespostaUsuario {
 model TrilhaUsuario {
   id String @id @default(uuid())
 
-  usuarioId String
+  usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   trilhaId String
@@ -267,7 +267,7 @@ model Conquista {
 model ConquistaUsuario {
   id String @id @default(uuid())
 
-  usuarioId String
+  usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   conquistaId String
@@ -292,7 +292,7 @@ model Habilidade {
 model HabilidadeUsuario {
   id String @id @default(uuid())
 
-  usuarioId String
+  usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   habilidadeId String
@@ -336,7 +336,7 @@ enum TipoInsignia {
 model InsigniaUsuario {
   id String @id @default(uuid())
 
-  usuarioId String
+  usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   insigniaId String
@@ -356,7 +356,7 @@ model InsigniaUsuario {
 model Ranking {
   id String @id @default(uuid())
 
-  usuarioId String
+  usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   xpTotal Int
@@ -384,7 +384,7 @@ model Token {
   type      TypeToken @default(ACCESS)
   revoked   Boolean   @default(false)
   expiresAt DateTime
-  usuarioId String
+  usuarioId Int
 
   usuario Usuario @relation(fields: [usuarioId], references: [id])
 
