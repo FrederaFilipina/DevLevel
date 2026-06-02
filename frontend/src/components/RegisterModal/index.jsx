@@ -26,7 +26,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
         senha: password
       })
       if(response?.data) {
-        toast.success("✅ Operador registrado com sucesso!", {
+        toast.success("Operador registrado com sucesso!", {
           position: "top-right",
           autoClose: 2000,
           pauseOnHover: false

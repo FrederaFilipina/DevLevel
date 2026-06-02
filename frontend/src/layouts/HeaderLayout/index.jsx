@@ -1,5 +1,7 @@
 ﻿import { Outlet, useNavigate } from "react-router"
 import { useAuth } from "../../context/AuthContext"
+import { BiSolidLogOut } from "react-icons/bi";
+
 
 const HeaderLayout = () => {
   const { user, logout } = useAuth()
@@ -26,9 +28,9 @@ const HeaderLayout = () => {
           <span className="text-primary-container text-sm opacity-70">{user.name}</span>
           <button
             onClick={handleLogout}
-            className="text-red-400 hover:text-secondary cursor-pointer transition-colors font-code-md uppercase tracking-widest"
+            className="text-red-400 hover:text-secondary cursor-pointer transition-colors font-code-md uppercase tracking-widest flex items-center gap-1"
           >
-            LOGOUT
+            <BiSolidLogOut size={24}/>LOGOUT
           </button>
         </div>
       )}
