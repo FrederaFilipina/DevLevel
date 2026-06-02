@@ -1,150 +1,174 @@
-import type { Request, Response } from 'express';
-import { prisma } from '../prisma/prisma';
-import { getParam, handleError, removeUndefined } from './utils';
-// import { TrilhaService } from '../Service/trilhaService';
-
-// const trilhaService = new TrilhaService();
+import type { Request, Response } from "express";
+import type { TrilhaService } from "../Services/trilhaService";
+import { getParam, handleError } from "./utils";
 
 export class TrilhaController {
-  async obter(req: Request, res: Response) {
-    try {
-      const id = getParam(req, 'id');
-      // const trilha = await trilhaService.obter(id);
-      const trilha = await prisma.trilha.findUnique({
-        where: { id },
-        include: {
-          tema: true,
-          trilhaAnterior: true,
-          proximasTrilhas: true,
-          modulos: {
-            orderBy: { ordem: 'asc' },
-            include: { questoes: { orderBy: { ordem: 'asc' } } },
-          },
-        },
-      });
-
-      if (!trilha) return res.status(404).json({ erro: 'Trilha não encontrada' });
-
-      return res.json(trilha);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao obter trilha');
-    }
-  }
-
-  async listarPorTema(req: Request, res: Response) {
-    try {
-      const temaId = getParam(req, 'temaId');
-      // const trilhas = await trilhaService.listarPorTema(temaId);
-      const trilhas = await prisma.trilha.findMany({
-        where: { temaId },
-        orderBy: { ordem: 'asc' },
-        include: { modulos: { orderBy: { ordem: 'asc' } } },
-      });
-
-      return res.json(trilhas);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar trilhas');
-    }
-  }
+  constructor(
+    private readonly trilhaService: TrilhaService
+  ) {}
 
   async listar(_req: Request, res: Response) {
     try {
-      // const trilhas = await trilhaService.listar();
-      const trilhas = await prisma.trilha.findMany({
-        orderBy: [{ temaId: 'asc' }, { ordem: 'asc' }],
-        include: { tema: true, modulos: { orderBy: { ordem: 'asc' } } },
-      });
+      const trilhas =
+        await this.trilhaService.listarTodas();
 
-      return res.json(trilhas);
+      return res.status(200).json(trilhas);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar trilhas');
+      return handleError(
+        res,
+        erro,
+        "Erro ao listar trilhas"
+      );
     }
   }
 
-  async iniciarTrilha(req: Request, res: Response) {
+  async obter(req: Request, res: Response) {
     try {
-      const { usuarioId, trilhaId } = req.body;
-      if (!usuarioId || !trilhaId) return res.status(400).json({ erro: 'usuarioId e trilhaId são obrigatórios' });
+      const id = Number(getParam(req, "id"));
 
-      // const progresso = await trilhaService.iniciarTrilha({ usuarioId, trilhaId });
-      const trilha = await prisma.trilha.findUnique({ where: { id: trilhaId } });
-      if (!trilha) return res.status(404).json({ erro: 'Trilha não encontrada' });
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID inválido.",
+        });
+      }
 
-      const progresso = await prisma.trilhaUsuario.upsert({
-        where: { usuarioId_trilhaId: { usuarioId, trilhaId } },
-        update: {},
-        create: {
-          usuarioId,
-          trilhaId,
-          pontuacaoNecessaria: trilha.pontuacaoMinima,
-          podeDesbloquear: trilha.pontuacaoMinima === 0,
-        },
-        include: { trilha: true },
-      });
+      const trilha =
+        await this.trilhaService.buscarPorId(id);
 
-      return res.status(201).json(progresso);
+      return res.status(200).json(trilha);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao iniciar trilha');
+      return handleError(
+        res,
+        erro,
+        "Erro ao obter trilha"
+      );
     }
   }
 
-  async trilhasDoUsuario(req: Request, res: Response) {
+  async listarPorTema(
+    req: Request,
+    res: Response
+  ) {
     try {
-      const usuarioId = getParam(req, 'usuarioId');
-      // const trilhas = await trilhaService.trilhasDoUsuario(usuarioId);
-      const trilhas = await prisma.trilhaUsuario.findMany({
-        where: { usuarioId },
-        include: { trilha: { include: { tema: true, modulos: { orderBy: { ordem: 'asc' } } } } },
-        orderBy: { iniciadaEm: 'desc' },
-      });
+      const temaId = Number(
+        getParam(req, "temaId")
+      );
 
-      return res.json(trilhas);
+      if (isNaN(temaId)) {
+        return res.status(400).json({
+          erro: "ID do tema inválido.",
+        });
+      }
+
+      const trilhas =
+        await this.trilhaService.listarPorTema(
+          temaId
+        );
+
+      return res.status(200).json(trilhas);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar trilhas do usuário');
+      return handleError(
+        res,
+        erro,
+        "Erro ao listar trilhas por tema"
+      );
     }
   }
 
-  async atualizarProgresso(req: Request, res: Response) {
+  async buscarPorTemaEOrdem(
+    req: Request,
+    res: Response
+  ) {
     try {
-      const id = getParam(req, 'id');
-      const { status, pontuacaoAtual, pontuacaoNecessaria, percentualConclusao, podeDesbloquear, moduloAtualId, questaoAtualId } = req.body;
-      // const progresso = await trilhaService.atualizarProgresso(id, { status, pontuacaoAtual, pontuacaoNecessaria, percentualConclusao, podeDesbloquear, moduloAtualId, questaoAtualId });
-      const progresso = await prisma.trilhaUsuario.update({
-        where: { id },
-        data: removeUndefined({
-          status,
-          pontuacaoAtual,
-          pontuacaoNecessaria,
-          percentualConclusao,
-          podeDesbloquear,
-          moduloAtualId,
-          questaoAtualId,
-        }),
-        include: { trilha: true },
-      });
+      const temaId = Number(
+        getParam(req, "temaId")
+      );
 
-      return res.json(progresso);
+      if (isNaN(temaId)) {
+        return res.status(400).json({
+          erro: "ID do tema inválido.",
+        });
+      }
+
+      const ordem = Number(
+        getParam(req, "ordem")
+      );
+
+      if (isNaN(ordem)) {
+        return res.status(400).json({
+          erro: "Ordem inválida.",
+        });
+      }
+
+      const trilha =
+        await this.trilhaService.buscarPorTemaEOrdem(
+          temaId,
+          ordem
+        );
+
+      return res.status(200).json(trilha);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao atualizar progresso');
+      return handleError(
+        res,
+        erro,
+        "Erro ao buscar trilha por tema e ordem"
+      );
     }
   }
 
-  async concluirTrilha(req: Request, res: Response) {
+  async buscarTrilhaAnterior(
+    req: Request,
+    res: Response
+  ) {
     try {
-      const id = getParam(req, 'id');
-      // const progresso = await trilhaService.concluirTrilha(id);
-      const progresso = await prisma.trilhaUsuario.update({
-        where: { id },
-        data: { status: 'CONCLUIDA', percentualConclusao: 100, concluidaEm: new Date() },
-        include: { trilha: true },
-      });
+      const id = Number(getParam(req, "id"));
 
-      return res.json(progresso);
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID inválido.",
+        });
+      }
+
+      const trilhaAnterior =
+        await this.trilhaService.buscarTrilhaAnterior(
+          id
+        );
+
+      return res.status(200).json(trilhaAnterior);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao concluir trilha');
+      return handleError(
+        res,
+        erro,
+        "Erro ao buscar trilha anterior"
+      );
+    }
+  }
+
+  async buscarProximasTrilhas(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const id = Number(getParam(req, "id"));
+
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID inválido.",
+        });
+      }
+
+      const proximasTrilhas =
+        await this.trilhaService.buscarProximasTrilhas(
+          id
+        );
+
+      return res.status(200).json(proximasTrilhas);
+    } catch (erro) {
+      return handleError(
+        res,
+        erro,
+        "Erro ao buscar próximas trilhas"
+      );
     }
   }
 }
-
-
-// export const trilhaController = new TrilhaController(trilhaService);

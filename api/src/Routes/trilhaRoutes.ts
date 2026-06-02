@@ -1,15 +1,46 @@
-import { Router } from 'express';
-import { TrilhaController } from '../Controller/trilhaController';
+import { Router } from "express";
+import { PrismaClient } from "../prisma/generated/prisma";
+
+import { TrilhaRepository } from "../Repositories/trilhaRepository";
+import { TrilhaService } from "../Services/trilhaService";
+import { TrilhaController } from "../Controller/trilhaController";
 
 const router = Router();
-const controller = new TrilhaController();
 
-router.post('/usuarios/iniciar', controller.iniciarTrilha);
-router.get('/usuarios/:usuarioId', controller.trilhasDoUsuario);
-router.put('/usuarios/:id', controller.atualizarProgresso);
-router.patch('/usuarios/:id/concluir', controller.concluirTrilha);
-router.get('/tema/:temaId', controller.listarPorTema);
-router.get('/', controller.listar);
-router.get('/:id', controller.obter);
+const prisma = new PrismaClient();
+
+const repository = new TrilhaRepository(prisma);
+const service = new TrilhaService(repository);
+const controller = new TrilhaController(service);
+
+router.get(
+  "/",
+  controller.listar.bind(controller)
+);
+
+router.get(
+  "/:id",
+  controller.obter.bind(controller)
+);
+
+router.get(
+  "/tema/:temaId",
+  controller.listarPorTema.bind(controller)
+);
+
+router.get(
+  "/tema/:temaId/ordem/:ordem",
+  controller.buscarPorTemaEOrdem.bind(controller)
+);
+
+router.get(
+  "/:id/anterior",
+  controller.buscarTrilhaAnterior.bind(controller)
+);
+
+router.get(
+  "/:id/proximas",
+  controller.buscarProximasTrilhas.bind(controller)
+);
 
 export default router;

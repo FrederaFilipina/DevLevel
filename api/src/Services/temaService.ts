@@ -1,6 +1,5 @@
-import { type Tema } from "@prisma/client";
+import { type Tema } from "../prisma/generated/prisma";
 import type { TemaRepository } from "../Repositories/temaRepository";
-
 
 export class TemaService {
   constructor(
@@ -11,8 +10,9 @@ export class TemaService {
     return await this.temaRepository.listarTodos();
   }
 
-  async buscarPorId(id: string): Promise<Tema> {
-    const tema = await this.temaRepository.buscarPorId(id);
+  async buscarPorId(id: number): Promise<Tema> {
+    const tema =
+      await this.temaRepository.buscarPorId(id);
 
     if (!tema) {
       throw new Error("Tema não encontrado.");
@@ -22,7 +22,8 @@ export class TemaService {
   }
 
   async buscarPorNome(nome: string): Promise<Tema> {
-    const tema = await this.temaRepository.buscarPorNome(nome);
+    const tema =
+      await this.temaRepository.buscarPorNome(nome);
 
     if (!tema) {
       throw new Error("Tema não encontrado.");

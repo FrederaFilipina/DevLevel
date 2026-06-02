@@ -4,7 +4,7 @@ import temaRoutes from './Routes/temaRoutes';
 import trilhaRoutes from './Routes/trilhaRoutes';
 import moduloRoutes from './Routes/moduloRoutes';
 import questaoRoutes from './Routes/questaoRoutes';
-import respostaRoutes from './Routes/respostaRoutes';
+import respostaRoutes from './Routes/questaoRespostaRoutes';
 import conquistaRoutes from './Routes/conquistaRoutes';
 import habilidadeRoutes from './Routes/habilidadeRoutes';
 import insigniaRoutes from './Routes/insigniaRoutes';

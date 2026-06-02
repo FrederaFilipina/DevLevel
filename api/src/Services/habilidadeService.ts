@@ -2,33 +2,33 @@ import { type Habilidade } from "../prisma/generated/prisma";
 import { HabilidadeRepository } from "../Repositories/habilidadeRepository";
 
 export class HabilidadeService {
-    constructor(
-        private readonly habilidadeRepository: HabilidadeRepository
-    ) {}
+  constructor(
+    private readonly habilidadeRepository: HabilidadeRepository
+  ) {}
 
-    async listarTodas(): Promise<Habilidade[]> {
-        return await this.habilidadeRepository.listarTodas();
+  async listarTodas(): Promise<Habilidade[]> {
+    return await this.habilidadeRepository.listarTodas();
+  }
+
+  async buscarPorId(id: number): Promise<Habilidade> {
+    const habilidade =
+      await this.habilidadeRepository.buscarPorId(id);
+
+    if (!habilidade) {
+      throw new Error("Habilidade não encontrada.");
     }
 
-    async buscarPorId(id: string): Promise<Habilidade> {
-        const habilidade =
-            await this.habilidadeRepository.buscarPorId(id);
+    return habilidade;
+  }
 
-        if (!habilidade) {
-            throw new Error("Habilidade não encontrada.");
-        }
+  async buscarPorNome(nome: string): Promise<Habilidade> {
+    const habilidade =
+      await this.habilidadeRepository.buscarPorNome(nome);
 
-        return habilidade;
+    if (!habilidade) {
+      throw new Error("Habilidade não encontrada.");
     }
 
-    async buscarPorNome(nome: string): Promise<Habilidade> {
-        const habilidade =
-            await this.habilidadeRepository.buscarPorNome(nome);
-
-        if (!habilidade) {
-            throw new Error("Habilidade não encontrada.");
-        }
-
-        return habilidade;
-    }
+    return habilidade;
+  }
 }

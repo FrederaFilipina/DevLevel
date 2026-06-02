@@ -1,89 +1,67 @@
-import type { Request, Response } from 'express';
-import { prisma } from '../prisma/prisma';
-import { getParam, handleError } from './utils';
-// import { TemaService } from '../Service/temaService';
-
-// const temaService = new TemaService();
+import type { Request, Response } from "express";
+import type { TemaService } from "../Services/temaService";
+import { getParam, handleError } from "./utils";
 
 export class TemaController {
-  async obter(req: Request, res: Response) {
-    try {
-      const id = getParam(req, 'id');
-      // const tema = await temaService.obter(id);
-      const tema = await prisma.tema.findUnique({
-        where: { id },
-        include: {
-          trilhas: { orderBy: { ordem: 'asc' }, include: { modulos: { orderBy: { ordem: 'asc' } } } },
-        },
-      });
-
-      if (!tema) return res.status(404).json({ erro: 'Tema não encontrado' });
-
-      return res.json(tema);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao obter tema');
-    }
-  }
+  constructor(
+    private readonly temaService: TemaService
+  ) {}
 
   async listar(_req: Request, res: Response) {
     try {
-      // const temas = await temaService.listar();
-      const temas = await prisma.tema.findMany({
-        orderBy: { nome: 'asc' },
-        include: { trilhas: { orderBy: { ordem: 'asc' } } },
-      });
+      const temas =
+        await this.temaService.listarTodos();
 
-      return res.json(temas);
+      return res.status(200).json(temas);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar temas');
+      return handleError(
+        res,
+        erro,
+        "Erro ao listar temas"
+      );
     }
   }
 
-  async vincularUsuario(req: Request, res: Response) {
+  async obter(req: Request, res: Response) {
     try {
-      const { usuarioId, temaId } = req.body;
-      if (!usuarioId || !temaId) return res.status(400).json({ erro: 'usuarioId e temaId são obrigatórios' });
+      const id = Number(getParam(req, "id"));
 
-      // const temaUsuario = await temaService.vincularUsuario({ usuarioId, temaId });
-      const temaUsuario = await prisma.temaUsuario.upsert({
-        where: { usuarioId_temaId: { usuarioId, temaId } },
-        update: {},
-        create: { usuarioId, temaId },
-        include: { tema: true },
-      });
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID inválido.",
+        });
+      }
 
-      return res.status(201).json(temaUsuario);
+      const tema =
+        await this.temaService.buscarPorId(id);
+
+      return res.status(200).json(tema);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao vincular tema');
+      return handleError(
+        res,
+        erro,
+        "Erro ao obter tema"
+      );
     }
   }
 
-  async temasDoUsuario(req: Request, res: Response) {
+  async buscarPorNome(
+    req: Request,
+    res: Response
+  ) {
     try {
-      const usuarioId = getParam(req, 'usuarioId');
-      // const temas = await temaService.temasDoUsuario(usuarioId);
-      const temas = await prisma.temaUsuario.findMany({
-        where: { usuarioId },
-        include: { tema: { include: { trilhas: { orderBy: { ordem: 'asc' } } } } },
-        orderBy: { createdAt: 'desc' },
-      });
+      const nome = getParam(req, "nome");
 
-      return res.json(temas);
-    } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar temas do usuário');
-    }
-  }
+      const tema =
+        await this.temaService.buscarPorNome(nome);
 
-  async desvincularUsuario(req: Request, res: Response) {
-    try {
-      const id = getParam(req, 'id');
-      // await temaService.desvincularUsuario(id);
-      await prisma.temaUsuario.delete({ where: { id } });
-      return res.status(204).send();
+      return res.status(200).json(tema);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao desvincular tema');
+      return handleError(
+        res,
+        erro,
+        "Erro ao buscar tema por nome"
+      );
     }
   }
 }
-
-// export const temaController = new TemaController(temaService);

@@ -1,43 +1,118 @@
-import type { Request, Response } from 'express';
-import { prisma } from '../prisma/prisma';
-import { getParam, handleError } from './utils';
-// import { ModuloService } from '../Service/moduloService';
-
-// const moduloService = new ModuloService();
+import type { Request, Response } from "express";
+import type { ModuloService } from "../Services/moduloService";
+import { getParam, handleError } from "./utils";
 
 export class ModuloController {
-  async obter(req: Request, res: Response) {
+  constructor(
+    private readonly moduloService: ModuloService
+  ) {}
+
+  async listar(_req: Request, res: Response) {
     try {
-      const id = getParam(req, 'id');
-      // const modulo = await moduloService.obter(id);
-      const modulo = await prisma.modulo.findUnique({
-        where: { id },
-        include: { trilha: true, questoes: { orderBy: { ordem: 'asc' } } },
-      });
+      const modulos =
+        await this.moduloService.listarTodos();
 
-      if (!modulo) return res.status(404).json({ erro: 'Módulo não encontrado' });
-
-      return res.json(modulo);
+      return res.status(200).json(modulos);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao obter módulo');
+      return handleError(
+        res,
+        erro,
+        "Erro ao listar módulos"
+      );
     }
   }
 
-  async listarPorTrilha(req: Request, res: Response) {
+  async obter(req: Request, res: Response) {
     try {
-      const trilhaId = getParam(req, 'trilhaId');
-      // const modulos = await moduloService.listarPorTrilha(trilhaId);
-      const modulos = await prisma.modulo.findMany({
-        where: { trilhaId },
-        orderBy: { ordem: 'asc' },
-        include: { questoes: { orderBy: { ordem: 'asc' } } },
-      });
+      const id = Number(getParam(req, "id"));
 
-      return res.json(modulos);
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID inválido.",
+        });
+      }
+
+      const modulo =
+        await this.moduloService.buscarPorId(id);
+
+      return res.status(200).json(modulo);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar módulos');
+      return handleError(
+        res,
+        erro,
+        "Erro ao obter módulo"
+      );
+    }
+  }
+
+  async listarPorTrilha(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const trilhaId = Number(
+        getParam(req, "trilhaId")
+      );
+
+      if (isNaN(trilhaId)) {
+        return res.status(400).json({
+          erro: "ID da trilha inválido.",
+        });
+      }
+
+      const modulos =
+        await this.moduloService.listarPorTrilha(
+          trilhaId
+        );
+
+      return res.status(200).json(modulos);
+    } catch (erro) {
+      return handleError(
+        res,
+        erro,
+        "Erro ao listar módulos da trilha"
+      );
+    }
+  }
+
+  async buscarPorTrilhaEOrdem(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const trilhaId = Number(
+        getParam(req, "trilhaId")
+      );
+
+      if (isNaN(trilhaId)) {
+        return res.status(400).json({
+          erro: "ID da trilha inválido.",
+        });
+      }
+
+      const ordem = Number(
+        getParam(req, "ordem")
+      );
+
+      if (isNaN(ordem)) {
+        return res.status(400).json({
+          erro: "Ordem inválida.",
+        });
+      }
+
+      const modulo =
+        await this.moduloService.buscarPorTrilhaEOrdem(
+          trilhaId,
+          ordem
+        );
+
+      return res.status(200).json(modulo);
+    } catch (erro) {
+      return handleError(
+        res,
+        erro,
+        "Erro ao buscar módulo por trilha e ordem"
+      );
     }
   }
 }
-
-// export const moduloController = new ModuloController(moduloService);

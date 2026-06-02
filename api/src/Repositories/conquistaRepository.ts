@@ -1,4 +1,5 @@
 import { PrismaClient, type Conquista } from "../prisma/generated/prisma";
+
 export class ConquistaRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
@@ -10,15 +11,19 @@ export class ConquistaRepository {
     });
   }
 
-  async buscarPorId(id: string): Promise<Conquista | null> {
+  async buscarPorId(id: number): Promise<Conquista | null> {
     return await this.prisma.conquista.findUnique({
-      where: { id },
+      where: {
+        id,
+      },
     });
   }
 
   async buscarPorTitulo(titulo: string): Promise<Conquista | null> {
     return await this.prisma.conquista.findUnique({
-      where: { titulo },
+      where: {
+        titulo,
+      },
     });
   }
 }

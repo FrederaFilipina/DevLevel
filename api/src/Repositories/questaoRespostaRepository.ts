@@ -1,19 +1,28 @@
-import { PrismaClient, type RespostaQuestao } from "../prisma/generated/prisma";
+import {
+  PrismaClient,
+  type RespostaQuestao,
+} from "../prisma/generated/prisma";
 
 export class RespostaQuestaoRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async buscarPorId(id: string): Promise<RespostaQuestao | null> {
+  async buscarPorId(
+    id: number
+  ): Promise<RespostaQuestao | null> {
     return await this.prisma.respostaQuestao.findUnique({
-      where: { id },
+      where: {
+        id,
+      },
     });
   }
 
   async listarPorQuestao(
-    questaoId: string
+    questaoId: number
   ): Promise<RespostaQuestao[]> {
     return await this.prisma.respostaQuestao.findMany({
-      where: { questaoId },
+      where: {
+        questaoId,
+      },
       orderBy: {
         pontuacao: "desc",
       },
@@ -21,7 +30,7 @@ export class RespostaQuestaoRepository {
   }
 
   async buscarPorQuestaoETitulo(
-    questaoId: string,
+    questaoId: number,
     titulo: string
   ): Promise<RespostaQuestao | null> {
     return await this.prisma.respostaQuestao.findFirst({
@@ -33,10 +42,12 @@ export class RespostaQuestaoRepository {
   }
 
   async listarMelhoresRespostas(
-    questaoId: string
+    questaoId: number
   ): Promise<RespostaQuestao[]> {
     return await this.prisma.respostaQuestao.findMany({
-      where: { questaoId },
+      where: {
+        questaoId,
+      },
       orderBy: [
         { pontuacao: "desc" },
         { cleanCodeScore: "desc" },
@@ -47,10 +58,12 @@ export class RespostaQuestaoRepository {
   }
 
   async listarPorPerformance(
-    questaoId: string
+    questaoId: number
   ): Promise<RespostaQuestao[]> {
     return await this.prisma.respostaQuestao.findMany({
-      where: { questaoId },
+      where: {
+        questaoId,
+      },
       orderBy: {
         performanceScore: "desc",
       },
@@ -58,10 +71,12 @@ export class RespostaQuestaoRepository {
   }
 
   async listarPorCleanCode(
-    questaoId: string
+    questaoId: number
   ): Promise<RespostaQuestao[]> {
     return await this.prisma.respostaQuestao.findMany({
-      where: { questaoId },
+      where: {
+        questaoId,
+      },
       orderBy: {
         cleanCodeScore: "desc",
       },

@@ -1,14 +1,31 @@
-import { Router } from 'express';
-import { HabilidadeController } from '../Controller/habilidadeController';
+import { Router } from "express";
+import { PrismaClient } from "../prisma/generated/prisma";
+
+import { HabilidadeRepository } from "../Repositories/habilidadeRepository";
+import { HabilidadeService } from "../Services/habilidadeService";
+import { HabilidadeController } from "../Controller/habilidadeController";
 
 const router = Router();
-const controller = new HabilidadeController();
 
-router.post('/usuarios/vincular', controller.vincularUsuario);
-router.get('/usuarios/:usuarioId', controller.habilidadesDoUsuario);
-router.put('/usuarios/:id', controller.atualizarPontuacao);
-router.delete('/usuarios/:id', controller.desvincularUsuario);
-router.get('/', controller.listar);
-router.get('/:id', controller.obter);
+const prisma = new PrismaClient();
+
+const repository = new HabilidadeRepository(prisma);
+const service = new HabilidadeService(repository);
+const controller = new HabilidadeController(service);
+
+router.get(
+  "/",
+  controller.listar.bind(controller)
+);
+
+router.get(
+  "/nome/:nome",
+  controller.buscarPorNome.bind(controller)
+);
+
+router.get(
+  "/:id",
+  controller.obter.bind(controller)
+);
 
 export default router;

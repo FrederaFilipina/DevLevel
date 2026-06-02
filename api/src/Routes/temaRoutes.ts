@@ -1,13 +1,31 @@
-import { Router } from 'express';
-import { TemaController } from '../Controller/temaController';
+import { Router } from "express";
+import { PrismaClient } from "../prisma/generated/prisma";
+
+import { TemaRepository } from "../Repositories/temaRepository";
+import { TemaService } from "../Services/temaService";
+import { TemaController } from "../Controller/temaController";
 
 const router = Router();
-const controller = new TemaController();
 
-router.post('/usuarios/vincular', controller.vincularUsuario);
-router.get('/usuarios/:usuarioId', controller.temasDoUsuario);
-router.delete('/usuarios/:id', controller.desvincularUsuario);
-router.get('/', controller.listar);
-router.get('/:id', controller.obter);
+const prisma = new PrismaClient();
+
+const repository = new TemaRepository(prisma);
+const service = new TemaService(repository);
+const controller = new TemaController(service);
+
+router.get(
+  "/",
+  controller.listar.bind(controller)
+);
+
+router.get(
+  "/:id",
+  controller.obter.bind(controller)
+);
+
+router.get(
+  "/nome/:nome",
+  controller.buscarPorNome.bind(controller)
+);
 
 export default router;

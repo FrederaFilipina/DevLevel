@@ -2446,19 +2446,21 @@ export namespace Prisma {
   }
 
   export type UsuarioAvgAggregateOutputType = {
+    id: number | null
     xp: number | null
     nivel: number | null
     pontuacaoTotal: number | null
   }
 
   export type UsuarioSumAggregateOutputType = {
+    id: number | null
     xp: number | null
     nivel: number | null
     pontuacaoTotal: number | null
   }
 
   export type UsuarioMinAggregateOutputType = {
-    id: string | null
+    id: number | null
     nome: string | null
     email: string | null
     senha: string | null
@@ -2473,7 +2475,7 @@ export namespace Prisma {
   }
 
   export type UsuarioMaxAggregateOutputType = {
-    id: string | null
+    id: number | null
     nome: string | null
     email: string | null
     senha: string | null
@@ -2505,12 +2507,14 @@ export namespace Prisma {
 
 
   export type UsuarioAvgAggregateInputType = {
+    id?: true
     xp?: true
     nivel?: true
     pontuacaoTotal?: true
   }
 
   export type UsuarioSumAggregateInputType = {
+    id?: true
     xp?: true
     nivel?: true
     pontuacaoTotal?: true
@@ -2649,7 +2653,7 @@ export namespace Prisma {
   }
 
   export type UsuarioGroupByOutputType = {
-    id: string
+    id: number
     nome: string
     email: string
     senha: string
@@ -2773,7 +2777,7 @@ export namespace Prisma {
       tokens: Prisma.$TokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      id: number
       nome: string
       email: string
       senha: string
@@ -3214,7 +3218,7 @@ export namespace Prisma {
    * Fields of the Usuario model
    */
   interface UsuarioFieldRefs {
-    readonly id: FieldRef<"Usuario", 'String'>
+    readonly id: FieldRef<"Usuario", 'Int'>
     readonly nome: FieldRef<"Usuario", 'String'>
     readonly email: FieldRef<"Usuario", 'String'>
     readonly senha: FieldRef<"Usuario", 'String'>
@@ -3787,12 +3791,22 @@ export namespace Prisma {
 
   export type AggregateTema = {
     _count: TemaCountAggregateOutputType | null
+    _avg: TemaAvgAggregateOutputType | null
+    _sum: TemaSumAggregateOutputType | null
     _min: TemaMinAggregateOutputType | null
     _max: TemaMaxAggregateOutputType | null
   }
 
+  export type TemaAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TemaSumAggregateOutputType = {
+    id: number | null
+  }
+
   export type TemaMinAggregateOutputType = {
-    id: string | null
+    id: number | null
     nome: string | null
     descricao: string | null
     createdAt: Date | null
@@ -3800,7 +3814,7 @@ export namespace Prisma {
   }
 
   export type TemaMaxAggregateOutputType = {
-    id: string | null
+    id: number | null
     nome: string | null
     descricao: string | null
     createdAt: Date | null
@@ -3816,6 +3830,14 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type TemaAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type TemaSumAggregateInputType = {
+    id?: true
+  }
 
   export type TemaMinAggregateInputType = {
     id?: true
@@ -3880,6 +3902,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: TemaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TemaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: TemaMinAggregateInputType
@@ -3910,17 +3944,21 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: TemaCountAggregateInputType | true
+    _avg?: TemaAvgAggregateInputType
+    _sum?: TemaSumAggregateInputType
     _min?: TemaMinAggregateInputType
     _max?: TemaMaxAggregateInputType
   }
 
   export type TemaGroupByOutputType = {
-    id: string
+    id: number
     nome: string
     descricao: string | null
     createdAt: Date
     updatedAt: Date
     _count: TemaCountAggregateOutputType | null
+    _avg: TemaAvgAggregateOutputType | null
+    _sum: TemaSumAggregateOutputType | null
     _min: TemaMinAggregateOutputType | null
     _max: TemaMaxAggregateOutputType | null
   }
@@ -3990,7 +4028,7 @@ export namespace Prisma {
       usuarios: Prisma.$TemaUsuarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      id: number
       nome: string
       descricao: string | null
       createdAt: Date
@@ -4420,7 +4458,7 @@ export namespace Prisma {
    * Fields of the Tema model
    */
   interface TemaFieldRefs {
-    readonly id: FieldRef<"Tema", 'String'>
+    readonly id: FieldRef<"Tema", 'Int'>
     readonly nome: FieldRef<"Tema", 'String'>
     readonly descricao: FieldRef<"Tema", 'String'>
     readonly createdAt: FieldRef<"Tema", 'DateTime'>
@@ -4897,19 +4935,25 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioAvgAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    temaId: number | null
     pontuacaoTotal: number | null
     trilhasConcluidas: number | null
   }
 
   export type TemaUsuarioSumAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    temaId: number | null
     pontuacaoTotal: number | null
     trilhasConcluidas: number | null
   }
 
   export type TemaUsuarioMinAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    temaId: string | null
+    id: number | null
+    usuarioId: number | null
+    temaId: number | null
     pontuacaoTotal: number | null
     trilhasConcluidas: number | null
     nivelAtual: $Enums.NivelDificuldade | null
@@ -4918,9 +4962,9 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioMaxAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    temaId: string | null
+    id: number | null
+    usuarioId: number | null
+    temaId: number | null
     pontuacaoTotal: number | null
     trilhasConcluidas: number | null
     nivelAtual: $Enums.NivelDificuldade | null
@@ -4942,11 +4986,17 @@ export namespace Prisma {
 
 
   export type TemaUsuarioAvgAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    temaId?: true
     pontuacaoTotal?: true
     trilhasConcluidas?: true
   }
 
   export type TemaUsuarioSumAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    temaId?: true
     pontuacaoTotal?: true
     trilhasConcluidas?: true
   }
@@ -5072,9 +5122,9 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioGroupByOutputType = {
-    id: string
-    usuarioId: string
-    temaId: string
+    id: number
+    usuarioId: number
+    temaId: number
     pontuacaoTotal: number
     trilhasConcluidas: number
     nivelAtual: $Enums.NivelDificuldade
@@ -5172,9 +5222,9 @@ export namespace Prisma {
       tema: Prisma.$TemaPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      usuarioId: string
-      temaId: string
+      id: number
+      usuarioId: number
+      temaId: number
       pontuacaoTotal: number
       trilhasConcluidas: number
       nivelAtual: $Enums.NivelDificuldade
@@ -5605,9 +5655,9 @@ export namespace Prisma {
    * Fields of the TemaUsuario model
    */
   interface TemaUsuarioFieldRefs {
-    readonly id: FieldRef<"TemaUsuario", 'String'>
-    readonly usuarioId: FieldRef<"TemaUsuario", 'String'>
-    readonly temaId: FieldRef<"TemaUsuario", 'String'>
+    readonly id: FieldRef<"TemaUsuario", 'Int'>
+    readonly usuarioId: FieldRef<"TemaUsuario", 'Int'>
+    readonly temaId: FieldRef<"TemaUsuario", 'Int'>
     readonly pontuacaoTotal: FieldRef<"TemaUsuario", 'Int'>
     readonly trilhasConcluidas: FieldRef<"TemaUsuario", 'Int'>
     readonly nivelAtual: FieldRef<"TemaUsuario", 'NivelDificuldade'>
@@ -6045,37 +6095,43 @@ export namespace Prisma {
   }
 
   export type TrilhaAvgAggregateOutputType = {
+    id: number | null
+    temaId: number | null
     ordem: number | null
     pontuacaoMinima: number | null
+    trilhaAnteriorId: number | null
   }
 
   export type TrilhaSumAggregateOutputType = {
+    id: number | null
+    temaId: number | null
     ordem: number | null
     pontuacaoMinima: number | null
+    trilhaAnteriorId: number | null
   }
 
   export type TrilhaMinAggregateOutputType = {
-    id: string | null
-    temaId: string | null
+    id: number | null
+    temaId: number | null
     titulo: string | null
     descricao: string | null
     nivel: $Enums.NivelDificuldade | null
     ordem: number | null
     pontuacaoMinima: number | null
-    trilhaAnteriorId: string | null
+    trilhaAnteriorId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type TrilhaMaxAggregateOutputType = {
-    id: string | null
-    temaId: string | null
+    id: number | null
+    temaId: number | null
     titulo: string | null
     descricao: string | null
     nivel: $Enums.NivelDificuldade | null
     ordem: number | null
     pontuacaoMinima: number | null
-    trilhaAnteriorId: string | null
+    trilhaAnteriorId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6096,13 +6152,19 @@ export namespace Prisma {
 
 
   export type TrilhaAvgAggregateInputType = {
+    id?: true
+    temaId?: true
     ordem?: true
     pontuacaoMinima?: true
+    trilhaAnteriorId?: true
   }
 
   export type TrilhaSumAggregateInputType = {
+    id?: true
+    temaId?: true
     ordem?: true
     pontuacaoMinima?: true
+    trilhaAnteriorId?: true
   }
 
   export type TrilhaMinAggregateInputType = {
@@ -6232,14 +6294,14 @@ export namespace Prisma {
   }
 
   export type TrilhaGroupByOutputType = {
-    id: string
-    temaId: string
+    id: number
+    temaId: number
     titulo: string
     descricao: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId: string | null
+    trilhaAnteriorId: number | null
     createdAt: Date
     updatedAt: Date
     _count: TrilhaCountAggregateOutputType | null
@@ -6353,14 +6415,14 @@ export namespace Prisma {
       usuarios: Prisma.$TrilhaUsuarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      temaId: string
+      id: number
+      temaId: number
       titulo: string
       descricao: string | null
       nivel: $Enums.NivelDificuldade
       ordem: number
       pontuacaoMinima: number
-      trilhaAnteriorId: string | null
+      trilhaAnteriorId: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["trilha"]>
@@ -6791,14 +6853,14 @@ export namespace Prisma {
    * Fields of the Trilha model
    */
   interface TrilhaFieldRefs {
-    readonly id: FieldRef<"Trilha", 'String'>
-    readonly temaId: FieldRef<"Trilha", 'String'>
+    readonly id: FieldRef<"Trilha", 'Int'>
+    readonly temaId: FieldRef<"Trilha", 'Int'>
     readonly titulo: FieldRef<"Trilha", 'String'>
     readonly descricao: FieldRef<"Trilha", 'String'>
     readonly nivel: FieldRef<"Trilha", 'NivelDificuldade'>
     readonly ordem: FieldRef<"Trilha", 'Int'>
     readonly pontuacaoMinima: FieldRef<"Trilha", 'Int'>
-    readonly trilhaAnteriorId: FieldRef<"Trilha", 'String'>
+    readonly trilhaAnteriorId: FieldRef<"Trilha", 'Int'>
     readonly createdAt: FieldRef<"Trilha", 'DateTime'>
     readonly updatedAt: FieldRef<"Trilha", 'DateTime'>
   }
@@ -7324,16 +7386,20 @@ export namespace Prisma {
   }
 
   export type ModuloAvgAggregateOutputType = {
+    id: number | null
+    trilhaId: number | null
     ordem: number | null
   }
 
   export type ModuloSumAggregateOutputType = {
+    id: number | null
+    trilhaId: number | null
     ordem: number | null
   }
 
   export type ModuloMinAggregateOutputType = {
-    id: string | null
-    trilhaId: string | null
+    id: number | null
+    trilhaId: number | null
     titulo: string | null
     descricao: string | null
     ordem: number | null
@@ -7342,8 +7408,8 @@ export namespace Prisma {
   }
 
   export type ModuloMaxAggregateOutputType = {
-    id: string | null
-    trilhaId: string | null
+    id: number | null
+    trilhaId: number | null
     titulo: string | null
     descricao: string | null
     ordem: number | null
@@ -7364,10 +7430,14 @@ export namespace Prisma {
 
 
   export type ModuloAvgAggregateInputType = {
+    id?: true
+    trilhaId?: true
     ordem?: true
   }
 
   export type ModuloSumAggregateInputType = {
+    id?: true
+    trilhaId?: true
     ordem?: true
   }
 
@@ -7489,8 +7559,8 @@ export namespace Prisma {
   }
 
   export type ModuloGroupByOutputType = {
-    id: string
-    trilhaId: string
+    id: number
+    trilhaId: number
     titulo: string
     descricao: string | null
     ordem: number
@@ -7582,8 +7652,8 @@ export namespace Prisma {
       questoes: Prisma.$QuestaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      trilhaId: string
+      id: number
+      trilhaId: number
       titulo: string
       descricao: string | null
       ordem: number
@@ -8014,8 +8084,8 @@ export namespace Prisma {
    * Fields of the Modulo model
    */
   interface ModuloFieldRefs {
-    readonly id: FieldRef<"Modulo", 'String'>
-    readonly trilhaId: FieldRef<"Modulo", 'String'>
+    readonly id: FieldRef<"Modulo", 'Int'>
+    readonly trilhaId: FieldRef<"Modulo", 'Int'>
     readonly titulo: FieldRef<"Modulo", 'String'>
     readonly descricao: FieldRef<"Modulo", 'String'>
     readonly ordem: FieldRef<"Modulo", 'Int'>
@@ -8477,20 +8547,24 @@ export namespace Prisma {
   }
 
   export type QuestaoAvgAggregateOutputType = {
+    id: number | null
+    moduloId: number | null
     dificuldade: number | null
     xpRecompensa: number | null
     ordem: number | null
   }
 
   export type QuestaoSumAggregateOutputType = {
+    id: number | null
+    moduloId: number | null
     dificuldade: number | null
     xpRecompensa: number | null
     ordem: number | null
   }
 
   export type QuestaoMinAggregateOutputType = {
-    id: string | null
-    moduloId: string | null
+    id: number | null
+    moduloId: number | null
     titulo: string | null
     descricao: string | null
     dificuldade: number | null
@@ -8501,8 +8575,8 @@ export namespace Prisma {
   }
 
   export type QuestaoMaxAggregateOutputType = {
-    id: string | null
-    moduloId: string | null
+    id: number | null
+    moduloId: number | null
     titulo: string | null
     descricao: string | null
     dificuldade: number | null
@@ -8527,12 +8601,16 @@ export namespace Prisma {
 
 
   export type QuestaoAvgAggregateInputType = {
+    id?: true
+    moduloId?: true
     dificuldade?: true
     xpRecompensa?: true
     ordem?: true
   }
 
   export type QuestaoSumAggregateInputType = {
+    id?: true
+    moduloId?: true
     dificuldade?: true
     xpRecompensa?: true
     ordem?: true
@@ -8662,8 +8740,8 @@ export namespace Prisma {
   }
 
   export type QuestaoGroupByOutputType = {
-    id: string
-    moduloId: string
+    id: number
+    moduloId: number
     titulo: string
     descricao: string
     dificuldade: number
@@ -8768,8 +8846,8 @@ export namespace Prisma {
       respostasUsuario: Prisma.$RespostaUsuarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      moduloId: string
+      id: number
+      moduloId: number
       titulo: string
       descricao: string
       dificuldade: number
@@ -9203,8 +9281,8 @@ export namespace Prisma {
    * Fields of the Questao model
    */
   interface QuestaoFieldRefs {
-    readonly id: FieldRef<"Questao", 'String'>
-    readonly moduloId: FieldRef<"Questao", 'String'>
+    readonly id: FieldRef<"Questao", 'Int'>
+    readonly moduloId: FieldRef<"Questao", 'Int'>
     readonly titulo: FieldRef<"Questao", 'String'>
     readonly descricao: FieldRef<"Questao", 'String'>
     readonly dificuldade: FieldRef<"Questao", 'Int'>
@@ -9692,6 +9770,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoAvgAggregateOutputType = {
+    id: number | null
+    questaoId: number | null
     pontuacao: number | null
     cleanCodeScore: number | null
     performanceScore: number | null
@@ -9699,6 +9779,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoSumAggregateOutputType = {
+    id: number | null
+    questaoId: number | null
     pontuacao: number | null
     cleanCodeScore: number | null
     performanceScore: number | null
@@ -9706,8 +9788,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoMinAggregateOutputType = {
-    id: string | null
-    questaoId: string | null
+    id: number | null
+    questaoId: number | null
     titulo: string | null
     codigoResposta: string | null
     explicacao: string | null
@@ -9722,8 +9804,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoMaxAggregateOutputType = {
-    id: string | null
-    questaoId: string | null
+    id: number | null
+    questaoId: number | null
     titulo: string | null
     codigoResposta: string | null
     explicacao: string | null
@@ -9756,6 +9838,8 @@ export namespace Prisma {
 
 
   export type RespostaQuestaoAvgAggregateInputType = {
+    id?: true
+    questaoId?: true
     pontuacao?: true
     cleanCodeScore?: true
     performanceScore?: true
@@ -9763,6 +9847,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoSumAggregateInputType = {
+    id?: true
+    questaoId?: true
     pontuacao?: true
     cleanCodeScore?: true
     performanceScore?: true
@@ -9905,8 +9991,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoGroupByOutputType = {
-    id: string
-    questaoId: string
+    id: number
+    questaoId: number
     titulo: string
     codigoResposta: string
     explicacao: string | null
@@ -10028,8 +10114,8 @@ export namespace Prisma {
       respostasUsuarios: Prisma.$RespostaUsuarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      questaoId: string
+      id: number
+      questaoId: number
       titulo: string
       codigoResposta: string
       explicacao: string | null
@@ -10466,8 +10552,8 @@ export namespace Prisma {
    * Fields of the RespostaQuestao model
    */
   interface RespostaQuestaoFieldRefs {
-    readonly id: FieldRef<"RespostaQuestao", 'String'>
-    readonly questaoId: FieldRef<"RespostaQuestao", 'String'>
+    readonly id: FieldRef<"RespostaQuestao", 'Int'>
+    readonly questaoId: FieldRef<"RespostaQuestao", 'Int'>
     readonly titulo: FieldRef<"RespostaQuestao", 'String'>
     readonly codigoResposta: FieldRef<"RespostaQuestao", 'String'>
     readonly explicacao: FieldRef<"RespostaQuestao", 'String'>
@@ -10935,27 +11021,35 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioAvgAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    questaoId: number | null
+    respostaQuestaoId: number | null
     pontuacaoRecebida: number | null
   }
 
   export type RespostaUsuarioSumAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    questaoId: number | null
+    respostaQuestaoId: number | null
     pontuacaoRecebida: number | null
   }
 
   export type RespostaUsuarioMinAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    questaoId: string | null
-    respostaQuestaoId: string | null
+    id: number | null
+    usuarioId: number | null
+    questaoId: number | null
+    respostaQuestaoId: number | null
     pontuacaoRecebida: number | null
     respondidaEm: Date | null
   }
 
   export type RespostaUsuarioMaxAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    questaoId: string | null
-    respostaQuestaoId: string | null
+    id: number | null
+    usuarioId: number | null
+    questaoId: number | null
+    respostaQuestaoId: number | null
     pontuacaoRecebida: number | null
     respondidaEm: Date | null
   }
@@ -10972,10 +11066,18 @@ export namespace Prisma {
 
 
   export type RespostaUsuarioAvgAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    questaoId?: true
+    respostaQuestaoId?: true
     pontuacaoRecebida?: true
   }
 
   export type RespostaUsuarioSumAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    questaoId?: true
+    respostaQuestaoId?: true
     pontuacaoRecebida?: true
   }
 
@@ -11094,10 +11196,10 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioGroupByOutputType = {
-    id: string
-    usuarioId: string
-    questaoId: string
-    respostaQuestaoId: string
+    id: number
+    usuarioId: number
+    questaoId: number
+    respostaQuestaoId: number
     pontuacaoRecebida: number
     respondidaEm: Date
     _count: RespostaUsuarioCountAggregateOutputType | null
@@ -11191,10 +11293,10 @@ export namespace Prisma {
       respostaQuestao: Prisma.$RespostaQuestaoPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      usuarioId: string
-      questaoId: string
-      respostaQuestaoId: string
+      id: number
+      usuarioId: number
+      questaoId: number
+      respostaQuestaoId: number
       pontuacaoRecebida: number
       respondidaEm: Date
     }, ExtArgs["result"]["respostaUsuario"]>
@@ -11623,10 +11725,10 @@ export namespace Prisma {
    * Fields of the RespostaUsuario model
    */
   interface RespostaUsuarioFieldRefs {
-    readonly id: FieldRef<"RespostaUsuario", 'String'>
-    readonly usuarioId: FieldRef<"RespostaUsuario", 'String'>
-    readonly questaoId: FieldRef<"RespostaUsuario", 'String'>
-    readonly respostaQuestaoId: FieldRef<"RespostaUsuario", 'String'>
+    readonly id: FieldRef<"RespostaUsuario", 'Int'>
+    readonly usuarioId: FieldRef<"RespostaUsuario", 'Int'>
+    readonly questaoId: FieldRef<"RespostaUsuario", 'Int'>
+    readonly respostaQuestaoId: FieldRef<"RespostaUsuario", 'Int'>
     readonly pontuacaoRecebida: FieldRef<"RespostaUsuario", 'Int'>
     readonly respondidaEm: FieldRef<"RespostaUsuario", 'DateTime'>
   }
@@ -12061,43 +12163,53 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioAvgAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    trilhaId: number | null
     pontuacaoAtual: number | null
     pontuacaoNecessaria: number | null
     percentualConclusao: number | null
+    moduloAtualId: number | null
+    questaoAtualId: number | null
   }
 
   export type TrilhaUsuarioSumAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    trilhaId: number | null
     pontuacaoAtual: number | null
     pontuacaoNecessaria: number | null
     percentualConclusao: number | null
+    moduloAtualId: number | null
+    questaoAtualId: number | null
   }
 
   export type TrilhaUsuarioMinAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    trilhaId: string | null
+    id: number | null
+    usuarioId: number | null
+    trilhaId: number | null
     status: $Enums.StatusTrilhaUsuario | null
     pontuacaoAtual: number | null
     pontuacaoNecessaria: number | null
     percentualConclusao: number | null
     podeDesbloquear: boolean | null
-    moduloAtualId: string | null
-    questaoAtualId: string | null
+    moduloAtualId: number | null
+    questaoAtualId: number | null
     iniciadaEm: Date | null
     concluidaEm: Date | null
   }
 
   export type TrilhaUsuarioMaxAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    trilhaId: string | null
+    id: number | null
+    usuarioId: number | null
+    trilhaId: number | null
     status: $Enums.StatusTrilhaUsuario | null
     pontuacaoAtual: number | null
     pontuacaoNecessaria: number | null
     percentualConclusao: number | null
     podeDesbloquear: boolean | null
-    moduloAtualId: string | null
-    questaoAtualId: string | null
+    moduloAtualId: number | null
+    questaoAtualId: number | null
     iniciadaEm: Date | null
     concluidaEm: Date | null
   }
@@ -12120,15 +12232,25 @@ export namespace Prisma {
 
 
   export type TrilhaUsuarioAvgAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    trilhaId?: true
     pontuacaoAtual?: true
     pontuacaoNecessaria?: true
     percentualConclusao?: true
+    moduloAtualId?: true
+    questaoAtualId?: true
   }
 
   export type TrilhaUsuarioSumAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    trilhaId?: true
     pontuacaoAtual?: true
     pontuacaoNecessaria?: true
     percentualConclusao?: true
+    moduloAtualId?: true
+    questaoAtualId?: true
   }
 
   export type TrilhaUsuarioMinAggregateInputType = {
@@ -12264,16 +12386,16 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioGroupByOutputType = {
-    id: string
-    usuarioId: string
-    trilhaId: string
+    id: number
+    usuarioId: number
+    trilhaId: number
     status: $Enums.StatusTrilhaUsuario
     pontuacaoAtual: number
     pontuacaoNecessaria: number
     percentualConclusao: number
     podeDesbloquear: boolean
-    moduloAtualId: string | null
-    questaoAtualId: string | null
+    moduloAtualId: number | null
+    questaoAtualId: number | null
     iniciadaEm: Date
     concluidaEm: Date | null
     _count: TrilhaUsuarioCountAggregateOutputType | null
@@ -12384,16 +12506,16 @@ export namespace Prisma {
       trilha: Prisma.$TrilhaPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      usuarioId: string
-      trilhaId: string
+      id: number
+      usuarioId: number
+      trilhaId: number
       status: $Enums.StatusTrilhaUsuario
       pontuacaoAtual: number
       pontuacaoNecessaria: number
       percentualConclusao: number
       podeDesbloquear: boolean
-      moduloAtualId: string | null
-      questaoAtualId: string | null
+      moduloAtualId: number | null
+      questaoAtualId: number | null
       iniciadaEm: Date
       concluidaEm: Date | null
     }, ExtArgs["result"]["trilhaUsuario"]>
@@ -12821,16 +12943,16 @@ export namespace Prisma {
    * Fields of the TrilhaUsuario model
    */
   interface TrilhaUsuarioFieldRefs {
-    readonly id: FieldRef<"TrilhaUsuario", 'String'>
-    readonly usuarioId: FieldRef<"TrilhaUsuario", 'String'>
-    readonly trilhaId: FieldRef<"TrilhaUsuario", 'String'>
+    readonly id: FieldRef<"TrilhaUsuario", 'Int'>
+    readonly usuarioId: FieldRef<"TrilhaUsuario", 'Int'>
+    readonly trilhaId: FieldRef<"TrilhaUsuario", 'Int'>
     readonly status: FieldRef<"TrilhaUsuario", 'StatusTrilhaUsuario'>
     readonly pontuacaoAtual: FieldRef<"TrilhaUsuario", 'Int'>
     readonly pontuacaoNecessaria: FieldRef<"TrilhaUsuario", 'Int'>
     readonly percentualConclusao: FieldRef<"TrilhaUsuario", 'Int'>
     readonly podeDesbloquear: FieldRef<"TrilhaUsuario", 'Boolean'>
-    readonly moduloAtualId: FieldRef<"TrilhaUsuario", 'String'>
-    readonly questaoAtualId: FieldRef<"TrilhaUsuario", 'String'>
+    readonly moduloAtualId: FieldRef<"TrilhaUsuario", 'Int'>
+    readonly questaoAtualId: FieldRef<"TrilhaUsuario", 'Int'>
     readonly iniciadaEm: FieldRef<"TrilhaUsuario", 'DateTime'>
     readonly concluidaEm: FieldRef<"TrilhaUsuario", 'DateTime'>
   }
@@ -13265,15 +13387,17 @@ export namespace Prisma {
   }
 
   export type ConquistaAvgAggregateOutputType = {
+    id: number | null
     xpRecompensa: number | null
   }
 
   export type ConquistaSumAggregateOutputType = {
+    id: number | null
     xpRecompensa: number | null
   }
 
   export type ConquistaMinAggregateOutputType = {
-    id: string | null
+    id: number | null
     titulo: string | null
     descricao: string | null
     icone: string | null
@@ -13283,7 +13407,7 @@ export namespace Prisma {
   }
 
   export type ConquistaMaxAggregateOutputType = {
-    id: string | null
+    id: number | null
     titulo: string | null
     descricao: string | null
     icone: string | null
@@ -13305,10 +13429,12 @@ export namespace Prisma {
 
 
   export type ConquistaAvgAggregateInputType = {
+    id?: true
     xpRecompensa?: true
   }
 
   export type ConquistaSumAggregateInputType = {
+    id?: true
     xpRecompensa?: true
   }
 
@@ -13430,7 +13556,7 @@ export namespace Prisma {
   }
 
   export type ConquistaGroupByOutputType = {
-    id: string
+    id: number
     titulo: string
     descricao: string | null
     icone: string | null
@@ -13514,7 +13640,7 @@ export namespace Prisma {
       usuarios: Prisma.$ConquistaUsuarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      id: number
       titulo: string
       descricao: string | null
       icone: string | null
@@ -13945,7 +14071,7 @@ export namespace Prisma {
    * Fields of the Conquista model
    */
   interface ConquistaFieldRefs {
-    readonly id: FieldRef<"Conquista", 'String'>
+    readonly id: FieldRef<"Conquista", 'Int'>
     readonly titulo: FieldRef<"Conquista", 'String'>
     readonly descricao: FieldRef<"Conquista", 'String'>
     readonly icone: FieldRef<"Conquista", 'String'>
@@ -14393,21 +14519,35 @@ export namespace Prisma {
 
   export type AggregateConquistaUsuario = {
     _count: ConquistaUsuarioCountAggregateOutputType | null
+    _avg: ConquistaUsuarioAvgAggregateOutputType | null
+    _sum: ConquistaUsuarioSumAggregateOutputType | null
     _min: ConquistaUsuarioMinAggregateOutputType | null
     _max: ConquistaUsuarioMaxAggregateOutputType | null
   }
 
+  export type ConquistaUsuarioAvgAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    conquistaId: number | null
+  }
+
+  export type ConquistaUsuarioSumAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    conquistaId: number | null
+  }
+
   export type ConquistaUsuarioMinAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    conquistaId: string | null
+    id: number | null
+    usuarioId: number | null
+    conquistaId: number | null
     desbloqueadaEm: Date | null
   }
 
   export type ConquistaUsuarioMaxAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    conquistaId: string | null
+    id: number | null
+    usuarioId: number | null
+    conquistaId: number | null
     desbloqueadaEm: Date | null
   }
 
@@ -14419,6 +14559,18 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type ConquistaUsuarioAvgAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    conquistaId?: true
+  }
+
+  export type ConquistaUsuarioSumAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    conquistaId?: true
+  }
 
   export type ConquistaUsuarioMinAggregateInputType = {
     id?: true
@@ -14480,6 +14632,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ConquistaUsuarioAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConquistaUsuarioSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ConquistaUsuarioMinAggregateInputType
@@ -14510,16 +14674,20 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ConquistaUsuarioCountAggregateInputType | true
+    _avg?: ConquistaUsuarioAvgAggregateInputType
+    _sum?: ConquistaUsuarioSumAggregateInputType
     _min?: ConquistaUsuarioMinAggregateInputType
     _max?: ConquistaUsuarioMaxAggregateInputType
   }
 
   export type ConquistaUsuarioGroupByOutputType = {
-    id: string
-    usuarioId: string
-    conquistaId: string
+    id: number
+    usuarioId: number
+    conquistaId: number
     desbloqueadaEm: Date
     _count: ConquistaUsuarioCountAggregateOutputType | null
+    _avg: ConquistaUsuarioAvgAggregateOutputType | null
+    _sum: ConquistaUsuarioSumAggregateOutputType | null
     _min: ConquistaUsuarioMinAggregateOutputType | null
     _max: ConquistaUsuarioMaxAggregateOutputType | null
   }
@@ -14593,9 +14761,9 @@ export namespace Prisma {
       conquista: Prisma.$ConquistaPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      usuarioId: string
-      conquistaId: string
+      id: number
+      usuarioId: number
+      conquistaId: number
       desbloqueadaEm: Date
     }, ExtArgs["result"]["conquistaUsuario"]>
     composites: {}
@@ -15022,9 +15190,9 @@ export namespace Prisma {
    * Fields of the ConquistaUsuario model
    */
   interface ConquistaUsuarioFieldRefs {
-    readonly id: FieldRef<"ConquistaUsuario", 'String'>
-    readonly usuarioId: FieldRef<"ConquistaUsuario", 'String'>
-    readonly conquistaId: FieldRef<"ConquistaUsuario", 'String'>
+    readonly id: FieldRef<"ConquistaUsuario", 'Int'>
+    readonly usuarioId: FieldRef<"ConquistaUsuario", 'Int'>
+    readonly conquistaId: FieldRef<"ConquistaUsuario", 'Int'>
     readonly desbloqueadaEm: FieldRef<"ConquistaUsuario", 'DateTime'>
   }
     
@@ -15451,18 +15619,28 @@ export namespace Prisma {
 
   export type AggregateHabilidade = {
     _count: HabilidadeCountAggregateOutputType | null
+    _avg: HabilidadeAvgAggregateOutputType | null
+    _sum: HabilidadeSumAggregateOutputType | null
     _min: HabilidadeMinAggregateOutputType | null
     _max: HabilidadeMaxAggregateOutputType | null
   }
 
+  export type HabilidadeAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type HabilidadeSumAggregateOutputType = {
+    id: number | null
+  }
+
   export type HabilidadeMinAggregateOutputType = {
-    id: string | null
+    id: number | null
     nome: string | null
     descricao: string | null
   }
 
   export type HabilidadeMaxAggregateOutputType = {
-    id: string | null
+    id: number | null
     nome: string | null
     descricao: string | null
   }
@@ -15474,6 +15652,14 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type HabilidadeAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type HabilidadeSumAggregateInputType = {
+    id?: true
+  }
 
   export type HabilidadeMinAggregateInputType = {
     id?: true
@@ -15532,6 +15718,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: HabilidadeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HabilidadeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: HabilidadeMinAggregateInputType
@@ -15562,15 +15760,19 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: HabilidadeCountAggregateInputType | true
+    _avg?: HabilidadeAvgAggregateInputType
+    _sum?: HabilidadeSumAggregateInputType
     _min?: HabilidadeMinAggregateInputType
     _max?: HabilidadeMaxAggregateInputType
   }
 
   export type HabilidadeGroupByOutputType = {
-    id: string
+    id: number
     nome: string
     descricao: string | null
     _count: HabilidadeCountAggregateOutputType | null
+    _avg: HabilidadeAvgAggregateOutputType | null
+    _sum: HabilidadeSumAggregateOutputType | null
     _min: HabilidadeMinAggregateOutputType | null
     _max: HabilidadeMaxAggregateOutputType | null
   }
@@ -15629,7 +15831,7 @@ export namespace Prisma {
       usuarios: Prisma.$HabilidadeUsuarioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      id: number
       nome: string
       descricao: string | null
     }, ExtArgs["result"]["habilidade"]>
@@ -16056,7 +16258,7 @@ export namespace Prisma {
    * Fields of the Habilidade model
    */
   interface HabilidadeFieldRefs {
-    readonly id: FieldRef<"Habilidade", 'String'>
+    readonly id: FieldRef<"Habilidade", 'Int'>
     readonly nome: FieldRef<"Habilidade", 'String'>
     readonly descricao: FieldRef<"Habilidade", 'String'>
   }
@@ -16507,28 +16709,34 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioAvgAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    habilidadeId: number | null
     pontuacao: number | null
     nivel: number | null
   }
 
   export type HabilidadeUsuarioSumAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+    habilidadeId: number | null
     pontuacao: number | null
     nivel: number | null
   }
 
   export type HabilidadeUsuarioMinAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    habilidadeId: string | null
+    id: number | null
+    usuarioId: number | null
+    habilidadeId: number | null
     pontuacao: number | null
     nivel: number | null
     updatedAt: Date | null
   }
 
   export type HabilidadeUsuarioMaxAggregateOutputType = {
-    id: string | null
-    usuarioId: string | null
-    habilidadeId: string | null
+    id: number | null
+    usuarioId: number | null
+    habilidadeId: number | null
     pontuacao: number | null
     nivel: number | null
     updatedAt: Date | null
@@ -16546,11 +16754,17 @@ export namespace Prisma {
 
 
   export type HabilidadeUsuarioAvgAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    habilidadeId?: true
     pontuacao?: true
     nivel?: true
   }
 
   export type HabilidadeUsuarioSumAggregateInputType = {
+    id?: true
+    usuarioId?: true
+    habilidadeId?: true
     pontuacao?: true
     nivel?: true
   }
@@ -16670,9 +16884,9 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioGroupByOutputType = {
-    id: string
-    usuarioId: string
-    habilidadeId: string
+    id: number
+    usuarioId: number
+    habilidadeId: number
     pontuacao: number
     nivel: number
     updatedAt: Date
@@ -16760,9 +16974,9 @@ export namespace Prisma {
       habilidade: Prisma.$HabilidadePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      usuarioId: string
-      habilidadeId: string
+      id: number
+      usuarioId: number
+      habilidadeId: number
       pontuacao: number
       nivel: number
       updatedAt: Date
@@ -17191,9 +17405,9 @@ export namespace Prisma {
    * Fields of the HabilidadeUsuario model
    */
   interface HabilidadeUsuarioFieldRefs {
-    readonly id: FieldRef<"HabilidadeUsuario", 'String'>
-    readonly usuarioId: FieldRef<"HabilidadeUsuario", 'String'>
-    readonly habilidadeId: FieldRef<"HabilidadeUsuario", 'String'>
+    readonly id: FieldRef<"HabilidadeUsuario", 'Int'>
+    readonly usuarioId: FieldRef<"HabilidadeUsuario", 'Int'>
+    readonly habilidadeId: FieldRef<"HabilidadeUsuario", 'Int'>
     readonly pontuacao: FieldRef<"HabilidadeUsuario", 'Int'>
     readonly nivel: FieldRef<"HabilidadeUsuario", 'Int'>
     readonly updatedAt: FieldRef<"HabilidadeUsuario", 'DateTime'>
@@ -17630,10 +17844,12 @@ export namespace Prisma {
 
   export type TokenAvgAggregateOutputType = {
     id: number | null
+    usuarioId: number | null
   }
 
   export type TokenSumAggregateOutputType = {
     id: number | null
+    usuarioId: number | null
   }
 
   export type TokenMinAggregateOutputType = {
@@ -17642,7 +17858,7 @@ export namespace Prisma {
     type: $Enums.TypeToken | null
     revoked: boolean | null
     expiresAt: Date | null
-    usuarioId: string | null
+    usuarioId: number | null
   }
 
   export type TokenMaxAggregateOutputType = {
@@ -17651,7 +17867,7 @@ export namespace Prisma {
     type: $Enums.TypeToken | null
     revoked: boolean | null
     expiresAt: Date | null
-    usuarioId: string | null
+    usuarioId: number | null
   }
 
   export type TokenCountAggregateOutputType = {
@@ -17667,10 +17883,12 @@ export namespace Prisma {
 
   export type TokenAvgAggregateInputType = {
     id?: true
+    usuarioId?: true
   }
 
   export type TokenSumAggregateInputType = {
     id?: true
+    usuarioId?: true
   }
 
   export type TokenMinAggregateInputType = {
@@ -17793,7 +18011,7 @@ export namespace Prisma {
     type: $Enums.TypeToken
     revoked: boolean
     expiresAt: Date
-    usuarioId: string
+    usuarioId: number
     _count: TokenCountAggregateOutputType | null
     _avg: TokenAvgAggregateOutputType | null
     _sum: TokenSumAggregateOutputType | null
@@ -17876,7 +18094,7 @@ export namespace Prisma {
       type: $Enums.TypeToken
       revoked: boolean
       expiresAt: Date
-      usuarioId: string
+      usuarioId: number
     }, ExtArgs["result"]["token"]>
     composites: {}
   }
@@ -18306,7 +18524,7 @@ export namespace Prisma {
     readonly type: FieldRef<"Token", 'TypeToken'>
     readonly revoked: FieldRef<"Token", 'Boolean'>
     readonly expiresAt: FieldRef<"Token", 'DateTime'>
-    readonly usuarioId: FieldRef<"Token", 'String'>
+    readonly usuarioId: FieldRef<"Token", 'Int'>
   }
     
 
@@ -18962,6 +19180,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -18986,20 +19218,6 @@ export namespace Prisma {
    * Reference to a field of type 'Role[]'
    */
   export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -19087,7 +19305,7 @@ export namespace Prisma {
     AND?: UsuarioWhereInput | UsuarioWhereInput[]
     OR?: UsuarioWhereInput[]
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
-    id?: StringFilter<"Usuario"> | string
+    id?: IntFilter<"Usuario"> | number
     nome?: StringFilter<"Usuario"> | string
     email?: StringFilter<"Usuario"> | string
     senha?: StringFilter<"Usuario"> | string
@@ -19129,7 +19347,7 @@ export namespace Prisma {
   }
 
   export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     email?: string
     AND?: UsuarioWhereInput | UsuarioWhereInput[]
     OR?: UsuarioWhereInput[]
@@ -19176,7 +19394,7 @@ export namespace Prisma {
     AND?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
     OR?: UsuarioScalarWhereWithAggregatesInput[]
     NOT?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Usuario"> | string
+    id?: IntWithAggregatesFilter<"Usuario"> | number
     nome?: StringWithAggregatesFilter<"Usuario"> | string
     email?: StringWithAggregatesFilter<"Usuario"> | string
     senha?: StringWithAggregatesFilter<"Usuario"> | string
@@ -19194,7 +19412,7 @@ export namespace Prisma {
     AND?: TemaWhereInput | TemaWhereInput[]
     OR?: TemaWhereInput[]
     NOT?: TemaWhereInput | TemaWhereInput[]
-    id?: StringFilter<"Tema"> | string
+    id?: IntFilter<"Tema"> | number
     nome?: StringFilter<"Tema"> | string
     descricao?: StringNullableFilter<"Tema"> | string | null
     createdAt?: DateTimeFilter<"Tema"> | Date | string
@@ -19214,7 +19432,7 @@ export namespace Prisma {
   }
 
   export type TemaWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     nome?: string
     AND?: TemaWhereInput | TemaWhereInput[]
     OR?: TemaWhereInput[]
@@ -19233,15 +19451,17 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TemaCountOrderByAggregateInput
+    _avg?: TemaAvgOrderByAggregateInput
     _max?: TemaMaxOrderByAggregateInput
     _min?: TemaMinOrderByAggregateInput
+    _sum?: TemaSumOrderByAggregateInput
   }
 
   export type TemaScalarWhereWithAggregatesInput = {
     AND?: TemaScalarWhereWithAggregatesInput | TemaScalarWhereWithAggregatesInput[]
     OR?: TemaScalarWhereWithAggregatesInput[]
     NOT?: TemaScalarWhereWithAggregatesInput | TemaScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Tema"> | string
+    id?: IntWithAggregatesFilter<"Tema"> | number
     nome?: StringWithAggregatesFilter<"Tema"> | string
     descricao?: StringNullableWithAggregatesFilter<"Tema"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Tema"> | Date | string
@@ -19252,9 +19472,9 @@ export namespace Prisma {
     AND?: TemaUsuarioWhereInput | TemaUsuarioWhereInput[]
     OR?: TemaUsuarioWhereInput[]
     NOT?: TemaUsuarioWhereInput | TemaUsuarioWhereInput[]
-    id?: StringFilter<"TemaUsuario"> | string
-    usuarioId?: StringFilter<"TemaUsuario"> | string
-    temaId?: StringFilter<"TemaUsuario"> | string
+    id?: IntFilter<"TemaUsuario"> | number
+    usuarioId?: IntFilter<"TemaUsuario"> | number
+    temaId?: IntFilter<"TemaUsuario"> | number
     pontuacaoTotal?: IntFilter<"TemaUsuario"> | number
     trilhasConcluidas?: IntFilter<"TemaUsuario"> | number
     nivelAtual?: EnumNivelDificuldadeFilter<"TemaUsuario"> | $Enums.NivelDificuldade
@@ -19278,13 +19498,13 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     usuarioId_temaId?: TemaUsuarioUsuarioIdTemaIdCompoundUniqueInput
     AND?: TemaUsuarioWhereInput | TemaUsuarioWhereInput[]
     OR?: TemaUsuarioWhereInput[]
     NOT?: TemaUsuarioWhereInput | TemaUsuarioWhereInput[]
-    usuarioId?: StringFilter<"TemaUsuario"> | string
-    temaId?: StringFilter<"TemaUsuario"> | string
+    usuarioId?: IntFilter<"TemaUsuario"> | number
+    temaId?: IntFilter<"TemaUsuario"> | number
     pontuacaoTotal?: IntFilter<"TemaUsuario"> | number
     trilhasConcluidas?: IntFilter<"TemaUsuario"> | number
     nivelAtual?: EnumNivelDificuldadeFilter<"TemaUsuario"> | $Enums.NivelDificuldade
@@ -19314,9 +19534,9 @@ export namespace Prisma {
     AND?: TemaUsuarioScalarWhereWithAggregatesInput | TemaUsuarioScalarWhereWithAggregatesInput[]
     OR?: TemaUsuarioScalarWhereWithAggregatesInput[]
     NOT?: TemaUsuarioScalarWhereWithAggregatesInput | TemaUsuarioScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TemaUsuario"> | string
-    usuarioId?: StringWithAggregatesFilter<"TemaUsuario"> | string
-    temaId?: StringWithAggregatesFilter<"TemaUsuario"> | string
+    id?: IntWithAggregatesFilter<"TemaUsuario"> | number
+    usuarioId?: IntWithAggregatesFilter<"TemaUsuario"> | number
+    temaId?: IntWithAggregatesFilter<"TemaUsuario"> | number
     pontuacaoTotal?: IntWithAggregatesFilter<"TemaUsuario"> | number
     trilhasConcluidas?: IntWithAggregatesFilter<"TemaUsuario"> | number
     nivelAtual?: EnumNivelDificuldadeWithAggregatesFilter<"TemaUsuario"> | $Enums.NivelDificuldade
@@ -19328,14 +19548,14 @@ export namespace Prisma {
     AND?: TrilhaWhereInput | TrilhaWhereInput[]
     OR?: TrilhaWhereInput[]
     NOT?: TrilhaWhereInput | TrilhaWhereInput[]
-    id?: StringFilter<"Trilha"> | string
-    temaId?: StringFilter<"Trilha"> | string
+    id?: IntFilter<"Trilha"> | number
+    temaId?: IntFilter<"Trilha"> | number
     titulo?: StringFilter<"Trilha"> | string
     descricao?: StringNullableFilter<"Trilha"> | string | null
     nivel?: EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
     ordem?: IntFilter<"Trilha"> | number
     pontuacaoMinima?: IntFilter<"Trilha"> | number
-    trilhaAnteriorId?: StringNullableFilter<"Trilha"> | string | null
+    trilhaAnteriorId?: IntNullableFilter<"Trilha"> | number | null
     createdAt?: DateTimeFilter<"Trilha"> | Date | string
     updatedAt?: DateTimeFilter<"Trilha"> | Date | string
     tema?: XOR<TemaScalarRelationFilter, TemaWhereInput>
@@ -19364,18 +19584,18 @@ export namespace Prisma {
   }
 
   export type TrilhaWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     temaId_ordem?: TrilhaTemaIdOrdemCompoundUniqueInput
     AND?: TrilhaWhereInput | TrilhaWhereInput[]
     OR?: TrilhaWhereInput[]
     NOT?: TrilhaWhereInput | TrilhaWhereInput[]
-    temaId?: StringFilter<"Trilha"> | string
+    temaId?: IntFilter<"Trilha"> | number
     titulo?: StringFilter<"Trilha"> | string
     descricao?: StringNullableFilter<"Trilha"> | string | null
     nivel?: EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
     ordem?: IntFilter<"Trilha"> | number
     pontuacaoMinima?: IntFilter<"Trilha"> | number
-    trilhaAnteriorId?: StringNullableFilter<"Trilha"> | string | null
+    trilhaAnteriorId?: IntNullableFilter<"Trilha"> | number | null
     createdAt?: DateTimeFilter<"Trilha"> | Date | string
     updatedAt?: DateTimeFilter<"Trilha"> | Date | string
     tema?: XOR<TemaScalarRelationFilter, TemaWhereInput>
@@ -19407,14 +19627,14 @@ export namespace Prisma {
     AND?: TrilhaScalarWhereWithAggregatesInput | TrilhaScalarWhereWithAggregatesInput[]
     OR?: TrilhaScalarWhereWithAggregatesInput[]
     NOT?: TrilhaScalarWhereWithAggregatesInput | TrilhaScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Trilha"> | string
-    temaId?: StringWithAggregatesFilter<"Trilha"> | string
+    id?: IntWithAggregatesFilter<"Trilha"> | number
+    temaId?: IntWithAggregatesFilter<"Trilha"> | number
     titulo?: StringWithAggregatesFilter<"Trilha"> | string
     descricao?: StringNullableWithAggregatesFilter<"Trilha"> | string | null
     nivel?: EnumNivelDificuldadeWithAggregatesFilter<"Trilha"> | $Enums.NivelDificuldade
     ordem?: IntWithAggregatesFilter<"Trilha"> | number
     pontuacaoMinima?: IntWithAggregatesFilter<"Trilha"> | number
-    trilhaAnteriorId?: StringNullableWithAggregatesFilter<"Trilha"> | string | null
+    trilhaAnteriorId?: IntNullableWithAggregatesFilter<"Trilha"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Trilha"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Trilha"> | Date | string
   }
@@ -19423,8 +19643,8 @@ export namespace Prisma {
     AND?: ModuloWhereInput | ModuloWhereInput[]
     OR?: ModuloWhereInput[]
     NOT?: ModuloWhereInput | ModuloWhereInput[]
-    id?: StringFilter<"Modulo"> | string
-    trilhaId?: StringFilter<"Modulo"> | string
+    id?: IntFilter<"Modulo"> | number
+    trilhaId?: IntFilter<"Modulo"> | number
     titulo?: StringFilter<"Modulo"> | string
     descricao?: StringNullableFilter<"Modulo"> | string | null
     ordem?: IntFilter<"Modulo"> | number
@@ -19447,12 +19667,12 @@ export namespace Prisma {
   }
 
   export type ModuloWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     trilhaId_ordem?: ModuloTrilhaIdOrdemCompoundUniqueInput
     AND?: ModuloWhereInput | ModuloWhereInput[]
     OR?: ModuloWhereInput[]
     NOT?: ModuloWhereInput | ModuloWhereInput[]
-    trilhaId?: StringFilter<"Modulo"> | string
+    trilhaId?: IntFilter<"Modulo"> | number
     titulo?: StringFilter<"Modulo"> | string
     descricao?: StringNullableFilter<"Modulo"> | string | null
     ordem?: IntFilter<"Modulo"> | number
@@ -19481,8 +19701,8 @@ export namespace Prisma {
     AND?: ModuloScalarWhereWithAggregatesInput | ModuloScalarWhereWithAggregatesInput[]
     OR?: ModuloScalarWhereWithAggregatesInput[]
     NOT?: ModuloScalarWhereWithAggregatesInput | ModuloScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Modulo"> | string
-    trilhaId?: StringWithAggregatesFilter<"Modulo"> | string
+    id?: IntWithAggregatesFilter<"Modulo"> | number
+    trilhaId?: IntWithAggregatesFilter<"Modulo"> | number
     titulo?: StringWithAggregatesFilter<"Modulo"> | string
     descricao?: StringNullableWithAggregatesFilter<"Modulo"> | string | null
     ordem?: IntWithAggregatesFilter<"Modulo"> | number
@@ -19494,8 +19714,8 @@ export namespace Prisma {
     AND?: QuestaoWhereInput | QuestaoWhereInput[]
     OR?: QuestaoWhereInput[]
     NOT?: QuestaoWhereInput | QuestaoWhereInput[]
-    id?: StringFilter<"Questao"> | string
-    moduloId?: StringFilter<"Questao"> | string
+    id?: IntFilter<"Questao"> | number
+    moduloId?: IntFilter<"Questao"> | number
     titulo?: StringFilter<"Questao"> | string
     descricao?: StringFilter<"Questao"> | string
     dificuldade?: IntFilter<"Questao"> | number
@@ -19524,12 +19744,12 @@ export namespace Prisma {
   }
 
   export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     moduloId_ordem?: QuestaoModuloIdOrdemCompoundUniqueInput
     AND?: QuestaoWhereInput | QuestaoWhereInput[]
     OR?: QuestaoWhereInput[]
     NOT?: QuestaoWhereInput | QuestaoWhereInput[]
-    moduloId?: StringFilter<"Questao"> | string
+    moduloId?: IntFilter<"Questao"> | number
     titulo?: StringFilter<"Questao"> | string
     descricao?: StringFilter<"Questao"> | string
     dificuldade?: IntFilter<"Questao"> | number
@@ -19563,8 +19783,8 @@ export namespace Prisma {
     AND?: QuestaoScalarWhereWithAggregatesInput | QuestaoScalarWhereWithAggregatesInput[]
     OR?: QuestaoScalarWhereWithAggregatesInput[]
     NOT?: QuestaoScalarWhereWithAggregatesInput | QuestaoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Questao"> | string
-    moduloId?: StringWithAggregatesFilter<"Questao"> | string
+    id?: IntWithAggregatesFilter<"Questao"> | number
+    moduloId?: IntWithAggregatesFilter<"Questao"> | number
     titulo?: StringWithAggregatesFilter<"Questao"> | string
     descricao?: StringWithAggregatesFilter<"Questao"> | string
     dificuldade?: IntWithAggregatesFilter<"Questao"> | number
@@ -19578,8 +19798,8 @@ export namespace Prisma {
     AND?: RespostaQuestaoWhereInput | RespostaQuestaoWhereInput[]
     OR?: RespostaQuestaoWhereInput[]
     NOT?: RespostaQuestaoWhereInput | RespostaQuestaoWhereInput[]
-    id?: StringFilter<"RespostaQuestao"> | string
-    questaoId?: StringFilter<"RespostaQuestao"> | string
+    id?: IntFilter<"RespostaQuestao"> | number
+    questaoId?: IntFilter<"RespostaQuestao"> | number
     titulo?: StringFilter<"RespostaQuestao"> | string
     codigoResposta?: StringFilter<"RespostaQuestao"> | string
     explicacao?: StringNullableFilter<"RespostaQuestao"> | string | null
@@ -19614,11 +19834,11 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     AND?: RespostaQuestaoWhereInput | RespostaQuestaoWhereInput[]
     OR?: RespostaQuestaoWhereInput[]
     NOT?: RespostaQuestaoWhereInput | RespostaQuestaoWhereInput[]
-    questaoId?: StringFilter<"RespostaQuestao"> | string
+    questaoId?: IntFilter<"RespostaQuestao"> | number
     titulo?: StringFilter<"RespostaQuestao"> | string
     codigoResposta?: StringFilter<"RespostaQuestao"> | string
     explicacao?: StringNullableFilter<"RespostaQuestao"> | string | null
@@ -19659,8 +19879,8 @@ export namespace Prisma {
     AND?: RespostaQuestaoScalarWhereWithAggregatesInput | RespostaQuestaoScalarWhereWithAggregatesInput[]
     OR?: RespostaQuestaoScalarWhereWithAggregatesInput[]
     NOT?: RespostaQuestaoScalarWhereWithAggregatesInput | RespostaQuestaoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"RespostaQuestao"> | string
-    questaoId?: StringWithAggregatesFilter<"RespostaQuestao"> | string
+    id?: IntWithAggregatesFilter<"RespostaQuestao"> | number
+    questaoId?: IntWithAggregatesFilter<"RespostaQuestao"> | number
     titulo?: StringWithAggregatesFilter<"RespostaQuestao"> | string
     codigoResposta?: StringWithAggregatesFilter<"RespostaQuestao"> | string
     explicacao?: StringNullableWithAggregatesFilter<"RespostaQuestao"> | string | null
@@ -19678,10 +19898,10 @@ export namespace Prisma {
     AND?: RespostaUsuarioWhereInput | RespostaUsuarioWhereInput[]
     OR?: RespostaUsuarioWhereInput[]
     NOT?: RespostaUsuarioWhereInput | RespostaUsuarioWhereInput[]
-    id?: StringFilter<"RespostaUsuario"> | string
-    usuarioId?: StringFilter<"RespostaUsuario"> | string
-    questaoId?: StringFilter<"RespostaUsuario"> | string
-    respostaQuestaoId?: StringFilter<"RespostaUsuario"> | string
+    id?: IntFilter<"RespostaUsuario"> | number
+    usuarioId?: IntFilter<"RespostaUsuario"> | number
+    questaoId?: IntFilter<"RespostaUsuario"> | number
+    respostaQuestaoId?: IntFilter<"RespostaUsuario"> | number
     pontuacaoRecebida?: IntFilter<"RespostaUsuario"> | number
     respondidaEm?: DateTimeFilter<"RespostaUsuario"> | Date | string
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
@@ -19702,14 +19922,14 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     usuarioId_questaoId?: RespostaUsuarioUsuarioIdQuestaoIdCompoundUniqueInput
     AND?: RespostaUsuarioWhereInput | RespostaUsuarioWhereInput[]
     OR?: RespostaUsuarioWhereInput[]
     NOT?: RespostaUsuarioWhereInput | RespostaUsuarioWhereInput[]
-    usuarioId?: StringFilter<"RespostaUsuario"> | string
-    questaoId?: StringFilter<"RespostaUsuario"> | string
-    respostaQuestaoId?: StringFilter<"RespostaUsuario"> | string
+    usuarioId?: IntFilter<"RespostaUsuario"> | number
+    questaoId?: IntFilter<"RespostaUsuario"> | number
+    respostaQuestaoId?: IntFilter<"RespostaUsuario"> | number
     pontuacaoRecebida?: IntFilter<"RespostaUsuario"> | number
     respondidaEm?: DateTimeFilter<"RespostaUsuario"> | Date | string
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
@@ -19735,10 +19955,10 @@ export namespace Prisma {
     AND?: RespostaUsuarioScalarWhereWithAggregatesInput | RespostaUsuarioScalarWhereWithAggregatesInput[]
     OR?: RespostaUsuarioScalarWhereWithAggregatesInput[]
     NOT?: RespostaUsuarioScalarWhereWithAggregatesInput | RespostaUsuarioScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"RespostaUsuario"> | string
-    usuarioId?: StringWithAggregatesFilter<"RespostaUsuario"> | string
-    questaoId?: StringWithAggregatesFilter<"RespostaUsuario"> | string
-    respostaQuestaoId?: StringWithAggregatesFilter<"RespostaUsuario"> | string
+    id?: IntWithAggregatesFilter<"RespostaUsuario"> | number
+    usuarioId?: IntWithAggregatesFilter<"RespostaUsuario"> | number
+    questaoId?: IntWithAggregatesFilter<"RespostaUsuario"> | number
+    respostaQuestaoId?: IntWithAggregatesFilter<"RespostaUsuario"> | number
     pontuacaoRecebida?: IntWithAggregatesFilter<"RespostaUsuario"> | number
     respondidaEm?: DateTimeWithAggregatesFilter<"RespostaUsuario"> | Date | string
   }
@@ -19747,16 +19967,16 @@ export namespace Prisma {
     AND?: TrilhaUsuarioWhereInput | TrilhaUsuarioWhereInput[]
     OR?: TrilhaUsuarioWhereInput[]
     NOT?: TrilhaUsuarioWhereInput | TrilhaUsuarioWhereInput[]
-    id?: StringFilter<"TrilhaUsuario"> | string
-    usuarioId?: StringFilter<"TrilhaUsuario"> | string
-    trilhaId?: StringFilter<"TrilhaUsuario"> | string
+    id?: IntFilter<"TrilhaUsuario"> | number
+    usuarioId?: IntFilter<"TrilhaUsuario"> | number
+    trilhaId?: IntFilter<"TrilhaUsuario"> | number
     status?: EnumStatusTrilhaUsuarioFilter<"TrilhaUsuario"> | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFilter<"TrilhaUsuario"> | number
     pontuacaoNecessaria?: IntFilter<"TrilhaUsuario"> | number
     percentualConclusao?: IntFilter<"TrilhaUsuario"> | number
     podeDesbloquear?: BoolFilter<"TrilhaUsuario"> | boolean
-    moduloAtualId?: StringNullableFilter<"TrilhaUsuario"> | string | null
-    questaoAtualId?: StringNullableFilter<"TrilhaUsuario"> | string | null
+    moduloAtualId?: IntNullableFilter<"TrilhaUsuario"> | number | null
+    questaoAtualId?: IntNullableFilter<"TrilhaUsuario"> | number | null
     iniciadaEm?: DateTimeFilter<"TrilhaUsuario"> | Date | string
     concluidaEm?: DateTimeNullableFilter<"TrilhaUsuario"> | Date | string | null
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
@@ -19781,20 +20001,20 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     usuarioId_trilhaId?: TrilhaUsuarioUsuarioIdTrilhaIdCompoundUniqueInput
     AND?: TrilhaUsuarioWhereInput | TrilhaUsuarioWhereInput[]
     OR?: TrilhaUsuarioWhereInput[]
     NOT?: TrilhaUsuarioWhereInput | TrilhaUsuarioWhereInput[]
-    usuarioId?: StringFilter<"TrilhaUsuario"> | string
-    trilhaId?: StringFilter<"TrilhaUsuario"> | string
+    usuarioId?: IntFilter<"TrilhaUsuario"> | number
+    trilhaId?: IntFilter<"TrilhaUsuario"> | number
     status?: EnumStatusTrilhaUsuarioFilter<"TrilhaUsuario"> | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFilter<"TrilhaUsuario"> | number
     pontuacaoNecessaria?: IntFilter<"TrilhaUsuario"> | number
     percentualConclusao?: IntFilter<"TrilhaUsuario"> | number
     podeDesbloquear?: BoolFilter<"TrilhaUsuario"> | boolean
-    moduloAtualId?: StringNullableFilter<"TrilhaUsuario"> | string | null
-    questaoAtualId?: StringNullableFilter<"TrilhaUsuario"> | string | null
+    moduloAtualId?: IntNullableFilter<"TrilhaUsuario"> | number | null
+    questaoAtualId?: IntNullableFilter<"TrilhaUsuario"> | number | null
     iniciadaEm?: DateTimeFilter<"TrilhaUsuario"> | Date | string
     concluidaEm?: DateTimeNullableFilter<"TrilhaUsuario"> | Date | string | null
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
@@ -19825,16 +20045,16 @@ export namespace Prisma {
     AND?: TrilhaUsuarioScalarWhereWithAggregatesInput | TrilhaUsuarioScalarWhereWithAggregatesInput[]
     OR?: TrilhaUsuarioScalarWhereWithAggregatesInput[]
     NOT?: TrilhaUsuarioScalarWhereWithAggregatesInput | TrilhaUsuarioScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TrilhaUsuario"> | string
-    usuarioId?: StringWithAggregatesFilter<"TrilhaUsuario"> | string
-    trilhaId?: StringWithAggregatesFilter<"TrilhaUsuario"> | string
+    id?: IntWithAggregatesFilter<"TrilhaUsuario"> | number
+    usuarioId?: IntWithAggregatesFilter<"TrilhaUsuario"> | number
+    trilhaId?: IntWithAggregatesFilter<"TrilhaUsuario"> | number
     status?: EnumStatusTrilhaUsuarioWithAggregatesFilter<"TrilhaUsuario"> | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntWithAggregatesFilter<"TrilhaUsuario"> | number
     pontuacaoNecessaria?: IntWithAggregatesFilter<"TrilhaUsuario"> | number
     percentualConclusao?: IntWithAggregatesFilter<"TrilhaUsuario"> | number
     podeDesbloquear?: BoolWithAggregatesFilter<"TrilhaUsuario"> | boolean
-    moduloAtualId?: StringNullableWithAggregatesFilter<"TrilhaUsuario"> | string | null
-    questaoAtualId?: StringNullableWithAggregatesFilter<"TrilhaUsuario"> | string | null
+    moduloAtualId?: IntNullableWithAggregatesFilter<"TrilhaUsuario"> | number | null
+    questaoAtualId?: IntNullableWithAggregatesFilter<"TrilhaUsuario"> | number | null
     iniciadaEm?: DateTimeWithAggregatesFilter<"TrilhaUsuario"> | Date | string
     concluidaEm?: DateTimeNullableWithAggregatesFilter<"TrilhaUsuario"> | Date | string | null
   }
@@ -19843,7 +20063,7 @@ export namespace Prisma {
     AND?: ConquistaWhereInput | ConquistaWhereInput[]
     OR?: ConquistaWhereInput[]
     NOT?: ConquistaWhereInput | ConquistaWhereInput[]
-    id?: StringFilter<"Conquista"> | string
+    id?: IntFilter<"Conquista"> | number
     titulo?: StringFilter<"Conquista"> | string
     descricao?: StringNullableFilter<"Conquista"> | string | null
     icone?: StringNullableFilter<"Conquista"> | string | null
@@ -19865,7 +20085,7 @@ export namespace Prisma {
   }
 
   export type ConquistaWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     titulo?: string
     AND?: ConquistaWhereInput | ConquistaWhereInput[]
     OR?: ConquistaWhereInput[]
@@ -19897,7 +20117,7 @@ export namespace Prisma {
     AND?: ConquistaScalarWhereWithAggregatesInput | ConquistaScalarWhereWithAggregatesInput[]
     OR?: ConquistaScalarWhereWithAggregatesInput[]
     NOT?: ConquistaScalarWhereWithAggregatesInput | ConquistaScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Conquista"> | string
+    id?: IntWithAggregatesFilter<"Conquista"> | number
     titulo?: StringWithAggregatesFilter<"Conquista"> | string
     descricao?: StringNullableWithAggregatesFilter<"Conquista"> | string | null
     icone?: StringNullableWithAggregatesFilter<"Conquista"> | string | null
@@ -19910,9 +20130,9 @@ export namespace Prisma {
     AND?: ConquistaUsuarioWhereInput | ConquistaUsuarioWhereInput[]
     OR?: ConquistaUsuarioWhereInput[]
     NOT?: ConquistaUsuarioWhereInput | ConquistaUsuarioWhereInput[]
-    id?: StringFilter<"ConquistaUsuario"> | string
-    usuarioId?: StringFilter<"ConquistaUsuario"> | string
-    conquistaId?: StringFilter<"ConquistaUsuario"> | string
+    id?: IntFilter<"ConquistaUsuario"> | number
+    usuarioId?: IntFilter<"ConquistaUsuario"> | number
+    conquistaId?: IntFilter<"ConquistaUsuario"> | number
     desbloqueadaEm?: DateTimeFilter<"ConquistaUsuario"> | Date | string
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     conquista?: XOR<ConquistaScalarRelationFilter, ConquistaWhereInput>
@@ -19928,12 +20148,12 @@ export namespace Prisma {
   }
 
   export type ConquistaUsuarioWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     AND?: ConquistaUsuarioWhereInput | ConquistaUsuarioWhereInput[]
     OR?: ConquistaUsuarioWhereInput[]
     NOT?: ConquistaUsuarioWhereInput | ConquistaUsuarioWhereInput[]
-    usuarioId?: StringFilter<"ConquistaUsuario"> | string
-    conquistaId?: StringFilter<"ConquistaUsuario"> | string
+    usuarioId?: IntFilter<"ConquistaUsuario"> | number
+    conquistaId?: IntFilter<"ConquistaUsuario"> | number
     desbloqueadaEm?: DateTimeFilter<"ConquistaUsuario"> | Date | string
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     conquista?: XOR<ConquistaScalarRelationFilter, ConquistaWhereInput>
@@ -19945,17 +20165,19 @@ export namespace Prisma {
     conquistaId?: SortOrder
     desbloqueadaEm?: SortOrder
     _count?: ConquistaUsuarioCountOrderByAggregateInput
+    _avg?: ConquistaUsuarioAvgOrderByAggregateInput
     _max?: ConquistaUsuarioMaxOrderByAggregateInput
     _min?: ConquistaUsuarioMinOrderByAggregateInput
+    _sum?: ConquistaUsuarioSumOrderByAggregateInput
   }
 
   export type ConquistaUsuarioScalarWhereWithAggregatesInput = {
     AND?: ConquistaUsuarioScalarWhereWithAggregatesInput | ConquistaUsuarioScalarWhereWithAggregatesInput[]
     OR?: ConquistaUsuarioScalarWhereWithAggregatesInput[]
     NOT?: ConquistaUsuarioScalarWhereWithAggregatesInput | ConquistaUsuarioScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"ConquistaUsuario"> | string
-    usuarioId?: StringWithAggregatesFilter<"ConquistaUsuario"> | string
-    conquistaId?: StringWithAggregatesFilter<"ConquistaUsuario"> | string
+    id?: IntWithAggregatesFilter<"ConquistaUsuario"> | number
+    usuarioId?: IntWithAggregatesFilter<"ConquistaUsuario"> | number
+    conquistaId?: IntWithAggregatesFilter<"ConquistaUsuario"> | number
     desbloqueadaEm?: DateTimeWithAggregatesFilter<"ConquistaUsuario"> | Date | string
   }
 
@@ -19963,7 +20185,7 @@ export namespace Prisma {
     AND?: HabilidadeWhereInput | HabilidadeWhereInput[]
     OR?: HabilidadeWhereInput[]
     NOT?: HabilidadeWhereInput | HabilidadeWhereInput[]
-    id?: StringFilter<"Habilidade"> | string
+    id?: IntFilter<"Habilidade"> | number
     nome?: StringFilter<"Habilidade"> | string
     descricao?: StringNullableFilter<"Habilidade"> | string | null
     usuarios?: HabilidadeUsuarioListRelationFilter
@@ -19977,7 +20199,7 @@ export namespace Prisma {
   }
 
   export type HabilidadeWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     nome?: string
     AND?: HabilidadeWhereInput | HabilidadeWhereInput[]
     OR?: HabilidadeWhereInput[]
@@ -19991,15 +20213,17 @@ export namespace Prisma {
     nome?: SortOrder
     descricao?: SortOrderInput | SortOrder
     _count?: HabilidadeCountOrderByAggregateInput
+    _avg?: HabilidadeAvgOrderByAggregateInput
     _max?: HabilidadeMaxOrderByAggregateInput
     _min?: HabilidadeMinOrderByAggregateInput
+    _sum?: HabilidadeSumOrderByAggregateInput
   }
 
   export type HabilidadeScalarWhereWithAggregatesInput = {
     AND?: HabilidadeScalarWhereWithAggregatesInput | HabilidadeScalarWhereWithAggregatesInput[]
     OR?: HabilidadeScalarWhereWithAggregatesInput[]
     NOT?: HabilidadeScalarWhereWithAggregatesInput | HabilidadeScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Habilidade"> | string
+    id?: IntWithAggregatesFilter<"Habilidade"> | number
     nome?: StringWithAggregatesFilter<"Habilidade"> | string
     descricao?: StringNullableWithAggregatesFilter<"Habilidade"> | string | null
   }
@@ -20008,9 +20232,9 @@ export namespace Prisma {
     AND?: HabilidadeUsuarioWhereInput | HabilidadeUsuarioWhereInput[]
     OR?: HabilidadeUsuarioWhereInput[]
     NOT?: HabilidadeUsuarioWhereInput | HabilidadeUsuarioWhereInput[]
-    id?: StringFilter<"HabilidadeUsuario"> | string
-    usuarioId?: StringFilter<"HabilidadeUsuario"> | string
-    habilidadeId?: StringFilter<"HabilidadeUsuario"> | string
+    id?: IntFilter<"HabilidadeUsuario"> | number
+    usuarioId?: IntFilter<"HabilidadeUsuario"> | number
+    habilidadeId?: IntFilter<"HabilidadeUsuario"> | number
     pontuacao?: IntFilter<"HabilidadeUsuario"> | number
     nivel?: IntFilter<"HabilidadeUsuario"> | number
     updatedAt?: DateTimeFilter<"HabilidadeUsuario"> | Date | string
@@ -20030,13 +20254,13 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     usuarioId_habilidadeId?: HabilidadeUsuarioUsuarioIdHabilidadeIdCompoundUniqueInput
     AND?: HabilidadeUsuarioWhereInput | HabilidadeUsuarioWhereInput[]
     OR?: HabilidadeUsuarioWhereInput[]
     NOT?: HabilidadeUsuarioWhereInput | HabilidadeUsuarioWhereInput[]
-    usuarioId?: StringFilter<"HabilidadeUsuario"> | string
-    habilidadeId?: StringFilter<"HabilidadeUsuario"> | string
+    usuarioId?: IntFilter<"HabilidadeUsuario"> | number
+    habilidadeId?: IntFilter<"HabilidadeUsuario"> | number
     pontuacao?: IntFilter<"HabilidadeUsuario"> | number
     nivel?: IntFilter<"HabilidadeUsuario"> | number
     updatedAt?: DateTimeFilter<"HabilidadeUsuario"> | Date | string
@@ -20062,9 +20286,9 @@ export namespace Prisma {
     AND?: HabilidadeUsuarioScalarWhereWithAggregatesInput | HabilidadeUsuarioScalarWhereWithAggregatesInput[]
     OR?: HabilidadeUsuarioScalarWhereWithAggregatesInput[]
     NOT?: HabilidadeUsuarioScalarWhereWithAggregatesInput | HabilidadeUsuarioScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"HabilidadeUsuario"> | string
-    usuarioId?: StringWithAggregatesFilter<"HabilidadeUsuario"> | string
-    habilidadeId?: StringWithAggregatesFilter<"HabilidadeUsuario"> | string
+    id?: IntWithAggregatesFilter<"HabilidadeUsuario"> | number
+    usuarioId?: IntWithAggregatesFilter<"HabilidadeUsuario"> | number
+    habilidadeId?: IntWithAggregatesFilter<"HabilidadeUsuario"> | number
     pontuacao?: IntWithAggregatesFilter<"HabilidadeUsuario"> | number
     nivel?: IntWithAggregatesFilter<"HabilidadeUsuario"> | number
     updatedAt?: DateTimeWithAggregatesFilter<"HabilidadeUsuario"> | Date | string
@@ -20079,7 +20303,7 @@ export namespace Prisma {
     type?: EnumTypeTokenFilter<"Token"> | $Enums.TypeToken
     revoked?: BoolFilter<"Token"> | boolean
     expiresAt?: DateTimeFilter<"Token"> | Date | string
-    usuarioId?: StringFilter<"Token"> | string
+    usuarioId?: IntFilter<"Token"> | number
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
   }
 
@@ -20102,7 +20326,7 @@ export namespace Prisma {
     type?: EnumTypeTokenFilter<"Token"> | $Enums.TypeToken
     revoked?: BoolFilter<"Token"> | boolean
     expiresAt?: DateTimeFilter<"Token"> | Date | string
-    usuarioId?: StringFilter<"Token"> | string
+    usuarioId?: IntFilter<"Token"> | number
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
   }, "id">
 
@@ -20129,11 +20353,10 @@ export namespace Prisma {
     type?: EnumTypeTokenWithAggregatesFilter<"Token"> | $Enums.TypeToken
     revoked?: BoolWithAggregatesFilter<"Token"> | boolean
     expiresAt?: DateTimeWithAggregatesFilter<"Token"> | Date | string
-    usuarioId?: StringWithAggregatesFilter<"Token"> | string
+    usuarioId?: IntWithAggregatesFilter<"Token"> | number
   }
 
   export type UsuarioCreateInput = {
-    id?: string
     nome: string
     email: string
     senha: string
@@ -20154,7 +20377,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedCreateInput = {
-    id?: string
+    id?: number
     nome: string
     email: string
     senha: string
@@ -20175,7 +20398,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -20196,7 +20418,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -20217,7 +20439,7 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateManyInput = {
-    id?: string
+    id?: number
     nome: string
     email: string
     senha: string
@@ -20232,7 +20454,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -20247,7 +20468,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -20262,7 +20483,6 @@ export namespace Prisma {
   }
 
   export type TemaCreateInput = {
-    id?: string
     nome: string
     descricao?: string | null
     createdAt?: Date | string
@@ -20272,7 +20492,7 @@ export namespace Prisma {
   }
 
   export type TemaUncheckedCreateInput = {
-    id?: string
+    id?: number
     nome: string
     descricao?: string | null
     createdAt?: Date | string
@@ -20282,7 +20502,6 @@ export namespace Prisma {
   }
 
   export type TemaUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20292,7 +20511,7 @@ export namespace Prisma {
   }
 
   export type TemaUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20302,7 +20521,7 @@ export namespace Prisma {
   }
 
   export type TemaCreateManyInput = {
-    id?: string
+    id?: number
     nome: string
     descricao?: string | null
     createdAt?: Date | string
@@ -20310,7 +20529,6 @@ export namespace Prisma {
   }
 
   export type TemaUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20318,7 +20536,7 @@ export namespace Prisma {
   }
 
   export type TemaUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20326,7 +20544,6 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioCreateInput = {
-    id?: string
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -20337,9 +20554,9 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedCreateInput = {
-    id?: string
-    usuarioId: string
-    temaId: string
+    id?: number
+    usuarioId: number
+    temaId: number
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -20348,7 +20565,6 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -20359,9 +20575,9 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -20370,9 +20586,9 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioCreateManyInput = {
-    id?: string
-    usuarioId: string
-    temaId: string
+    id?: number
+    usuarioId: number
+    temaId: number
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -20381,7 +20597,6 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -20390,9 +20605,9 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -20401,7 +20616,6 @@ export namespace Prisma {
   }
 
   export type TrilhaCreateInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
@@ -20417,14 +20631,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedCreateInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId?: string | null
+    trilhaAnteriorId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     proximasTrilhas?: TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
@@ -20433,7 +20647,6 @@ export namespace Prisma {
   }
 
   export type TrilhaUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -20449,14 +20662,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
     ordem?: IntFieldUpdateOperationsInput | number
     pontuacaoMinima?: IntFieldUpdateOperationsInput | number
-    trilhaAnteriorId?: NullableStringFieldUpdateOperationsInput | string | null
+    trilhaAnteriorId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     proximasTrilhas?: TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
@@ -20465,20 +20678,19 @@ export namespace Prisma {
   }
 
   export type TrilhaCreateManyInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId?: string | null
+    trilhaAnteriorId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type TrilhaUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -20489,20 +20701,19 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
     ordem?: IntFieldUpdateOperationsInput | number
     pontuacaoMinima?: IntFieldUpdateOperationsInput | number
-    trilhaAnteriorId?: NullableStringFieldUpdateOperationsInput | string | null
+    trilhaAnteriorId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ModuloCreateInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     ordem: number
@@ -20513,8 +20724,8 @@ export namespace Prisma {
   }
 
   export type ModuloUncheckedCreateInput = {
-    id?: string
-    trilhaId: string
+    id?: number
+    trilhaId: number
     titulo: string
     descricao?: string | null
     ordem: number
@@ -20524,7 +20735,6 @@ export namespace Prisma {
   }
 
   export type ModuloUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -20535,8 +20745,8 @@ export namespace Prisma {
   }
 
   export type ModuloUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    trilhaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    trilhaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -20546,8 +20756,8 @@ export namespace Prisma {
   }
 
   export type ModuloCreateManyInput = {
-    id?: string
-    trilhaId: string
+    id?: number
+    trilhaId: number
     titulo: string
     descricao?: string | null
     ordem: number
@@ -20556,7 +20766,6 @@ export namespace Prisma {
   }
 
   export type ModuloUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -20565,8 +20774,8 @@ export namespace Prisma {
   }
 
   export type ModuloUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    trilhaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    trilhaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -20575,7 +20784,6 @@ export namespace Prisma {
   }
 
   export type QuestaoCreateInput = {
-    id?: string
     titulo: string
     descricao: string
     dificuldade: number
@@ -20589,8 +20797,8 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedCreateInput = {
-    id?: string
-    moduloId: string
+    id?: number
+    moduloId: number
     titulo: string
     descricao: string
     dificuldade: number
@@ -20603,7 +20811,6 @@ export namespace Prisma {
   }
 
   export type QuestaoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -20617,8 +20824,8 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    moduloId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    moduloId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -20631,8 +20838,8 @@ export namespace Prisma {
   }
 
   export type QuestaoCreateManyInput = {
-    id?: string
-    moduloId: string
+    id?: number
+    moduloId: number
     titulo: string
     descricao: string
     dificuldade: number
@@ -20643,7 +20850,6 @@ export namespace Prisma {
   }
 
   export type QuestaoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -20654,8 +20860,8 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    moduloId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    moduloId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -20666,7 +20872,6 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoCreateInput = {
-    id?: string
     titulo: string
     codigoResposta: string
     explicacao?: string | null
@@ -20683,8 +20888,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUncheckedCreateInput = {
-    id?: string
-    questaoId: string
+    id?: number
+    questaoId: number
     titulo: string
     codigoResposta: string
     explicacao?: string | null
@@ -20700,7 +20905,6 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20717,8 +20921,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20734,8 +20938,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoCreateManyInput = {
-    id?: string
-    questaoId: string
+    id?: number
+    questaoId: number
     titulo: string
     codigoResposta: string
     explicacao?: string | null
@@ -20750,7 +20954,6 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20765,8 +20968,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20781,7 +20984,6 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioCreateInput = {
-    id?: string
     pontuacaoRecebida: number
     respondidaEm?: Date | string
     usuario: UsuarioCreateNestedOneWithoutRespostasUsuarioInput
@@ -20790,16 +20992,15 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUncheckedCreateInput = {
-    id?: string
-    usuarioId: string
-    questaoId: string
-    respostaQuestaoId: string
+    id?: number
+    usuarioId: number
+    questaoId: number
+    respostaQuestaoId: number
     pontuacaoRecebida: number
     respondidaEm?: Date | string
   }
 
   export type RespostaUsuarioUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
@@ -20808,47 +21009,45 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
-    respostaQuestaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
+    respostaQuestaoId?: IntFieldUpdateOperationsInput | number
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RespostaUsuarioCreateManyInput = {
-    id?: string
-    usuarioId: string
-    questaoId: string
-    respostaQuestaoId: string
+    id?: number
+    usuarioId: number
+    questaoId: number
+    respostaQuestaoId: number
     pontuacaoRecebida: number
     respondidaEm?: Date | string
   }
 
   export type RespostaUsuarioUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RespostaUsuarioUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
-    respostaQuestaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
+    respostaQuestaoId?: IntFieldUpdateOperationsInput | number
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TrilhaUsuarioCreateInput = {
-    id?: string
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
     usuario: UsuarioCreateNestedOneWithoutTrilhasUsuarioInput
@@ -20856,29 +21055,28 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioUncheckedCreateInput = {
-    id?: string
-    usuarioId: string
-    trilhaId: string
+    id?: number
+    usuarioId: number
+    trilhaId: number
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
   }
 
   export type TrilhaUsuarioUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     usuario?: UsuarioUpdateOneRequiredWithoutTrilhasUsuarioNestedInput
@@ -20886,65 +21084,63 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    trilhaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    trilhaId?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TrilhaUsuarioCreateManyInput = {
-    id?: string
-    usuarioId: string
-    trilhaId: string
+    id?: number
+    usuarioId: number
+    trilhaId: number
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
   }
 
   export type TrilhaUsuarioUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TrilhaUsuarioUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    trilhaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    trilhaId?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ConquistaCreateInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     icone?: string | null
@@ -20955,7 +21151,7 @@ export namespace Prisma {
   }
 
   export type ConquistaUncheckedCreateInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao?: string | null
     icone?: string | null
@@ -20966,7 +21162,6 @@ export namespace Prisma {
   }
 
   export type ConquistaUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     icone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20977,7 +21172,7 @@ export namespace Prisma {
   }
 
   export type ConquistaUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     icone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20988,7 +21183,7 @@ export namespace Prisma {
   }
 
   export type ConquistaCreateManyInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao?: string | null
     icone?: string | null
@@ -20998,7 +21193,6 @@ export namespace Prisma {
   }
 
   export type ConquistaUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     icone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21008,7 +21202,7 @@ export namespace Prisma {
   }
 
   export type ConquistaUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     icone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21018,100 +21212,93 @@ export namespace Prisma {
   }
 
   export type ConquistaUsuarioCreateInput = {
-    id?: string
     desbloqueadaEm?: Date | string
     usuario: UsuarioCreateNestedOneWithoutConquistasUsuarioInput
     conquista: ConquistaCreateNestedOneWithoutUsuariosInput
   }
 
   export type ConquistaUsuarioUncheckedCreateInput = {
-    id?: string
-    usuarioId: string
-    conquistaId: string
+    id?: number
+    usuarioId: number
+    conquistaId: number
     desbloqueadaEm?: Date | string
   }
 
   export type ConquistaUsuarioUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UsuarioUpdateOneRequiredWithoutConquistasUsuarioNestedInput
     conquista?: ConquistaUpdateOneRequiredWithoutUsuariosNestedInput
   }
 
   export type ConquistaUsuarioUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    conquistaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    conquistaId?: IntFieldUpdateOperationsInput | number
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConquistaUsuarioCreateManyInput = {
-    id?: string
-    usuarioId: string
-    conquistaId: string
+    id?: number
+    usuarioId: number
+    conquistaId: number
     desbloqueadaEm?: Date | string
   }
 
   export type ConquistaUsuarioUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConquistaUsuarioUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    conquistaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    conquistaId?: IntFieldUpdateOperationsInput | number
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabilidadeCreateInput = {
-    id?: string
     nome: string
     descricao?: string | null
     usuarios?: HabilidadeUsuarioCreateNestedManyWithoutHabilidadeInput
   }
 
   export type HabilidadeUncheckedCreateInput = {
-    id?: string
+    id?: number
     nome: string
     descricao?: string | null
     usuarios?: HabilidadeUsuarioUncheckedCreateNestedManyWithoutHabilidadeInput
   }
 
   export type HabilidadeUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     usuarios?: HabilidadeUsuarioUpdateManyWithoutHabilidadeNestedInput
   }
 
   export type HabilidadeUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     usuarios?: HabilidadeUsuarioUncheckedUpdateManyWithoutHabilidadeNestedInput
   }
 
   export type HabilidadeCreateManyInput = {
-    id?: string
+    id?: number
     nome: string
     descricao?: string | null
   }
 
   export type HabilidadeUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HabilidadeUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HabilidadeUsuarioCreateInput = {
-    id?: string
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
@@ -21120,16 +21307,15 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioUncheckedCreateInput = {
-    id?: string
-    usuarioId: string
-    habilidadeId: string
+    id?: number
+    usuarioId: number
+    habilidadeId: number
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
   }
 
   export type HabilidadeUsuarioUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21138,34 +21324,33 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    habilidadeId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    habilidadeId?: IntFieldUpdateOperationsInput | number
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabilidadeUsuarioCreateManyInput = {
-    id?: string
-    usuarioId: string
-    habilidadeId: string
+    id?: number
+    usuarioId: number
+    habilidadeId: number
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
   }
 
   export type HabilidadeUsuarioUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabilidadeUsuarioUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    habilidadeId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    habilidadeId?: IntFieldUpdateOperationsInput | number
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21185,7 +21370,7 @@ export namespace Prisma {
     type?: $Enums.TypeToken
     revoked?: boolean
     expiresAt: Date | string
-    usuarioId: string
+    usuarioId: number
   }
 
   export type TokenUpdateInput = {
@@ -21202,7 +21387,7 @@ export namespace Prisma {
     type?: EnumTypeTokenFieldUpdateOperationsInput | $Enums.TypeToken
     revoked?: BoolFieldUpdateOperationsInput | boolean
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: IntFieldUpdateOperationsInput | number
   }
 
   export type TokenCreateManyInput = {
@@ -21211,7 +21396,7 @@ export namespace Prisma {
     type?: $Enums.TypeToken
     revoked?: boolean
     expiresAt: Date | string
-    usuarioId: string
+    usuarioId: number
   }
 
   export type TokenUpdateManyMutationInput = {
@@ -21227,7 +21412,18 @@ export namespace Prisma {
     type?: EnumTypeTokenFieldUpdateOperationsInput | $Enums.TypeToken
     revoked?: BoolFieldUpdateOperationsInput | boolean
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -21265,17 +21461,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -21370,6 +21555,7 @@ export namespace Prisma {
   }
 
   export type UsuarioAvgOrderByAggregateInput = {
+    id?: SortOrder
     xp?: SortOrder
     nivel?: SortOrder
     pontuacaoTotal?: SortOrder
@@ -21406,9 +21592,26 @@ export namespace Prisma {
   }
 
   export type UsuarioSumOrderByAggregateInput = {
+    id?: SortOrder
     xp?: SortOrder
     nivel?: SortOrder
     pontuacaoTotal?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -21457,22 +21660,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -21505,6 +21692,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type TemaAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type TemaMaxOrderByAggregateInput = {
     id?: SortOrder
     nome?: SortOrder
@@ -21519,6 +21710,10 @@ export namespace Prisma {
     descricao?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type TemaSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type EnumNivelDificuldadeFilter<$PrismaModel = never> = {
@@ -21539,8 +21734,8 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUsuarioIdTemaIdCompoundUniqueInput = {
-    usuarioId: string
-    temaId: string
+    usuarioId: number
+    temaId: number
   }
 
   export type TemaUsuarioCountOrderByAggregateInput = {
@@ -21555,6 +21750,9 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioAvgOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    temaId?: SortOrder
     pontuacaoTotal?: SortOrder
     trilhasConcluidas?: SortOrder
   }
@@ -21582,6 +21780,9 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioSumOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    temaId?: SortOrder
     pontuacaoTotal?: SortOrder
     trilhasConcluidas?: SortOrder
   }
@@ -21594,6 +21795,17 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumNivelDificuldadeFilter<$PrismaModel>
     _max?: NestedEnumNivelDificuldadeFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type TrilhaNullableScalarRelationFilter = {
@@ -21612,7 +21824,7 @@ export namespace Prisma {
   }
 
   export type TrilhaTemaIdOrdemCompoundUniqueInput = {
-    temaId: string
+    temaId: number
     ordem: number
   }
 
@@ -21630,8 +21842,11 @@ export namespace Prisma {
   }
 
   export type TrilhaAvgOrderByAggregateInput = {
+    id?: SortOrder
+    temaId?: SortOrder
     ordem?: SortOrder
     pontuacaoMinima?: SortOrder
+    trilhaAnteriorId?: SortOrder
   }
 
   export type TrilhaMaxOrderByAggregateInput = {
@@ -21661,8 +21876,27 @@ export namespace Prisma {
   }
 
   export type TrilhaSumOrderByAggregateInput = {
+    id?: SortOrder
+    temaId?: SortOrder
     ordem?: SortOrder
     pontuacaoMinima?: SortOrder
+    trilhaAnteriorId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type TrilhaScalarRelationFilter = {
@@ -21681,7 +21915,7 @@ export namespace Prisma {
   }
 
   export type ModuloTrilhaIdOrdemCompoundUniqueInput = {
-    trilhaId: string
+    trilhaId: number
     ordem: number
   }
 
@@ -21696,6 +21930,8 @@ export namespace Prisma {
   }
 
   export type ModuloAvgOrderByAggregateInput = {
+    id?: SortOrder
+    trilhaId?: SortOrder
     ordem?: SortOrder
   }
 
@@ -21720,6 +21956,8 @@ export namespace Prisma {
   }
 
   export type ModuloSumOrderByAggregateInput = {
+    id?: SortOrder
+    trilhaId?: SortOrder
     ordem?: SortOrder
   }
 
@@ -21739,7 +21977,7 @@ export namespace Prisma {
   }
 
   export type QuestaoModuloIdOrdemCompoundUniqueInput = {
-    moduloId: string
+    moduloId: number
     ordem: number
   }
 
@@ -21756,6 +21994,8 @@ export namespace Prisma {
   }
 
   export type QuestaoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    moduloId?: SortOrder
     dificuldade?: SortOrder
     xpRecompensa?: SortOrder
     ordem?: SortOrder
@@ -21786,6 +22026,8 @@ export namespace Prisma {
   }
 
   export type QuestaoSumOrderByAggregateInput = {
+    id?: SortOrder
+    moduloId?: SortOrder
     dificuldade?: SortOrder
     xpRecompensa?: SortOrder
     ordem?: SortOrder
@@ -21813,6 +22055,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    questaoId?: SortOrder
     pontuacao?: SortOrder
     cleanCodeScore?: SortOrder
     performanceScore?: SortOrder
@@ -21852,6 +22096,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoSumOrderByAggregateInput = {
+    id?: SortOrder
+    questaoId?: SortOrder
     pontuacao?: SortOrder
     cleanCodeScore?: SortOrder
     performanceScore?: SortOrder
@@ -21864,8 +22110,8 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUsuarioIdQuestaoIdCompoundUniqueInput = {
-    usuarioId: string
-    questaoId: string
+    usuarioId: number
+    questaoId: number
   }
 
   export type RespostaUsuarioCountOrderByAggregateInput = {
@@ -21878,6 +22124,10 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioAvgOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    questaoId?: SortOrder
+    respostaQuestaoId?: SortOrder
     pontuacaoRecebida?: SortOrder
   }
 
@@ -21900,6 +22150,10 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioSumOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    questaoId?: SortOrder
+    respostaQuestaoId?: SortOrder
     pontuacaoRecebida?: SortOrder
   }
 
@@ -21927,8 +22181,8 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioUsuarioIdTrilhaIdCompoundUniqueInput = {
-    usuarioId: string
-    trilhaId: string
+    usuarioId: number
+    trilhaId: number
   }
 
   export type TrilhaUsuarioCountOrderByAggregateInput = {
@@ -21947,9 +22201,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioAvgOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    trilhaId?: SortOrder
     pontuacaoAtual?: SortOrder
     pontuacaoNecessaria?: SortOrder
     percentualConclusao?: SortOrder
+    moduloAtualId?: SortOrder
+    questaoAtualId?: SortOrder
   }
 
   export type TrilhaUsuarioMaxOrderByAggregateInput = {
@@ -21983,9 +22242,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioSumOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    trilhaId?: SortOrder
     pontuacaoAtual?: SortOrder
     pontuacaoNecessaria?: SortOrder
     percentualConclusao?: SortOrder
+    moduloAtualId?: SortOrder
+    questaoAtualId?: SortOrder
   }
 
   export type EnumStatusTrilhaUsuarioWithAggregatesFilter<$PrismaModel = never> = {
@@ -22031,6 +22295,7 @@ export namespace Prisma {
   }
 
   export type ConquistaAvgOrderByAggregateInput = {
+    id?: SortOrder
     xpRecompensa?: SortOrder
   }
 
@@ -22055,6 +22320,7 @@ export namespace Prisma {
   }
 
   export type ConquistaSumOrderByAggregateInput = {
+    id?: SortOrder
     xpRecompensa?: SortOrder
   }
 
@@ -22068,6 +22334,12 @@ export namespace Prisma {
     usuarioId?: SortOrder
     conquistaId?: SortOrder
     desbloqueadaEm?: SortOrder
+  }
+
+  export type ConquistaUsuarioAvgOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    conquistaId?: SortOrder
   }
 
   export type ConquistaUsuarioMaxOrderByAggregateInput = {
@@ -22084,10 +22356,20 @@ export namespace Prisma {
     desbloqueadaEm?: SortOrder
   }
 
+  export type ConquistaUsuarioSumOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    conquistaId?: SortOrder
+  }
+
   export type HabilidadeCountOrderByAggregateInput = {
     id?: SortOrder
     nome?: SortOrder
     descricao?: SortOrder
+  }
+
+  export type HabilidadeAvgOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type HabilidadeMaxOrderByAggregateInput = {
@@ -22102,14 +22384,18 @@ export namespace Prisma {
     descricao?: SortOrder
   }
 
+  export type HabilidadeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type HabilidadeScalarRelationFilter = {
     is?: HabilidadeWhereInput
     isNot?: HabilidadeWhereInput
   }
 
   export type HabilidadeUsuarioUsuarioIdHabilidadeIdCompoundUniqueInput = {
-    usuarioId: string
-    habilidadeId: string
+    usuarioId: number
+    habilidadeId: number
   }
 
   export type HabilidadeUsuarioCountOrderByAggregateInput = {
@@ -22122,6 +22408,9 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioAvgOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    habilidadeId?: SortOrder
     pontuacao?: SortOrder
     nivel?: SortOrder
   }
@@ -22145,6 +22434,9 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioSumOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+    habilidadeId?: SortOrder
     pontuacao?: SortOrder
     nivel?: SortOrder
   }
@@ -22167,6 +22459,7 @@ export namespace Prisma {
 
   export type TokenAvgOrderByAggregateInput = {
     id?: SortOrder
+    usuarioId?: SortOrder
   }
 
   export type TokenMaxOrderByAggregateInput = {
@@ -22189,6 +22482,7 @@ export namespace Prisma {
 
   export type TokenSumOrderByAggregateInput = {
     id?: SortOrder
+    usuarioId?: SortOrder
   }
 
   export type EnumTypeTokenWithAggregatesFilter<$PrismaModel = never> = {
@@ -22707,6 +23001,14 @@ export namespace Prisma {
     deleteMany?: TrilhaUsuarioScalarWhereInput | TrilhaUsuarioScalarWhereInput[]
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput = {
     create?: XOR<TrilhaCreateWithoutTrilhaAnteriorInput, TrilhaUncheckedCreateWithoutTrilhaAnteriorInput> | TrilhaCreateWithoutTrilhaAnteriorInput[] | TrilhaUncheckedCreateWithoutTrilhaAnteriorInput[]
     connectOrCreate?: TrilhaCreateOrConnectWithoutTrilhaAnteriorInput | TrilhaCreateOrConnectWithoutTrilhaAnteriorInput[]
@@ -23199,6 +23501,17 @@ export namespace Prisma {
     update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutTokensInput, UsuarioUpdateWithoutTokensInput>, UsuarioUncheckedUpdateWithoutTokensInput>
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -23234,17 +23547,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -23254,6 +23556,33 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -23311,33 +23640,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -23367,6 +23669,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumNivelDificuldadeFilter<$PrismaModel>
     _max?: NestedEnumNivelDificuldadeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumStatusTrilhaUsuarioFilter<$PrismaModel = never> = {
@@ -23442,29 +23771,28 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioCreateWithoutUsuarioInput = {
-    id?: string
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
     trilha: TrilhaCreateNestedOneWithoutUsuariosInput
   }
 
   export type TrilhaUsuarioUncheckedCreateWithoutUsuarioInput = {
-    id?: string
-    trilhaId: string
+    id?: number
+    trilhaId: number
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
   }
@@ -23480,7 +23808,6 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioCreateWithoutUsuarioInput = {
-    id?: string
     pontuacaoRecebida: number
     respondidaEm?: Date | string
     questao: QuestaoCreateNestedOneWithoutRespostasUsuarioInput
@@ -23488,9 +23815,9 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUncheckedCreateWithoutUsuarioInput = {
-    id?: string
-    questaoId: string
-    respostaQuestaoId: string
+    id?: number
+    questaoId: number
+    respostaQuestaoId: number
     pontuacaoRecebida: number
     respondidaEm?: Date | string
   }
@@ -23506,7 +23833,6 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioCreateWithoutUsuarioInput = {
-    id?: string
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -23516,8 +23842,8 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedCreateWithoutUsuarioInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -23536,14 +23862,13 @@ export namespace Prisma {
   }
 
   export type ConquistaUsuarioCreateWithoutUsuarioInput = {
-    id?: string
     desbloqueadaEm?: Date | string
     conquista: ConquistaCreateNestedOneWithoutUsuariosInput
   }
 
   export type ConquistaUsuarioUncheckedCreateWithoutUsuarioInput = {
-    id?: string
-    conquistaId: string
+    id?: number
+    conquistaId: number
     desbloqueadaEm?: Date | string
   }
 
@@ -23558,7 +23883,6 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioCreateWithoutUsuarioInput = {
-    id?: string
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
@@ -23566,8 +23890,8 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioUncheckedCreateWithoutUsuarioInput = {
-    id?: string
-    habilidadeId: string
+    id?: number
+    habilidadeId: number
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
@@ -23628,16 +23952,16 @@ export namespace Prisma {
     AND?: TrilhaUsuarioScalarWhereInput | TrilhaUsuarioScalarWhereInput[]
     OR?: TrilhaUsuarioScalarWhereInput[]
     NOT?: TrilhaUsuarioScalarWhereInput | TrilhaUsuarioScalarWhereInput[]
-    id?: StringFilter<"TrilhaUsuario"> | string
-    usuarioId?: StringFilter<"TrilhaUsuario"> | string
-    trilhaId?: StringFilter<"TrilhaUsuario"> | string
+    id?: IntFilter<"TrilhaUsuario"> | number
+    usuarioId?: IntFilter<"TrilhaUsuario"> | number
+    trilhaId?: IntFilter<"TrilhaUsuario"> | number
     status?: EnumStatusTrilhaUsuarioFilter<"TrilhaUsuario"> | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFilter<"TrilhaUsuario"> | number
     pontuacaoNecessaria?: IntFilter<"TrilhaUsuario"> | number
     percentualConclusao?: IntFilter<"TrilhaUsuario"> | number
     podeDesbloquear?: BoolFilter<"TrilhaUsuario"> | boolean
-    moduloAtualId?: StringNullableFilter<"TrilhaUsuario"> | string | null
-    questaoAtualId?: StringNullableFilter<"TrilhaUsuario"> | string | null
+    moduloAtualId?: IntNullableFilter<"TrilhaUsuario"> | number | null
+    questaoAtualId?: IntNullableFilter<"TrilhaUsuario"> | number | null
     iniciadaEm?: DateTimeFilter<"TrilhaUsuario"> | Date | string
     concluidaEm?: DateTimeNullableFilter<"TrilhaUsuario"> | Date | string | null
   }
@@ -23662,10 +23986,10 @@ export namespace Prisma {
     AND?: RespostaUsuarioScalarWhereInput | RespostaUsuarioScalarWhereInput[]
     OR?: RespostaUsuarioScalarWhereInput[]
     NOT?: RespostaUsuarioScalarWhereInput | RespostaUsuarioScalarWhereInput[]
-    id?: StringFilter<"RespostaUsuario"> | string
-    usuarioId?: StringFilter<"RespostaUsuario"> | string
-    questaoId?: StringFilter<"RespostaUsuario"> | string
-    respostaQuestaoId?: StringFilter<"RespostaUsuario"> | string
+    id?: IntFilter<"RespostaUsuario"> | number
+    usuarioId?: IntFilter<"RespostaUsuario"> | number
+    questaoId?: IntFilter<"RespostaUsuario"> | number
+    respostaQuestaoId?: IntFilter<"RespostaUsuario"> | number
     pontuacaoRecebida?: IntFilter<"RespostaUsuario"> | number
     respondidaEm?: DateTimeFilter<"RespostaUsuario"> | Date | string
   }
@@ -23690,9 +24014,9 @@ export namespace Prisma {
     AND?: TemaUsuarioScalarWhereInput | TemaUsuarioScalarWhereInput[]
     OR?: TemaUsuarioScalarWhereInput[]
     NOT?: TemaUsuarioScalarWhereInput | TemaUsuarioScalarWhereInput[]
-    id?: StringFilter<"TemaUsuario"> | string
-    usuarioId?: StringFilter<"TemaUsuario"> | string
-    temaId?: StringFilter<"TemaUsuario"> | string
+    id?: IntFilter<"TemaUsuario"> | number
+    usuarioId?: IntFilter<"TemaUsuario"> | number
+    temaId?: IntFilter<"TemaUsuario"> | number
     pontuacaoTotal?: IntFilter<"TemaUsuario"> | number
     trilhasConcluidas?: IntFilter<"TemaUsuario"> | number
     nivelAtual?: EnumNivelDificuldadeFilter<"TemaUsuario"> | $Enums.NivelDificuldade
@@ -23720,9 +24044,9 @@ export namespace Prisma {
     AND?: ConquistaUsuarioScalarWhereInput | ConquistaUsuarioScalarWhereInput[]
     OR?: ConquistaUsuarioScalarWhereInput[]
     NOT?: ConquistaUsuarioScalarWhereInput | ConquistaUsuarioScalarWhereInput[]
-    id?: StringFilter<"ConquistaUsuario"> | string
-    usuarioId?: StringFilter<"ConquistaUsuario"> | string
-    conquistaId?: StringFilter<"ConquistaUsuario"> | string
+    id?: IntFilter<"ConquistaUsuario"> | number
+    usuarioId?: IntFilter<"ConquistaUsuario"> | number
+    conquistaId?: IntFilter<"ConquistaUsuario"> | number
     desbloqueadaEm?: DateTimeFilter<"ConquistaUsuario"> | Date | string
   }
 
@@ -23746,9 +24070,9 @@ export namespace Prisma {
     AND?: HabilidadeUsuarioScalarWhereInput | HabilidadeUsuarioScalarWhereInput[]
     OR?: HabilidadeUsuarioScalarWhereInput[]
     NOT?: HabilidadeUsuarioScalarWhereInput | HabilidadeUsuarioScalarWhereInput[]
-    id?: StringFilter<"HabilidadeUsuario"> | string
-    usuarioId?: StringFilter<"HabilidadeUsuario"> | string
-    habilidadeId?: StringFilter<"HabilidadeUsuario"> | string
+    id?: IntFilter<"HabilidadeUsuario"> | number
+    usuarioId?: IntFilter<"HabilidadeUsuario"> | number
+    habilidadeId?: IntFilter<"HabilidadeUsuario"> | number
     pontuacao?: IntFilter<"HabilidadeUsuario"> | number
     nivel?: IntFilter<"HabilidadeUsuario"> | number
     updatedAt?: DateTimeFilter<"HabilidadeUsuario"> | Date | string
@@ -23779,11 +24103,10 @@ export namespace Prisma {
     type?: EnumTypeTokenFilter<"Token"> | $Enums.TypeToken
     revoked?: BoolFilter<"Token"> | boolean
     expiresAt?: DateTimeFilter<"Token"> | Date | string
-    usuarioId?: StringFilter<"Token"> | string
+    usuarioId?: IntFilter<"Token"> | number
   }
 
   export type TrilhaCreateWithoutTemaInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
@@ -23798,13 +24121,13 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedCreateWithoutTemaInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId?: string | null
+    trilhaAnteriorId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     proximasTrilhas?: TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
@@ -23823,7 +24146,6 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioCreateWithoutTemaInput = {
-    id?: string
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -23833,8 +24155,8 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedCreateWithoutTemaInput = {
-    id?: string
-    usuarioId: string
+    id?: number
+    usuarioId: number
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -23872,14 +24194,14 @@ export namespace Prisma {
     AND?: TrilhaScalarWhereInput | TrilhaScalarWhereInput[]
     OR?: TrilhaScalarWhereInput[]
     NOT?: TrilhaScalarWhereInput | TrilhaScalarWhereInput[]
-    id?: StringFilter<"Trilha"> | string
-    temaId?: StringFilter<"Trilha"> | string
+    id?: IntFilter<"Trilha"> | number
+    temaId?: IntFilter<"Trilha"> | number
     titulo?: StringFilter<"Trilha"> | string
     descricao?: StringNullableFilter<"Trilha"> | string | null
     nivel?: EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
     ordem?: IntFilter<"Trilha"> | number
     pontuacaoMinima?: IntFilter<"Trilha"> | number
-    trilhaAnteriorId?: StringNullableFilter<"Trilha"> | string | null
+    trilhaAnteriorId?: IntNullableFilter<"Trilha"> | number | null
     createdAt?: DateTimeFilter<"Trilha"> | Date | string
     updatedAt?: DateTimeFilter<"Trilha"> | Date | string
   }
@@ -23901,7 +24223,6 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutTemasUsuarioInput = {
-    id?: string
     nome: string
     email: string
     senha: string
@@ -23921,7 +24242,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedCreateWithoutTemasUsuarioInput = {
-    id?: string
+    id?: number
     nome: string
     email: string
     senha: string
@@ -23946,7 +24267,6 @@ export namespace Prisma {
   }
 
   export type TemaCreateWithoutUsuariosInput = {
-    id?: string
     nome: string
     descricao?: string | null
     createdAt?: Date | string
@@ -23955,7 +24275,7 @@ export namespace Prisma {
   }
 
   export type TemaUncheckedCreateWithoutUsuariosInput = {
-    id?: string
+    id?: number
     nome: string
     descricao?: string | null
     createdAt?: Date | string
@@ -23980,7 +24300,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutTemasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -24000,7 +24319,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateWithoutTemasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -24031,7 +24350,6 @@ export namespace Prisma {
   }
 
   export type TemaUpdateWithoutUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24040,7 +24358,7 @@ export namespace Prisma {
   }
 
   export type TemaUncheckedUpdateWithoutUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24049,7 +24367,6 @@ export namespace Prisma {
   }
 
   export type TemaCreateWithoutTrilhasInput = {
-    id?: string
     nome: string
     descricao?: string | null
     createdAt?: Date | string
@@ -24058,7 +24375,7 @@ export namespace Prisma {
   }
 
   export type TemaUncheckedCreateWithoutTrilhasInput = {
-    id?: string
+    id?: number
     nome: string
     descricao?: string | null
     createdAt?: Date | string
@@ -24072,7 +24389,6 @@ export namespace Prisma {
   }
 
   export type TrilhaCreateWithoutProximasTrilhasInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
@@ -24087,14 +24403,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedCreateWithoutProximasTrilhasInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId?: string | null
+    trilhaAnteriorId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     modulos?: ModuloUncheckedCreateNestedManyWithoutTrilhaInput
@@ -24107,7 +24423,6 @@ export namespace Prisma {
   }
 
   export type TrilhaCreateWithoutTrilhaAnteriorInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
@@ -24122,8 +24437,8 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedCreateWithoutTrilhaAnteriorInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
@@ -24147,7 +24462,6 @@ export namespace Prisma {
   }
 
   export type ModuloCreateWithoutTrilhaInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     ordem: number
@@ -24157,7 +24471,7 @@ export namespace Prisma {
   }
 
   export type ModuloUncheckedCreateWithoutTrilhaInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao?: string | null
     ordem: number
@@ -24177,29 +24491,28 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioCreateWithoutTrilhaInput = {
-    id?: string
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
     usuario: UsuarioCreateNestedOneWithoutTrilhasUsuarioInput
   }
 
   export type TrilhaUsuarioUncheckedCreateWithoutTrilhaInput = {
-    id?: string
-    usuarioId: string
+    id?: number
+    usuarioId: number
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
   }
@@ -24226,7 +24539,6 @@ export namespace Prisma {
   }
 
   export type TemaUpdateWithoutTrilhasInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24235,7 +24547,7 @@ export namespace Prisma {
   }
 
   export type TemaUncheckedUpdateWithoutTrilhasInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24255,7 +24567,6 @@ export namespace Prisma {
   }
 
   export type TrilhaUpdateWithoutProximasTrilhasInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -24270,14 +24581,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateWithoutProximasTrilhasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
     ordem?: IntFieldUpdateOperationsInput | number
     pontuacaoMinima?: IntFieldUpdateOperationsInput | number
-    trilhaAnteriorId?: NullableStringFieldUpdateOperationsInput | string | null
+    trilhaAnteriorId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     modulos?: ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
@@ -24320,8 +24631,8 @@ export namespace Prisma {
     AND?: ModuloScalarWhereInput | ModuloScalarWhereInput[]
     OR?: ModuloScalarWhereInput[]
     NOT?: ModuloScalarWhereInput | ModuloScalarWhereInput[]
-    id?: StringFilter<"Modulo"> | string
-    trilhaId?: StringFilter<"Modulo"> | string
+    id?: IntFilter<"Modulo"> | number
+    trilhaId?: IntFilter<"Modulo"> | number
     titulo?: StringFilter<"Modulo"> | string
     descricao?: StringNullableFilter<"Modulo"> | string | null
     ordem?: IntFilter<"Modulo"> | number
@@ -24346,7 +24657,6 @@ export namespace Prisma {
   }
 
   export type TrilhaCreateWithoutModulosInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
@@ -24361,14 +24671,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedCreateWithoutModulosInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId?: string | null
+    trilhaAnteriorId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     proximasTrilhas?: TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
@@ -24381,7 +24691,6 @@ export namespace Prisma {
   }
 
   export type QuestaoCreateWithoutModuloInput = {
-    id?: string
     titulo: string
     descricao: string
     dificuldade: number
@@ -24394,7 +24703,7 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedCreateWithoutModuloInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao: string
     dificuldade: number
@@ -24428,7 +24737,6 @@ export namespace Prisma {
   }
 
   export type TrilhaUpdateWithoutModulosInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -24443,14 +24751,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateWithoutModulosInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
     ordem?: IntFieldUpdateOperationsInput | number
     pontuacaoMinima?: IntFieldUpdateOperationsInput | number
-    trilhaAnteriorId?: NullableStringFieldUpdateOperationsInput | string | null
+    trilhaAnteriorId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     proximasTrilhas?: TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
@@ -24477,8 +24785,8 @@ export namespace Prisma {
     AND?: QuestaoScalarWhereInput | QuestaoScalarWhereInput[]
     OR?: QuestaoScalarWhereInput[]
     NOT?: QuestaoScalarWhereInput | QuestaoScalarWhereInput[]
-    id?: StringFilter<"Questao"> | string
-    moduloId?: StringFilter<"Questao"> | string
+    id?: IntFilter<"Questao"> | number
+    moduloId?: IntFilter<"Questao"> | number
     titulo?: StringFilter<"Questao"> | string
     descricao?: StringFilter<"Questao"> | string
     dificuldade?: IntFilter<"Questao"> | number
@@ -24489,7 +24797,6 @@ export namespace Prisma {
   }
 
   export type ModuloCreateWithoutQuestoesInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     ordem: number
@@ -24499,8 +24806,8 @@ export namespace Prisma {
   }
 
   export type ModuloUncheckedCreateWithoutQuestoesInput = {
-    id?: string
-    trilhaId: string
+    id?: number
+    trilhaId: number
     titulo: string
     descricao?: string | null
     ordem: number
@@ -24514,7 +24821,6 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoCreateWithoutQuestaoInput = {
-    id?: string
     titulo: string
     codigoResposta: string
     explicacao?: string | null
@@ -24530,7 +24836,7 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUncheckedCreateWithoutQuestaoInput = {
-    id?: string
+    id?: number
     titulo: string
     codigoResposta: string
     explicacao?: string | null
@@ -24556,7 +24862,6 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioCreateWithoutQuestaoInput = {
-    id?: string
     pontuacaoRecebida: number
     respondidaEm?: Date | string
     usuario: UsuarioCreateNestedOneWithoutRespostasUsuarioInput
@@ -24564,9 +24869,9 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUncheckedCreateWithoutQuestaoInput = {
-    id?: string
-    usuarioId: string
-    respostaQuestaoId: string
+    id?: number
+    usuarioId: number
+    respostaQuestaoId: number
     pontuacaoRecebida: number
     respondidaEm?: Date | string
   }
@@ -24593,7 +24898,6 @@ export namespace Prisma {
   }
 
   export type ModuloUpdateWithoutQuestoesInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -24603,8 +24907,8 @@ export namespace Prisma {
   }
 
   export type ModuloUncheckedUpdateWithoutQuestoesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    trilhaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    trilhaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -24632,8 +24936,8 @@ export namespace Prisma {
     AND?: RespostaQuestaoScalarWhereInput | RespostaQuestaoScalarWhereInput[]
     OR?: RespostaQuestaoScalarWhereInput[]
     NOT?: RespostaQuestaoScalarWhereInput | RespostaQuestaoScalarWhereInput[]
-    id?: StringFilter<"RespostaQuestao"> | string
-    questaoId?: StringFilter<"RespostaQuestao"> | string
+    id?: IntFilter<"RespostaQuestao"> | number
+    questaoId?: IntFilter<"RespostaQuestao"> | number
     titulo?: StringFilter<"RespostaQuestao"> | string
     codigoResposta?: StringFilter<"RespostaQuestao"> | string
     explicacao?: StringNullableFilter<"RespostaQuestao"> | string | null
@@ -24664,7 +24968,6 @@ export namespace Prisma {
   }
 
   export type QuestaoCreateWithoutRespostasInput = {
-    id?: string
     titulo: string
     descricao: string
     dificuldade: number
@@ -24677,8 +24980,8 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedCreateWithoutRespostasInput = {
-    id?: string
-    moduloId: string
+    id?: number
+    moduloId: number
     titulo: string
     descricao: string
     dificuldade: number
@@ -24695,7 +24998,6 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioCreateWithoutRespostaQuestaoInput = {
-    id?: string
     pontuacaoRecebida: number
     respondidaEm?: Date | string
     usuario: UsuarioCreateNestedOneWithoutRespostasUsuarioInput
@@ -24703,9 +25005,9 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput = {
-    id?: string
-    usuarioId: string
-    questaoId: string
+    id?: number
+    usuarioId: number
+    questaoId: number
     pontuacaoRecebida: number
     respondidaEm?: Date | string
   }
@@ -24732,7 +25034,6 @@ export namespace Prisma {
   }
 
   export type QuestaoUpdateWithoutRespostasInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -24745,8 +25046,8 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedUpdateWithoutRespostasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    moduloId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    moduloId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -24774,7 +25075,6 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutRespostasUsuarioInput = {
-    id?: string
     nome: string
     email: string
     senha: string
@@ -24794,7 +25094,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedCreateWithoutRespostasUsuarioInput = {
-    id?: string
+    id?: number
     nome: string
     email: string
     senha: string
@@ -24819,7 +25119,6 @@ export namespace Prisma {
   }
 
   export type QuestaoCreateWithoutRespostasUsuarioInput = {
-    id?: string
     titulo: string
     descricao: string
     dificuldade: number
@@ -24832,8 +25131,8 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedCreateWithoutRespostasUsuarioInput = {
-    id?: string
-    moduloId: string
+    id?: number
+    moduloId: number
     titulo: string
     descricao: string
     dificuldade: number
@@ -24850,7 +25149,6 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoCreateWithoutRespostasUsuariosInput = {
-    id?: string
     titulo: string
     codigoResposta: string
     explicacao?: string | null
@@ -24866,8 +25164,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUncheckedCreateWithoutRespostasUsuariosInput = {
-    id?: string
-    questaoId: string
+    id?: number
+    questaoId: number
     titulo: string
     codigoResposta: string
     explicacao?: string | null
@@ -24898,7 +25196,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutRespostasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -24918,7 +25215,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateWithoutRespostasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -24949,7 +25246,6 @@ export namespace Prisma {
   }
 
   export type QuestaoUpdateWithoutRespostasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -24962,8 +25258,8 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedUpdateWithoutRespostasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    moduloId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    moduloId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -24986,7 +25282,6 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUpdateWithoutRespostasUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25002,8 +25297,8 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUncheckedUpdateWithoutRespostasUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25018,7 +25313,6 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutTrilhasUsuarioInput = {
-    id?: string
     nome: string
     email: string
     senha: string
@@ -25038,7 +25332,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedCreateWithoutTrilhasUsuarioInput = {
-    id?: string
+    id?: number
     nome: string
     email: string
     senha: string
@@ -25063,7 +25357,6 @@ export namespace Prisma {
   }
 
   export type TrilhaCreateWithoutUsuariosInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
@@ -25078,14 +25371,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedCreateWithoutUsuariosInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId?: string | null
+    trilhaAnteriorId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     proximasTrilhas?: TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
@@ -25109,7 +25402,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutTrilhasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -25129,7 +25421,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateWithoutTrilhasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -25160,7 +25452,6 @@ export namespace Prisma {
   }
 
   export type TrilhaUpdateWithoutUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -25175,14 +25466,14 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateWithoutUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
     ordem?: IntFieldUpdateOperationsInput | number
     pontuacaoMinima?: IntFieldUpdateOperationsInput | number
-    trilhaAnteriorId?: NullableStringFieldUpdateOperationsInput | string | null
+    trilhaAnteriorId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     proximasTrilhas?: TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
@@ -25190,14 +25481,13 @@ export namespace Prisma {
   }
 
   export type ConquistaUsuarioCreateWithoutConquistaInput = {
-    id?: string
     desbloqueadaEm?: Date | string
     usuario: UsuarioCreateNestedOneWithoutConquistasUsuarioInput
   }
 
   export type ConquistaUsuarioUncheckedCreateWithoutConquistaInput = {
-    id?: string
-    usuarioId: string
+    id?: number
+    usuarioId: number
     desbloqueadaEm?: Date | string
   }
 
@@ -25228,7 +25518,6 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutConquistasUsuarioInput = {
-    id?: string
     nome: string
     email: string
     senha: string
@@ -25248,7 +25537,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedCreateWithoutConquistasUsuarioInput = {
-    id?: string
+    id?: number
     nome: string
     email: string
     senha: string
@@ -25273,7 +25562,6 @@ export namespace Prisma {
   }
 
   export type ConquistaCreateWithoutUsuariosInput = {
-    id?: string
     titulo: string
     descricao?: string | null
     icone?: string | null
@@ -25283,7 +25571,7 @@ export namespace Prisma {
   }
 
   export type ConquistaUncheckedCreateWithoutUsuariosInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao?: string | null
     icone?: string | null
@@ -25309,7 +25597,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutConquistasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -25329,7 +25616,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateWithoutConquistasUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -25360,7 +25647,6 @@ export namespace Prisma {
   }
 
   export type ConquistaUpdateWithoutUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     icone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25370,7 +25656,7 @@ export namespace Prisma {
   }
 
   export type ConquistaUncheckedUpdateWithoutUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     icone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25380,7 +25666,6 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioCreateWithoutHabilidadeInput = {
-    id?: string
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
@@ -25388,8 +25673,8 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioUncheckedCreateWithoutHabilidadeInput = {
-    id?: string
-    usuarioId: string
+    id?: number
+    usuarioId: number
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
@@ -25422,7 +25707,6 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutHabilidadesUsuarioInput = {
-    id?: string
     nome: string
     email: string
     senha: string
@@ -25442,7 +25726,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedCreateWithoutHabilidadesUsuarioInput = {
-    id?: string
+    id?: number
     nome: string
     email: string
     senha: string
@@ -25467,13 +25751,12 @@ export namespace Prisma {
   }
 
   export type HabilidadeCreateWithoutUsuariosInput = {
-    id?: string
     nome: string
     descricao?: string | null
   }
 
   export type HabilidadeUncheckedCreateWithoutUsuariosInput = {
-    id?: string
+    id?: number
     nome: string
     descricao?: string | null
   }
@@ -25495,7 +25778,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutHabilidadesUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -25515,7 +25797,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateWithoutHabilidadesUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -25546,19 +25828,17 @@ export namespace Prisma {
   }
 
   export type HabilidadeUpdateWithoutUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HabilidadeUncheckedUpdateWithoutUsuariosInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UsuarioCreateWithoutTokensInput = {
-    id?: string
     nome: string
     email: string
     senha: string
@@ -25578,7 +25858,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedCreateWithoutTokensInput = {
-    id?: string
+    id?: number
     nome: string
     email: string
     senha: string
@@ -25614,7 +25894,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutTokensInput = {
-    id?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -25634,7 +25913,7 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateWithoutTokensInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
@@ -25654,30 +25933,30 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioCreateManyUsuarioInput = {
-    id?: string
-    trilhaId: string
+    id?: number
+    trilhaId: number
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
   }
 
   export type RespostaUsuarioCreateManyUsuarioInput = {
-    id?: string
-    questaoId: string
-    respostaQuestaoId: string
+    id?: number
+    questaoId: number
+    respostaQuestaoId: number
     pontuacaoRecebida: number
     respondidaEm?: Date | string
   }
 
   export type TemaUsuarioCreateManyUsuarioInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -25686,14 +25965,14 @@ export namespace Prisma {
   }
 
   export type ConquistaUsuarioCreateManyUsuarioInput = {
-    id?: string
-    conquistaId: string
+    id?: number
+    conquistaId: number
     desbloqueadaEm?: Date | string
   }
 
   export type HabilidadeUsuarioCreateManyUsuarioInput = {
-    id?: string
-    habilidadeId: string
+    id?: number
+    habilidadeId: number
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
@@ -25708,49 +25987,47 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     trilha?: TrilhaUpdateOneRequiredWithoutUsuariosNestedInput
   }
 
   export type TrilhaUsuarioUncheckedUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    trilhaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    trilhaId?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    trilhaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    trilhaId?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RespostaUsuarioUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     questao?: QuestaoUpdateOneRequiredWithoutRespostasUsuarioNestedInput
@@ -25758,23 +26035,22 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUncheckedUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
-    respostaQuestaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
+    respostaQuestaoId?: IntFieldUpdateOperationsInput | number
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RespostaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
-    respostaQuestaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
+    respostaQuestaoId?: IntFieldUpdateOperationsInput | number
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TemaUsuarioUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -25784,8 +26060,8 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -25794,8 +26070,8 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -25804,25 +26080,23 @@ export namespace Prisma {
   }
 
   export type ConquistaUsuarioUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     conquista?: ConquistaUpdateOneRequiredWithoutUsuariosNestedInput
   }
 
   export type ConquistaUsuarioUncheckedUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conquistaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    conquistaId?: IntFieldUpdateOperationsInput | number
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conquistaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    conquistaId?: IntFieldUpdateOperationsInput | number
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabilidadeUsuarioUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25830,16 +26104,16 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioUncheckedUpdateWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    habilidadeId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    habilidadeId?: IntFieldUpdateOperationsInput | number
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    habilidadeId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    habilidadeId?: IntFieldUpdateOperationsInput | number
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25869,20 +26143,20 @@ export namespace Prisma {
   }
 
   export type TrilhaCreateManyTemaInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId?: string | null
+    trilhaAnteriorId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type TemaUsuarioCreateManyTemaInput = {
-    id?: string
-    usuarioId: string
+    id?: number
+    usuarioId: number
     pontuacaoTotal?: number
     trilhasConcluidas?: number
     nivelAtual?: $Enums.NivelDificuldade
@@ -25891,7 +26165,6 @@ export namespace Prisma {
   }
 
   export type TrilhaUpdateWithoutTemaInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -25906,13 +26179,13 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateWithoutTemaInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
     ordem?: IntFieldUpdateOperationsInput | number
     pontuacaoMinima?: IntFieldUpdateOperationsInput | number
-    trilhaAnteriorId?: NullableStringFieldUpdateOperationsInput | string | null
+    trilhaAnteriorId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     proximasTrilhas?: TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
@@ -25921,19 +26194,18 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateManyWithoutTemaInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
     ordem?: IntFieldUpdateOperationsInput | number
     pontuacaoMinima?: IntFieldUpdateOperationsInput | number
-    trilhaAnteriorId?: NullableStringFieldUpdateOperationsInput | string | null
+    trilhaAnteriorId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TemaUsuarioUpdateWithoutTemaInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -25943,8 +26215,8 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedUpdateWithoutTemaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -25953,8 +26225,8 @@ export namespace Prisma {
   }
 
   export type TemaUsuarioUncheckedUpdateManyWithoutTemaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
     pontuacaoTotal?: IntFieldUpdateOperationsInput | number
     trilhasConcluidas?: IntFieldUpdateOperationsInput | number
     nivelAtual?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -25963,8 +26235,8 @@ export namespace Prisma {
   }
 
   export type TrilhaCreateManyTrilhaAnteriorInput = {
-    id?: string
-    temaId: string
+    id?: number
+    temaId: number
     titulo: string
     descricao?: string | null
     nivel: $Enums.NivelDificuldade
@@ -25975,7 +26247,7 @@ export namespace Prisma {
   }
 
   export type ModuloCreateManyTrilhaInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao?: string | null
     ordem: number
@@ -25984,21 +26256,20 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioCreateManyTrilhaInput = {
-    id?: string
-    usuarioId: string
+    id?: number
+    usuarioId: number
     status?: $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: number
     pontuacaoNecessaria: number
     percentualConclusao?: number
     podeDesbloquear?: boolean
-    moduloAtualId?: string | null
-    questaoAtualId?: string | null
+    moduloAtualId?: number | null
+    questaoAtualId?: number | null
     iniciadaEm?: Date | string
     concluidaEm?: Date | string | null
   }
 
   export type TrilhaUpdateWithoutTrilhaAnteriorInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -26013,8 +26284,8 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateWithoutTrilhaAnteriorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -26028,8 +26299,8 @@ export namespace Prisma {
   }
 
   export type TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    temaId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    temaId?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     nivel?: EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -26040,7 +26311,6 @@ export namespace Prisma {
   }
 
   export type ModuloUpdateWithoutTrilhaInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -26050,7 +26320,7 @@ export namespace Prisma {
   }
 
   export type ModuloUncheckedUpdateWithoutTrilhaInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -26060,7 +26330,7 @@ export namespace Prisma {
   }
 
   export type ModuloUncheckedUpdateManyWithoutTrilhaInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ordem?: IntFieldUpdateOperationsInput | number
@@ -26069,49 +26339,48 @@ export namespace Prisma {
   }
 
   export type TrilhaUsuarioUpdateWithoutTrilhaInput = {
-    id?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     usuario?: UsuarioUpdateOneRequiredWithoutTrilhasUsuarioNestedInput
   }
 
   export type TrilhaUsuarioUncheckedUpdateWithoutTrilhaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
     pontuacaoAtual?: IntFieldUpdateOperationsInput | number
     pontuacaoNecessaria?: IntFieldUpdateOperationsInput | number
     percentualConclusao?: IntFieldUpdateOperationsInput | number
     podeDesbloquear?: BoolFieldUpdateOperationsInput | boolean
-    moduloAtualId?: NullableStringFieldUpdateOperationsInput | string | null
-    questaoAtualId?: NullableStringFieldUpdateOperationsInput | string | null
+    moduloAtualId?: NullableIntFieldUpdateOperationsInput | number | null
+    questaoAtualId?: NullableIntFieldUpdateOperationsInput | number | null
     iniciadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     concluidaEm?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type QuestaoCreateManyModuloInput = {
-    id?: string
+    id?: number
     titulo: string
     descricao: string
     dificuldade: number
@@ -26122,7 +26391,6 @@ export namespace Prisma {
   }
 
   export type QuestaoUpdateWithoutModuloInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -26135,7 +26403,7 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedUpdateWithoutModuloInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -26148,7 +26416,7 @@ export namespace Prisma {
   }
 
   export type QuestaoUncheckedUpdateManyWithoutModuloInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     descricao?: StringFieldUpdateOperationsInput | string
     dificuldade?: IntFieldUpdateOperationsInput | number
@@ -26159,7 +26427,7 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoCreateManyQuestaoInput = {
-    id?: string
+    id?: number
     titulo: string
     codigoResposta: string
     explicacao?: string | null
@@ -26174,15 +26442,14 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioCreateManyQuestaoInput = {
-    id?: string
-    usuarioId: string
-    respostaQuestaoId: string
+    id?: number
+    usuarioId: number
+    respostaQuestaoId: number
     pontuacaoRecebida: number
     respondidaEm?: Date | string
   }
 
   export type RespostaQuestaoUpdateWithoutQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26198,7 +26465,7 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUncheckedUpdateWithoutQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26214,7 +26481,7 @@ export namespace Prisma {
   }
 
   export type RespostaQuestaoUncheckedUpdateManyWithoutQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     codigoResposta?: StringFieldUpdateOperationsInput | string
     explicacao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26229,7 +26496,6 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUpdateWithoutQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
@@ -26237,31 +26503,30 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUncheckedUpdateWithoutQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    respostaQuestaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    respostaQuestaoId?: IntFieldUpdateOperationsInput | number
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RespostaUsuarioUncheckedUpdateManyWithoutQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    respostaQuestaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    respostaQuestaoId?: IntFieldUpdateOperationsInput | number
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RespostaUsuarioCreateManyRespostaQuestaoInput = {
-    id?: string
-    usuarioId: string
-    questaoId: string
+    id?: number
+    usuarioId: number
+    questaoId: number
     pontuacaoRecebida: number
     respondidaEm?: Date | string
   }
 
   export type RespostaUsuarioUpdateWithoutRespostaQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
@@ -26269,55 +26534,53 @@ export namespace Prisma {
   }
 
   export type RespostaUsuarioUncheckedUpdateWithoutRespostaQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RespostaUsuarioUncheckedUpdateManyWithoutRespostaQuestaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-    questaoId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    questaoId?: IntFieldUpdateOperationsInput | number
     pontuacaoRecebida?: IntFieldUpdateOperationsInput | number
     respondidaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConquistaUsuarioCreateManyConquistaInput = {
-    id?: string
-    usuarioId: string
+    id?: number
+    usuarioId: number
     desbloqueadaEm?: Date | string
   }
 
   export type ConquistaUsuarioUpdateWithoutConquistaInput = {
-    id?: StringFieldUpdateOperationsInput | string
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UsuarioUpdateOneRequiredWithoutConquistasUsuarioNestedInput
   }
 
   export type ConquistaUsuarioUncheckedUpdateWithoutConquistaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConquistaUsuarioUncheckedUpdateManyWithoutConquistaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
     desbloqueadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabilidadeUsuarioCreateManyHabilidadeInput = {
-    id?: string
-    usuarioId: string
+    id?: number
+    usuarioId: number
     pontuacao?: number
     nivel?: number
     updatedAt?: Date | string
   }
 
   export type HabilidadeUsuarioUpdateWithoutHabilidadeInput = {
-    id?: StringFieldUpdateOperationsInput | string
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26325,16 +26588,16 @@ export namespace Prisma {
   }
 
   export type HabilidadeUsuarioUncheckedUpdateWithoutHabilidadeInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabilidadeUsuarioUncheckedUpdateManyWithoutHabilidadeInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    usuarioId?: IntFieldUpdateOperationsInput | number
     pontuacao?: IntFieldUpdateOperationsInput | number
     nivel?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

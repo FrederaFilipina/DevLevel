@@ -1,60 +1,148 @@
-import type { Request, Response } from 'express';
-import { prisma } from '../prisma/prisma';
-import { getParam, handleError } from './utils';
-// import { QuestaoService } from '../Service/questaoService';
-
-// const questaoService = new QuestaoService();
-
-const respostaPublicaSelect = {
-  id: true,
-  titulo: true,
-  codigoResposta: true,
-};
+import type { Request, Response } from "express";
+import type { QuestaoService } from "../Services/questaoService";
+import { getParam, handleError } from "./utils";
 
 export class QuestaoController {
-  async obter(req: Request, res: Response) {
+  constructor(
+    private readonly questaoService: QuestaoService
+  ) {}
+
+  async listar(_req: Request, res: Response) {
     try {
-      const id = getParam(req, 'id');
-      // const questao = await questaoService.obter(id);
-      const questao = await prisma.questao.findUnique({
-        where: { id },
-        include: {
-          modulo: { include: { trilha: true } },
-          respostas: {
-            orderBy: { createdAt: 'asc' },
-            select: respostaPublicaSelect,
-          },
-        },
-      });
+      const questoes =
+        await this.questaoService.listarTodas();
 
-      if (!questao) return res.status(404).json({ erro: 'Questão não encontrada' });
-
-      return res.json(questao);
+      return res.status(200).json(questoes);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao obter questão');
+      return handleError(
+        res,
+        erro,
+        "Erro ao listar questões"
+      );
     }
   }
 
-  async listarPorModulo(req: Request, res: Response) {
+  async obter(req: Request, res: Response) {
     try {
-      const moduloId = getParam(req, 'moduloId');
-      // const questoes = await questaoService.listarPorModulo(moduloId);
-      const questoes = await prisma.questao.findMany({
-        where: { moduloId },
-        orderBy: { ordem: 'asc' },
-        include: {
-          respostas: {
-            orderBy: { createdAt: 'asc' },
-            select: respostaPublicaSelect,
-          },
-        },
-      });
+      const id = Number(getParam(req, "id"));
 
-      return res.json(questoes);
+      if (isNaN(id)) {
+        return res.status(400).json({
+          erro: "ID inválido.",
+        });
+      }
+
+      const questao =
+        await this.questaoService.buscarPorId(id);
+
+      return res.status(200).json(questao);
     } catch (erro) {
-      return handleError(res, erro, 'Erro ao listar questões');
+      return handleError(
+        res,
+        erro,
+        "Erro ao obter questão"
+      );
+    }
+  }
+
+  async listarPorModulo(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const moduloId = Number(
+        getParam(req, "moduloId")
+      );
+
+      if (isNaN(moduloId)) {
+        return res.status(400).json({
+          erro: "ID do módulo inválido.",
+        });
+      }
+
+      const questoes =
+        await this.questaoService.listarPorModulo(
+          moduloId
+        );
+
+      return res.status(200).json(questoes);
+    } catch (erro) {
+      return handleError(
+        res,
+        erro,
+        "Erro ao listar questões do módulo"
+      );
+    }
+  }
+
+  async buscarPorModuloEOrdem(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const moduloId = Number(
+        getParam(req, "moduloId")
+      );
+
+      if (isNaN(moduloId)) {
+        return res.status(400).json({
+          erro: "ID do módulo inválido.",
+        });
+      }
+
+      const ordem = Number(
+        getParam(req, "ordem")
+      );
+
+      if (isNaN(ordem)) {
+        return res.status(400).json({
+          erro: "Ordem inválida.",
+        });
+      }
+
+      const questao =
+        await this.questaoService.buscarPorModuloEOrdem(
+          moduloId,
+          ordem
+        );
+
+      return res.status(200).json(questao);
+    } catch (erro) {
+      return handleError(
+        res,
+        erro,
+        "Erro ao buscar questão por módulo e ordem"
+      );
+    }
+  }
+
+  async listarPorDificuldade(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const dificuldade = Number(
+        getParam(req, "dificuldade")
+      );
+
+      if (isNaN(dificuldade)) {
+        return res.status(400).json({
+          erro: "Dificuldade inválida.",
+        });
+      }
+
+      const questoes =
+        await this.questaoService.listarPorDificuldade(
+          dificuldade
+        );
+
+      return res.status(200).json(questoes);
+    } catch (erro) {
+      return handleError(
+        res,
+        erro,
+        "Erro ao listar questões por dificuldade"
+      );
     }
   }
 }
-
-// export const questaoController = new QuestaoController(questaoService);
