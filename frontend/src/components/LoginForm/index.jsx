@@ -1,14 +1,55 @@
-import { useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { CustomInput } from "../CustomInput";
+import axios from "axios"
+import { useAuth } from "../../context/AuthContext";
+import { Navigate, useNavigate } from "react-router";
+import {toast} from "react-toastify"
 
 const LoginForm = ({ onRegisterClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {login} = useAuth()
+  const navigate = useNavigate()
 
   const handleRegisterClick = (e) => {
     e.preventDefault();
     onRegisterClick();
   };
+
+  const limparInputs = () => {
+    setEmail("")
+    setPassword("")
+  }
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    try {
+       const response = await axios.post("http://localhost:3000/login", {
+        email,
+        senha: password
+       })
+
+       const tokenAcesso = response.data.data.tokenRefresh
+       const tokenRefresh = response.data.data.tokenAcesso
+
+       if(response?.data) {
+        login(email, tokenAcesso, tokenRefresh)
+        localStorage.setItem("tokenAcesso", tokenAcesso)
+        localStorage.setItem("tokenRefresh", tokenRefresh)
+        toast.success("Usuário logado com sucesso!", {
+          progress: true,
+          autoClose: 500,
+          position: "top-right",
+          pauseOnHover: false
+        })
+        limparInputs()
+        setTimeout(() => navigate(("/dashboard"), 2000));
+      }
+    } catch (error) {
+      console.log(error)
+      alert(error?.response?.data?.message)
+    }
+  }
 
   return (
     <div className="space-y-3">
@@ -65,12 +106,13 @@ const LoginForm = ({ onRegisterClick }) => {
       <div className="pt-4">
         <button
           type="submit"
+          onClick={handleLogin}
           className="w-full group relative overflow-hidden bg-primary-container cursor-pointer text-on-primary font-label-sm text-label-sm py-4 tracking-[0.2em] uppercase transition-all hover:scale-[1.02] active:scale-95 active:skew-x-2"
         >
           <span className="relative z-10">Initiate Linkage</span>
 
           {/* Glitch Hover Effect Overlay */}
-          <div className="absolute inset-0 bg-secondary translate-x-full group-hover:translate-x-0 transition-transform duration-300 opacity-20" />
+          <div className="absolute inset-0 bg-secondary translate-x-full group-hover:translate-x-formansition-transform duration-300 opacity-20" />
         </button>
       </div>
     </div>

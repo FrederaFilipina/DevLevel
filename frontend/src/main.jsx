@@ -1,10 +1,12 @@
-import { StrictMode } from 'react'
+﻿import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import Login from './pages/Login/index.jsx'
 import HeaderLayout from './layouts/HeaderLayout/index.jsx'
 import Dashboard from './pages/Dashboard/index.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
+import PrivateRoute from './components/PrivateRoute/index.jsx'
 
 export const router = createBrowserRouter([
     {
@@ -13,6 +15,15 @@ export const router = createBrowserRouter([
       ),
       children: [
         {path: "/", element: <Login/>},
+      ]
+    },
+    {
+      element: (
+        <PrivateRoute>
+        <HeaderLayout/>
+        </PrivateRoute>
+      ),
+      children: [
         {path: "/dashboard", element: <Dashboard/>}
       ]
     }
@@ -20,7 +31,8 @@ export const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <AuthProvider>
+      <RouterProvider router={router}/>
+    </AuthProvider>
   </StrictMode>,
 )
-

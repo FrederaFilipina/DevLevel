@@ -1,8 +1,10 @@
 import { Outlet } from "react-router"
+import { ToastContainer } from "react-toastify";
 
 const HeaderLayout = () => {
   return (
     <main>
+    <ToastContainer /> {/* Adicione aqui */}
     <header className="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 border-b border-primary-container/30 bg-background/80 backdrop-blur-md shadow-[0_0_15px_rgba(0,243,255,0.2)]">
       <div className="flex items-center gap-2">
         <h1 className="font-headline-lg-mobile text-headline-lg-mobile font-black tracking-tighter text-primary-container drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]">

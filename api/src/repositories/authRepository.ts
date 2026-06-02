@@ -1,4 +1,4 @@
-import type { Token } from "@prisma/client";
+import type { Token } from "../prisma/generated/prisma";
 import type{ PrismaClient,Usuario, } from "../prisma/generated/prisma/client";
 import {prisma} from "../prisma/prisma"
 
@@ -15,7 +15,7 @@ export class AuthRepository{
                 email:dataUser.email||"",
                 nome:dataUser.nome||"",
                 senha:dataUser.senha||'',
-                avatar_url:dataUser.avatarUrl,
+                avatarUrl: dataUser.avatarUrl || "",
                 bio:dataUser.bio||null
             }
         })

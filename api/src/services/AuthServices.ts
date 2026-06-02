@@ -1,4 +1,4 @@
-import type { Usuario } from "@prisma/client";
+import type { Usuario } from "../prisma/generated/prisma";
 import { authRepository, AuthRepository } from "../repositories/authRepository";
 import z, { email } from "zod";
 import bcrypt from"bcrypt"

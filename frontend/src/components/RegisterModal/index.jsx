@@ -1,5 +1,6 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { CustomInput } from "../CustomInput";
+import axios from "axios"
 
 const RegisterModal = ({ isOpen, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
@@ -15,10 +16,34 @@ const RegisterModal = ({ isOpen, onClose }) => {
     }, 600); // Duration matches animation (slightly shorter to feel snappier)
   };
 
+  const registrar = async(e) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post("http://localhost:3000/cadastro", {
+        nome: name, 
+        email,
+        senha: password
+      })
+      if(response?.data) {
+        alert("Usuário cadastrado com sucesso")
+        limparInputs()
+      }
+    } catch (error) {
+      console.log(error.response)
+      alert(error.response.data.message)      
+    }
+  }
+
+  function limparInputs() {
+    setEmail("")
+    setName("")
+    setPassword("")
+  }
+
   if (!isOpen && !isClosing) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <form onSubmit={registrar} className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div 
         className={`absolute inset-0 bg-background/90 transition-opacity duration-100 ${isClosing ? 'opacity-0' : 'opacity-100'}`}
@@ -107,7 +132,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
