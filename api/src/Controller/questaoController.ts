@@ -46,7 +46,10 @@ export class QuestaoController {
     }
   }
 
-  async listarPorModulo(req: Request, res: Response) {
+  async buscarPorModuloEOrdem(
+    req: Request,
+    res: Response
+  ) {
     try {
       const moduloId = Number(req.params.moduloId);
 

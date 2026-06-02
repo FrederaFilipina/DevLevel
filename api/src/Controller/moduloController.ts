@@ -46,7 +46,10 @@ export class ModuloController {
     }
   }
 
-  async listarPorTrilha(req: Request, res: Response) {
+  async listarPorTrilha(
+    req: Request,
+    res: Response
+  ) {
     try {
       const trilhaId = Number(req.params.trilhaId);
 
