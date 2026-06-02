@@ -41,9 +41,8 @@ const LoginForm = ({ onRegisterClick }) => {
         localStorage.setItem("tokenAcesso", tokenAcesso)
         localStorage.setItem("tokenRefresh", tokenRefresh)
         toast.success("Acesso garantido!", {
-          progress: true,
-          autoClose: 2000,
           position: "top-right",
+          autoClose: 3000,
           pauseOnHover: false
         })
         limparInputs()
@@ -54,8 +53,6 @@ const LoginForm = ({ onRegisterClick }) => {
       const errorMsg = error?.response?.data?.message || "FALHA_NA_AUTENTICACAO"
       toast.error(`Acesso negado: ${errorMsg}`, {
         position: "top-right",
-        autoClose: 3000,
-        pauseOnHover: false
       })
     }
   }

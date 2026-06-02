@@ -28,8 +28,6 @@ const RegisterModal = ({ isOpen, onClose }) => {
       if(response?.data) {
         toast.success("Operador registrado com sucesso!", {
           position: "top-right",
-          autoClose: 2000,
-          pauseOnHover: false
         })
         limparInputs()
         setTimeout(() => handleClose(), 2000);
@@ -39,8 +37,6 @@ const RegisterModal = ({ isOpen, onClose }) => {
       const errorMsg = error?.response?.data?.message || "ERRO_NO_REGISTRO"
       toast.error(`Registro falhou: ${errorMsg}`, {
         position: "top-right",
-        autoClose: 3000,
-        pauseOnHover: false
       })      
     }
   }

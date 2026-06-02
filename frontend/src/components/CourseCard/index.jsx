@@ -9,9 +9,9 @@ const CourseCard = ({
 }) => {
   // Mapeamento de cores para dificuldades
   const difficultyStyles = {
-    EASY: "text-tertiary-fixed border-tertiary/30",
-    MEDIUM: "text-secondary-fixed border-secondary/30",
-    HARD: "text-error border-error/30"
+    EASY: "text-secondary-fixed border-secondary/30",
+    MEDIUM: "text-primary-fixed border-primary/50",
+    HARD: "text-tertiary border-tertiary"
   };
 
   const currentDiffStyle = difficultyStyles[difficulty.toUpperCase()] || difficultyStyles.EASY;
