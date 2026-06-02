@@ -1,19 +1,18 @@
 import type { Request, Response } from "express";
 import type { RespostaQuestaoService } from "../Services/questaoRespostaService";
-import { getParam, handleError } from "./utils";
 
 export class QuestaoRespostaController {
   constructor(
     private readonly respostaQuestaoService: RespostaQuestaoService
-  ) {}
+  ) { }
 
   async obter(req: Request, res: Response) {
     try {
-      const id = Number(getParam(req, "id"));
+      const id = Number(req.params.id);
 
       if (isNaN(id)) {
         return res.status(400).json({
-          erro: "ID inválido.",
+          erro: "ID invalido.",
         });
       }
 
@@ -22,28 +21,27 @@ export class QuestaoRespostaController {
           id
         );
 
+      if (!respostaQuestao) {
+        return res.status(404).json({
+          erro: "Resposta não encontrada."
+        });
+      }
+
       return res.status(200).json(respostaQuestao);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao obter resposta da questão"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter resposta da questao",
+      });
     }
   }
 
-  async listarPorQuestao(
-    req: Request,
-    res: Response
-  ) {
+  async listarPorQuestao(req: Request, res: Response) {
     try {
-      const questaoId = Number(
-        getParam(req, "questaoId")
-      );
+      const questaoId = Number(req.params.questaoId);
 
       if (isNaN(questaoId)) {
         return res.status(400).json({
-          erro: "ID da questão inválido.",
+          erro: "ID da questao invalido.",
         });
       }
 
@@ -53,12 +51,10 @@ export class QuestaoRespostaController {
         );
 
       return res.status(200).json(respostas);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar respostas da questão"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar respostas da questao",
+      });
     }
   }
 
@@ -67,31 +63,33 @@ export class QuestaoRespostaController {
     res: Response
   ) {
     try {
-      const questaoId = Number(
-        getParam(req, "questaoId")
-      );
+      const questaoId = Number(req.params.questaoId);
 
       if (isNaN(questaoId)) {
         return res.status(400).json({
-          erro: "ID da questão inválido.",
+          erro: "ID da questao invalido.",
         });
       }
 
-      const titulo = getParam(req, "titulo");
+      const titulo = String(req.params.titulo ?? "");
+
 
       const resposta =
         await this.respostaQuestaoService.buscarPorQuestaoETitulo(
           questaoId,
           titulo
         );
+      if (!resposta) {
+        return res.status(404).json({
+          erro: "Resposta não encontrada."
+        });
+      }
 
       return res.status(200).json(resposta);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao buscar resposta por título"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar resposta por titulo",
+      });
     }
   }
 
@@ -100,13 +98,11 @@ export class QuestaoRespostaController {
     res: Response
   ) {
     try {
-      const questaoId = Number(
-        getParam(req, "questaoId")
-      );
+      const questaoId = Number(req.params.questaoId);
 
       if (isNaN(questaoId)) {
         return res.status(400).json({
-          erro: "ID da questão inválido.",
+          erro: "ID da questao invalido.",
         });
       }
 
@@ -116,12 +112,10 @@ export class QuestaoRespostaController {
         );
 
       return res.status(200).json(respostas);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar melhores respostas"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar melhores respostas",
+      });
     }
   }
 
@@ -130,13 +124,11 @@ export class QuestaoRespostaController {
     res: Response
   ) {
     try {
-      const questaoId = Number(
-        getParam(req, "questaoId")
-      );
+      const questaoId = Number(req.params.questaoId);
 
       if (isNaN(questaoId)) {
         return res.status(400).json({
-          erro: "ID da questão inválido.",
+          erro: "ID da questao invalido.",
         });
       }
 
@@ -146,12 +138,10 @@ export class QuestaoRespostaController {
         );
 
       return res.status(200).json(respostas);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar respostas por performance"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar respostas por performance",
+      });
     }
   }
 
@@ -160,13 +150,11 @@ export class QuestaoRespostaController {
     res: Response
   ) {
     try {
-      const questaoId = Number(
-        getParam(req, "questaoId")
-      );
+      const questaoId = Number(req.params.questaoId);
 
       if (isNaN(questaoId)) {
         return res.status(400).json({
-          erro: "ID da questão inválido.",
+          erro: "ID da questao invalido.",
         });
       }
 
@@ -176,12 +164,10 @@ export class QuestaoRespostaController {
         );
 
       return res.status(200).json(respostas);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar respostas por clean code"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar respostas por clean code",
+      });
     }
   }
 }

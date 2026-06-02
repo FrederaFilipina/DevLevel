@@ -1,11 +1,10 @@
 import type { Request, Response } from "express";
 import type { ModuloService } from "../Services/moduloService";
-import { getParam, handleError } from "./utils";
 
 export class ModuloController {
   constructor(
     private readonly moduloService: ModuloService
-  ) {}
+  ) { }
 
   async listar(_req: Request, res: Response) {
     try {
@@ -13,35 +12,37 @@ export class ModuloController {
         await this.moduloService.listarTodos();
 
       return res.status(200).json(modulos);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar módulos"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar modulos",
+      });
     }
   }
 
   async obter(req: Request, res: Response) {
     try {
-      const id = Number(getParam(req, "id"));
+      const id = Number(req.params.id);
 
       if (isNaN(id)) {
         return res.status(400).json({
-          erro: "ID inválido.",
+          erro: "ID invalido.",
         });
       }
 
       const modulo =
         await this.moduloService.buscarPorId(id);
 
+      if (!modulo) {
+        return res.status(404).json({
+          erro: "Módulo não encontrado."
+        });
+      }
+
       return res.status(200).json(modulo);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao obter módulo"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter modulo",
+      });
     }
   }
 
@@ -50,13 +51,11 @@ export class ModuloController {
     res: Response
   ) {
     try {
-      const trilhaId = Number(
-        getParam(req, "trilhaId")
-      );
+      const trilhaId = Number(req.params.trilhaId);
 
       if (isNaN(trilhaId)) {
         return res.status(400).json({
-          erro: "ID da trilha inválido.",
+          erro: "ID da trilha invalido.",
         });
       }
 
@@ -66,12 +65,10 @@ export class ModuloController {
         );
 
       return res.status(200).json(modulos);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar módulos da trilha"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar modulos da trilha",
+      });
     }
   }
 
@@ -80,23 +77,20 @@ export class ModuloController {
     res: Response
   ) {
     try {
-      const trilhaId = Number(
-        getParam(req, "trilhaId")
-      );
+      const trilhaId = Number(req.params.trilhaId);
 
       if (isNaN(trilhaId)) {
         return res.status(400).json({
-          erro: "ID da trilha inválido.",
+          erro: "ID da trilha invalido.",
         });
       }
 
-      const ordem = Number(
-        getParam(req, "ordem")
-      );
+      const ordem = Number(req.params.ordem);
 
-      if (isNaN(ordem)) {
+
+      if (isNaN(ordem) || ordem <= 0) {
         return res.status(400).json({
-          erro: "Ordem inválida.",
+          erro: "Ordem invalida.",
         });
       }
 
@@ -106,13 +100,17 @@ export class ModuloController {
           ordem
         );
 
+      if (!modulo) {
+        return res.status(404).json({
+          erro: "Módulo não encontrado."
+        });
+      }
+
       return res.status(200).json(modulo);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao buscar módulo por trilha e ordem"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar modulo por trilha e ordem",
+      });
     }
   }
 }

@@ -1,11 +1,10 @@
 import type { Request, Response } from "express";
 import type { TrilhaService } from "../Services/trilhaService";
-import { getParam, handleError } from "./utils";
 
 export class TrilhaController {
   constructor(
     private readonly trilhaService: TrilhaService
-  ) {}
+  ) { }
 
   async listar(_req: Request, res: Response) {
     try {
@@ -13,50 +12,47 @@ export class TrilhaController {
         await this.trilhaService.listarTodas();
 
       return res.status(200).json(trilhas);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar trilhas"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar trilhas",
+      });
     }
   }
 
   async obter(req: Request, res: Response) {
     try {
-      const id = Number(getParam(req, "id"));
+      const id = Number(req.params.id);
 
       if (isNaN(id)) {
         return res.status(400).json({
-          erro: "ID inválido.",
+          erro: "ID invalido.",
         });
       }
 
       const trilha =
         await this.trilhaService.buscarPorId(id);
 
+      if (!trilha) {
+        return res.status(404).json({
+          erro: "Trilha não encontrada."
+        });
+      }
+
       return res.status(200).json(trilha);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao obter trilha"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter trilha",
+      });
     }
   }
 
-  async listarPorTema(
-    req: Request,
-    res: Response
-  ) {
+  async listarPorTema(req: Request, res: Response) {
     try {
-      const temaId = Number(
-        getParam(req, "temaId")
-      );
+      const temaId = Number(req.params.temaId);
 
       if (isNaN(temaId)) {
         return res.status(400).json({
-          erro: "ID do tema inválido.",
+          erro: "ID do tema invalido.",
         });
       }
 
@@ -66,12 +62,10 @@ export class TrilhaController {
         );
 
       return res.status(200).json(trilhas);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar trilhas por tema"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar trilhas por tema",
+      });
     }
   }
 
@@ -80,23 +74,19 @@ export class TrilhaController {
     res: Response
   ) {
     try {
-      const temaId = Number(
-        getParam(req, "temaId")
-      );
+      const temaId = Number(req.params.temaId);
 
       if (isNaN(temaId)) {
         return res.status(400).json({
-          erro: "ID do tema inválido.",
+          erro: "ID do tema invalido.",
         });
       }
 
-      const ordem = Number(
-        getParam(req, "ordem")
-      );
+      const ordem = Number(req.params.ordem);
 
-      if (isNaN(ordem)) {
+      if (isNaN(ordem) || ordem <= 0) {
         return res.status(400).json({
-          erro: "Ordem inválida.",
+          erro: "Ordem invalida.",
         });
       }
 
@@ -105,14 +95,17 @@ export class TrilhaController {
           temaId,
           ordem
         );
+      if (!trilha) {
+        return res.status(404).json({
+          erro: "Trilha não encontrada."
+        });
+      }
 
       return res.status(200).json(trilha);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao buscar trilha por tema e ordem"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar trilha por tema e ordem",
+      });
     }
   }
 
@@ -121,11 +114,11 @@ export class TrilhaController {
     res: Response
   ) {
     try {
-      const id = Number(getParam(req, "id"));
+      const id = Number(req.params.id);
 
       if (isNaN(id)) {
         return res.status(400).json({
-          erro: "ID inválido.",
+          erro: "ID invalido.",
         });
       }
 
@@ -135,12 +128,10 @@ export class TrilhaController {
         );
 
       return res.status(200).json(trilhaAnterior);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao buscar trilha anterior"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar trilha anterior",
+      });
     }
   }
 
@@ -149,11 +140,11 @@ export class TrilhaController {
     res: Response
   ) {
     try {
-      const id = Number(getParam(req, "id"));
+      const id = Number(req.params.id);
 
       if (isNaN(id)) {
         return res.status(400).json({
-          erro: "ID inválido.",
+          erro: "ID invalido.",
         });
       }
 
@@ -163,12 +154,10 @@ export class TrilhaController {
         );
 
       return res.status(200).json(proximasTrilhas);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao buscar próximas trilhas"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar proximas trilhas",
+      });
     }
   }
 }

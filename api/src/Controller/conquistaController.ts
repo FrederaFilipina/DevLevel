@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import type { ConquistaService } from "../Services/conquistaService";
-import { getParam, handleError } from "./utils";
 
 export class ConquistaController {
   constructor(
@@ -13,22 +12,20 @@ export class ConquistaController {
         await this.conquistaService.listarTodas();
 
       return res.status(200).json(conquistas);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao listar conquistas"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao listar conquistas",
+      });
     }
   }
 
   async obter(req: Request, res: Response) {
     try {
-      const id = Number(getParam(req, "id"));
+      const id = Number(req.params.id);
 
       if (isNaN(id)) {
         return res.status(400).json({
-          erro: "ID inválido.",
+          erro: "ID invalido.",
         });
       }
 
@@ -36,21 +33,16 @@ export class ConquistaController {
         await this.conquistaService.buscarPorId(id);
 
       return res.status(200).json(conquista);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao obter conquista"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao obter conquista",
+      });
     }
   }
 
-  async buscarPorTitulo(
-    req: Request,
-    res: Response
-  ) {
+  async buscarPorTitulo(req: Request, res: Response) {
     try {
-      const titulo = getParam(req, "titulo");
+      const titulo = String(req.params.titulo ?? "");
 
       const conquista =
         await this.conquistaService.buscarPorTitulo(
@@ -58,12 +50,10 @@ export class ConquistaController {
         );
 
       return res.status(200).json(conquista);
-    } catch (erro) {
-      return handleError(
-        res,
-        erro,
-        "Erro ao buscar conquista por título"
-      );
+    } catch {
+      return res.status(500).json({
+        erro: "Erro ao buscar conquista por titulo",
+      });
     }
   }
 }
