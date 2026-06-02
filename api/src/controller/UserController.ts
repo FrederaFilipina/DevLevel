@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { userServices, type UserServices } from "../services/userServices";
+import { userServices, type UserServices } from "../services/UserServices";
 import { verificarTokenAcesso } from "../utils/jwt";
 
 export class UserController {
