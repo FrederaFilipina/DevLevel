@@ -6,7 +6,7 @@ export class ConquistaUsuarioService {
         private readonly conquistaUsuarioRepository: ConquistaUsuarioRepository
     ) {}
 
-    async buscarPorId(id: string): Promise<ConquistaUsuario> {
+    async buscarPorId(id: number): Promise<ConquistaUsuario> {
         const conquistaUsuario =
             await this.conquistaUsuarioRepository.buscarPorId(id);
 
@@ -18,8 +18,8 @@ export class ConquistaUsuarioService {
     }
 
     async buscarPorUsuarioEConquista(
-        usuarioId: string,
-        conquistaId: string
+        usuarioId: number,
+        conquistaId: number
     ): Promise<ConquistaUsuario> {
         const conquistaUsuario =
             await this.conquistaUsuarioRepository.buscarPorUsuarioEConquista(
@@ -35,7 +35,7 @@ export class ConquistaUsuarioService {
     }
 
     async listarPorUsuario(
-        usuarioId: string
+        usuarioId: number
     ): Promise<ConquistaUsuario[]> {
         return await this.conquistaUsuarioRepository.listarPorUsuario(
             usuarioId
@@ -43,7 +43,7 @@ export class ConquistaUsuarioService {
     }
 
     async listarPorConquista(
-        conquistaId: string
+        conquistaId: number
     ): Promise<ConquistaUsuario[]> {
         return await this.conquistaUsuarioRepository.listarPorConquista(
             conquistaId

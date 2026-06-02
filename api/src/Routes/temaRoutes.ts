@@ -19,12 +19,12 @@ router.get(
 );
 
 router.get(
-  "/:id",
+  "/nome/:nome",
   controller.obter.bind(controller)
 );
 
 router.get(
-  "/nome/:nome",
+   "/:id",
   controller.buscarPorNome.bind(controller)
 );
 

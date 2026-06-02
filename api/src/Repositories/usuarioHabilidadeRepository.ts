@@ -1,17 +1,17 @@
 import { PrismaClient, type HabilidadeUsuario } from "../prisma/generated/prisma";
 
 export class HabilidadeUsuarioRepository {
-  constructor(private readonly prisma: PrismaClient) {}
+  constructor(private readonly prisma: PrismaClient) { }
 
-  async buscarPorId(id: string): Promise<HabilidadeUsuario | null> {
+  async buscarPorId(id: number): Promise<HabilidadeUsuario | null> {
     return await this.prisma.habilidadeUsuario.findUnique({
       where: { id },
     });
   }
 
   async buscarPorUsuarioEHabilidade(
-    usuarioId: string,
-    habilidadeId: string
+    usuarioId: number,
+    habilidadeId: number
   ): Promise<HabilidadeUsuario | null> {
     return await this.prisma.habilidadeUsuario.findUnique({
       where: {
@@ -24,7 +24,7 @@ export class HabilidadeUsuarioRepository {
   }
 
   async listarPorUsuario(
-    usuarioId: string
+    usuarioId: number
   ): Promise<HabilidadeUsuario[]> {
     return await this.prisma.habilidadeUsuario.findMany({
       where: { usuarioId },
@@ -35,7 +35,7 @@ export class HabilidadeUsuarioRepository {
   }
 
   async listarPorHabilidade(
-    habilidadeId: string
+    habilidadeId: number
   ): Promise<HabilidadeUsuario[]> {
     return await this.prisma.habilidadeUsuario.findMany({
       where: { habilidadeId },

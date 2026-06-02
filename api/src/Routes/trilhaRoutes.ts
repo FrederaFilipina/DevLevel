@@ -19,11 +19,6 @@ router.get(
 );
 
 router.get(
-  "/:id",
-  controller.obter.bind(controller)
-);
-
-router.get(
   "/tema/:temaId",
   controller.listarPorTema.bind(controller)
 );
@@ -33,6 +28,7 @@ router.get(
   controller.buscarPorTemaEOrdem.bind(controller)
 );
 
+
 router.get(
   "/:id/anterior",
   controller.buscarTrilhaAnterior.bind(controller)
@@ -41,6 +37,11 @@ router.get(
 router.get(
   "/:id/proximas",
   controller.buscarProximasTrilhas.bind(controller)
+);
+
+router.get(
+  "/:id",
+  controller.obter.bind(controller)
 );
 
 export default router;

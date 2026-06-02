@@ -3,15 +3,15 @@ import { PrismaClient, type TemaUsuario, type NivelDificuldade } from "../prisma
 export class TemaUsuarioRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async buscarPorId(id: string): Promise<TemaUsuario | null> {
+  async buscarPorId(id: number): Promise<TemaUsuario | null> {
     return await this.prisma.temaUsuario.findUnique({
       where: { id },
     });
   }
 
-  async buscarPorUsuarioETema(
-    usuarioId: string,
-    temaId: string
+  async buscarPorUsuarioETema(  
+    usuarioId: number,
+    temaId: number
   ): Promise<TemaUsuario | null> {
     return await this.prisma.temaUsuario.findUnique({
       where: {
@@ -24,7 +24,7 @@ export class TemaUsuarioRepository {
   }
 
   async listarPorUsuario(
-    usuarioId: string
+    usuarioId: number
   ): Promise<TemaUsuario[]> {
     return await this.prisma.temaUsuario.findMany({
       where: { usuarioId },
@@ -35,7 +35,7 @@ export class TemaUsuarioRepository {
   }
 
   async listarPorTema(
-    temaId: string
+    temaId: number
   ): Promise<TemaUsuario[]> {
     return await this.prisma.temaUsuario.findMany({
       where: { temaId },

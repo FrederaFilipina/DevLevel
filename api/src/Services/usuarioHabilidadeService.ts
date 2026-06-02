@@ -7,7 +7,7 @@ export class HabilidadeUsuarioService {
         private readonly habilidadeUsuarioRepository: HabilidadeUsuarioRepository
     ) {}
 
-    async buscarPorId(id: string): Promise<HabilidadeUsuario> {
+    async buscarPorId(id: number): Promise<HabilidadeUsuario> {
         const habilidadeUsuario =
             await this.habilidadeUsuarioRepository.buscarPorId(id);
 
@@ -19,8 +19,8 @@ export class HabilidadeUsuarioService {
     }
 
     async buscarPorUsuarioEHabilidade(
-        usuarioId: string,
-        habilidadeId: string
+        usuarioId: number,
+        habilidadeId: number
     ): Promise<HabilidadeUsuario> {
         const habilidadeUsuario =
             await this.habilidadeUsuarioRepository.buscarPorUsuarioEHabilidade(
@@ -36,7 +36,7 @@ export class HabilidadeUsuarioService {
     }
 
     async listarPorUsuario(
-        usuarioId: string
+        usuarioId: number
     ): Promise<HabilidadeUsuario[]> {
         return await this.habilidadeUsuarioRepository.listarPorUsuario(
             usuarioId
@@ -44,7 +44,7 @@ export class HabilidadeUsuarioService {
     }
 
     async listarPorHabilidade(
-        habilidadeId: string
+        habilidadeId: number
     ): Promise<HabilidadeUsuario[]> {
         return await this.habilidadeUsuarioRepository.listarPorHabilidade(
             habilidadeId

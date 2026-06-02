@@ -6,7 +6,7 @@ export class TemaUsuarioService {
         private readonly temaUsuarioRepository: TemaUsuarioRepository
     ) {}
 
-    async buscarPorId(id: string): Promise<TemaUsuario> {
+    async buscarPorId(id: number): Promise<TemaUsuario> {
         const temaUsuario =
             await this.temaUsuarioRepository.buscarPorId(id);
 
@@ -18,8 +18,8 @@ export class TemaUsuarioService {
     }
 
     async buscarPorUsuarioETema(
-        usuarioId: string,
-        temaId: string
+        usuarioId: number,
+        temaId: number
     ): Promise<TemaUsuario> {
         const temaUsuario =
             await this.temaUsuarioRepository.buscarPorUsuarioETema(
@@ -35,7 +35,7 @@ export class TemaUsuarioService {
     }
 
     async listarPorUsuario(
-        usuarioId: string
+        usuarioId: number
     ): Promise<TemaUsuario[]> {
         return await this.temaUsuarioRepository.listarPorUsuario(
             usuarioId
@@ -43,7 +43,7 @@ export class TemaUsuarioService {
     }
 
     async listarPorTema(
-        temaId: string
+        temaId: number
     ): Promise<TemaUsuario[]> {
         return await this.temaUsuarioRepository.listarPorTema(
             temaId

@@ -7,7 +7,7 @@ export class TrilhaUsuarioService {
         private readonly trilhaUsuarioRepository: TrilhaUsuarioRepository
     ) {}
 
-    async buscarPorId(id: string): Promise<TrilhaUsuario> {
+    async buscarPorId(id: number): Promise<TrilhaUsuario> {
         const trilhaUsuario =
             await this.trilhaUsuarioRepository.buscarPorId(id);
 
@@ -19,8 +19,8 @@ export class TrilhaUsuarioService {
     }
 
     async buscarPorUsuarioETrilha(
-        usuarioId: string,
-        trilhaId: string
+        usuarioId: number,
+        trilhaId: number
     ): Promise<TrilhaUsuario> {
         const trilhaUsuario =
             await this.trilhaUsuarioRepository.buscarPorUsuarioETrilha(
@@ -36,7 +36,7 @@ export class TrilhaUsuarioService {
     }
 
     async listarPorUsuario(
-        usuarioId: string
+        usuarioId: number
     ): Promise<TrilhaUsuario[]> {
         return await this.trilhaUsuarioRepository.listarPorUsuario(
             usuarioId
@@ -44,7 +44,7 @@ export class TrilhaUsuarioService {
     }
 
     async listarPorTrilha(
-        trilhaId: string
+        trilhaId: number
     ): Promise<TrilhaUsuario[]> {
         return await this.trilhaUsuarioRepository.listarPorTrilha(
             trilhaId
