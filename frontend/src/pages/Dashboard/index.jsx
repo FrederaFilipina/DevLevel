@@ -3,35 +3,60 @@ import CourseCard from '../../components/CourseCard'
 import { useAuth } from '../../context/AuthContext'
 import ProfileEditModal from '../../components/ProfileEditModal'
 import axios from 'axios'
-import { FiEdit3 } from 'react-icons/fi'
+import { FiEdit3, FiRefreshCcw } from 'react-icons/fi'
+import { getMockTrails, getMockUser, resetMockData } from '../../utils/mockData'
 
 const Dashboard = () => {
     const { user: authUser } = useAuth();
     const [user, setUser] = useState(null);
+    const [trails, setTrails] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const fetchUserProfile = async () => {
+    const loadData = async () => {
+        setLoading(true);
+        const mockTrails = getMockTrails();
+        const mockUser = getMockUser(); // Get persistent XP/Score from MVP mock
+        setTrails(mockTrails);
+
         try {
             const token = localStorage.getItem('tokenAcesso');
-            if (!token) return;
-
-            const response = await axios.get('http://localhost:3000/user/', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            setUser(response.data.data);
+            if (token) {
+                const response = await axios.get('http://localhost:3000/user/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                const realUser = response.data.data;
+                
+                // Merge real profile with mock gamification progress
+                setUser({
+                    ...realUser,
+                    xp: mockUser.xp,
+                    pontuacaoTotal: mockUser.pontuacaoTotal
+                });
+            } else {
+                // Fallback for no token (guest)
+                setUser(mockUser);
+            }
         } catch (error) {
             console.error('Error fetching user profile:', error);
+            setUser(mockUser);
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchUserProfile();
-    }, []);
+        loadData();
+    }, [authUser]);
+
+    const handleReset = () => {
+        if (window.confirm("Deseja resetar todos os dados do MVP?")) {
+            resetMockData();
+            loadData();
+        }
+    };
 
     if (loading) {
         return (
@@ -45,8 +70,9 @@ const Dashboard = () => {
     }
 
     // Independent Level Calculation Logic
+    // Formula: Level = floor(sqrt(XP / 250)) + 1
     const calculateLevelData = (xp) => {
-        const baseXP = 100; 
+        const baseXP = 250; 
         const level = Math.floor(Math.sqrt(xp / baseXP)) + 1;
         const currentLevelXP = Math.pow(level - 1, 2) * baseXP;
         const nextLevelXP = Math.pow(level, 2) * baseXP;
@@ -139,10 +165,13 @@ const Dashboard = () => {
                                 </h2>
                                 <button 
                                     onClick={() => setIsEditModalOpen(true)}
-                                    className="p-2 border border-primary/20 bg-primary/5 text-primary hover:bg-primary hover:text-background transition-all cursor-pointer rounded-sm"
+                                    className="p-2 border border-primary/20 bg-surface-container-low hover:bg-surface-container transition-all group/edit relative overflow-hidden cursor-pointer rounded-sm"
                                     title="EDIT_PROFILE"
                                 >
-                                    <FiEdit3 size={18} />
+                                    <div className="relative z-10 flex items-center justify-center text-primary transition-colors">
+                                        <FiEdit3 size={18} />
+                                    </div>
+                                    <div className="absolute inset-0 bg-primary/10 -translate-x-full group-hover/edit:translate-x-0 transition-transform duration-300"></div>
                                 </button>
                             </div>
                         </div>
@@ -213,15 +242,25 @@ const Dashboard = () => {
                 </div>
             </section>
 
-            <div className='flex items-start flex-col gap-4 mb-4 pl-2 border-l-2 border-primary-fixed-dim/30'>
-                <h1 className="flex flex-row items-center font-headline-lg text-primary uppercase tracking-tighter gap-3 text-2xl">
-                    <span className='font-black border-b-2 border-primary-fixed-dim'>MAINFRAME_STATUS:</span> 
-                    <span className="text-primary-fixed-dim font-bold animate-pulse drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">ONLINE</span>
-                    <div className="flex gap-1">
-                        <span className="w-1.5 h-1.5 bg-primary-fixed-dim"></span>
-                        <span className="w-1.5 h-1.5 bg-primary-fixed-dim/40"></span>
-                    </div>
-                </h1>
+            <div className='flex items-start flex-col gap-4 mb-4 pl-2 border-l-2 border-primary-fixed-dim/30 w-full'>
+                <div className="flex justify-between items-center w-full">
+                    <h1 className="flex flex-row items-center font-headline-lg text-primary uppercase tracking-tighter gap-3 text-2xl">
+                        <span className='font-black border-b-2 border-primary-fixed-dim'>MAINFRAME_STATUS:</span> 
+                        <span className="text-primary-fixed-dim font-bold animate-pulse drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">ONLINE</span>
+                        <div className="flex gap-1">
+                            <span className="w-1.5 h-1.5 bg-primary-fixed-dim"></span>
+                            <span className="w-1.5 h-1.5 bg-primary-fixed-dim/40"></span>
+                        </div>
+                    </h1>
+                    <button 
+                        onClick={handleReset}
+                        className="p-2 border border-tertiary/20 bg-tertiary/5 text-tertiary hover:bg-tertiary hover:text-background transition-all cursor-pointer rounded-sm flex items-center gap-2 text-[10px] font-black uppercase tracking-widest"
+                        title="RESET_MVP_DATA"
+                    >
+                        <FiRefreshCcw size={14} />
+                        REINICIAR_SISTEMA
+                    </button>
+                </div>
 
                 <h3 className='text-on-surface-variant text-sm md:text-md max-w-3xl leading-relaxed font-body-md opacity-80'>
                     Conexão estabelecida. Selecione uma trilha de estudos para iniciar o processo de descriptografia e elevar seus privilégios de sistema no diretório raiz.
@@ -229,27 +268,16 @@ const Dashboard = () => {
             </div>
 
             <div className="flex flex-col gap-6">
-                <CourseCard 
-                    id="TR-00" 
-                    title="INTRODUÇÃO AO TERMINAL" 
-                    status="CONCLUIDA" 
-                    progress={100} 
-                    difficulty="EASY" 
-                />
-                <CourseCard 
-                    id="TR-01" 
-                    title="FUNDAMENTOS DE SEGURANÇA" 
-                    status="EM_CURSO" 
-                    progress={35} 
-                    difficulty="EASY" 
-                />
-                <CourseCard 
-                    id="TR-02" 
-                    title="CRIPTOGRAFIA AVANÇADA" 
-                    status="BLOQUEADO" 
-                    progress={0} 
-                    difficulty="HARD" 
-                />
+                {trails.map((trail) => (
+                    <CourseCard 
+                        key={trail.id}
+                        id={trail.id} 
+                        title={trail.title} 
+                        status={trail.status} 
+                        progress={trail.progress} 
+                        difficulty={trail.difficulty} 
+                    />
+                ))}
             </div>
 
             {/* Profile Edit Modal */}
@@ -257,7 +285,7 @@ const Dashboard = () => {
                 isOpen={isEditModalOpen} 
                 onClose={() => setIsEditModalOpen(false)} 
                 profile={user} 
-                onUpdate={fetchUserProfile}
+                onUpdate={loadData}
             />
         </main>
     )

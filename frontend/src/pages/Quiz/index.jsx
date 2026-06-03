@@ -1,43 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import { toast } from 'react-toastify';
+import { updateMockUser, updateTrailProgress, getMockTrails } from '../../utils/mockData';
+import { questionsByTrail } from '../../utils/questionsData';
 
 const Quiz = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const currentStep = parseInt(searchParams.get('step') || '1');
+    const trailId = searchParams.get('trailId') || 'TR-00';
 
-    // Mock Questions Database
-    const mockBancoQuestoes = [
-        {
-            id: "QUEST-01",
-            titulo: "ESTRUTURA_DADOS_01",
-            descricao: "O sistema detectou uma vulnerabilidade no módulo de segurança. Identifique qual operador de comparação garante a integridade dos tipos durante a validação do token de acesso no Mainframe.",
-            codigo: `function validateAccess(token) {\n    if (token.clearance == "TOP_SECRET") {\n        grantAccess();\n    }\n}`,
-            opcoes: [
-                { id: "A", texto: "Utilizar o operador '==' para comparação flexível." },
-                { id: "B", texto: "Utilizar o operador '===' para comparação estrita.", correta: true },
-                { id: "C", texto: "Utilizar o operador '=' para atribuição direta." },
-                { id: "D", texto: "Utilizar 'instanceof' para validar String." }
-            ],
-            xp: 250,
-            dificuldade: "INICIANTE"
-        },
-        {
-            id: "QUEST-02",
-            titulo: "LOGICA_SISTEMA_02",
-            descricao: "Para otimizar o processamento de pacotes, precisamos iterar sobre o buffer de dados. Qual estrutura de repetição é a mais recomendada para percorrer um Array de IDs de forma síncrona?",
-            codigo: `const buffer = [102, 304, 506];\n// Inserir loop aqui\nconsole.log(id);`,
-            opcoes: [
-                { id: "A", texto: "Utilizar um loop 'for...of'.", correta: true },
-                { id: "B", texto: "Utilizar 'while(true)' com um contador externo." },
-                { id: "C", texto: "Utilizar recursividade infinita." },
-                { id: "D", texto: "Utilizar o método 'Math.random()'." }
-            ],
-            xp: 350,
-            dificuldade: "INICIANTE"
-        }
-    ];
+    // Get questions for the current trail
+    const trailQuestions = questionsByTrail[trailId] || [];
 
     const [questaoAtual, setQuestaoAtual] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -47,13 +21,15 @@ const Quiz = () => {
 
     // Load question based on URL step
     useEffect(() => {
-        const index = Math.min(Math.max(currentStep - 1, 0), mockBancoQuestoes.length - 1);
-        const questao = mockBancoQuestoes[index];
-        setQuestaoAtual(questao);
-        setShuffledOpcoes([...questao.opcoes].sort(() => Math.random() - 0.5));
-        setSelectedOption(null);
-        setIsSubmitted(false);
-    }, [currentStep]);
+        if (trailQuestions.length > 0) {
+            const index = Math.min(Math.max(currentStep - 1, 0), trailQuestions.length - 1);
+            const questao = trailQuestions[index];
+            setQuestaoAtual(questao);
+            setShuffledOpcoes([...questao.opcoes].sort(() => Math.random() - 0.5));
+            setSelectedOption(null);
+            setIsSubmitted(false);
+        }
+    }, [currentStep, trailId]);
 
     const handleSubmit = () => {
         if (!selectedOption || isSubmitted) return;
@@ -68,8 +44,18 @@ const Quiz = () => {
                     className: 'cyber-toast-success',
                 });
                 
-                if (currentStep < mockBancoQuestoes.length) {
-                    setSearchParams({ step: currentStep + 1 });
+                // Update MVP Mock Data
+                const trails = getMockTrails();
+                const currentTrail = trails.find(t => t.id === trailId);
+                const xpPerQuestion = currentTrail ? Math.round(currentTrail.xpReward / trailQuestions.length) : questaoAtual.xp;
+                
+                updateMockUser(xpPerQuestion, xpPerQuestion * 2);
+                
+                const progressPerQuestion = 100 / trailQuestions.length;
+                updateTrailProgress(trailId, Math.min(currentStep * progressPerQuestion, 100));
+
+                if (currentStep < trailQuestions.length) {
+                    setSearchParams({ step: (currentStep + 1).toString(), trailId });
                 } else {
                     setIsFinished(true);
                 }
@@ -81,10 +67,10 @@ const Quiz = () => {
                 // Escolher uma pergunta aleatória diferente da atual (se houver mais de uma)
                 let novoIndex;
                 do {
-                    novoIndex = Math.floor(Math.random() * mockBancoQuestoes.length);
-                } while (mockBancoQuestoes.length > 1 && mockBancoQuestoes[novoIndex].id === questaoAtual.id);
+                    novoIndex = Math.floor(Math.random() * trailQuestions.length);
+                } while (trailQuestions.length > 1 && trailQuestions[novoIndex].id === questaoAtual.id);
                 
-                const novaQuestao = mockBancoQuestoes[novoIndex];
+                const novaQuestao = trailQuestions[novoIndex];
                 
                 // Aplicar a nova pergunta com um pequeno atraso visual
                 setTimeout(() => {
@@ -133,7 +119,7 @@ const Quiz = () => {
 
     if (!questaoAtual) return <div className="min-h-screen bg-background flex items-center justify-center text-primary font-code-md">CARREGANDO_PROTOCOLO...</div>;
 
-    const progressoModulo = (currentStep / mockBancoQuestoes.length) * 100;
+    const progressoModulo = (currentStep / trailQuestions.length) * 100;
 
     return (
         <main className="flex flex-col w-full min-h-screen bg-background px-4 md:px-8 pt-24 pb-12 relative overflow-hidden">

@@ -24,7 +24,7 @@ const CourseCard = ({
 
   return (
     <div 
-      onClick={() => !isInactive && navigate('/quiz')}
+      onClick={() => !isInactive && navigate(`/quiz?trailId=${id}`)}
       className={`md:col-span-8 group relative bg-surface-container-low neon-border p-6 border transition-all gpu-accelerated h-60 md:w-[60%] overflow-hidden ${
         isBlocked 
           ? "border-tertiary/30 cursor-not-allowed bg-tertiary/[0.02]" 

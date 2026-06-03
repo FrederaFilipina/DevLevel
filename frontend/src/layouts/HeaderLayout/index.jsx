@@ -36,7 +36,7 @@ const HeaderLayout = () => {
         {/* Theme Toggle Button */}
         <button 
             onClick={() => setIsLight(!isLight)}
-            className="p-2 border border-primary/20 bg-surface-container-low hover:bg-surface-container transition-colors group relative overflow-hidden"
+            className="p-2 border border-primary/20 bg-surface-container-low cursor-pointer rounded-sm hover:bg-surface-container transition-colors group relative overflow-hidden"
             title={isLight ? "Ativar Modo Noturno" : "Ativar Modo de Alta Luminosidade"}
         >
             <div className="relative z-10 flex items-center justify-center cursor-pointer text-primary">
