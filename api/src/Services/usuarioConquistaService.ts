@@ -1,5 +1,5 @@
-import { type ConquistaUsuario } from "../prisma/generated/prisma/client";
-import { ConquistaUsuarioRepository } from "../Repositories/usuarioConquistaRepository";
+import { type ConquistaUsuario } from "../prisma/generated/client";
+import { ConquistaUsuarioRepository } from "../repositories/usuarioConquistaRepository";
 
 export class ConquistaUsuarioService {
     constructor(

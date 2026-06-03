@@ -1,9 +1,9 @@
 import { Router } from "express";
 
 
-import { TemaRepository } from "../Repositories/temaRepository";
-import { TemaService } from "../Services/temaService";
-import { TemaController } from "../Controller/temaController";
+import { TemaRepository } from "../repositories/temaRepository";
+import { TemaService } from "../services/temaService";
+import { TemaController } from "../controller/temaController";
 
 const router = Router();
 

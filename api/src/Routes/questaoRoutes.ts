@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { QuestaoRepository } from "../Repositories/questaoRepository";
-import { QuestaoService } from "../Services/questaoService";
-import { QuestaoController } from "../Controller/questaoController";
+import { QuestaoRepository } from "../repositories/questaoRepository";
+import { QuestaoService } from "../services/questaoService";
+import { QuestaoController } from "../controller/questaoController";
 import { prisma } from "../prisma/prisma";
 
 const router = Router();

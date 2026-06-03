@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { RespostaQuestaoRepository } from "../Repositories/questaoRespostaRepository";
-import { RespostaQuestaoService } from "../Services/questaoRespostaService";
-import { QuestaoRespostaController } from "../Controller/questaoRespostaController";
+import { RespostaQuestaoRepository } from "../repositories/questaoRespostaRepository";
+import { RespostaQuestaoService } from "../services/questaoRespostaService";
+import { QuestaoRespostaController } from "../controller/questaoRespostaController";
 import { prisma } from "../prisma/prisma";
 
 const router = Router();

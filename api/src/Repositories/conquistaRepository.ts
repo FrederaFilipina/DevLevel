@@ -1,4 +1,4 @@
-import { PrismaClient, type Conquista } from "../prisma/generated/prisma/client";
+import { PrismaClient, type Conquista } from "../prisma/generated/client";
 
 export class ConquistaRepository {
   constructor(private readonly prisma: PrismaClient) {}

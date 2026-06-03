@@ -1,5 +1,5 @@
-import { type RespostaQuestao } from "../prisma/generated/prisma/client";
-import type { RespostaQuestaoRepository } from "../Repositories/questaoRespostaRepository";
+import { type RespostaQuestao } from "../prisma/generated/client";
+import type { RespostaQuestaoRepository } from "../repositories/questaoRespostaRepository";
 
 export class RespostaQuestaoService {
   constructor(

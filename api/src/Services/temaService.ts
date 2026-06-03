@@ -1,5 +1,5 @@
-import { type Tema } from "../prisma/generated/prisma/client";
-import type { TemaRepository } from "../Repositories/temaRepository";
+import { type Tema } from "../prisma/generated/client";
+import type { TemaRepository } from "../repositories/temaRepository";
 
 export class TemaService {
   constructor(

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import { TemaUsuarioService } from "../Services/usuarioTemaService";
-import { TemaUsuarioRepository } from "../Repositories/usuarioTemaRepository";
+import { TemaUsuarioService } from "../services/usuarioTemaService";
+import { TemaUsuarioRepository } from "../repositories/usuarioTemaRepository";
 import { prisma } from "../prisma/prisma";
 
 export class TemaUsuarioController {

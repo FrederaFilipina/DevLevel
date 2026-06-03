@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { prisma } from "../prisma/prisma";
 
-import { HabilidadeRepository } from "../Repositories/habilidadeRepository";
-import { HabilidadeService } from "../Services/habilidadeService";
-import { HabilidadeController } from "../Controller/habilidadeController";
+import { HabilidadeRepository } from "../repositories/habilidadeRepository";
+import { HabilidadeService } from "../services/habilidadeService";
+import { HabilidadeController } from "../controller/habilidadeController";
 
 const router = Router();
 

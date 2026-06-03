@@ -1,7 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import { HabilidadeUsuarioService } from "../Services/usuarioHabilidadeService";
-import { HabilidadeUsuarioRepository } from "../Repositories/usuarioHabilidadeRepository";
+import { HabilidadeUsuarioService } from "../services/usuarioHabilidadeService";
+import { HabilidadeUsuarioRepository } from "../repositories/usuarioHabilidadeRepository";
 import { prisma } from "../prisma/prisma";
 
 export class HabilidadeUsuarioController {

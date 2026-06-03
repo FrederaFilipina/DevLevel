@@ -1,9 +1,9 @@
 import { Router } from "express";
 import {prisma } from "../prisma/prisma";
 
-import { ModuloRepository } from "../Repositories/moduloRepository";
-import { ModuloService } from "../Services/moduloService";
-import { ModuloController } from "../Controller/moduloController";
+import { ModuloRepository } from "../repositories/moduloRepository";
+import { ModuloService } from "../services/moduloService";
+import { ModuloController } from "../controller/moduloController";
 
 const router = Router();
 

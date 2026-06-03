@@ -1,5 +1,5 @@
-import { type TrilhaUsuario, type StatusTrilhaUsuario} from "../prisma/generated/prisma/client";
-import type { TrilhaUsuarioRepository } from "../Repositories/usuarioTrilhaRepository";
+import { type TrilhaUsuario, type StatusTrilhaUsuario} from "../prisma/generated/client";
+import type { TrilhaUsuarioRepository } from "../repositories/usuarioTrilhaRepository";
 
 
 export class TrilhaUsuarioService {

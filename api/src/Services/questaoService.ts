@@ -1,5 +1,5 @@
-import { type Questao } from "../prisma/generated/prisma/client";
-import { QuestaoRepository } from "../Repositories/questaoRepository";
+import { type Questao } from "../prisma/generated/client";
+import { QuestaoRepository } from "../repositories/questaoRepository";
 
 export class QuestaoService {
   constructor(

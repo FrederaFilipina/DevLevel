@@ -1,7 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import { TrilhaUsuarioService } from "../Services/usuarioTrilhaService";
-import { TrilhaUsuarioRepository } from "../Repositories/usuarioTrilhaRepository";
+import { TrilhaUsuarioService } from "../services/usuarioTrilhaService";
+import { TrilhaUsuarioRepository } from "../repositories/usuarioTrilhaRepository";
 import { prisma } from "../prisma/prisma";
 
 export class TrilhaUsuarioController {

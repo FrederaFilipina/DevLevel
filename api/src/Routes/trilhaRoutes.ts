@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { TrilhaRepository } from "../Repositories/trilhaRepository";
-import { TrilhaService } from "../Services/trilhaService";
-import { TrilhaController } from "../Controller/trilhaController";
+import { TrilhaRepository } from "../repositories/trilhaRepository";
+import { TrilhaService } from "../services/trilhaService";
+import { TrilhaController } from "../controller/trilhaController";
 
 const router = Router();
 import { prisma } from "../prisma/prisma";

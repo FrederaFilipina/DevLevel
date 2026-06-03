@@ -1,5 +1,5 @@
-import { type HabilidadeUsuario } from "../prisma/generated/prisma/client";
-import type { HabilidadeUsuarioRepository } from "../Repositories/usuarioHabilidadeRepository";
+import { type HabilidadeUsuario } from "../prisma/generated/client";
+import type { HabilidadeUsuarioRepository } from "../repositories/usuarioHabilidadeRepository";
 
 
 export class HabilidadeUsuarioService {

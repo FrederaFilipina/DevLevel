@@ -1,5 +1,5 @@
-import { type TemaUsuario, type NivelDificuldade } from "../prisma/generated/prisma/client";
-import type { TemaUsuarioRepository } from "../Repositories/usuarioTemaRepository";
+import { type TemaUsuario, type NivelDificuldade } from "../prisma/generated/client";
+import type { TemaUsuarioRepository } from "../repositories/usuarioTemaRepository";
 
 export class TemaUsuarioService {
     constructor(

@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { prisma } from "../prisma/prisma";
 
-import { ConquistaRepository } from "../Repositories/conquistaRepository";
-import { ConquistaService } from "../Services/conquistaService";
-import { ConquistaController } from "../Controller/conquistaController";
+import { ConquistaRepository } from "../repositories/conquistaRepository";
+import { ConquistaService } from "../services/conquistaService";
+import { ConquistaController } from "../controller/conquistaController";
 
 const router = Router();
 

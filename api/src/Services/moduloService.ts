@@ -1,5 +1,5 @@
-import { type Modulo } from "../prisma/generated/prisma/client";
-import { ModuloRepository } from "../Repositories/moduloRepository";
+import { type Modulo } from "../prisma/generated/client";
+import { ModuloRepository } from "../repositories/moduloRepository";
 
 export class ModuloService {
   constructor(
