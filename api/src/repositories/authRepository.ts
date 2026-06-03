@@ -1,5 +1,4 @@
-import type { Token } from "@prisma/client";
-import type{ PrismaClient,Usuario, } from "../prisma/generated/prisma/client";
+import type{ PrismaClient,Usuario,Token } from "../prisma/generated/prisma/client";
 import {prisma} from "../prisma/prisma"
 
 export class AuthRepository{
@@ -15,7 +14,7 @@ export class AuthRepository{
                 email:dataUser.email||"",
                 nome:dataUser.nome||"",
                 senha:dataUser.senha||'',
-                avatar_url:dataUser.avatarUrl,
+                avatarUrl:dataUser.avatarUrl||"",
                 bio:dataUser.bio||null
             }
         })
@@ -32,9 +31,14 @@ export class AuthRepository{
     }
 
     async createToken(dadosToken:Omit<Token,"id"|"revoked">){
-        
+
         return await this.prisma.token.create({
-            data:{...dadosToken}
+            data:{
+                expiresAt:dadosToken.expiresAt||"",
+                token:dadosToken.token||"",
+                type:dadosToken.type,
+                usuarioId:Number(dadosToken.usuarioId)
+            }
         })
     }
 
