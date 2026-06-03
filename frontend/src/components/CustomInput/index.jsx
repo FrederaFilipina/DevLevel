@@ -9,7 +9,6 @@ export const CustomInput = ({ type, label, id, value, setValue = () => {}, place
                 onChange={(e) => setValue(e.target.value)}
                 placeholder={placeholder}
                 id={id}
-                required
                 minLength={min}
                 {...rest}
                 />

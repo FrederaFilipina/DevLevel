@@ -1,6 +1,6 @@
-import type { Usuario } from "../prisma/generated/prisma";
+import type { Usuario } from "../prisma/generated/client";
 import { authRepository, AuthRepository } from "../repositories/authRepository";
-import z, { email } from "zod";
+import z from "zod";
 import bcrypt from"bcrypt"
 import { signTokenAcesso, signTokenRefresh } from "../utils/jwt";
 import { createHash } from "../utils/createHash";
@@ -16,7 +16,7 @@ export class AuthServices{
     async createUser(dadosUser:Omit<Usuario,"id">){
 
         const createUserSchema = z.object({
-            nome:z.string(),
+            nome:z.string("Nome invalido"),
             email:z.email("Email invalido"),
             senha:z.string().min(6,"Senha precisa ter no mínimo 6 carácteres")
         })

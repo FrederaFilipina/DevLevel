@@ -58,22 +58,26 @@ const RegisterModal = ({ isOpen, onClose }) => {
       />
 
       {/* Modal Content - Essential Cyberpunk Style */}
-      <div className={`bg-surface-container-low border border-primary-container/40 p-8 glitch-border relative sm:w-96 w-full max-w-md z-10 gpu-accelerated ${isClosing ? "animate-slow-fade-out" : "animate-slow-fade-in"}`}>
+      <div className={`bg-surface-container-low border border-primary/20 p-8 glitch-border relative sm:w-96 w-full max-w-md z-10 gpu-accelerated ${isClosing ? "animate-slow-fade-out" : "animate-slow-fade-in"}`}>
         {/* Decorative Corner Accents */}
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary-container"></div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary-container"></div>
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary"></div>
 
-        {/* Close Button */}
-        <button 
-          onClick={handleClose}
-          className="absolute top-2 right-2 text-primary-container hover:text-secondary cursor-pointer transition-colors font-code-md"
-        >
-          [X]
-        </button>
-
-        <h2 className="text-code-md text-primary-container mb-4 mt-2 text-center tracking-[0.2em] uppercase">
-          New Operator Registration
-        </h2>
+        <div className="flex justify-between items-start mb-6 border-b border-primary/10 pb-4 relative">
+            <div className="flex flex-col">
+                <span className="text-[8px] text-primary/40 font-code-md tracking-[0.3em] mb-1">NOVO_OPERADOR</span>
+                <h2 className="text-xl font-black text-primary uppercase tracking-tighter italic leading-none">
+                    REGISTRO
+                </h2>
+            </div>
+            <button 
+                onClick={handleClose}
+                className="text-primary/30 hover:text-secondary transition-all font-code-md text-[10px] cursor-pointer border border-primary/10 px-2 py-1 bg-primary/5 hover:bg-secondary/10 hover:border-secondary/30"
+            >
+                [ FECHAR ]
+            </button>
+            <div className="absolute -bottom-[1px] left-0 w-12 h-[2px] bg-secondary shadow-[0_0_10px_rgba(0,243,255,0.8)]"></div>
+        </div>
 
         <div className="space-y-3">
           {/* Name Field */}

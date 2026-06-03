@@ -1,33 +1,64 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import CourseCard from '../../components/CourseCard'
 import { useAuth } from '../../context/AuthContext'
+import ProfileEditModal from '../../components/ProfileEditModal'
+import axios from 'axios'
+import { FiEdit3 } from 'react-icons/fi'
 
 const Dashboard = () => {
-    const { user } = useAuth();
+    const { user: authUser } = useAuth();
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    const fetchUserProfile = async () => {
+        try {
+            const token = localStorage.getItem('tokenAcesso');
+            if (!token) return;
+
+            const response = await axios.get('http://localhost:3000/user/', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setUser(response.data.data);
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserProfile();
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-background">
+                <div className="flex flex-col items-center gap-4">
+                    <div className="w-12 h-12 border-4 border-primary border-t-transparent animate-spin"></div>
+                    <span className="text-primary font-code-md animate-pulse uppercase tracking-[0.3em] text-xs">initializing_link...</span>
+                </div>
+            </div>
+        );
+    }
 
     // Independent Level Calculation Logic
-    // Formula: Level = floor(sqrt(XP / 100)) + 1
-    // This creates a progressive curve where higher levels require more XP
     const calculateLevelData = (xp) => {
-        const baseXP = 100; // XP for level 2
+        const baseXP = 100; 
         const level = Math.floor(Math.sqrt(xp / baseXP)) + 1;
-
-        // XP required for the current level start
         const currentLevelXP = Math.pow(level - 1, 2) * baseXP;
-        // XP required for the next level start
         const nextLevelXP = Math.pow(level, 2) * baseXP;
-
         const xpInCurrentLevel = xp - currentLevelXP;
         const xpRequiredForNext = nextLevelXP - currentLevelXP;
         const progress = Math.min(Math.round((xpInCurrentLevel / xpRequiredForNext) * 100), 100);
-
         return { level, progress, nextLevelXP, xpInCurrentLevel, xpRequiredForNext };
     };
 
     const currentXP = user?.xp || 0;
-    const { level: calculatedLevel, progress: xpProgress, nextLevelXP, xpRequiredForNext, xpInCurrentLevel } = calculateLevelData(currentXP);
+    const { level: calculatedLevel, progress: xpProgress, nextLevelXP } = calculateLevelData(currentXP);
 
-    // Fallback data for fields not yet in JWT/Context
     const userData = {
         name: user?.nome || (user?.email ? user.email.split('@')[0].toUpperCase() : "AGENTE_ANONIMO"),
         xp: currentXP,
@@ -36,7 +67,6 @@ const Dashboard = () => {
         role: user?.role || "USER"
     };
 
-    // Dynamic color for score
     const getScoreColor = (score) => {
         if (score === 0) return 'text-tertiary border-tertiary/40 bg-tertiary/5';
         if (score < 1000) return 'text-secondary-fixed-dim border-secondary-fixed-dim/40 bg-secondary/5';
@@ -45,8 +75,6 @@ const Dashboard = () => {
     };
 
     const scoreStyles = getScoreColor(userData.score);
-
-    // Temporary avatar using a bot-style generator
     const tempAvatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${user?.id || 'default'}&backgroundColor=020202,0d0d0d`;
 
     return (
@@ -102,10 +130,21 @@ const Dashboard = () => {
                 <div className="flex-1 flex flex-col gap-4 md:gap-5 text-left">
                     <div className="relative flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
                         <div>
-                            <span className="text-[10px] text-primary/40 font-code-md block mb-1">USER_IDENTIFIER: {user?.id?.slice(0, 8) || "UNKNOWN"}</span>
-                            <h2 className="text-3xl md:text-6xl font-black text-primary uppercase tracking-tighter italic leading-tight md:leading-[0.8] group-hover:drop-shadow-[0_0_8px_rgba(252,238,10,0.3)] transition-all">
-                                {userData.name}
-                            </h2>
+                            <span className="text-[10px] text-primary/40 font-code-md block mb-1 uppercase tracking-widest">
+                                USER_IDENTIFIER: {user?.id ? String(user.id).slice(0, 8) : "UNKNOWN"}
+                            </span>
+                            <div className="flex items-center gap-4">
+                                <h2 className="text-3xl md:text-6xl font-black text-primary uppercase tracking-tighter italic leading-tight md:leading-[0.8] group-hover:drop-shadow-[0_0_8px_rgba(252,238,10,0.3)] transition-all">
+                                    {userData.name}
+                                </h2>
+                                <button 
+                                    onClick={() => setIsEditModalOpen(true)}
+                                    className="p-2 border border-primary/20 bg-primary/5 text-primary hover:bg-primary hover:text-background transition-all cursor-pointer rounded-sm"
+                                    title="EDIT_PROFILE"
+                                >
+                                    <FiEdit3 size={18} />
+                                </button>
+                            </div>
                         </div>
 
                         {/* Level Badge (Desktop Only) */}
@@ -212,6 +251,14 @@ const Dashboard = () => {
                     difficulty="HARD" 
                 />
             </div>
+
+            {/* Profile Edit Modal */}
+            <ProfileEditModal 
+                isOpen={isEditModalOpen} 
+                onClose={() => setIsEditModalOpen(false)} 
+                profile={user} 
+                onUpdate={fetchUserProfile}
+            />
         </main>
     )
 }

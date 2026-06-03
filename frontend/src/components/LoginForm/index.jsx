@@ -38,15 +38,12 @@ const LoginForm = ({ onRegisterClick }) => {
 
        if(tokenAcesso && tokenRefresh) {
         login(email, tokenAcesso, tokenRefresh)
-        localStorage.setItem("tokenAcesso", tokenAcesso)
-        localStorage.setItem("tokenRefresh", tokenRefresh)
         toast.success("Acesso garantido!", {
           position: "top-right",
           autoClose: 3000,
           pauseOnHover: false
         })
         limparInputs()
-        setTimeout(() => navigate("/dashboard"), 2000);
       }
     } catch (error) {
       console.log(error)
