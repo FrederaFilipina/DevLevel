@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { userServices, type UserServices } from "../services/UserServices";
+import { userServices, type UserServices } from "../Services/UserServices";
 import { verificarTokenAcesso } from "../utils/jwt";
 import type { Usuario } from "../prisma/generated/client";
 import { ZodError } from "zod";
