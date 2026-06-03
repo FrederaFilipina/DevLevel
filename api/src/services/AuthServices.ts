@@ -16,9 +16,10 @@ export class AuthServices{
     async createUser(dadosUser:Omit<Usuario,"id">){
 
         const createUserSchema = z.object({
-            nome:z.string(),
+            nome:z.string("Nome invalido"),
             email:z.email("Email invalido"),
-            senha:z.string().min(6,"Senha precisa ter no mínimo 6 carácteres")
+            senha:z.string().min(6,"Senha precisa ter no mínimo 6 carácteres"),
+            bio:z.string("Bio invalido")
         })
 
 
