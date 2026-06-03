@@ -306,70 +306,8 @@ model HabilidadeUsuario {
   @@map("habilidade_usuario")
 }
 
-<<<<<<< HEAD
-model Insignia {
-  id String @id @default(uuid())
 
-  titulo    String
-  descricao String?
 
-  icone String?
-
-  tipo TipoInsignia
-
-  xpRecompensa Int @default(0)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  usuarios InsigniaUsuario[]
-
-  @@map("insignia")
-}
-
-enum TipoInsignia {
-  CONCLUSAO_TRILHA
-  APROVACAO_TRILHA
-  MESTRE_TEMA
-}
-
-model InsigniaUsuario {
-  id String @id @default(uuid())
-
-  usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id])
-
-  insigniaId String
-  insignia   Insignia @relation(fields: [insigniaId], references: [id])
-
-  temaId String?
-  tema   Tema?   @relation(fields: [temaId], references: [id])
-
-  trilhaId String?
-  trilha   Trilha? @relation(fields: [trilhaId], references: [id])
-
-  desbloqueadaEm DateTime @default(now())
-
-  @@map("insignia_usuario")
-}
-
-model Ranking {
-  id String @id @default(uuid())
-
-  usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id])
-
-  xpTotal Int
-
-  posicao Int
-
-  updatedAt DateTime @updatedAt
-
-  @@map("ranking")
-}
-
-=======
->>>>>>> feat/camadas
 enum Role {
   USER
   ADMIN
@@ -390,10 +328,6 @@ model Token {
   revoked Boolean @default(false)
 
   expiresAt DateTime
-<<<<<<< HEAD
-=======
-
->>>>>>> feat/camadas
   usuarioId Int
 
   usuario Usuario @relation(fields: [usuarioId], references: [id])
