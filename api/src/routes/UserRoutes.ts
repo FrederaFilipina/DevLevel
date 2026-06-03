@@ -18,3 +18,31 @@ userRoutes.delete("/",(req,res)=>{
 
 })
 
+userRoutes.put("/email",(req,res)=>{
+
+    return userController.editarEmail(req,res)
+
+})
+
+userRoutes.put("/senha",(req,res)=>{
+
+    return userController.editarSenha(req,res)
+
+})
+
+userRoutes.put("/bio",(req,res)=>{
+
+    return userController.editarBio(req,res)
+
+})
+
+userRoutes.put("/nome",(req,res)=>{
+
+    return userController.editarNome(req,res)
+
+})
+
+
+
+
+

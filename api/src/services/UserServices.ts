@@ -3,6 +3,7 @@ import z, { bigint } from "zod";
 import { userRepository, type Edicao, type UserRepository } from "../repositories/userRepository";
 import { getToken } from "../utils/jwt";
 import type { Usuario } from "@prisma/client";
+import { createHash } from "../utils/createHash";
 
 interface EdicaoServices {
 
@@ -67,8 +68,10 @@ export class UserServices {
 
         const validation = editSchema.parse({senha:dadosAtualisado})
 
+        const hash = await createHash(dadosAtualisado)
 
-        return await this.repository.editarSenha({id:user.id,dadosAtualisado})
+
+        return await this.repository.editarSenha({id:user.id,dadosAtualisado:hash})
 
         
 

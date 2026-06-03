@@ -1,8 +1,9 @@
 import type { Request, Response } from "express";
 import { userServices, type UserServices } from "../services/UserServices";
-import { getToken, verificarTokenAcesso } from "../utils/jwt";
+import { verificarTokenAcesso } from "../utils/jwt";
 import type { Usuario } from "@prisma/client";
 import { ZodError } from "zod";
+
 
 export class UserController {
     constructor(private readonly services: UserServices) {
