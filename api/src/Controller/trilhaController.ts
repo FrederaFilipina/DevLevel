@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { TrilhaService } from "../Services/trilhaService";
+import type { TrilhaService } from "../services/trilhaService";
 
 export class TrilhaController {
   constructor(

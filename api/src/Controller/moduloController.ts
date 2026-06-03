@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { ModuloService } from "../Services/moduloService";
+import type { ModuloService } from "../services/moduloService";
 
 export class ModuloController {
   constructor(

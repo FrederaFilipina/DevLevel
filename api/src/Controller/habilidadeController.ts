@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { HabilidadeService } from "../Services/habilidadeService";
+import type { HabilidadeService } from "../services/habilidadeService";
 
 export class HabilidadeController {
   constructor(

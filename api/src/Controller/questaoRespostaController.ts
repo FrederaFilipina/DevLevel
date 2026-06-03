@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { RespostaQuestaoService } from "../Services/questaoRespostaService";
+import type { RespostaQuestaoService } from "../services/questaoRespostaService";
 
 export class QuestaoRespostaController {
   constructor(

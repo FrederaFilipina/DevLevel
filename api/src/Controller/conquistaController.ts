@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { ConquistaService } from "../Services/conquistaService";
+import type { ConquistaService } from "../services/conquistaService";
 
 export class ConquistaController {
   constructor(

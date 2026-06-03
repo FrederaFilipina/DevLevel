@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { TemaService } from "../Services/temaService";
+import type { TemaService } from "../services/temaService";
 
 export class TemaController {
   constructor(
