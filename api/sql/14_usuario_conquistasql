@@ -1,0 +1,21 @@
+INSERT INTO conquista_usuario (
+  "usuarioId",
+  "conquistaId",
+  "desbloqueadaEm"
+)
+VALUES
+
+-- Ana
+(1, 1, NOW()),
+(1, 2, NOW()),
+
+-- Bruno
+(2, 1, NOW()),
+(2, 2, NOW()),
+
+-- Carla
+(3, 1, NOW()),
+(3, 2, NOW()),
+(3, 3, NOW()),
+(3, 4, NOW()),
+(3, 5, NOW());
