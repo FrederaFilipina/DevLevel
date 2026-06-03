@@ -1,4 +1,4 @@
-import type{ PrismaClient,Usuario,Token } from "../prisma/generated/prisma/client";
+import type{ PrismaClient,Usuario,Token } from "../prisma/generated/client";
 import {prisma} from "../prisma/prisma"
 
 export class AuthRepository{

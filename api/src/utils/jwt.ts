@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { env } from '../env'
-import type { Usuario } from '../prisma/generated/prisma/client'
+import type { Usuario } from '../prisma/generated/client'
 
 interface Token extends Usuario {
     iat: number,
