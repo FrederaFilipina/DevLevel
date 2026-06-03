@@ -1,4 +1,4 @@
-import { type Habilidade } from "../prisma/generated/prisma/client";
+import { type Habilidade } from "../prisma/generated/client";
 import { HabilidadeRepository } from "../Repositories/habilidadeRepository";
 
 export class HabilidadeService {

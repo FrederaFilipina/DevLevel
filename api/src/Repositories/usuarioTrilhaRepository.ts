@@ -1,4 +1,4 @@
-import { PrismaClient, type TrilhaUsuario, type StatusTrilhaUsuario } from "../prisma/generated/prisma/client";
+import { PrismaClient, type TrilhaUsuario, type StatusTrilhaUsuario } from "../prisma/generated/client";
 
 export class TrilhaUsuarioRepository {
   constructor(private readonly prisma: PrismaClient) {}

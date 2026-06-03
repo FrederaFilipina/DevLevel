@@ -1,7 +1,7 @@
 import {
   PrismaClient,
   type RespostaQuestao,
-} from "../prisma/generated/prisma/client";
+} from "../prisma/generated/client";
 
 export class RespostaQuestaoRepository {
   constructor(private readonly prisma: PrismaClient) {}

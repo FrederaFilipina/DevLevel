@@ -1,4 +1,4 @@
-import { type RespostaUsuario } from "../prisma/generated/prisma/client";
+import { type RespostaUsuario } from "../prisma/generated/client";
 import type { RespostaUsuarioRepository } from "../Repositories/usuarioRespostaRepository";
 
 

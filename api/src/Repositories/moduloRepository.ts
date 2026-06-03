@@ -1,4 +1,4 @@
-import { PrismaClient, type Modulo } from "../prisma/generated/prisma/client";
+import { PrismaClient, type Modulo } from "../prisma/generated/client";
 
 export class ModuloRepository {
   constructor(private prisma: PrismaClient) {}

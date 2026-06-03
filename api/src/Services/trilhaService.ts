@@ -1,4 +1,4 @@
-import { type Trilha } from "../prisma/generated/prisma/client";
+import { type Trilha } from "../prisma/generated/client";
 import { TrilhaRepository } from "../Repositories/trilhaRepository";
 
 export class TrilhaService {

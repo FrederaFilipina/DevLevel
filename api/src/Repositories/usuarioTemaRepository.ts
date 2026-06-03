@@ -1,4 +1,4 @@
-import { PrismaClient, type TemaUsuario, type NivelDificuldade } from "../prisma/generated/prisma/client";
+import { PrismaClient, type TemaUsuario, type NivelDificuldade } from "../prisma/generated/client";
 
 export class TemaUsuarioRepository {
   constructor(private readonly prisma: PrismaClient) {}

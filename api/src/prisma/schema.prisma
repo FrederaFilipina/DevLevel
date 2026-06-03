@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "./generated/prisma"
+  output   = "./generated"
 }
 
 datasource db {
@@ -34,8 +34,10 @@ model Usuario {
 
   conquistasUsuario  ConquistaUsuario[]
   habilidadesUsuario HabilidadeUsuario[]
+  insigniasUsuario   InsigniaUsuario[]
 
-  tokens Token[]
+  rankings Ranking[]
+  tokens   Token[]
 
   @@map("usuario")
 }
@@ -52,6 +54,8 @@ model Tema {
   trilhas  Trilha[]
   usuarios TemaUsuario[]
 
+  insignias InsigniaUsuario[]
+
   @@map("tema")
 }
 
@@ -62,7 +66,7 @@ model TemaUsuario {
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   temaId Int
-  tema   Tema @relation(fields: [temaId], references: [id])
+  tema   Tema   @relation(fields: [temaId], references: [id])
 
   pontuacaoTotal Int @default(0)
 
@@ -81,7 +85,7 @@ model Trilha {
   id Int @id @default(autoincrement())
 
   temaId Int
-  tema   Tema @relation(fields: [temaId], references: [id])
+  tema   Tema   @relation(fields: [temaId], references: [id])
 
   titulo    String
   descricao String?
@@ -93,18 +97,18 @@ model Trilha {
   pontuacaoMinima Int
 
   trilhaAnteriorId Int?
-
-  trilhaAnterior Trilha? @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
+  trilhaAnterior   Trilha? @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
 
   proximasTrilhas Trilha[] @relation("ProgressaoTrilha")
 
   modulos  Modulo[]
   usuarios TrilhaUsuario[]
 
+  insignias InsigniaUsuario[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([temaId, ordem])
   @@map("trilha")
 }
 
@@ -130,7 +134,6 @@ model Modulo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([trilhaId, ordem])
   @@map("modulo")
 }
 
@@ -155,7 +158,6 @@ model Questao {
   respostas        RespostaQuestao[]
   respostasUsuario RespostaUsuario[]
 
-  @@unique([moduloId, ordem])
   @@map("questao")
 }
 
@@ -227,8 +229,8 @@ model TrilhaUsuario {
 
   podeDesbloquear Boolean @default(false)
 
-  moduloAtualId  Int?
-  questaoAtualId Int?
+  moduloAtualId  String?
+  questaoAtualId String?
 
   iniciadaEm  DateTime  @default(now())
   concluidaEm DateTime?
@@ -247,7 +249,7 @@ enum StatusTrilhaUsuario {
 model Conquista {
   id Int @id @default(autoincrement())
 
-  titulo    String  @unique
+  titulo    String
   descricao String?
 
   icone String?
@@ -279,7 +281,7 @@ model ConquistaUsuario {
 model Habilidade {
   id Int @id @default(autoincrement())
 
-  nome      String  @unique
+  nome      String
   descricao String?
 
   usuarios HabilidadeUsuario[]
@@ -302,8 +304,68 @@ model HabilidadeUsuario {
 
   updatedAt DateTime @updatedAt
 
-  @@unique([usuarioId, habilidadeId])
   @@map("habilidade_usuario")
+}
+
+model Insignia {
+  id Int @id @default(autoincrement())
+
+  titulo    String
+  descricao String?
+
+  icone String?
+
+  tipo TipoInsignia
+
+  xpRecompensa Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  usuarios InsigniaUsuario[]
+
+  @@map("insignia")
+}
+
+enum TipoInsignia {
+  CONCLUSAO_TRILHA
+  APROVACAO_TRILHA
+  MESTRE_TEMA
+}
+
+model InsigniaUsuario {
+  id Int @id @default(autoincrement())
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+
+  insigniaId Int
+  insignia   Insignia @relation(fields: [insigniaId], references: [id])
+
+  temaId Int?
+  tema   Tema?   @relation(fields: [temaId], references: [id])
+
+  trilhaId Int?
+  trilha   Trilha? @relation(fields: [trilhaId], references: [id])
+
+  desbloqueadaEm DateTime @default(now())
+
+  @@map("insignia_usuario")
+}
+
+model Ranking {
+  id Int @id @default(autoincrement())
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+
+  xpTotal Int
+
+  posicao Int
+
+  updatedAt DateTime @updatedAt
+
+  @@map("ranking")
 }
 
 enum Role {
@@ -317,16 +379,11 @@ enum TypeToken {
 }
 
 model Token {
-  id Int @id @default(autoincrement())
-
-  token String @db.Text
-
-  type TypeToken @default(ACCESS)
-
-  revoked Boolean @default(false)
-
+  id        Int       @id @default(autoincrement())
+  token     String    @db.Text
+  type      TypeToken @default(ACCESS)
+  revoked   Boolean   @default(false)
   expiresAt DateTime
-
   usuarioId Int
 
   usuario Usuario @relation(fields: [usuarioId], references: [id])
