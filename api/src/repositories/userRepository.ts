@@ -1,4 +1,4 @@
-import type{ PrismaClient } from "../prisma/generated/prisma/client";
+import type{ PrismaClient } from "../prisma/generated/client";
 import {prisma} from "../prisma/prisma"
 
 export type Edicao ={

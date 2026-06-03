@@ -1,8 +1,7 @@
 
 import z, { bigint } from "zod";
-import { userRepository, type Edicao, type UserRepository } from "../repositories/userRepository";
+import { userRepository,  type UserRepository } from "../repositories/userRepository";
 import { getToken } from "../utils/jwt";
-import type { Usuario } from "@prisma/client";
 import { createHash } from "../utils/createHash";
 
 interface EdicaoServices {
