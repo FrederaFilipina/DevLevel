@@ -27,15 +27,17 @@ export type AggregateConquista = {
 }
 
 export type ConquistaAvgAggregateOutputType = {
+  id: number | null
   xpRecompensa: number | null
 }
 
 export type ConquistaSumAggregateOutputType = {
+  id: number | null
   xpRecompensa: number | null
 }
 
 export type ConquistaMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   titulo: string | null
   descricao: string | null
   icone: string | null
@@ -45,7 +47,7 @@ export type ConquistaMinAggregateOutputType = {
 }
 
 export type ConquistaMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   titulo: string | null
   descricao: string | null
   icone: string | null
@@ -67,10 +69,12 @@ export type ConquistaCountAggregateOutputType = {
 
 
 export type ConquistaAvgAggregateInputType = {
+  id?: true
   xpRecompensa?: true
 }
 
 export type ConquistaSumAggregateInputType = {
+  id?: true
   xpRecompensa?: true
 }
 
@@ -192,7 +196,7 @@ export type ConquistaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 export type ConquistaGroupByOutputType = {
-  id: string
+  id: number
   titulo: string
   descricao: string | null
   icone: string | null
@@ -225,7 +229,7 @@ export type ConquistaWhereInput = {
   AND?: Prisma.ConquistaWhereInput | Prisma.ConquistaWhereInput[]
   OR?: Prisma.ConquistaWhereInput[]
   NOT?: Prisma.ConquistaWhereInput | Prisma.ConquistaWhereInput[]
-  id?: Prisma.StringFilter<"Conquista"> | string
+  id?: Prisma.IntFilter<"Conquista"> | number
   titulo?: Prisma.StringFilter<"Conquista"> | string
   descricao?: Prisma.StringNullableFilter<"Conquista"> | string | null
   icone?: Prisma.StringNullableFilter<"Conquista"> | string | null
@@ -247,18 +251,18 @@ export type ConquistaOrderByWithRelationInput = {
 }
 
 export type ConquistaWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  titulo?: string
   AND?: Prisma.ConquistaWhereInput | Prisma.ConquistaWhereInput[]
   OR?: Prisma.ConquistaWhereInput[]
   NOT?: Prisma.ConquistaWhereInput | Prisma.ConquistaWhereInput[]
-  titulo?: Prisma.StringFilter<"Conquista"> | string
   descricao?: Prisma.StringNullableFilter<"Conquista"> | string | null
   icone?: Prisma.StringNullableFilter<"Conquista"> | string | null
   xpRecompensa?: Prisma.IntFilter<"Conquista"> | number
   createdAt?: Prisma.DateTimeFilter<"Conquista"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Conquista"> | Date | string
   usuarios?: Prisma.ConquistaUsuarioListRelationFilter
-}, "id">
+}, "id" | "titulo">
 
 export type ConquistaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -279,7 +283,7 @@ export type ConquistaScalarWhereWithAggregatesInput = {
   AND?: Prisma.ConquistaScalarWhereWithAggregatesInput | Prisma.ConquistaScalarWhereWithAggregatesInput[]
   OR?: Prisma.ConquistaScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ConquistaScalarWhereWithAggregatesInput | Prisma.ConquistaScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Conquista"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Conquista"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"Conquista"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Conquista"> | string | null
   icone?: Prisma.StringNullableWithAggregatesFilter<"Conquista"> | string | null
@@ -289,7 +293,6 @@ export type ConquistaScalarWhereWithAggregatesInput = {
 }
 
 export type ConquistaCreateInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   icone?: string | null
@@ -300,7 +303,7 @@ export type ConquistaCreateInput = {
 }
 
 export type ConquistaUncheckedCreateInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao?: string | null
   icone?: string | null
@@ -311,7 +314,6 @@ export type ConquistaUncheckedCreateInput = {
 }
 
 export type ConquistaUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -322,7 +324,7 @@ export type ConquistaUpdateInput = {
 }
 
 export type ConquistaUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -333,7 +335,7 @@ export type ConquistaUncheckedUpdateInput = {
 }
 
 export type ConquistaCreateManyInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao?: string | null
   icone?: string | null
@@ -343,7 +345,6 @@ export type ConquistaCreateManyInput = {
 }
 
 export type ConquistaUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -353,7 +354,7 @@ export type ConquistaUpdateManyMutationInput = {
 }
 
 export type ConquistaUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -373,6 +374,7 @@ export type ConquistaCountOrderByAggregateInput = {
 }
 
 export type ConquistaAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
 }
 
@@ -397,6 +399,7 @@ export type ConquistaMinOrderByAggregateInput = {
 }
 
 export type ConquistaSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
 }
 
@@ -420,7 +423,6 @@ export type ConquistaUpdateOneRequiredWithoutUsuariosNestedInput = {
 }
 
 export type ConquistaCreateWithoutUsuariosInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   icone?: string | null
@@ -430,7 +432,7 @@ export type ConquistaCreateWithoutUsuariosInput = {
 }
 
 export type ConquistaUncheckedCreateWithoutUsuariosInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao?: string | null
   icone?: string | null
@@ -456,7 +458,6 @@ export type ConquistaUpdateToOneWithWhereWithoutUsuariosInput = {
 }
 
 export type ConquistaUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -466,7 +467,7 @@ export type ConquistaUpdateWithoutUsuariosInput = {
 }
 
 export type ConquistaUncheckedUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -562,7 +563,7 @@ export type $ConquistaPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     usuarios: Prisma.$ConquistaUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     titulo: string
     descricao: string | null
     icone: string | null
@@ -993,7 +994,7 @@ export interface Prisma__ConquistaClient<T, Null = never, ExtArgs extends runtim
  * Fields of the Conquista model
  */
 export interface ConquistaFieldRefs {
-  readonly id: Prisma.FieldRef<"Conquista", 'String'>
+  readonly id: Prisma.FieldRef<"Conquista", 'Int'>
   readonly titulo: Prisma.FieldRef<"Conquista", 'String'>
   readonly descricao: Prisma.FieldRef<"Conquista", 'String'>
   readonly icone: Prisma.FieldRef<"Conquista", 'String'>

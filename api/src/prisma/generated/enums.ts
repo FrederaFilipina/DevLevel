@@ -28,15 +28,6 @@ export const StatusTrilhaUsuario = {
 export type StatusTrilhaUsuario = (typeof StatusTrilhaUsuario)[keyof typeof StatusTrilhaUsuario]
 
 
-export const TipoInsignia = {
-  CONCLUSAO_TRILHA: 'CONCLUSAO_TRILHA',
-  APROVACAO_TRILHA: 'APROVACAO_TRILHA',
-  MESTRE_TEMA: 'MESTRE_TEMA'
-} as const
-
-export type TipoInsignia = (typeof TipoInsignia)[keyof typeof TipoInsignia]
-
-
 export const Role = {
   USER: 'USER',
   ADMIN: 'ADMIN'

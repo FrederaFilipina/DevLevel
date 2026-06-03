@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { userServices, type UserServices } from "../services/UserServices";
 import { verificarTokenAcesso } from "../utils/jwt";
-import type { Usuario } from "@prisma/client";
+import type { Usuario } from "../prisma/generated/client";
 import { ZodError } from "zod";
 
 
@@ -103,7 +103,7 @@ export class UserController {
 
             res.status(200).json({
                 message: "Email modificado",
-                data: await this.services.editarEmail({ token, dadosAtualisado: email || "" })
+                data: await this.services.editarEmail({ token, dadosAtualizados: email || "" })
             })
 
         } catch (error) {
@@ -155,7 +155,7 @@ export class UserController {
 
             res.status(200).json({
                 message: "Senha modificado",
-                data: await this.services.editarSenha({ token, dadosAtualisado: senha || "" })
+                data: await this.services.editarSenha({ token, dadosAtualizados: senha || "" })
             })
 
         } catch (error) {
@@ -206,7 +206,7 @@ export class UserController {
 
             res.status(200).json({
                 message: "Nome modificado",
-                data: await this.services.editarNome({ token, dadosAtualisado: nome || "" })
+                data: await this.services.editarNome({ token, dadosAtualizados: nome || "" })
             })
 
         } catch (error) {
@@ -257,7 +257,7 @@ export class UserController {
 
             res.status(200).json({
                 message: "Bio modificado",
-                data: await this.services.editarBio({ token, dadosAtualisado: bio || "" })
+                data: await this.services.editarBio({ token, dadosAtualizados: bio || "" })
             })
 
         } catch (error) {

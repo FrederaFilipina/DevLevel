@@ -27,24 +27,28 @@ export type AggregateConquistaUsuario = {
 }
 
 export type ConquistaUsuarioAvgAggregateOutputType = {
+  id: number | null
   usuarioId: number | null
+  conquistaId: number | null
 }
 
 export type ConquistaUsuarioSumAggregateOutputType = {
+  id: number | null
   usuarioId: number | null
+  conquistaId: number | null
 }
 
 export type ConquistaUsuarioMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   usuarioId: number | null
-  conquistaId: string | null
+  conquistaId: number | null
   desbloqueadaEm: Date | null
 }
 
 export type ConquistaUsuarioMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   usuarioId: number | null
-  conquistaId: string | null
+  conquistaId: number | null
   desbloqueadaEm: Date | null
 }
 
@@ -58,11 +62,15 @@ export type ConquistaUsuarioCountAggregateOutputType = {
 
 
 export type ConquistaUsuarioAvgAggregateInputType = {
+  id?: true
   usuarioId?: true
+  conquistaId?: true
 }
 
 export type ConquistaUsuarioSumAggregateInputType = {
+  id?: true
   usuarioId?: true
+  conquistaId?: true
 }
 
 export type ConquistaUsuarioMinAggregateInputType = {
@@ -174,9 +182,9 @@ export type ConquistaUsuarioGroupByArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 export type ConquistaUsuarioGroupByOutputType = {
-  id: string
+  id: number
   usuarioId: number
-  conquistaId: string
+  conquistaId: number
   desbloqueadaEm: Date
   _count: ConquistaUsuarioCountAggregateOutputType | null
   _avg: ConquistaUsuarioAvgAggregateOutputType | null
@@ -204,9 +212,9 @@ export type ConquistaUsuarioWhereInput = {
   AND?: Prisma.ConquistaUsuarioWhereInput | Prisma.ConquistaUsuarioWhereInput[]
   OR?: Prisma.ConquistaUsuarioWhereInput[]
   NOT?: Prisma.ConquistaUsuarioWhereInput | Prisma.ConquistaUsuarioWhereInput[]
-  id?: Prisma.StringFilter<"ConquistaUsuario"> | string
+  id?: Prisma.IntFilter<"ConquistaUsuario"> | number
   usuarioId?: Prisma.IntFilter<"ConquistaUsuario"> | number
-  conquistaId?: Prisma.StringFilter<"ConquistaUsuario"> | string
+  conquistaId?: Prisma.IntFilter<"ConquistaUsuario"> | number
   desbloqueadaEm?: Prisma.DateTimeFilter<"ConquistaUsuario"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   conquista?: Prisma.XOR<Prisma.ConquistaScalarRelationFilter, Prisma.ConquistaWhereInput>
@@ -222,12 +230,12 @@ export type ConquistaUsuarioOrderByWithRelationInput = {
 }
 
 export type ConquistaUsuarioWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ConquistaUsuarioWhereInput | Prisma.ConquistaUsuarioWhereInput[]
   OR?: Prisma.ConquistaUsuarioWhereInput[]
   NOT?: Prisma.ConquistaUsuarioWhereInput | Prisma.ConquistaUsuarioWhereInput[]
   usuarioId?: Prisma.IntFilter<"ConquistaUsuario"> | number
-  conquistaId?: Prisma.StringFilter<"ConquistaUsuario"> | string
+  conquistaId?: Prisma.IntFilter<"ConquistaUsuario"> | number
   desbloqueadaEm?: Prisma.DateTimeFilter<"ConquistaUsuario"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   conquista?: Prisma.XOR<Prisma.ConquistaScalarRelationFilter, Prisma.ConquistaWhereInput>
@@ -249,56 +257,53 @@ export type ConquistaUsuarioScalarWhereWithAggregatesInput = {
   AND?: Prisma.ConquistaUsuarioScalarWhereWithAggregatesInput | Prisma.ConquistaUsuarioScalarWhereWithAggregatesInput[]
   OR?: Prisma.ConquistaUsuarioScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ConquistaUsuarioScalarWhereWithAggregatesInput | Prisma.ConquistaUsuarioScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"ConquistaUsuario"> | string
+  id?: Prisma.IntWithAggregatesFilter<"ConquistaUsuario"> | number
   usuarioId?: Prisma.IntWithAggregatesFilter<"ConquistaUsuario"> | number
-  conquistaId?: Prisma.StringWithAggregatesFilter<"ConquistaUsuario"> | string
+  conquistaId?: Prisma.IntWithAggregatesFilter<"ConquistaUsuario"> | number
   desbloqueadaEm?: Prisma.DateTimeWithAggregatesFilter<"ConquistaUsuario"> | Date | string
 }
 
 export type ConquistaUsuarioCreateInput = {
-  id?: string
   desbloqueadaEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutConquistasUsuarioInput
   conquista: Prisma.ConquistaCreateNestedOneWithoutUsuariosInput
 }
 
 export type ConquistaUsuarioUncheckedCreateInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  conquistaId: string
+  conquistaId: number
   desbloqueadaEm?: Date | string
 }
 
 export type ConquistaUsuarioUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutConquistasUsuarioNestedInput
   conquista?: Prisma.ConquistaUpdateOneRequiredWithoutUsuariosNestedInput
 }
 
 export type ConquistaUsuarioUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  conquistaId?: Prisma.StringFieldUpdateOperationsInput | string
+  conquistaId?: Prisma.IntFieldUpdateOperationsInput | number
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConquistaUsuarioCreateManyInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  conquistaId: string
+  conquistaId: number
   desbloqueadaEm?: Date | string
 }
 
 export type ConquistaUsuarioUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConquistaUsuarioUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  conquistaId?: Prisma.StringFieldUpdateOperationsInput | string
+  conquistaId?: Prisma.IntFieldUpdateOperationsInput | number
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -320,7 +325,9 @@ export type ConquistaUsuarioCountOrderByAggregateInput = {
 }
 
 export type ConquistaUsuarioAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
+  conquistaId?: Prisma.SortOrder
 }
 
 export type ConquistaUsuarioMaxOrderByAggregateInput = {
@@ -338,7 +345,9 @@ export type ConquistaUsuarioMinOrderByAggregateInput = {
 }
 
 export type ConquistaUsuarioSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
+  conquistaId?: Prisma.SortOrder
 }
 
 export type ConquistaUsuarioCreateNestedManyWithoutUsuarioInput = {
@@ -426,14 +435,13 @@ export type ConquistaUsuarioUncheckedUpdateManyWithoutConquistaNestedInput = {
 }
 
 export type ConquistaUsuarioCreateWithoutUsuarioInput = {
-  id?: string
   desbloqueadaEm?: Date | string
   conquista: Prisma.ConquistaCreateNestedOneWithoutUsuariosInput
 }
 
 export type ConquistaUsuarioUncheckedCreateWithoutUsuarioInput = {
-  id?: string
-  conquistaId: string
+  id?: number
+  conquistaId: number
   desbloqueadaEm?: Date | string
 }
 
@@ -467,20 +475,19 @@ export type ConquistaUsuarioScalarWhereInput = {
   AND?: Prisma.ConquistaUsuarioScalarWhereInput | Prisma.ConquistaUsuarioScalarWhereInput[]
   OR?: Prisma.ConquistaUsuarioScalarWhereInput[]
   NOT?: Prisma.ConquistaUsuarioScalarWhereInput | Prisma.ConquistaUsuarioScalarWhereInput[]
-  id?: Prisma.StringFilter<"ConquistaUsuario"> | string
+  id?: Prisma.IntFilter<"ConquistaUsuario"> | number
   usuarioId?: Prisma.IntFilter<"ConquistaUsuario"> | number
-  conquistaId?: Prisma.StringFilter<"ConquistaUsuario"> | string
+  conquistaId?: Prisma.IntFilter<"ConquistaUsuario"> | number
   desbloqueadaEm?: Prisma.DateTimeFilter<"ConquistaUsuario"> | Date | string
 }
 
 export type ConquistaUsuarioCreateWithoutConquistaInput = {
-  id?: string
   desbloqueadaEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutConquistasUsuarioInput
 }
 
 export type ConquistaUsuarioUncheckedCreateWithoutConquistaInput = {
-  id?: string
+  id?: number
   usuarioId: number
   desbloqueadaEm?: Date | string
 }
@@ -512,49 +519,47 @@ export type ConquistaUsuarioUpdateManyWithWhereWithoutConquistaInput = {
 }
 
 export type ConquistaUsuarioCreateManyUsuarioInput = {
-  id?: string
-  conquistaId: string
+  id?: number
+  conquistaId: number
   desbloqueadaEm?: Date | string
 }
 
 export type ConquistaUsuarioUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conquista?: Prisma.ConquistaUpdateOneRequiredWithoutUsuariosNestedInput
 }
 
 export type ConquistaUsuarioUncheckedUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  conquistaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  conquistaId?: Prisma.IntFieldUpdateOperationsInput | number
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  conquistaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  conquistaId?: Prisma.IntFieldUpdateOperationsInput | number
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConquistaUsuarioCreateManyConquistaInput = {
-  id?: string
+  id?: number
   usuarioId: number
   desbloqueadaEm?: Date | string
 }
 
 export type ConquistaUsuarioUpdateWithoutConquistaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutConquistasUsuarioNestedInput
 }
 
 export type ConquistaUsuarioUncheckedUpdateWithoutConquistaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConquistaUsuarioUncheckedUpdateManyWithoutConquistaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
   desbloqueadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -616,9 +621,9 @@ export type $ConquistaUsuarioPayload<ExtArgs extends runtime.Types.Extensions.In
     conquista: Prisma.$ConquistaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     usuarioId: number
-    conquistaId: string
+    conquistaId: number
     desbloqueadaEm: Date
   }, ExtArgs["result"]["conquistaUsuario"]>
   composites: {}
@@ -1045,9 +1050,9 @@ export interface Prisma__ConquistaUsuarioClient<T, Null = never, ExtArgs extends
  * Fields of the ConquistaUsuario model
  */
 export interface ConquistaUsuarioFieldRefs {
-  readonly id: Prisma.FieldRef<"ConquistaUsuario", 'String'>
+  readonly id: Prisma.FieldRef<"ConquistaUsuario", 'Int'>
   readonly usuarioId: Prisma.FieldRef<"ConquistaUsuario", 'Int'>
-  readonly conquistaId: Prisma.FieldRef<"ConquistaUsuario", 'String'>
+  readonly conquistaId: Prisma.FieldRef<"ConquistaUsuario", 'Int'>
   readonly desbloqueadaEm: Prisma.FieldRef<"ConquistaUsuario", 'DateTime'>
 }
     

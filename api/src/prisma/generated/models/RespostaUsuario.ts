@@ -27,29 +27,35 @@ export type AggregateRespostaUsuario = {
 }
 
 export type RespostaUsuarioAvgAggregateOutputType = {
+  id: number | null
   usuarioId: number | null
+  questaoId: number | null
+  respostaQuestaoId: number | null
   pontuacaoRecebida: number | null
 }
 
 export type RespostaUsuarioSumAggregateOutputType = {
+  id: number | null
   usuarioId: number | null
+  questaoId: number | null
+  respostaQuestaoId: number | null
   pontuacaoRecebida: number | null
 }
 
 export type RespostaUsuarioMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   usuarioId: number | null
-  questaoId: string | null
-  respostaQuestaoId: string | null
+  questaoId: number | null
+  respostaQuestaoId: number | null
   pontuacaoRecebida: number | null
   respondidaEm: Date | null
 }
 
 export type RespostaUsuarioMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   usuarioId: number | null
-  questaoId: string | null
-  respostaQuestaoId: string | null
+  questaoId: number | null
+  respostaQuestaoId: number | null
   pontuacaoRecebida: number | null
   respondidaEm: Date | null
 }
@@ -66,12 +72,18 @@ export type RespostaUsuarioCountAggregateOutputType = {
 
 
 export type RespostaUsuarioAvgAggregateInputType = {
+  id?: true
   usuarioId?: true
+  questaoId?: true
+  respostaQuestaoId?: true
   pontuacaoRecebida?: true
 }
 
 export type RespostaUsuarioSumAggregateInputType = {
+  id?: true
   usuarioId?: true
+  questaoId?: true
+  respostaQuestaoId?: true
   pontuacaoRecebida?: true
 }
 
@@ -190,10 +202,10 @@ export type RespostaUsuarioGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type RespostaUsuarioGroupByOutputType = {
-  id: string
+  id: number
   usuarioId: number
-  questaoId: string
-  respostaQuestaoId: string
+  questaoId: number
+  respostaQuestaoId: number
   pontuacaoRecebida: number
   respondidaEm: Date
   _count: RespostaUsuarioCountAggregateOutputType | null
@@ -222,10 +234,10 @@ export type RespostaUsuarioWhereInput = {
   AND?: Prisma.RespostaUsuarioWhereInput | Prisma.RespostaUsuarioWhereInput[]
   OR?: Prisma.RespostaUsuarioWhereInput[]
   NOT?: Prisma.RespostaUsuarioWhereInput | Prisma.RespostaUsuarioWhereInput[]
-  id?: Prisma.StringFilter<"RespostaUsuario"> | string
+  id?: Prisma.IntFilter<"RespostaUsuario"> | number
   usuarioId?: Prisma.IntFilter<"RespostaUsuario"> | number
-  questaoId?: Prisma.StringFilter<"RespostaUsuario"> | string
-  respostaQuestaoId?: Prisma.StringFilter<"RespostaUsuario"> | string
+  questaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respostaQuestaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
   pontuacaoRecebida?: Prisma.IntFilter<"RespostaUsuario"> | number
   respondidaEm?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
@@ -246,14 +258,14 @@ export type RespostaUsuarioOrderByWithRelationInput = {
 }
 
 export type RespostaUsuarioWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   usuarioId_questaoId?: Prisma.RespostaUsuarioUsuarioIdQuestaoIdCompoundUniqueInput
   AND?: Prisma.RespostaUsuarioWhereInput | Prisma.RespostaUsuarioWhereInput[]
   OR?: Prisma.RespostaUsuarioWhereInput[]
   NOT?: Prisma.RespostaUsuarioWhereInput | Prisma.RespostaUsuarioWhereInput[]
   usuarioId?: Prisma.IntFilter<"RespostaUsuario"> | number
-  questaoId?: Prisma.StringFilter<"RespostaUsuario"> | string
-  respostaQuestaoId?: Prisma.StringFilter<"RespostaUsuario"> | string
+  questaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respostaQuestaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
   pontuacaoRecebida?: Prisma.IntFilter<"RespostaUsuario"> | number
   respondidaEm?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
@@ -279,16 +291,15 @@ export type RespostaUsuarioScalarWhereWithAggregatesInput = {
   AND?: Prisma.RespostaUsuarioScalarWhereWithAggregatesInput | Prisma.RespostaUsuarioScalarWhereWithAggregatesInput[]
   OR?: Prisma.RespostaUsuarioScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RespostaUsuarioScalarWhereWithAggregatesInput | Prisma.RespostaUsuarioScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"RespostaUsuario"> | string
+  id?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
   usuarioId?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
-  questaoId?: Prisma.StringWithAggregatesFilter<"RespostaUsuario"> | string
-  respostaQuestaoId?: Prisma.StringWithAggregatesFilter<"RespostaUsuario"> | string
+  questaoId?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
+  respostaQuestaoId?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
   pontuacaoRecebida?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
   respondidaEm?: Prisma.DateTimeWithAggregatesFilter<"RespostaUsuario"> | Date | string
 }
 
 export type RespostaUsuarioCreateInput = {
-  id?: string
   pontuacaoRecebida: number
   respondidaEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutRespostasUsuarioInput
@@ -297,16 +308,15 @@ export type RespostaUsuarioCreateInput = {
 }
 
 export type RespostaUsuarioUncheckedCreateInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  questaoId: string
-  respostaQuestaoId: string
+  questaoId: number
+  respostaQuestaoId: number
   pontuacaoRecebida: number
   respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
@@ -315,34 +325,33 @@ export type RespostaUsuarioUpdateInput = {
 }
 
 export type RespostaUsuarioUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
-  respostaQuestaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioCreateManyInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  questaoId: string
-  respostaQuestaoId: string
+  questaoId: number
+  respostaQuestaoId: number
   pontuacaoRecebida: number
   respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
-  respostaQuestaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -359,7 +368,7 @@ export type RespostaUsuarioOrderByRelationAggregateInput = {
 
 export type RespostaUsuarioUsuarioIdQuestaoIdCompoundUniqueInput = {
   usuarioId: number
-  questaoId: string
+  questaoId: number
 }
 
 export type RespostaUsuarioCountOrderByAggregateInput = {
@@ -372,7 +381,10 @@ export type RespostaUsuarioCountOrderByAggregateInput = {
 }
 
 export type RespostaUsuarioAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
   pontuacaoRecebida?: Prisma.SortOrder
 }
 
@@ -395,7 +407,10 @@ export type RespostaUsuarioMinOrderByAggregateInput = {
 }
 
 export type RespostaUsuarioSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
   pontuacaoRecebida?: Prisma.SortOrder
 }
 
@@ -526,7 +541,6 @@ export type RespostaUsuarioUncheckedUpdateManyWithoutRespostaQuestaoNestedInput 
 }
 
 export type RespostaUsuarioCreateWithoutUsuarioInput = {
-  id?: string
   pontuacaoRecebida: number
   respondidaEm?: Date | string
   questao: Prisma.QuestaoCreateNestedOneWithoutRespostasUsuarioInput
@@ -534,9 +548,9 @@ export type RespostaUsuarioCreateWithoutUsuarioInput = {
 }
 
 export type RespostaUsuarioUncheckedCreateWithoutUsuarioInput = {
-  id?: string
-  questaoId: string
-  respostaQuestaoId: string
+  id?: number
+  questaoId: number
+  respostaQuestaoId: number
   pontuacaoRecebida: number
   respondidaEm?: Date | string
 }
@@ -571,16 +585,15 @@ export type RespostaUsuarioScalarWhereInput = {
   AND?: Prisma.RespostaUsuarioScalarWhereInput | Prisma.RespostaUsuarioScalarWhereInput[]
   OR?: Prisma.RespostaUsuarioScalarWhereInput[]
   NOT?: Prisma.RespostaUsuarioScalarWhereInput | Prisma.RespostaUsuarioScalarWhereInput[]
-  id?: Prisma.StringFilter<"RespostaUsuario"> | string
+  id?: Prisma.IntFilter<"RespostaUsuario"> | number
   usuarioId?: Prisma.IntFilter<"RespostaUsuario"> | number
-  questaoId?: Prisma.StringFilter<"RespostaUsuario"> | string
-  respostaQuestaoId?: Prisma.StringFilter<"RespostaUsuario"> | string
+  questaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respostaQuestaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
   pontuacaoRecebida?: Prisma.IntFilter<"RespostaUsuario"> | number
   respondidaEm?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
 }
 
 export type RespostaUsuarioCreateWithoutQuestaoInput = {
-  id?: string
   pontuacaoRecebida: number
   respondidaEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutRespostasUsuarioInput
@@ -588,9 +601,9 @@ export type RespostaUsuarioCreateWithoutQuestaoInput = {
 }
 
 export type RespostaUsuarioUncheckedCreateWithoutQuestaoInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  respostaQuestaoId: string
+  respostaQuestaoId: number
   pontuacaoRecebida: number
   respondidaEm?: Date | string
 }
@@ -622,7 +635,6 @@ export type RespostaUsuarioUpdateManyWithWhereWithoutQuestaoInput = {
 }
 
 export type RespostaUsuarioCreateWithoutRespostaQuestaoInput = {
-  id?: string
   pontuacaoRecebida: number
   respondidaEm?: Date | string
   usuario: Prisma.UsuarioCreateNestedOneWithoutRespostasUsuarioInput
@@ -630,9 +642,9 @@ export type RespostaUsuarioCreateWithoutRespostaQuestaoInput = {
 }
 
 export type RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  questaoId: string
+  questaoId: number
   pontuacaoRecebida: number
   respondidaEm?: Date | string
 }
@@ -664,15 +676,14 @@ export type RespostaUsuarioUpdateManyWithWhereWithoutRespostaQuestaoInput = {
 }
 
 export type RespostaUsuarioCreateManyUsuarioInput = {
-  id?: string
-  questaoId: string
-  respostaQuestaoId: string
+  id?: number
+  questaoId: number
+  respostaQuestaoId: number
   pontuacaoRecebida: number
   respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questao?: Prisma.QuestaoUpdateOneRequiredWithoutRespostasUsuarioNestedInput
@@ -680,31 +691,30 @@ export type RespostaUsuarioUpdateWithoutUsuarioInput = {
 }
 
 export type RespostaUsuarioUncheckedUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
-  respostaQuestaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
-  respostaQuestaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioCreateManyQuestaoInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  respostaQuestaoId: string
+  respostaQuestaoId: number
   pontuacaoRecebida: number
   respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
@@ -712,31 +722,30 @@ export type RespostaUsuarioUpdateWithoutQuestaoInput = {
 }
 
 export type RespostaUsuarioUncheckedUpdateWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  respostaQuestaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioUncheckedUpdateManyWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  respostaQuestaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioCreateManyRespostaQuestaoInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  questaoId: string
+  questaoId: number
   pontuacaoRecebida: number
   respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateWithoutRespostaQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
@@ -744,17 +753,17 @@ export type RespostaUsuarioUpdateWithoutRespostaQuestaoInput = {
 }
 
 export type RespostaUsuarioUncheckedUpdateWithoutRespostaQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioUncheckedUpdateManyWithoutRespostaQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
   respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -831,10 +840,10 @@ export type $RespostaUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Int
     respostaQuestao: Prisma.$RespostaQuestaoPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     usuarioId: number
-    questaoId: string
-    respostaQuestaoId: string
+    questaoId: number
+    respostaQuestaoId: number
     pontuacaoRecebida: number
     respondidaEm: Date
   }, ExtArgs["result"]["respostaUsuario"]>
@@ -1263,10 +1272,10 @@ export interface Prisma__RespostaUsuarioClient<T, Null = never, ExtArgs extends 
  * Fields of the RespostaUsuario model
  */
 export interface RespostaUsuarioFieldRefs {
-  readonly id: Prisma.FieldRef<"RespostaUsuario", 'String'>
+  readonly id: Prisma.FieldRef<"RespostaUsuario", 'Int'>
   readonly usuarioId: Prisma.FieldRef<"RespostaUsuario", 'Int'>
-  readonly questaoId: Prisma.FieldRef<"RespostaUsuario", 'String'>
-  readonly respostaQuestaoId: Prisma.FieldRef<"RespostaUsuario", 'String'>
+  readonly questaoId: Prisma.FieldRef<"RespostaUsuario", 'Int'>
+  readonly respostaQuestaoId: Prisma.FieldRef<"RespostaUsuario", 'Int'>
   readonly pontuacaoRecebida: Prisma.FieldRef<"RespostaUsuario", 'Int'>
   readonly respondidaEm: Prisma.FieldRef<"RespostaUsuario", 'DateTime'>
 }

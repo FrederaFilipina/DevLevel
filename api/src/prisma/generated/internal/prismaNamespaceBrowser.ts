@@ -64,9 +64,6 @@ export const ModelName = {
   ConquistaUsuario: 'ConquistaUsuario',
   Habilidade: 'Habilidade',
   HabilidadeUsuario: 'HabilidadeUsuario',
-  Insignia: 'Insignia',
-  InsigniaUsuario: 'InsigniaUsuario',
-  Ranking: 'Ranking',
   Token: 'Token'
 } as const
 
@@ -264,43 +261,6 @@ export const HabilidadeUsuarioScalarFieldEnum = {
 } as const
 
 export type HabilidadeUsuarioScalarFieldEnum = (typeof HabilidadeUsuarioScalarFieldEnum)[keyof typeof HabilidadeUsuarioScalarFieldEnum]
-
-
-export const InsigniaScalarFieldEnum = {
-  id: 'id',
-  titulo: 'titulo',
-  descricao: 'descricao',
-  icone: 'icone',
-  tipo: 'tipo',
-  xpRecompensa: 'xpRecompensa',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type InsigniaScalarFieldEnum = (typeof InsigniaScalarFieldEnum)[keyof typeof InsigniaScalarFieldEnum]
-
-
-export const InsigniaUsuarioScalarFieldEnum = {
-  id: 'id',
-  usuarioId: 'usuarioId',
-  insigniaId: 'insigniaId',
-  temaId: 'temaId',
-  trilhaId: 'trilhaId',
-  desbloqueadaEm: 'desbloqueadaEm'
-} as const
-
-export type InsigniaUsuarioScalarFieldEnum = (typeof InsigniaUsuarioScalarFieldEnum)[keyof typeof InsigniaUsuarioScalarFieldEnum]
-
-
-export const RankingScalarFieldEnum = {
-  id: 'id',
-  usuarioId: 'usuarioId',
-  xpTotal: 'xpTotal',
-  posicao: 'posicao',
-  updatedAt: 'updatedAt'
-} as const
-
-export type RankingScalarFieldEnum = (typeof RankingScalarFieldEnum)[keyof typeof RankingScalarFieldEnum]
 
 
 export const TokenScalarFieldEnum = {

@@ -27,30 +27,34 @@ export type AggregateHabilidadeUsuario = {
 }
 
 export type HabilidadeUsuarioAvgAggregateOutputType = {
+  id: number | null
   usuarioId: number | null
+  habilidadeId: number | null
   pontuacao: number | null
   nivel: number | null
 }
 
 export type HabilidadeUsuarioSumAggregateOutputType = {
+  id: number | null
   usuarioId: number | null
+  habilidadeId: number | null
   pontuacao: number | null
   nivel: number | null
 }
 
 export type HabilidadeUsuarioMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   usuarioId: number | null
-  habilidadeId: string | null
+  habilidadeId: number | null
   pontuacao: number | null
   nivel: number | null
   updatedAt: Date | null
 }
 
 export type HabilidadeUsuarioMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   usuarioId: number | null
-  habilidadeId: string | null
+  habilidadeId: number | null
   pontuacao: number | null
   nivel: number | null
   updatedAt: Date | null
@@ -68,13 +72,17 @@ export type HabilidadeUsuarioCountAggregateOutputType = {
 
 
 export type HabilidadeUsuarioAvgAggregateInputType = {
+  id?: true
   usuarioId?: true
+  habilidadeId?: true
   pontuacao?: true
   nivel?: true
 }
 
 export type HabilidadeUsuarioSumAggregateInputType = {
+  id?: true
   usuarioId?: true
+  habilidadeId?: true
   pontuacao?: true
   nivel?: true
 }
@@ -194,9 +202,9 @@ export type HabilidadeUsuarioGroupByArgs<ExtArgs extends runtime.Types.Extension
 }
 
 export type HabilidadeUsuarioGroupByOutputType = {
-  id: string
+  id: number
   usuarioId: number
-  habilidadeId: string
+  habilidadeId: number
   pontuacao: number
   nivel: number
   updatedAt: Date
@@ -226,9 +234,9 @@ export type HabilidadeUsuarioWhereInput = {
   AND?: Prisma.HabilidadeUsuarioWhereInput | Prisma.HabilidadeUsuarioWhereInput[]
   OR?: Prisma.HabilidadeUsuarioWhereInput[]
   NOT?: Prisma.HabilidadeUsuarioWhereInput | Prisma.HabilidadeUsuarioWhereInput[]
-  id?: Prisma.StringFilter<"HabilidadeUsuario"> | string
+  id?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   usuarioId?: Prisma.IntFilter<"HabilidadeUsuario"> | number
-  habilidadeId?: Prisma.StringFilter<"HabilidadeUsuario"> | string
+  habilidadeId?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   pontuacao?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   nivel?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   updatedAt?: Prisma.DateTimeFilter<"HabilidadeUsuario"> | Date | string
@@ -248,18 +256,19 @@ export type HabilidadeUsuarioOrderByWithRelationInput = {
 }
 
 export type HabilidadeUsuarioWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  usuarioId_habilidadeId?: Prisma.HabilidadeUsuarioUsuarioIdHabilidadeIdCompoundUniqueInput
   AND?: Prisma.HabilidadeUsuarioWhereInput | Prisma.HabilidadeUsuarioWhereInput[]
   OR?: Prisma.HabilidadeUsuarioWhereInput[]
   NOT?: Prisma.HabilidadeUsuarioWhereInput | Prisma.HabilidadeUsuarioWhereInput[]
   usuarioId?: Prisma.IntFilter<"HabilidadeUsuario"> | number
-  habilidadeId?: Prisma.StringFilter<"HabilidadeUsuario"> | string
+  habilidadeId?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   pontuacao?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   nivel?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   updatedAt?: Prisma.DateTimeFilter<"HabilidadeUsuario"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   habilidade?: Prisma.XOR<Prisma.HabilidadeScalarRelationFilter, Prisma.HabilidadeWhereInput>
-}, "id">
+}, "id" | "usuarioId_habilidadeId">
 
 export type HabilidadeUsuarioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -279,16 +288,15 @@ export type HabilidadeUsuarioScalarWhereWithAggregatesInput = {
   AND?: Prisma.HabilidadeUsuarioScalarWhereWithAggregatesInput | Prisma.HabilidadeUsuarioScalarWhereWithAggregatesInput[]
   OR?: Prisma.HabilidadeUsuarioScalarWhereWithAggregatesInput[]
   NOT?: Prisma.HabilidadeUsuarioScalarWhereWithAggregatesInput | Prisma.HabilidadeUsuarioScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"HabilidadeUsuario"> | string
+  id?: Prisma.IntWithAggregatesFilter<"HabilidadeUsuario"> | number
   usuarioId?: Prisma.IntWithAggregatesFilter<"HabilidadeUsuario"> | number
-  habilidadeId?: Prisma.StringWithAggregatesFilter<"HabilidadeUsuario"> | string
+  habilidadeId?: Prisma.IntWithAggregatesFilter<"HabilidadeUsuario"> | number
   pontuacao?: Prisma.IntWithAggregatesFilter<"HabilidadeUsuario"> | number
   nivel?: Prisma.IntWithAggregatesFilter<"HabilidadeUsuario"> | number
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"HabilidadeUsuario"> | Date | string
 }
 
 export type HabilidadeUsuarioCreateInput = {
-  id?: string
   pontuacao?: number
   nivel?: number
   updatedAt?: Date | string
@@ -297,16 +305,15 @@ export type HabilidadeUsuarioCreateInput = {
 }
 
 export type HabilidadeUsuarioUncheckedCreateInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  habilidadeId: string
+  habilidadeId: number
   pontuacao?: number
   nivel?: number
   updatedAt?: Date | string
 }
 
 export type HabilidadeUsuarioUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -315,34 +322,33 @@ export type HabilidadeUsuarioUpdateInput = {
 }
 
 export type HabilidadeUsuarioUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  habilidadeId?: Prisma.StringFieldUpdateOperationsInput | string
+  habilidadeId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabilidadeUsuarioCreateManyInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  habilidadeId: string
+  habilidadeId: number
   pontuacao?: number
   nivel?: number
   updatedAt?: Date | string
 }
 
 export type HabilidadeUsuarioUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabilidadeUsuarioUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  habilidadeId?: Prisma.StringFieldUpdateOperationsInput | string
+  habilidadeId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -358,6 +364,11 @@ export type HabilidadeUsuarioOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type HabilidadeUsuarioUsuarioIdHabilidadeIdCompoundUniqueInput = {
+  usuarioId: number
+  habilidadeId: number
+}
+
 export type HabilidadeUsuarioCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
@@ -368,7 +379,9 @@ export type HabilidadeUsuarioCountOrderByAggregateInput = {
 }
 
 export type HabilidadeUsuarioAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
+  habilidadeId?: Prisma.SortOrder
   pontuacao?: Prisma.SortOrder
   nivel?: Prisma.SortOrder
 }
@@ -392,7 +405,9 @@ export type HabilidadeUsuarioMinOrderByAggregateInput = {
 }
 
 export type HabilidadeUsuarioSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
+  habilidadeId?: Prisma.SortOrder
   pontuacao?: Prisma.SortOrder
   nivel?: Prisma.SortOrder
 }
@@ -482,7 +497,6 @@ export type HabilidadeUsuarioUncheckedUpdateManyWithoutHabilidadeNestedInput = {
 }
 
 export type HabilidadeUsuarioCreateWithoutUsuarioInput = {
-  id?: string
   pontuacao?: number
   nivel?: number
   updatedAt?: Date | string
@@ -490,8 +504,8 @@ export type HabilidadeUsuarioCreateWithoutUsuarioInput = {
 }
 
 export type HabilidadeUsuarioUncheckedCreateWithoutUsuarioInput = {
-  id?: string
-  habilidadeId: string
+  id?: number
+  habilidadeId: number
   pontuacao?: number
   nivel?: number
   updatedAt?: Date | string
@@ -527,16 +541,15 @@ export type HabilidadeUsuarioScalarWhereInput = {
   AND?: Prisma.HabilidadeUsuarioScalarWhereInput | Prisma.HabilidadeUsuarioScalarWhereInput[]
   OR?: Prisma.HabilidadeUsuarioScalarWhereInput[]
   NOT?: Prisma.HabilidadeUsuarioScalarWhereInput | Prisma.HabilidadeUsuarioScalarWhereInput[]
-  id?: Prisma.StringFilter<"HabilidadeUsuario"> | string
+  id?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   usuarioId?: Prisma.IntFilter<"HabilidadeUsuario"> | number
-  habilidadeId?: Prisma.StringFilter<"HabilidadeUsuario"> | string
+  habilidadeId?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   pontuacao?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   nivel?: Prisma.IntFilter<"HabilidadeUsuario"> | number
   updatedAt?: Prisma.DateTimeFilter<"HabilidadeUsuario"> | Date | string
 }
 
 export type HabilidadeUsuarioCreateWithoutHabilidadeInput = {
-  id?: string
   pontuacao?: number
   nivel?: number
   updatedAt?: Date | string
@@ -544,7 +557,7 @@ export type HabilidadeUsuarioCreateWithoutHabilidadeInput = {
 }
 
 export type HabilidadeUsuarioUncheckedCreateWithoutHabilidadeInput = {
-  id?: string
+  id?: number
   usuarioId: number
   pontuacao?: number
   nivel?: number
@@ -578,15 +591,14 @@ export type HabilidadeUsuarioUpdateManyWithWhereWithoutHabilidadeInput = {
 }
 
 export type HabilidadeUsuarioCreateManyUsuarioInput = {
-  id?: string
-  habilidadeId: string
+  id?: number
+  habilidadeId: number
   pontuacao?: number
   nivel?: number
   updatedAt?: Date | string
 }
 
 export type HabilidadeUsuarioUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -594,23 +606,23 @@ export type HabilidadeUsuarioUpdateWithoutUsuarioInput = {
 }
 
 export type HabilidadeUsuarioUncheckedUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  habilidadeId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  habilidadeId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  habilidadeId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  habilidadeId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HabilidadeUsuarioCreateManyHabilidadeInput = {
-  id?: string
+  id?: number
   usuarioId: number
   pontuacao?: number
   nivel?: number
@@ -618,7 +630,6 @@ export type HabilidadeUsuarioCreateManyHabilidadeInput = {
 }
 
 export type HabilidadeUsuarioUpdateWithoutHabilidadeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -626,7 +637,7 @@ export type HabilidadeUsuarioUpdateWithoutHabilidadeInput = {
 }
 
 export type HabilidadeUsuarioUncheckedUpdateWithoutHabilidadeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
@@ -634,7 +645,7 @@ export type HabilidadeUsuarioUncheckedUpdateWithoutHabilidadeInput = {
 }
 
 export type HabilidadeUsuarioUncheckedUpdateManyWithoutHabilidadeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacao?: Prisma.IntFieldUpdateOperationsInput | number
   nivel?: Prisma.IntFieldUpdateOperationsInput | number
@@ -706,9 +717,9 @@ export type $HabilidadeUsuarioPayload<ExtArgs extends runtime.Types.Extensions.I
     habilidade: Prisma.$HabilidadePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     usuarioId: number
-    habilidadeId: string
+    habilidadeId: number
     pontuacao: number
     nivel: number
     updatedAt: Date
@@ -1137,9 +1148,9 @@ export interface Prisma__HabilidadeUsuarioClient<T, Null = never, ExtArgs extend
  * Fields of the HabilidadeUsuario model
  */
 export interface HabilidadeUsuarioFieldRefs {
-  readonly id: Prisma.FieldRef<"HabilidadeUsuario", 'String'>
+  readonly id: Prisma.FieldRef<"HabilidadeUsuario", 'Int'>
   readonly usuarioId: Prisma.FieldRef<"HabilidadeUsuario", 'Int'>
-  readonly habilidadeId: Prisma.FieldRef<"HabilidadeUsuario", 'String'>
+  readonly habilidadeId: Prisma.FieldRef<"HabilidadeUsuario", 'Int'>
   readonly pontuacao: Prisma.FieldRef<"HabilidadeUsuario", 'Int'>
   readonly nivel: Prisma.FieldRef<"HabilidadeUsuario", 'Int'>
   readonly updatedAt: Prisma.FieldRef<"HabilidadeUsuario", 'DateTime'>

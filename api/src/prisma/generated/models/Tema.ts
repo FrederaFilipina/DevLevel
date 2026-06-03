@@ -20,12 +20,22 @@ export type TemaModel = runtime.Types.Result.DefaultSelection<Prisma.$TemaPayloa
 
 export type AggregateTema = {
   _count: TemaCountAggregateOutputType | null
+  _avg: TemaAvgAggregateOutputType | null
+  _sum: TemaSumAggregateOutputType | null
   _min: TemaMinAggregateOutputType | null
   _max: TemaMaxAggregateOutputType | null
 }
 
+export type TemaAvgAggregateOutputType = {
+  id: number | null
+}
+
+export type TemaSumAggregateOutputType = {
+  id: number | null
+}
+
 export type TemaMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   nome: string | null
   descricao: string | null
   createdAt: Date | null
@@ -33,7 +43,7 @@ export type TemaMinAggregateOutputType = {
 }
 
 export type TemaMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   nome: string | null
   descricao: string | null
   createdAt: Date | null
@@ -49,6 +59,14 @@ export type TemaCountAggregateOutputType = {
   _all: number
 }
 
+
+export type TemaAvgAggregateInputType = {
+  id?: true
+}
+
+export type TemaSumAggregateInputType = {
+  id?: true
+}
 
 export type TemaMinAggregateInputType = {
   id?: true
@@ -113,6 +131,18 @@ export type TemaAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: TemaAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: TemaSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: TemaMinAggregateInputType
@@ -143,17 +173,21 @@ export type TemaGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: TemaCountAggregateInputType | true
+  _avg?: TemaAvgAggregateInputType
+  _sum?: TemaSumAggregateInputType
   _min?: TemaMinAggregateInputType
   _max?: TemaMaxAggregateInputType
 }
 
 export type TemaGroupByOutputType = {
-  id: string
+  id: number
   nome: string
   descricao: string | null
   createdAt: Date
   updatedAt: Date
   _count: TemaCountAggregateOutputType | null
+  _avg: TemaAvgAggregateOutputType | null
+  _sum: TemaSumAggregateOutputType | null
   _min: TemaMinAggregateOutputType | null
   _max: TemaMaxAggregateOutputType | null
 }
@@ -177,14 +211,13 @@ export type TemaWhereInput = {
   AND?: Prisma.TemaWhereInput | Prisma.TemaWhereInput[]
   OR?: Prisma.TemaWhereInput[]
   NOT?: Prisma.TemaWhereInput | Prisma.TemaWhereInput[]
-  id?: Prisma.StringFilter<"Tema"> | string
+  id?: Prisma.IntFilter<"Tema"> | number
   nome?: Prisma.StringFilter<"Tema"> | string
   descricao?: Prisma.StringNullableFilter<"Tema"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Tema"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tema"> | Date | string
   trilhas?: Prisma.TrilhaListRelationFilter
   usuarios?: Prisma.TemaUsuarioListRelationFilter
-  insignias?: Prisma.InsigniaUsuarioListRelationFilter
 }
 
 export type TemaOrderByWithRelationInput = {
@@ -195,11 +228,10 @@ export type TemaOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   trilhas?: Prisma.TrilhaOrderByRelationAggregateInput
   usuarios?: Prisma.TemaUsuarioOrderByRelationAggregateInput
-  insignias?: Prisma.InsigniaUsuarioOrderByRelationAggregateInput
 }
 
 export type TemaWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   nome?: string
   AND?: Prisma.TemaWhereInput | Prisma.TemaWhereInput[]
   OR?: Prisma.TemaWhereInput[]
@@ -209,7 +241,6 @@ export type TemaWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Tema"> | Date | string
   trilhas?: Prisma.TrilhaListRelationFilter
   usuarios?: Prisma.TemaUsuarioListRelationFilter
-  insignias?: Prisma.InsigniaUsuarioListRelationFilter
 }, "id" | "nome">
 
 export type TemaOrderByWithAggregationInput = {
@@ -219,15 +250,17 @@ export type TemaOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.TemaCountOrderByAggregateInput
+  _avg?: Prisma.TemaAvgOrderByAggregateInput
   _max?: Prisma.TemaMaxOrderByAggregateInput
   _min?: Prisma.TemaMinOrderByAggregateInput
+  _sum?: Prisma.TemaSumOrderByAggregateInput
 }
 
 export type TemaScalarWhereWithAggregatesInput = {
   AND?: Prisma.TemaScalarWhereWithAggregatesInput | Prisma.TemaScalarWhereWithAggregatesInput[]
   OR?: Prisma.TemaScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TemaScalarWhereWithAggregatesInput | Prisma.TemaScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Tema"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Tema"> | number
   nome?: Prisma.StringWithAggregatesFilter<"Tema"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Tema"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Tema"> | Date | string
@@ -235,51 +268,45 @@ export type TemaScalarWhereWithAggregatesInput = {
 }
 
 export type TemaCreateInput = {
-  id?: string
   nome: string
   descricao?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   trilhas?: Prisma.TrilhaCreateNestedManyWithoutTemaInput
   usuarios?: Prisma.TemaUsuarioCreateNestedManyWithoutTemaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTemaInput
 }
 
 export type TemaUncheckedCreateInput = {
-  id?: string
+  id?: number
   nome: string
   descricao?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   trilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTemaInput
   usuarios?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutTemaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTemaInput
 }
 
 export type TemaUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trilhas?: Prisma.TrilhaUpdateManyWithoutTemaNestedInput
   usuarios?: Prisma.TemaUsuarioUpdateManyWithoutTemaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTemaNestedInput
 }
 
 export type TemaUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTemaNestedInput
   usuarios?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutTemaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTemaNestedInput
 }
 
 export type TemaCreateManyInput = {
-  id?: string
+  id?: number
   nome: string
   descricao?: string | null
   createdAt?: Date | string
@@ -287,7 +314,6 @@ export type TemaCreateManyInput = {
 }
 
 export type TemaUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -295,7 +321,7 @@ export type TemaUpdateManyMutationInput = {
 }
 
 export type TemaUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -308,6 +334,10 @@ export type TemaCountOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type TemaAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
 }
 
 export type TemaMaxOrderByAggregateInput = {
@@ -326,14 +356,13 @@ export type TemaMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type TemaSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+}
+
 export type TemaScalarRelationFilter = {
   is?: Prisma.TemaWhereInput
   isNot?: Prisma.TemaWhereInput
-}
-
-export type TemaNullableScalarRelationFilter = {
-  is?: Prisma.TemaWhereInput | null
-  isNot?: Prisma.TemaWhereInput | null
 }
 
 export type TemaCreateNestedOneWithoutUsuariosInput = {
@@ -364,40 +393,21 @@ export type TemaUpdateOneRequiredWithoutTrilhasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TemaUpdateToOneWithWhereWithoutTrilhasInput, Prisma.TemaUpdateWithoutTrilhasInput>, Prisma.TemaUncheckedUpdateWithoutTrilhasInput>
 }
 
-export type TemaCreateNestedOneWithoutInsigniasInput = {
-  create?: Prisma.XOR<Prisma.TemaCreateWithoutInsigniasInput, Prisma.TemaUncheckedCreateWithoutInsigniasInput>
-  connectOrCreate?: Prisma.TemaCreateOrConnectWithoutInsigniasInput
-  connect?: Prisma.TemaWhereUniqueInput
-}
-
-export type TemaUpdateOneWithoutInsigniasNestedInput = {
-  create?: Prisma.XOR<Prisma.TemaCreateWithoutInsigniasInput, Prisma.TemaUncheckedCreateWithoutInsigniasInput>
-  connectOrCreate?: Prisma.TemaCreateOrConnectWithoutInsigniasInput
-  upsert?: Prisma.TemaUpsertWithoutInsigniasInput
-  disconnect?: Prisma.TemaWhereInput | boolean
-  delete?: Prisma.TemaWhereInput | boolean
-  connect?: Prisma.TemaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TemaUpdateToOneWithWhereWithoutInsigniasInput, Prisma.TemaUpdateWithoutInsigniasInput>, Prisma.TemaUncheckedUpdateWithoutInsigniasInput>
-}
-
 export type TemaCreateWithoutUsuariosInput = {
-  id?: string
   nome: string
   descricao?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   trilhas?: Prisma.TrilhaCreateNestedManyWithoutTemaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTemaInput
 }
 
 export type TemaUncheckedCreateWithoutUsuariosInput = {
-  id?: string
+  id?: number
   nome: string
   descricao?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   trilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTemaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTemaInput
 }
 
 export type TemaCreateOrConnectWithoutUsuariosInput = {
@@ -417,43 +427,37 @@ export type TemaUpdateToOneWithWhereWithoutUsuariosInput = {
 }
 
 export type TemaUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trilhas?: Prisma.TrilhaUpdateManyWithoutTemaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTemaNestedInput
 }
 
 export type TemaUncheckedUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTemaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTemaNestedInput
 }
 
 export type TemaCreateWithoutTrilhasInput = {
-  id?: string
   nome: string
   descricao?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   usuarios?: Prisma.TemaUsuarioCreateNestedManyWithoutTemaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTemaInput
 }
 
 export type TemaUncheckedCreateWithoutTrilhasInput = {
-  id?: string
+  id?: number
   nome: string
   descricao?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   usuarios?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutTemaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTemaInput
 }
 
 export type TemaCreateOrConnectWithoutTrilhasInput = {
@@ -473,78 +477,19 @@ export type TemaUpdateToOneWithWhereWithoutTrilhasInput = {
 }
 
 export type TemaUpdateWithoutTrilhasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuarios?: Prisma.TemaUsuarioUpdateManyWithoutTemaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTemaNestedInput
 }
 
 export type TemaUncheckedUpdateWithoutTrilhasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  usuarios?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutTemaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTemaNestedInput
-}
-
-export type TemaCreateWithoutInsigniasInput = {
-  id?: string
-  nome: string
-  descricao?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trilhas?: Prisma.TrilhaCreateNestedManyWithoutTemaInput
-  usuarios?: Prisma.TemaUsuarioCreateNestedManyWithoutTemaInput
-}
-
-export type TemaUncheckedCreateWithoutInsigniasInput = {
-  id?: string
-  nome: string
-  descricao?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTemaInput
-  usuarios?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutTemaInput
-}
-
-export type TemaCreateOrConnectWithoutInsigniasInput = {
-  where: Prisma.TemaWhereUniqueInput
-  create: Prisma.XOR<Prisma.TemaCreateWithoutInsigniasInput, Prisma.TemaUncheckedCreateWithoutInsigniasInput>
-}
-
-export type TemaUpsertWithoutInsigniasInput = {
-  update: Prisma.XOR<Prisma.TemaUpdateWithoutInsigniasInput, Prisma.TemaUncheckedUpdateWithoutInsigniasInput>
-  create: Prisma.XOR<Prisma.TemaCreateWithoutInsigniasInput, Prisma.TemaUncheckedCreateWithoutInsigniasInput>
-  where?: Prisma.TemaWhereInput
-}
-
-export type TemaUpdateToOneWithWhereWithoutInsigniasInput = {
-  where?: Prisma.TemaWhereInput
-  data: Prisma.XOR<Prisma.TemaUpdateWithoutInsigniasInput, Prisma.TemaUncheckedUpdateWithoutInsigniasInput>
-}
-
-export type TemaUpdateWithoutInsigniasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trilhas?: Prisma.TrilhaUpdateManyWithoutTemaNestedInput
-  usuarios?: Prisma.TemaUsuarioUpdateManyWithoutTemaNestedInput
-}
-
-export type TemaUncheckedUpdateWithoutInsigniasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTemaNestedInput
   usuarios?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutTemaNestedInput
 }
 
@@ -556,13 +501,11 @@ export type TemaUncheckedUpdateWithoutInsigniasInput = {
 export type TemaCountOutputType = {
   trilhas: number
   usuarios: number
-  insignias: number
 }
 
 export type TemaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   trilhas?: boolean | TemaCountOutputTypeCountTrilhasArgs
   usuarios?: boolean | TemaCountOutputTypeCountUsuariosArgs
-  insignias?: boolean | TemaCountOutputTypeCountInsigniasArgs
 }
 
 /**
@@ -589,13 +532,6 @@ export type TemaCountOutputTypeCountUsuariosArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.TemaUsuarioWhereInput
 }
 
-/**
- * TemaCountOutputType without action
- */
-export type TemaCountOutputTypeCountInsigniasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InsigniaUsuarioWhereInput
-}
-
 
 export type TemaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -605,7 +541,6 @@ export type TemaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   trilhas?: boolean | Prisma.Tema$trilhasArgs<ExtArgs>
   usuarios?: boolean | Prisma.Tema$usuariosArgs<ExtArgs>
-  insignias?: boolean | Prisma.Tema$insigniasArgs<ExtArgs>
   _count?: boolean | Prisma.TemaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tema"]>
 
@@ -637,7 +572,6 @@ export type TemaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type TemaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   trilhas?: boolean | Prisma.Tema$trilhasArgs<ExtArgs>
   usuarios?: boolean | Prisma.Tema$usuariosArgs<ExtArgs>
-  insignias?: boolean | Prisma.Tema$insigniasArgs<ExtArgs>
   _count?: boolean | Prisma.TemaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TemaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -648,10 +582,9 @@ export type $TemaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     trilhas: Prisma.$TrilhaPayload<ExtArgs>[]
     usuarios: Prisma.$TemaUsuarioPayload<ExtArgs>[]
-    insignias: Prisma.$InsigniaUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     nome: string
     descricao: string | null
     createdAt: Date
@@ -1052,7 +985,6 @@ export interface Prisma__TemaClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   trilhas<T extends Prisma.Tema$trilhasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tema$trilhasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrilhaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usuarios<T extends Prisma.Tema$usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tema$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TemaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  insignias<T extends Prisma.Tema$insigniasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tema$insigniasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InsigniaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1082,7 +1014,7 @@ export interface Prisma__TemaClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the Tema model
  */
 export interface TemaFieldRefs {
-  readonly id: Prisma.FieldRef<"Tema", 'String'>
+  readonly id: Prisma.FieldRef<"Tema", 'Int'>
   readonly nome: Prisma.FieldRef<"Tema", 'String'>
   readonly descricao: Prisma.FieldRef<"Tema", 'String'>
   readonly createdAt: Prisma.FieldRef<"Tema", 'DateTime'>
@@ -1525,30 +1457,6 @@ export type Tema$usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.TemaUsuarioScalarFieldEnum | Prisma.TemaUsuarioScalarFieldEnum[]
-}
-
-/**
- * Tema.insignias
- */
-export type Tema$insigniasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the InsigniaUsuario
-   */
-  select?: Prisma.InsigniaUsuarioSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the InsigniaUsuario
-   */
-  omit?: Prisma.InsigniaUsuarioOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InsigniaUsuarioInclude<ExtArgs> | null
-  where?: Prisma.InsigniaUsuarioWhereInput
-  orderBy?: Prisma.InsigniaUsuarioOrderByWithRelationInput | Prisma.InsigniaUsuarioOrderByWithRelationInput[]
-  cursor?: Prisma.InsigniaUsuarioWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.InsigniaUsuarioScalarFieldEnum | Prisma.InsigniaUsuarioScalarFieldEnum[]
 }
 
 /**

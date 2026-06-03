@@ -1,13 +1,13 @@
 import express from "express"
-import temaRoutes from './Routes/temaRoutes';
-import trilhaRoutes from './Routes/trilhaRoutes';
-import moduloRoutes from './Routes/moduloRoutes';
-import questaoRoutes from './Routes/questaoRoutes';
-import respostaRoutes from './Routes/questaoRespostaRoutes';
-import conquistaRoutes from './Routes/conquistaRoutes';
-import habilidadeRoutes from './Routes/habilidadeRoutes';
+import temaRoutes from './routes/temaRoutes';
+import trilhaRoutes from './routes/trilhaRoutes';
+import moduloRoutes from './routes/moduloRoutes';
+import questaoRoutes from './routes/questaoRoutes';
+import respostaRoutes from './routes/questaoRespostaRoutes';
+import conquistaRoutes from './routes/conquistaRoutes';
+import habilidadeRoutes from './routes/habilidadeRoutes';
 import cors from "cors"
-import { authRoutes } from "./Routes/AuthRoutes"
+import { authRoutes } from "./routes/AuthRoutes"
 import { auth } from "./middleware/auth"
 import { userRoutes } from "./routes/UserRoutes"
 

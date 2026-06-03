@@ -27,16 +27,20 @@ export type AggregateModulo = {
 }
 
 export type ModuloAvgAggregateOutputType = {
+  id: number | null
+  trilhaId: number | null
   ordem: number | null
 }
 
 export type ModuloSumAggregateOutputType = {
+  id: number | null
+  trilhaId: number | null
   ordem: number | null
 }
 
 export type ModuloMinAggregateOutputType = {
-  id: string | null
-  trilhaId: string | null
+  id: number | null
+  trilhaId: number | null
   titulo: string | null
   descricao: string | null
   ordem: number | null
@@ -45,8 +49,8 @@ export type ModuloMinAggregateOutputType = {
 }
 
 export type ModuloMaxAggregateOutputType = {
-  id: string | null
-  trilhaId: string | null
+  id: number | null
+  trilhaId: number | null
   titulo: string | null
   descricao: string | null
   ordem: number | null
@@ -67,10 +71,14 @@ export type ModuloCountAggregateOutputType = {
 
 
 export type ModuloAvgAggregateInputType = {
+  id?: true
+  trilhaId?: true
   ordem?: true
 }
 
 export type ModuloSumAggregateInputType = {
+  id?: true
+  trilhaId?: true
   ordem?: true
 }
 
@@ -192,8 +200,8 @@ export type ModuloGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type ModuloGroupByOutputType = {
-  id: string
-  trilhaId: string
+  id: number
+  trilhaId: number
   titulo: string
   descricao: string | null
   ordem: number
@@ -225,8 +233,8 @@ export type ModuloWhereInput = {
   AND?: Prisma.ModuloWhereInput | Prisma.ModuloWhereInput[]
   OR?: Prisma.ModuloWhereInput[]
   NOT?: Prisma.ModuloWhereInput | Prisma.ModuloWhereInput[]
-  id?: Prisma.StringFilter<"Modulo"> | string
-  trilhaId?: Prisma.StringFilter<"Modulo"> | string
+  id?: Prisma.IntFilter<"Modulo"> | number
+  trilhaId?: Prisma.IntFilter<"Modulo"> | number
   titulo?: Prisma.StringFilter<"Modulo"> | string
   descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
   ordem?: Prisma.IntFilter<"Modulo"> | number
@@ -249,11 +257,12 @@ export type ModuloOrderByWithRelationInput = {
 }
 
 export type ModuloWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  trilhaId_ordem?: Prisma.ModuloTrilhaIdOrdemCompoundUniqueInput
   AND?: Prisma.ModuloWhereInput | Prisma.ModuloWhereInput[]
   OR?: Prisma.ModuloWhereInput[]
   NOT?: Prisma.ModuloWhereInput | Prisma.ModuloWhereInput[]
-  trilhaId?: Prisma.StringFilter<"Modulo"> | string
+  trilhaId?: Prisma.IntFilter<"Modulo"> | number
   titulo?: Prisma.StringFilter<"Modulo"> | string
   descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
   ordem?: Prisma.IntFilter<"Modulo"> | number
@@ -261,7 +270,7 @@ export type ModuloWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Modulo"> | Date | string
   trilha?: Prisma.XOR<Prisma.TrilhaScalarRelationFilter, Prisma.TrilhaWhereInput>
   questoes?: Prisma.QuestaoListRelationFilter
-}, "id">
+}, "id" | "trilhaId_ordem">
 
 export type ModuloOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -282,8 +291,8 @@ export type ModuloScalarWhereWithAggregatesInput = {
   AND?: Prisma.ModuloScalarWhereWithAggregatesInput | Prisma.ModuloScalarWhereWithAggregatesInput[]
   OR?: Prisma.ModuloScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ModuloScalarWhereWithAggregatesInput | Prisma.ModuloScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Modulo"> | string
-  trilhaId?: Prisma.StringWithAggregatesFilter<"Modulo"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Modulo"> | number
+  trilhaId?: Prisma.IntWithAggregatesFilter<"Modulo"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"Modulo"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Modulo"> | string | null
   ordem?: Prisma.IntWithAggregatesFilter<"Modulo"> | number
@@ -292,7 +301,6 @@ export type ModuloScalarWhereWithAggregatesInput = {
 }
 
 export type ModuloCreateInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   ordem: number
@@ -303,8 +311,8 @@ export type ModuloCreateInput = {
 }
 
 export type ModuloUncheckedCreateInput = {
-  id?: string
-  trilhaId: string
+  id?: number
+  trilhaId: number
   titulo: string
   descricao?: string | null
   ordem: number
@@ -314,7 +322,6 @@ export type ModuloUncheckedCreateInput = {
 }
 
 export type ModuloUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -325,8 +332,8 @@ export type ModuloUpdateInput = {
 }
 
 export type ModuloUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  trilhaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -336,8 +343,8 @@ export type ModuloUncheckedUpdateInput = {
 }
 
 export type ModuloCreateManyInput = {
-  id?: string
-  trilhaId: string
+  id?: number
+  trilhaId: number
   titulo: string
   descricao?: string | null
   ordem: number
@@ -346,7 +353,6 @@ export type ModuloCreateManyInput = {
 }
 
 export type ModuloUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -355,8 +361,8 @@ export type ModuloUpdateManyMutationInput = {
 }
 
 export type ModuloUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  trilhaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -374,6 +380,11 @@ export type ModuloOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ModuloTrilhaIdOrdemCompoundUniqueInput = {
+  trilhaId: number
+  ordem: number
+}
+
 export type ModuloCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   trilhaId?: Prisma.SortOrder
@@ -385,6 +396,8 @@ export type ModuloCountOrderByAggregateInput = {
 }
 
 export type ModuloAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  trilhaId?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
 }
 
@@ -409,6 +422,8 @@ export type ModuloMinOrderByAggregateInput = {
 }
 
 export type ModuloSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  trilhaId?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
 }
 
@@ -474,7 +489,6 @@ export type ModuloUpdateOneRequiredWithoutQuestoesNestedInput = {
 }
 
 export type ModuloCreateWithoutTrilhaInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   ordem: number
@@ -484,7 +498,7 @@ export type ModuloCreateWithoutTrilhaInput = {
 }
 
 export type ModuloUncheckedCreateWithoutTrilhaInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao?: string | null
   ordem: number
@@ -523,8 +537,8 @@ export type ModuloScalarWhereInput = {
   AND?: Prisma.ModuloScalarWhereInput | Prisma.ModuloScalarWhereInput[]
   OR?: Prisma.ModuloScalarWhereInput[]
   NOT?: Prisma.ModuloScalarWhereInput | Prisma.ModuloScalarWhereInput[]
-  id?: Prisma.StringFilter<"Modulo"> | string
-  trilhaId?: Prisma.StringFilter<"Modulo"> | string
+  id?: Prisma.IntFilter<"Modulo"> | number
+  trilhaId?: Prisma.IntFilter<"Modulo"> | number
   titulo?: Prisma.StringFilter<"Modulo"> | string
   descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
   ordem?: Prisma.IntFilter<"Modulo"> | number
@@ -533,7 +547,6 @@ export type ModuloScalarWhereInput = {
 }
 
 export type ModuloCreateWithoutQuestoesInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   ordem: number
@@ -543,8 +556,8 @@ export type ModuloCreateWithoutQuestoesInput = {
 }
 
 export type ModuloUncheckedCreateWithoutQuestoesInput = {
-  id?: string
-  trilhaId: string
+  id?: number
+  trilhaId: number
   titulo: string
   descricao?: string | null
   ordem: number
@@ -569,7 +582,6 @@ export type ModuloUpdateToOneWithWhereWithoutQuestoesInput = {
 }
 
 export type ModuloUpdateWithoutQuestoesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -579,8 +591,8 @@ export type ModuloUpdateWithoutQuestoesInput = {
 }
 
 export type ModuloUncheckedUpdateWithoutQuestoesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  trilhaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -589,7 +601,7 @@ export type ModuloUncheckedUpdateWithoutQuestoesInput = {
 }
 
 export type ModuloCreateManyTrilhaInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao?: string | null
   ordem: number
@@ -598,7 +610,6 @@ export type ModuloCreateManyTrilhaInput = {
 }
 
 export type ModuloUpdateWithoutTrilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -608,7 +619,7 @@ export type ModuloUpdateWithoutTrilhaInput = {
 }
 
 export type ModuloUncheckedUpdateWithoutTrilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -618,7 +629,7 @@ export type ModuloUncheckedUpdateWithoutTrilhaInput = {
 }
 
 export type ModuloUncheckedUpdateManyWithoutTrilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
@@ -722,8 +733,8 @@ export type $ModuloPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     questoes: Prisma.$QuestaoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    trilhaId: string
+    id: number
+    trilhaId: number
     titulo: string
     descricao: string | null
     ordem: number
@@ -1154,8 +1165,8 @@ export interface Prisma__ModuloClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Modulo model
  */
 export interface ModuloFieldRefs {
-  readonly id: Prisma.FieldRef<"Modulo", 'String'>
-  readonly trilhaId: Prisma.FieldRef<"Modulo", 'String'>
+  readonly id: Prisma.FieldRef<"Modulo", 'Int'>
+  readonly trilhaId: Prisma.FieldRef<"Modulo", 'Int'>
   readonly titulo: Prisma.FieldRef<"Modulo", 'String'>
   readonly descricao: Prisma.FieldRef<"Modulo", 'String'>
   readonly ordem: Prisma.FieldRef<"Modulo", 'Int'>

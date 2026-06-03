@@ -27,20 +27,24 @@ export type AggregateQuestao = {
 }
 
 export type QuestaoAvgAggregateOutputType = {
+  id: number | null
+  moduloId: number | null
   dificuldade: number | null
   xpRecompensa: number | null
   ordem: number | null
 }
 
 export type QuestaoSumAggregateOutputType = {
+  id: number | null
+  moduloId: number | null
   dificuldade: number | null
   xpRecompensa: number | null
   ordem: number | null
 }
 
 export type QuestaoMinAggregateOutputType = {
-  id: string | null
-  moduloId: string | null
+  id: number | null
+  moduloId: number | null
   titulo: string | null
   descricao: string | null
   dificuldade: number | null
@@ -51,8 +55,8 @@ export type QuestaoMinAggregateOutputType = {
 }
 
 export type QuestaoMaxAggregateOutputType = {
-  id: string | null
-  moduloId: string | null
+  id: number | null
+  moduloId: number | null
   titulo: string | null
   descricao: string | null
   dificuldade: number | null
@@ -77,12 +81,16 @@ export type QuestaoCountAggregateOutputType = {
 
 
 export type QuestaoAvgAggregateInputType = {
+  id?: true
+  moduloId?: true
   dificuldade?: true
   xpRecompensa?: true
   ordem?: true
 }
 
 export type QuestaoSumAggregateInputType = {
+  id?: true
+  moduloId?: true
   dificuldade?: true
   xpRecompensa?: true
   ordem?: true
@@ -212,8 +220,8 @@ export type QuestaoGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type QuestaoGroupByOutputType = {
-  id: string
-  moduloId: string
+  id: number
+  moduloId: number
   titulo: string
   descricao: string
   dificuldade: number
@@ -247,8 +255,8 @@ export type QuestaoWhereInput = {
   AND?: Prisma.QuestaoWhereInput | Prisma.QuestaoWhereInput[]
   OR?: Prisma.QuestaoWhereInput[]
   NOT?: Prisma.QuestaoWhereInput | Prisma.QuestaoWhereInput[]
-  id?: Prisma.StringFilter<"Questao"> | string
-  moduloId?: Prisma.StringFilter<"Questao"> | string
+  id?: Prisma.IntFilter<"Questao"> | number
+  moduloId?: Prisma.IntFilter<"Questao"> | number
   titulo?: Prisma.StringFilter<"Questao"> | string
   descricao?: Prisma.StringFilter<"Questao"> | string
   dificuldade?: Prisma.IntFilter<"Questao"> | number
@@ -277,11 +285,12 @@ export type QuestaoOrderByWithRelationInput = {
 }
 
 export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  moduloId_ordem?: Prisma.QuestaoModuloIdOrdemCompoundUniqueInput
   AND?: Prisma.QuestaoWhereInput | Prisma.QuestaoWhereInput[]
   OR?: Prisma.QuestaoWhereInput[]
   NOT?: Prisma.QuestaoWhereInput | Prisma.QuestaoWhereInput[]
-  moduloId?: Prisma.StringFilter<"Questao"> | string
+  moduloId?: Prisma.IntFilter<"Questao"> | number
   titulo?: Prisma.StringFilter<"Questao"> | string
   descricao?: Prisma.StringFilter<"Questao"> | string
   dificuldade?: Prisma.IntFilter<"Questao"> | number
@@ -292,7 +301,7 @@ export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
   modulo?: Prisma.XOR<Prisma.ModuloScalarRelationFilter, Prisma.ModuloWhereInput>
   respostas?: Prisma.RespostaQuestaoListRelationFilter
   respostasUsuario?: Prisma.RespostaUsuarioListRelationFilter
-}, "id">
+}, "id" | "moduloId_ordem">
 
 export type QuestaoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -315,8 +324,8 @@ export type QuestaoScalarWhereWithAggregatesInput = {
   AND?: Prisma.QuestaoScalarWhereWithAggregatesInput | Prisma.QuestaoScalarWhereWithAggregatesInput[]
   OR?: Prisma.QuestaoScalarWhereWithAggregatesInput[]
   NOT?: Prisma.QuestaoScalarWhereWithAggregatesInput | Prisma.QuestaoScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Questao"> | string
-  moduloId?: Prisma.StringWithAggregatesFilter<"Questao"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Questao"> | number
+  moduloId?: Prisma.IntWithAggregatesFilter<"Questao"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"Questao"> | string
   descricao?: Prisma.StringWithAggregatesFilter<"Questao"> | string
   dificuldade?: Prisma.IntWithAggregatesFilter<"Questao"> | number
@@ -327,7 +336,6 @@ export type QuestaoScalarWhereWithAggregatesInput = {
 }
 
 export type QuestaoCreateInput = {
-  id?: string
   titulo: string
   descricao: string
   dificuldade: number
@@ -341,8 +349,8 @@ export type QuestaoCreateInput = {
 }
 
 export type QuestaoUncheckedCreateInput = {
-  id?: string
-  moduloId: string
+  id?: number
+  moduloId: number
   titulo: string
   descricao: string
   dificuldade: number
@@ -355,7 +363,6 @@ export type QuestaoUncheckedCreateInput = {
 }
 
 export type QuestaoUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -369,8 +376,8 @@ export type QuestaoUpdateInput = {
 }
 
 export type QuestaoUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  moduloId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  moduloId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -383,8 +390,8 @@ export type QuestaoUncheckedUpdateInput = {
 }
 
 export type QuestaoCreateManyInput = {
-  id?: string
-  moduloId: string
+  id?: number
+  moduloId: number
   titulo: string
   descricao: string
   dificuldade: number
@@ -395,7 +402,6 @@ export type QuestaoCreateManyInput = {
 }
 
 export type QuestaoUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -406,8 +412,8 @@ export type QuestaoUpdateManyMutationInput = {
 }
 
 export type QuestaoUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  moduloId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  moduloId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -427,6 +433,11 @@ export type QuestaoOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type QuestaoModuloIdOrdemCompoundUniqueInput = {
+  moduloId: number
+  ordem: number
+}
+
 export type QuestaoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   moduloId?: Prisma.SortOrder
@@ -440,6 +451,8 @@ export type QuestaoCountOrderByAggregateInput = {
 }
 
 export type QuestaoAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
@@ -470,6 +483,8 @@ export type QuestaoMinOrderByAggregateInput = {
 }
 
 export type QuestaoSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
   dificuldade?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
@@ -551,7 +566,6 @@ export type QuestaoUpdateOneRequiredWithoutRespostasUsuarioNestedInput = {
 }
 
 export type QuestaoCreateWithoutModuloInput = {
-  id?: string
   titulo: string
   descricao: string
   dificuldade: number
@@ -564,7 +578,7 @@ export type QuestaoCreateWithoutModuloInput = {
 }
 
 export type QuestaoUncheckedCreateWithoutModuloInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao: string
   dificuldade: number
@@ -606,8 +620,8 @@ export type QuestaoScalarWhereInput = {
   AND?: Prisma.QuestaoScalarWhereInput | Prisma.QuestaoScalarWhereInput[]
   OR?: Prisma.QuestaoScalarWhereInput[]
   NOT?: Prisma.QuestaoScalarWhereInput | Prisma.QuestaoScalarWhereInput[]
-  id?: Prisma.StringFilter<"Questao"> | string
-  moduloId?: Prisma.StringFilter<"Questao"> | string
+  id?: Prisma.IntFilter<"Questao"> | number
+  moduloId?: Prisma.IntFilter<"Questao"> | number
   titulo?: Prisma.StringFilter<"Questao"> | string
   descricao?: Prisma.StringFilter<"Questao"> | string
   dificuldade?: Prisma.IntFilter<"Questao"> | number
@@ -618,7 +632,6 @@ export type QuestaoScalarWhereInput = {
 }
 
 export type QuestaoCreateWithoutRespostasInput = {
-  id?: string
   titulo: string
   descricao: string
   dificuldade: number
@@ -631,8 +644,8 @@ export type QuestaoCreateWithoutRespostasInput = {
 }
 
 export type QuestaoUncheckedCreateWithoutRespostasInput = {
-  id?: string
-  moduloId: string
+  id?: number
+  moduloId: number
   titulo: string
   descricao: string
   dificuldade: number
@@ -660,7 +673,6 @@ export type QuestaoUpdateToOneWithWhereWithoutRespostasInput = {
 }
 
 export type QuestaoUpdateWithoutRespostasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -673,8 +685,8 @@ export type QuestaoUpdateWithoutRespostasInput = {
 }
 
 export type QuestaoUncheckedUpdateWithoutRespostasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  moduloId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  moduloId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -686,7 +698,6 @@ export type QuestaoUncheckedUpdateWithoutRespostasInput = {
 }
 
 export type QuestaoCreateWithoutRespostasUsuarioInput = {
-  id?: string
   titulo: string
   descricao: string
   dificuldade: number
@@ -699,8 +710,8 @@ export type QuestaoCreateWithoutRespostasUsuarioInput = {
 }
 
 export type QuestaoUncheckedCreateWithoutRespostasUsuarioInput = {
-  id?: string
-  moduloId: string
+  id?: number
+  moduloId: number
   titulo: string
   descricao: string
   dificuldade: number
@@ -728,7 +739,6 @@ export type QuestaoUpdateToOneWithWhereWithoutRespostasUsuarioInput = {
 }
 
 export type QuestaoUpdateWithoutRespostasUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -741,8 +751,8 @@ export type QuestaoUpdateWithoutRespostasUsuarioInput = {
 }
 
 export type QuestaoUncheckedUpdateWithoutRespostasUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  moduloId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  moduloId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -754,7 +764,7 @@ export type QuestaoUncheckedUpdateWithoutRespostasUsuarioInput = {
 }
 
 export type QuestaoCreateManyModuloInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao: string
   dificuldade: number
@@ -765,7 +775,6 @@ export type QuestaoCreateManyModuloInput = {
 }
 
 export type QuestaoUpdateWithoutModuloInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -778,7 +787,7 @@ export type QuestaoUpdateWithoutModuloInput = {
 }
 
 export type QuestaoUncheckedUpdateWithoutModuloInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -791,7 +800,7 @@ export type QuestaoUncheckedUpdateWithoutModuloInput = {
 }
 
 export type QuestaoUncheckedUpdateManyWithoutModuloInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
@@ -917,8 +926,8 @@ export type $QuestaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     respostasUsuario: Prisma.$RespostaUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    moduloId: string
+    id: number
+    moduloId: number
     titulo: string
     descricao: string
     dificuldade: number
@@ -1352,8 +1361,8 @@ export interface Prisma__QuestaoClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Questao model
  */
 export interface QuestaoFieldRefs {
-  readonly id: Prisma.FieldRef<"Questao", 'String'>
-  readonly moduloId: Prisma.FieldRef<"Questao", 'String'>
+  readonly id: Prisma.FieldRef<"Questao", 'Int'>
+  readonly moduloId: Prisma.FieldRef<"Questao", 'Int'>
   readonly titulo: Prisma.FieldRef<"Questao", 'String'>
   readonly descricao: Prisma.FieldRef<"Questao", 'String'>
   readonly dificuldade: Prisma.FieldRef<"Questao", 'Int'>

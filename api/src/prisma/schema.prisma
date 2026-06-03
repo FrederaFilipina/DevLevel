@@ -306,8 +306,6 @@ model HabilidadeUsuario {
   @@map("habilidade_usuario")
 }
 
-
-
 enum Role {
   USER
   ADMIN
@@ -330,7 +328,7 @@ model Token {
   expiresAt DateTime
   usuarioId Int
 
-  usuario Usuario @relation(fields: [usuarioId], references: [id])
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 
   @@map("token")
 }

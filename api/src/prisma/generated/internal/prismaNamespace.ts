@@ -397,9 +397,6 @@ export const ModelName = {
   ConquistaUsuario: 'ConquistaUsuario',
   Habilidade: 'Habilidade',
   HabilidadeUsuario: 'HabilidadeUsuario',
-  Insignia: 'Insignia',
-  InsigniaUsuario: 'InsigniaUsuario',
-  Ranking: 'Ranking',
   Token: 'Token'
 } as const
 
@@ -416,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "tema" | "temaUsuario" | "trilha" | "modulo" | "questao" | "respostaQuestao" | "respostaUsuario" | "trilhaUsuario" | "conquista" | "conquistaUsuario" | "habilidade" | "habilidadeUsuario" | "insignia" | "insigniaUsuario" | "ranking" | "token"
+    modelProps: "usuario" | "tema" | "temaUsuario" | "trilha" | "modulo" | "questao" | "respostaQuestao" | "respostaUsuario" | "trilhaUsuario" | "conquista" | "conquistaUsuario" | "habilidade" | "habilidadeUsuario" | "token"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1382,228 +1379,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Insignia: {
-      payload: Prisma.$InsigniaPayload<ExtArgs>
-      fields: Prisma.InsigniaFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.InsigniaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.InsigniaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>
-        }
-        findFirst: {
-          args: Prisma.InsigniaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.InsigniaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>
-        }
-        findMany: {
-          args: Prisma.InsigniaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>[]
-        }
-        create: {
-          args: Prisma.InsigniaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>
-        }
-        createMany: {
-          args: Prisma.InsigniaCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.InsigniaCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>[]
-        }
-        delete: {
-          args: Prisma.InsigniaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>
-        }
-        update: {
-          args: Prisma.InsigniaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>
-        }
-        deleteMany: {
-          args: Prisma.InsigniaDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.InsigniaUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.InsigniaUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>[]
-        }
-        upsert: {
-          args: Prisma.InsigniaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaPayload>
-        }
-        aggregate: {
-          args: Prisma.InsigniaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateInsignia>
-        }
-        groupBy: {
-          args: Prisma.InsigniaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.InsigniaGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.InsigniaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.InsigniaCountAggregateOutputType> | number
-        }
-      }
-    }
-    InsigniaUsuario: {
-      payload: Prisma.$InsigniaUsuarioPayload<ExtArgs>
-      fields: Prisma.InsigniaUsuarioFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.InsigniaUsuarioFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.InsigniaUsuarioFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>
-        }
-        findFirst: {
-          args: Prisma.InsigniaUsuarioFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.InsigniaUsuarioFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>
-        }
-        findMany: {
-          args: Prisma.InsigniaUsuarioFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>[]
-        }
-        create: {
-          args: Prisma.InsigniaUsuarioCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>
-        }
-        createMany: {
-          args: Prisma.InsigniaUsuarioCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.InsigniaUsuarioCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>[]
-        }
-        delete: {
-          args: Prisma.InsigniaUsuarioDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>
-        }
-        update: {
-          args: Prisma.InsigniaUsuarioUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>
-        }
-        deleteMany: {
-          args: Prisma.InsigniaUsuarioDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.InsigniaUsuarioUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.InsigniaUsuarioUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>[]
-        }
-        upsert: {
-          args: Prisma.InsigniaUsuarioUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InsigniaUsuarioPayload>
-        }
-        aggregate: {
-          args: Prisma.InsigniaUsuarioAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateInsigniaUsuario>
-        }
-        groupBy: {
-          args: Prisma.InsigniaUsuarioGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.InsigniaUsuarioGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.InsigniaUsuarioCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.InsigniaUsuarioCountAggregateOutputType> | number
-        }
-      }
-    }
-    Ranking: {
-      payload: Prisma.$RankingPayload<ExtArgs>
-      fields: Prisma.RankingFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.RankingFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.RankingFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>
-        }
-        findFirst: {
-          args: Prisma.RankingFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.RankingFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>
-        }
-        findMany: {
-          args: Prisma.RankingFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>[]
-        }
-        create: {
-          args: Prisma.RankingCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>
-        }
-        createMany: {
-          args: Prisma.RankingCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.RankingCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>[]
-        }
-        delete: {
-          args: Prisma.RankingDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>
-        }
-        update: {
-          args: Prisma.RankingUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>
-        }
-        deleteMany: {
-          args: Prisma.RankingDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.RankingUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.RankingUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>[]
-        }
-        upsert: {
-          args: Prisma.RankingUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankingPayload>
-        }
-        aggregate: {
-          args: Prisma.RankingAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateRanking>
-        }
-        groupBy: {
-          args: Prisma.RankingGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.RankingGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.RankingCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.RankingCountAggregateOutputType> | number
-        }
-      }
-    }
     Token: {
       payload: Prisma.$TokenPayload<ExtArgs>
       fields: Prisma.TokenFieldRefs
@@ -1897,43 +1672,6 @@ export const HabilidadeUsuarioScalarFieldEnum = {
 export type HabilidadeUsuarioScalarFieldEnum = (typeof HabilidadeUsuarioScalarFieldEnum)[keyof typeof HabilidadeUsuarioScalarFieldEnum]
 
 
-export const InsigniaScalarFieldEnum = {
-  id: 'id',
-  titulo: 'titulo',
-  descricao: 'descricao',
-  icone: 'icone',
-  tipo: 'tipo',
-  xpRecompensa: 'xpRecompensa',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type InsigniaScalarFieldEnum = (typeof InsigniaScalarFieldEnum)[keyof typeof InsigniaScalarFieldEnum]
-
-
-export const InsigniaUsuarioScalarFieldEnum = {
-  id: 'id',
-  usuarioId: 'usuarioId',
-  insigniaId: 'insigniaId',
-  temaId: 'temaId',
-  trilhaId: 'trilhaId',
-  desbloqueadaEm: 'desbloqueadaEm'
-} as const
-
-export type InsigniaUsuarioScalarFieldEnum = (typeof InsigniaUsuarioScalarFieldEnum)[keyof typeof InsigniaUsuarioScalarFieldEnum]
-
-
-export const RankingScalarFieldEnum = {
-  id: 'id',
-  usuarioId: 'usuarioId',
-  xpTotal: 'xpTotal',
-  posicao: 'posicao',
-  updatedAt: 'updatedAt'
-} as const
-
-export type RankingScalarFieldEnum = (typeof RankingScalarFieldEnum)[keyof typeof RankingScalarFieldEnum]
-
-
 export const TokenScalarFieldEnum = {
   id: 'id',
   token: 'token',
@@ -2064,20 +1802,6 @@ export type ListEnumStatusTrilhaUsuarioFieldRefInput<$PrismaModel> = FieldRefInp
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-/**
- * Reference to a field of type 'TipoInsignia'
- */
-export type EnumTipoInsigniaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoInsignia'>
-    
-
-
-/**
- * Reference to a field of type 'TipoInsignia[]'
- */
-export type ListEnumTipoInsigniaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoInsignia[]'>
     
 
 
@@ -2231,9 +1955,6 @@ export type GlobalOmitConfig = {
   conquistaUsuario?: Prisma.ConquistaUsuarioOmit
   habilidade?: Prisma.HabilidadeOmit
   habilidadeUsuario?: Prisma.HabilidadeUsuarioOmit
-  insignia?: Prisma.InsigniaOmit
-  insigniaUsuario?: Prisma.InsigniaUsuarioOmit
-  ranking?: Prisma.RankingOmit
   token?: Prisma.TokenOmit
 }
 

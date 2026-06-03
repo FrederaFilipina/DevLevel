@@ -7,7 +7,7 @@ import { createHash } from "../utils/createHash";
 interface EdicaoServices {
 
     token: string
-    dadosAtualisado:string
+    dadosAtualizados:string
 }
 
 export class UserServices {
@@ -36,7 +36,7 @@ export class UserServices {
 
     }
 
-    async editarEmail({token, dadosAtualisado}: EdicaoServices) {
+    async editarEmail({token, dadosAtualizados}: EdicaoServices) {
 
         const user = getToken(token)
 
@@ -48,13 +48,13 @@ export class UserServices {
             throw new Error("Token invalido")
         }
 
-        const validation = editSchema.parse({email:dadosAtualisado})
+        const validation = editSchema.parse({email:dadosAtualizados})
 
 
-        return await this.repository.editarEmail({id:user.id,dadosAtualisado})
+        return await this.repository.editarEmail({id:user.id,dadosAtualizados})
 
     }
-    async editarSenha({ token, dadosAtualisado }: EdicaoServices) {
+    async editarSenha({ token, dadosAtualizados }: EdicaoServices) {
          const user = getToken(token)
 
         const editSchema = z.object({
@@ -65,17 +65,17 @@ export class UserServices {
             throw new Error("Token invalido")
         }
 
-        const validation = editSchema.parse({senha:dadosAtualisado})
+        const validation = editSchema.parse({senha:dadosAtualizados})
 
-        const hash = await createHash(dadosAtualisado)
+        const hash = await createHash(dadosAtualizados)
 
 
-        return await this.repository.editarSenha({id:user.id,dadosAtualisado:hash})
+        return await this.repository.editarSenha({id:user.id,dadosAtualizados:hash})
 
         
 
     }
-    async editarNome({ token, dadosAtualisado }: EdicaoServices) {
+    async editarNome({ token, dadosAtualizados }: EdicaoServices) {
            const user = getToken(token)
 
         const editSchema = z.object({
@@ -86,14 +86,14 @@ export class UserServices {
             throw new Error("Token invalido")
         }
 
-        const validation = editSchema.parse({nome:dadosAtualisado})
+        const validation = editSchema.parse({nome:dadosAtualizados})
 
 
-        return await this.repository.editarNome({id:user.id,dadosAtualisado})
+        return await this.repository.editarNome({id:user.id,dadosAtualizados})
 
 
     }
-    async editarBio({ token, dadosAtualisado }: EdicaoServices) {
+    async editarBio({ token, dadosAtualizados }: EdicaoServices) {
            const user = getToken(token)
 
         const editSchema = z.object({
@@ -104,10 +104,10 @@ export class UserServices {
             throw new Error("Token invalido")
         }
 
-        const validation = editSchema.parse({nome:dadosAtualisado})
+        const validation = editSchema.parse({bio:dadosAtualizados})
 
 
-        return await this.repository.editarBio({id:user.id,dadosAtualisado})
+        return await this.repository.editarBio({id:user.id,dadosAtualizados})
 
 
 

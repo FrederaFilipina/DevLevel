@@ -27,6 +27,8 @@ export type AggregateRespostaQuestao = {
 }
 
 export type RespostaQuestaoAvgAggregateOutputType = {
+  id: number | null
+  questaoId: number | null
   pontuacao: number | null
   cleanCodeScore: number | null
   performanceScore: number | null
@@ -34,6 +36,8 @@ export type RespostaQuestaoAvgAggregateOutputType = {
 }
 
 export type RespostaQuestaoSumAggregateOutputType = {
+  id: number | null
+  questaoId: number | null
   pontuacao: number | null
   cleanCodeScore: number | null
   performanceScore: number | null
@@ -41,8 +45,8 @@ export type RespostaQuestaoSumAggregateOutputType = {
 }
 
 export type RespostaQuestaoMinAggregateOutputType = {
-  id: string | null
-  questaoId: string | null
+  id: number | null
+  questaoId: number | null
   titulo: string | null
   codigoResposta: string | null
   explicacao: string | null
@@ -57,8 +61,8 @@ export type RespostaQuestaoMinAggregateOutputType = {
 }
 
 export type RespostaQuestaoMaxAggregateOutputType = {
-  id: string | null
-  questaoId: string | null
+  id: number | null
+  questaoId: number | null
   titulo: string | null
   codigoResposta: string | null
   explicacao: string | null
@@ -91,6 +95,8 @@ export type RespostaQuestaoCountAggregateOutputType = {
 
 
 export type RespostaQuestaoAvgAggregateInputType = {
+  id?: true
+  questaoId?: true
   pontuacao?: true
   cleanCodeScore?: true
   performanceScore?: true
@@ -98,6 +104,8 @@ export type RespostaQuestaoAvgAggregateInputType = {
 }
 
 export type RespostaQuestaoSumAggregateInputType = {
+  id?: true
+  questaoId?: true
   pontuacao?: true
   cleanCodeScore?: true
   performanceScore?: true
@@ -240,8 +248,8 @@ export type RespostaQuestaoGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type RespostaQuestaoGroupByOutputType = {
-  id: string
-  questaoId: string
+  id: number
+  questaoId: number
   titulo: string
   codigoResposta: string
   explicacao: string | null
@@ -279,8 +287,8 @@ export type RespostaQuestaoWhereInput = {
   AND?: Prisma.RespostaQuestaoWhereInput | Prisma.RespostaQuestaoWhereInput[]
   OR?: Prisma.RespostaQuestaoWhereInput[]
   NOT?: Prisma.RespostaQuestaoWhereInput | Prisma.RespostaQuestaoWhereInput[]
-  id?: Prisma.StringFilter<"RespostaQuestao"> | string
-  questaoId?: Prisma.StringFilter<"RespostaQuestao"> | string
+  id?: Prisma.IntFilter<"RespostaQuestao"> | number
+  questaoId?: Prisma.IntFilter<"RespostaQuestao"> | number
   titulo?: Prisma.StringFilter<"RespostaQuestao"> | string
   codigoResposta?: Prisma.StringFilter<"RespostaQuestao"> | string
   explicacao?: Prisma.StringNullableFilter<"RespostaQuestao"> | string | null
@@ -315,11 +323,11 @@ export type RespostaQuestaoOrderByWithRelationInput = {
 }
 
 export type RespostaQuestaoWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.RespostaQuestaoWhereInput | Prisma.RespostaQuestaoWhereInput[]
   OR?: Prisma.RespostaQuestaoWhereInput[]
   NOT?: Prisma.RespostaQuestaoWhereInput | Prisma.RespostaQuestaoWhereInput[]
-  questaoId?: Prisma.StringFilter<"RespostaQuestao"> | string
+  questaoId?: Prisma.IntFilter<"RespostaQuestao"> | number
   titulo?: Prisma.StringFilter<"RespostaQuestao"> | string
   codigoResposta?: Prisma.StringFilter<"RespostaQuestao"> | string
   explicacao?: Prisma.StringNullableFilter<"RespostaQuestao"> | string | null
@@ -360,8 +368,8 @@ export type RespostaQuestaoScalarWhereWithAggregatesInput = {
   AND?: Prisma.RespostaQuestaoScalarWhereWithAggregatesInput | Prisma.RespostaQuestaoScalarWhereWithAggregatesInput[]
   OR?: Prisma.RespostaQuestaoScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RespostaQuestaoScalarWhereWithAggregatesInput | Prisma.RespostaQuestaoScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"RespostaQuestao"> | string
-  questaoId?: Prisma.StringWithAggregatesFilter<"RespostaQuestao"> | string
+  id?: Prisma.IntWithAggregatesFilter<"RespostaQuestao"> | number
+  questaoId?: Prisma.IntWithAggregatesFilter<"RespostaQuestao"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"RespostaQuestao"> | string
   codigoResposta?: Prisma.StringWithAggregatesFilter<"RespostaQuestao"> | string
   explicacao?: Prisma.StringNullableWithAggregatesFilter<"RespostaQuestao"> | string | null
@@ -376,7 +384,6 @@ export type RespostaQuestaoScalarWhereWithAggregatesInput = {
 }
 
 export type RespostaQuestaoCreateInput = {
-  id?: string
   titulo: string
   codigoResposta: string
   explicacao?: string | null
@@ -393,8 +400,8 @@ export type RespostaQuestaoCreateInput = {
 }
 
 export type RespostaQuestaoUncheckedCreateInput = {
-  id?: string
-  questaoId: string
+  id?: number
+  questaoId: number
   titulo: string
   codigoResposta: string
   explicacao?: string | null
@@ -410,7 +417,6 @@ export type RespostaQuestaoUncheckedCreateInput = {
 }
 
 export type RespostaQuestaoUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -427,8 +433,8 @@ export type RespostaQuestaoUpdateInput = {
 }
 
 export type RespostaQuestaoUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -444,8 +450,8 @@ export type RespostaQuestaoUncheckedUpdateInput = {
 }
 
 export type RespostaQuestaoCreateManyInput = {
-  id?: string
-  questaoId: string
+  id?: number
+  questaoId: number
   titulo: string
   codigoResposta: string
   explicacao?: string | null
@@ -460,7 +466,6 @@ export type RespostaQuestaoCreateManyInput = {
 }
 
 export type RespostaQuestaoUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -475,8 +480,8 @@ export type RespostaQuestaoUpdateManyMutationInput = {
 }
 
 export type RespostaQuestaoUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -517,6 +522,8 @@ export type RespostaQuestaoCountOrderByAggregateInput = {
 }
 
 export type RespostaQuestaoAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
   pontuacao?: Prisma.SortOrder
   cleanCodeScore?: Prisma.SortOrder
   performanceScore?: Prisma.SortOrder
@@ -556,6 +563,8 @@ export type RespostaQuestaoMinOrderByAggregateInput = {
 }
 
 export type RespostaQuestaoSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
   pontuacao?: Prisma.SortOrder
   cleanCodeScore?: Prisma.SortOrder
   performanceScore?: Prisma.SortOrder
@@ -624,7 +633,6 @@ export type RespostaQuestaoUpdateOneRequiredWithoutRespostasUsuariosNestedInput 
 }
 
 export type RespostaQuestaoCreateWithoutQuestaoInput = {
-  id?: string
   titulo: string
   codigoResposta: string
   explicacao?: string | null
@@ -640,7 +648,7 @@ export type RespostaQuestaoCreateWithoutQuestaoInput = {
 }
 
 export type RespostaQuestaoUncheckedCreateWithoutQuestaoInput = {
-  id?: string
+  id?: number
   titulo: string
   codigoResposta: string
   explicacao?: string | null
@@ -685,8 +693,8 @@ export type RespostaQuestaoScalarWhereInput = {
   AND?: Prisma.RespostaQuestaoScalarWhereInput | Prisma.RespostaQuestaoScalarWhereInput[]
   OR?: Prisma.RespostaQuestaoScalarWhereInput[]
   NOT?: Prisma.RespostaQuestaoScalarWhereInput | Prisma.RespostaQuestaoScalarWhereInput[]
-  id?: Prisma.StringFilter<"RespostaQuestao"> | string
-  questaoId?: Prisma.StringFilter<"RespostaQuestao"> | string
+  id?: Prisma.IntFilter<"RespostaQuestao"> | number
+  questaoId?: Prisma.IntFilter<"RespostaQuestao"> | number
   titulo?: Prisma.StringFilter<"RespostaQuestao"> | string
   codigoResposta?: Prisma.StringFilter<"RespostaQuestao"> | string
   explicacao?: Prisma.StringNullableFilter<"RespostaQuestao"> | string | null
@@ -701,7 +709,6 @@ export type RespostaQuestaoScalarWhereInput = {
 }
 
 export type RespostaQuestaoCreateWithoutRespostasUsuariosInput = {
-  id?: string
   titulo: string
   codigoResposta: string
   explicacao?: string | null
@@ -717,8 +724,8 @@ export type RespostaQuestaoCreateWithoutRespostasUsuariosInput = {
 }
 
 export type RespostaQuestaoUncheckedCreateWithoutRespostasUsuariosInput = {
-  id?: string
-  questaoId: string
+  id?: number
+  questaoId: number
   titulo: string
   codigoResposta: string
   explicacao?: string | null
@@ -749,7 +756,6 @@ export type RespostaQuestaoUpdateToOneWithWhereWithoutRespostasUsuariosInput = {
 }
 
 export type RespostaQuestaoUpdateWithoutRespostasUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -765,8 +771,8 @@ export type RespostaQuestaoUpdateWithoutRespostasUsuariosInput = {
 }
 
 export type RespostaQuestaoUncheckedUpdateWithoutRespostasUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  questaoId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -781,7 +787,7 @@ export type RespostaQuestaoUncheckedUpdateWithoutRespostasUsuariosInput = {
 }
 
 export type RespostaQuestaoCreateManyQuestaoInput = {
-  id?: string
+  id?: number
   titulo: string
   codigoResposta: string
   explicacao?: string | null
@@ -796,7 +802,6 @@ export type RespostaQuestaoCreateManyQuestaoInput = {
 }
 
 export type RespostaQuestaoUpdateWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -812,7 +817,7 @@ export type RespostaQuestaoUpdateWithoutQuestaoInput = {
 }
 
 export type RespostaQuestaoUncheckedUpdateWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -828,7 +833,7 @@ export type RespostaQuestaoUncheckedUpdateWithoutQuestaoInput = {
 }
 
 export type RespostaQuestaoUncheckedUpdateManyWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   codigoResposta?: Prisma.StringFieldUpdateOperationsInput | string
   explicacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -962,8 +967,8 @@ export type $RespostaQuestaoPayload<ExtArgs extends runtime.Types.Extensions.Int
     respostasUsuarios: Prisma.$RespostaUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    questaoId: string
+    id: number
+    questaoId: number
     titulo: string
     codigoResposta: string
     explicacao: string | null
@@ -1400,8 +1405,8 @@ export interface Prisma__RespostaQuestaoClient<T, Null = never, ExtArgs extends 
  * Fields of the RespostaQuestao model
  */
 export interface RespostaQuestaoFieldRefs {
-  readonly id: Prisma.FieldRef<"RespostaQuestao", 'String'>
-  readonly questaoId: Prisma.FieldRef<"RespostaQuestao", 'String'>
+  readonly id: Prisma.FieldRef<"RespostaQuestao", 'Int'>
+  readonly questaoId: Prisma.FieldRef<"RespostaQuestao", 'Int'>
   readonly titulo: Prisma.FieldRef<"RespostaQuestao", 'String'>
   readonly codigoResposta: Prisma.FieldRef<"RespostaQuestao", 'String'>
   readonly explicacao: Prisma.FieldRef<"RespostaQuestao", 'String'>

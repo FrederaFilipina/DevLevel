@@ -107,21 +107,6 @@ export type Habilidade = Prisma.HabilidadeModel
  */
 export type HabilidadeUsuario = Prisma.HabilidadeUsuarioModel
 /**
- * Model Insignia
- * 
- */
-export type Insignia = Prisma.InsigniaModel
-/**
- * Model InsigniaUsuario
- * 
- */
-export type InsigniaUsuario = Prisma.InsigniaUsuarioModel
-/**
- * Model Ranking
- * 
- */
-export type Ranking = Prisma.RankingModel
-/**
  * Model Token
  * 
  */

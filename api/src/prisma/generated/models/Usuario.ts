@@ -289,8 +289,6 @@ export type UsuarioWhereInput = {
   temasUsuario?: Prisma.TemaUsuarioListRelationFilter
   conquistasUsuario?: Prisma.ConquistaUsuarioListRelationFilter
   habilidadesUsuario?: Prisma.HabilidadeUsuarioListRelationFilter
-  insigniasUsuario?: Prisma.InsigniaUsuarioListRelationFilter
-  rankings?: Prisma.RankingListRelationFilter
   tokens?: Prisma.TokenListRelationFilter
 }
 
@@ -312,8 +310,6 @@ export type UsuarioOrderByWithRelationInput = {
   temasUsuario?: Prisma.TemaUsuarioOrderByRelationAggregateInput
   conquistasUsuario?: Prisma.ConquistaUsuarioOrderByRelationAggregateInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioOrderByRelationAggregateInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioOrderByRelationAggregateInput
-  rankings?: Prisma.RankingOrderByRelationAggregateInput
   tokens?: Prisma.TokenOrderByRelationAggregateInput
 }
 
@@ -338,8 +334,6 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   temasUsuario?: Prisma.TemaUsuarioListRelationFilter
   conquistasUsuario?: Prisma.ConquistaUsuarioListRelationFilter
   habilidadesUsuario?: Prisma.HabilidadeUsuarioListRelationFilter
-  insigniasUsuario?: Prisma.InsigniaUsuarioListRelationFilter
-  rankings?: Prisma.RankingListRelationFilter
   tokens?: Prisma.TokenListRelationFilter
 }, "id" | "email">
 
@@ -398,8 +392,6 @@ export type UsuarioCreateInput = {
   temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
@@ -421,8 +413,6 @@ export type UsuarioUncheckedCreateInput = {
   temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
@@ -443,8 +433,6 @@ export type UsuarioUpdateInput = {
   temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -466,8 +454,6 @@ export type UsuarioUncheckedUpdateInput = {
   temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -673,34 +659,6 @@ export type UsuarioUpdateOneRequiredWithoutHabilidadesUsuarioNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutHabilidadesUsuarioInput, Prisma.UsuarioUpdateWithoutHabilidadesUsuarioInput>, Prisma.UsuarioUncheckedUpdateWithoutHabilidadesUsuarioInput>
 }
 
-export type UsuarioCreateNestedOneWithoutInsigniasUsuarioInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInsigniasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutInsigniasUsuarioInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInsigniasUsuarioInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-}
-
-export type UsuarioUpdateOneRequiredWithoutInsigniasUsuarioNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInsigniasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutInsigniasUsuarioInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInsigniasUsuarioInput
-  upsert?: Prisma.UsuarioUpsertWithoutInsigniasUsuarioInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutInsigniasUsuarioInput, Prisma.UsuarioUpdateWithoutInsigniasUsuarioInput>, Prisma.UsuarioUncheckedUpdateWithoutInsigniasUsuarioInput>
-}
-
-export type UsuarioCreateNestedOneWithoutRankingsInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutRankingsInput, Prisma.UsuarioUncheckedCreateWithoutRankingsInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutRankingsInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-}
-
-export type UsuarioUpdateOneRequiredWithoutRankingsNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutRankingsInput, Prisma.UsuarioUncheckedCreateWithoutRankingsInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutRankingsInput
-  upsert?: Prisma.UsuarioUpsertWithoutRankingsInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutRankingsInput, Prisma.UsuarioUpdateWithoutRankingsInput>, Prisma.UsuarioUncheckedUpdateWithoutRankingsInput>
-}
-
 export type UsuarioCreateNestedOneWithoutTokensInput = {
   create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTokensInput, Prisma.UsuarioUncheckedCreateWithoutTokensInput>
   connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTokensInput
@@ -731,8 +689,6 @@ export type UsuarioCreateWithoutTemasUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
@@ -753,8 +709,6 @@ export type UsuarioUncheckedCreateWithoutTemasUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
@@ -790,8 +744,6 @@ export type UsuarioUpdateWithoutTemasUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -812,8 +764,6 @@ export type UsuarioUncheckedUpdateWithoutTemasUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -833,8 +783,6 @@ export type UsuarioCreateWithoutRespostasUsuarioInput = {
   temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
@@ -855,8 +803,6 @@ export type UsuarioUncheckedCreateWithoutRespostasUsuarioInput = {
   temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
@@ -892,8 +838,6 @@ export type UsuarioUpdateWithoutRespostasUsuarioInput = {
   temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -914,8 +858,6 @@ export type UsuarioUncheckedUpdateWithoutRespostasUsuarioInput = {
   temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -935,8 +877,6 @@ export type UsuarioCreateWithoutTrilhasUsuarioInput = {
   temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
@@ -957,8 +897,6 @@ export type UsuarioUncheckedCreateWithoutTrilhasUsuarioInput = {
   temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
@@ -994,8 +932,6 @@ export type UsuarioUpdateWithoutTrilhasUsuarioInput = {
   temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -1016,8 +952,6 @@ export type UsuarioUncheckedUpdateWithoutTrilhasUsuarioInput = {
   temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -1037,8 +971,6 @@ export type UsuarioCreateWithoutConquistasUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
   temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
@@ -1059,8 +991,6 @@ export type UsuarioUncheckedCreateWithoutConquistasUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
@@ -1096,8 +1026,6 @@ export type UsuarioUpdateWithoutConquistasUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
   temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -1118,8 +1046,6 @@ export type UsuarioUncheckedUpdateWithoutConquistasUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -1139,8 +1065,6 @@ export type UsuarioCreateWithoutHabilidadesUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
   temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
@@ -1161,8 +1085,6 @@ export type UsuarioUncheckedCreateWithoutHabilidadesUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
@@ -1198,8 +1120,6 @@ export type UsuarioUpdateWithoutHabilidadesUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
   temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -1220,212 +1140,6 @@ export type UsuarioUncheckedUpdateWithoutHabilidadesUsuarioInput = {
   respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
-  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
-}
-
-export type UsuarioCreateWithoutInsigniasUsuarioInput = {
-  nome: string
-  email: string
-  senha: string
-  role?: $Enums.Role
-  avatarUrl?: string | null
-  bio?: string | null
-  xp?: number
-  nivel?: number
-  pontuacaoTotal?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trilhasUsuario?: Prisma.TrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
-  temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
-  conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
-  tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
-}
-
-export type UsuarioUncheckedCreateWithoutInsigniasUsuarioInput = {
-  id?: number
-  nome: string
-  email: string
-  senha: string
-  role?: $Enums.Role
-  avatarUrl?: string | null
-  bio?: string | null
-  xp?: number
-  nivel?: number
-  pontuacaoTotal?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
-  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
-}
-
-export type UsuarioCreateOrConnectWithoutInsigniasUsuarioInput = {
-  where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutInsigniasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutInsigniasUsuarioInput>
-}
-
-export type UsuarioUpsertWithoutInsigniasUsuarioInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutInsigniasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutInsigniasUsuarioInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutInsigniasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutInsigniasUsuarioInput>
-  where?: Prisma.UsuarioWhereInput
-}
-
-export type UsuarioUpdateToOneWithWhereWithoutInsigniasUsuarioInput = {
-  where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutInsigniasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutInsigniasUsuarioInput>
-}
-
-export type UsuarioUpdateWithoutInsigniasUsuarioInput = {
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp?: Prisma.IntFieldUpdateOperationsInput | number
-  nivel?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trilhasUsuario?: Prisma.TrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
-  temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
-  conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
-  tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
-}
-
-export type UsuarioUncheckedUpdateWithoutInsigniasUsuarioInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp?: Prisma.IntFieldUpdateOperationsInput | number
-  nivel?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
-  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
-}
-
-export type UsuarioCreateWithoutRankingsInput = {
-  nome: string
-  email: string
-  senha: string
-  role?: $Enums.Role
-  avatarUrl?: string | null
-  bio?: string | null
-  xp?: number
-  nivel?: number
-  pontuacaoTotal?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trilhasUsuario?: Prisma.TrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
-  temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
-  conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioCreateNestedManyWithoutUsuarioInput
-  tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
-}
-
-export type UsuarioUncheckedCreateWithoutRankingsInput = {
-  id?: number
-  nome: string
-  email: string
-  senha: string
-  role?: $Enums.Role
-  avatarUrl?: string | null
-  bio?: string | null
-  xp?: number
-  nivel?: number
-  pontuacaoTotal?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
-}
-
-export type UsuarioCreateOrConnectWithoutRankingsInput = {
-  where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutRankingsInput, Prisma.UsuarioUncheckedCreateWithoutRankingsInput>
-}
-
-export type UsuarioUpsertWithoutRankingsInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutRankingsInput, Prisma.UsuarioUncheckedUpdateWithoutRankingsInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutRankingsInput, Prisma.UsuarioUncheckedCreateWithoutRankingsInput>
-  where?: Prisma.UsuarioWhereInput
-}
-
-export type UsuarioUpdateToOneWithWhereWithoutRankingsInput = {
-  where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutRankingsInput, Prisma.UsuarioUncheckedUpdateWithoutRankingsInput>
-}
-
-export type UsuarioUpdateWithoutRankingsInput = {
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp?: Prisma.IntFieldUpdateOperationsInput | number
-  nivel?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trilhasUsuario?: Prisma.TrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
-  temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
-  conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUpdateManyWithoutUsuarioNestedInput
-  tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
-}
-
-export type UsuarioUncheckedUpdateWithoutRankingsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp?: Prisma.IntFieldUpdateOperationsInput | number
-  nivel?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -1446,8 +1160,6 @@ export type UsuarioCreateWithoutTokensInput = {
   temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutTokensInput = {
@@ -1468,8 +1180,6 @@ export type UsuarioUncheckedCreateWithoutTokensInput = {
   temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutTokensInput = {
@@ -1505,8 +1215,6 @@ export type UsuarioUpdateWithoutTokensInput = {
   temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutTokensInput = {
@@ -1527,8 +1235,6 @@ export type UsuarioUncheckedUpdateWithoutTokensInput = {
   temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  insigniasUsuario?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 
@@ -1542,8 +1248,6 @@ export type UsuarioCountOutputType = {
   temasUsuario: number
   conquistasUsuario: number
   habilidadesUsuario: number
-  insigniasUsuario: number
-  rankings: number
   tokens: number
 }
 
@@ -1553,8 +1257,6 @@ export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   temasUsuario?: boolean | UsuarioCountOutputTypeCountTemasUsuarioArgs
   conquistasUsuario?: boolean | UsuarioCountOutputTypeCountConquistasUsuarioArgs
   habilidadesUsuario?: boolean | UsuarioCountOutputTypeCountHabilidadesUsuarioArgs
-  insigniasUsuario?: boolean | UsuarioCountOutputTypeCountInsigniasUsuarioArgs
-  rankings?: boolean | UsuarioCountOutputTypeCountRankingsArgs
   tokens?: boolean | UsuarioCountOutputTypeCountTokensArgs
 }
 
@@ -1606,20 +1308,6 @@ export type UsuarioCountOutputTypeCountHabilidadesUsuarioArgs<ExtArgs extends ru
 /**
  * UsuarioCountOutputType without action
  */
-export type UsuarioCountOutputTypeCountInsigniasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InsigniaUsuarioWhereInput
-}
-
-/**
- * UsuarioCountOutputType without action
- */
-export type UsuarioCountOutputTypeCountRankingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RankingWhereInput
-}
-
-/**
- * UsuarioCountOutputType without action
- */
 export type UsuarioCountOutputTypeCountTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TokenWhereInput
 }
@@ -1643,8 +1331,6 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   temasUsuario?: boolean | Prisma.Usuario$temasUsuarioArgs<ExtArgs>
   conquistasUsuario?: boolean | Prisma.Usuario$conquistasUsuarioArgs<ExtArgs>
   habilidadesUsuario?: boolean | Prisma.Usuario$habilidadesUsuarioArgs<ExtArgs>
-  insigniasUsuario?: boolean | Prisma.Usuario$insigniasUsuarioArgs<ExtArgs>
-  rankings?: boolean | Prisma.Usuario$rankingsArgs<ExtArgs>
   tokens?: boolean | Prisma.Usuario$tokensArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
@@ -1701,8 +1387,6 @@ export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   temasUsuario?: boolean | Prisma.Usuario$temasUsuarioArgs<ExtArgs>
   conquistasUsuario?: boolean | Prisma.Usuario$conquistasUsuarioArgs<ExtArgs>
   habilidadesUsuario?: boolean | Prisma.Usuario$habilidadesUsuarioArgs<ExtArgs>
-  insigniasUsuario?: boolean | Prisma.Usuario$insigniasUsuarioArgs<ExtArgs>
-  rankings?: boolean | Prisma.Usuario$rankingsArgs<ExtArgs>
   tokens?: boolean | Prisma.Usuario$tokensArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1717,8 +1401,6 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     temasUsuario: Prisma.$TemaUsuarioPayload<ExtArgs>[]
     conquistasUsuario: Prisma.$ConquistaUsuarioPayload<ExtArgs>[]
     habilidadesUsuario: Prisma.$HabilidadeUsuarioPayload<ExtArgs>[]
-    insigniasUsuario: Prisma.$InsigniaUsuarioPayload<ExtArgs>[]
-    rankings: Prisma.$RankingPayload<ExtArgs>[]
     tokens: Prisma.$TokenPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2133,8 +1815,6 @@ export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.
   temasUsuario<T extends Prisma.Usuario$temasUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$temasUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TemaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conquistasUsuario<T extends Prisma.Usuario$conquistasUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$conquistasUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConquistaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   habilidadesUsuario<T extends Prisma.Usuario$habilidadesUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$habilidadesUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HabilidadeUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  insigniasUsuario<T extends Prisma.Usuario$insigniasUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$insigniasUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InsigniaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  rankings<T extends Prisma.Usuario$rankingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$rankingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RankingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tokens<T extends Prisma.Usuario$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2687,54 +2367,6 @@ export type Usuario$habilidadesUsuarioArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.HabilidadeUsuarioScalarFieldEnum | Prisma.HabilidadeUsuarioScalarFieldEnum[]
-}
-
-/**
- * Usuario.insigniasUsuario
- */
-export type Usuario$insigniasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the InsigniaUsuario
-   */
-  select?: Prisma.InsigniaUsuarioSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the InsigniaUsuario
-   */
-  omit?: Prisma.InsigniaUsuarioOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InsigniaUsuarioInclude<ExtArgs> | null
-  where?: Prisma.InsigniaUsuarioWhereInput
-  orderBy?: Prisma.InsigniaUsuarioOrderByWithRelationInput | Prisma.InsigniaUsuarioOrderByWithRelationInput[]
-  cursor?: Prisma.InsigniaUsuarioWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.InsigniaUsuarioScalarFieldEnum | Prisma.InsigniaUsuarioScalarFieldEnum[]
-}
-
-/**
- * Usuario.rankings
- */
-export type Usuario$rankingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Ranking
-   */
-  select?: Prisma.RankingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Ranking
-   */
-  omit?: Prisma.RankingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RankingInclude<ExtArgs> | null
-  where?: Prisma.RankingWhereInput
-  orderBy?: Prisma.RankingOrderByWithRelationInput | Prisma.RankingOrderByWithRelationInput[]
-  cursor?: Prisma.RankingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.RankingScalarFieldEnum | Prisma.RankingScalarFieldEnum[]
 }
 
 /**

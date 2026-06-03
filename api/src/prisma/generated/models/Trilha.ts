@@ -27,37 +27,43 @@ export type AggregateTrilha = {
 }
 
 export type TrilhaAvgAggregateOutputType = {
+  id: number | null
+  temaId: number | null
   ordem: number | null
   pontuacaoMinima: number | null
+  trilhaAnteriorId: number | null
 }
 
 export type TrilhaSumAggregateOutputType = {
+  id: number | null
+  temaId: number | null
   ordem: number | null
   pontuacaoMinima: number | null
+  trilhaAnteriorId: number | null
 }
 
 export type TrilhaMinAggregateOutputType = {
-  id: string | null
-  temaId: string | null
+  id: number | null
+  temaId: number | null
   titulo: string | null
   descricao: string | null
   nivel: $Enums.NivelDificuldade | null
   ordem: number | null
   pontuacaoMinima: number | null
-  trilhaAnteriorId: string | null
+  trilhaAnteriorId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type TrilhaMaxAggregateOutputType = {
-  id: string | null
-  temaId: string | null
+  id: number | null
+  temaId: number | null
   titulo: string | null
   descricao: string | null
   nivel: $Enums.NivelDificuldade | null
   ordem: number | null
   pontuacaoMinima: number | null
-  trilhaAnteriorId: string | null
+  trilhaAnteriorId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -78,13 +84,19 @@ export type TrilhaCountAggregateOutputType = {
 
 
 export type TrilhaAvgAggregateInputType = {
+  id?: true
+  temaId?: true
   ordem?: true
   pontuacaoMinima?: true
+  trilhaAnteriorId?: true
 }
 
 export type TrilhaSumAggregateInputType = {
+  id?: true
+  temaId?: true
   ordem?: true
   pontuacaoMinima?: true
+  trilhaAnteriorId?: true
 }
 
 export type TrilhaMinAggregateInputType = {
@@ -214,14 +226,14 @@ export type TrilhaGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type TrilhaGroupByOutputType = {
-  id: string
-  temaId: string
+  id: number
+  temaId: number
   titulo: string
   descricao: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
-  trilhaAnteriorId: string | null
+  trilhaAnteriorId: number | null
   createdAt: Date
   updatedAt: Date
   _count: TrilhaCountAggregateOutputType | null
@@ -250,14 +262,14 @@ export type TrilhaWhereInput = {
   AND?: Prisma.TrilhaWhereInput | Prisma.TrilhaWhereInput[]
   OR?: Prisma.TrilhaWhereInput[]
   NOT?: Prisma.TrilhaWhereInput | Prisma.TrilhaWhereInput[]
-  id?: Prisma.StringFilter<"Trilha"> | string
-  temaId?: Prisma.StringFilter<"Trilha"> | string
+  id?: Prisma.IntFilter<"Trilha"> | number
+  temaId?: Prisma.IntFilter<"Trilha"> | number
   titulo?: Prisma.StringFilter<"Trilha"> | string
   descricao?: Prisma.StringNullableFilter<"Trilha"> | string | null
   nivel?: Prisma.EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
   ordem?: Prisma.IntFilter<"Trilha"> | number
   pontuacaoMinima?: Prisma.IntFilter<"Trilha"> | number
-  trilhaAnteriorId?: Prisma.StringNullableFilter<"Trilha"> | string | null
+  trilhaAnteriorId?: Prisma.IntNullableFilter<"Trilha"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
   tema?: Prisma.XOR<Prisma.TemaScalarRelationFilter, Prisma.TemaWhereInput>
@@ -265,7 +277,6 @@ export type TrilhaWhereInput = {
   proximasTrilhas?: Prisma.TrilhaListRelationFilter
   modulos?: Prisma.ModuloListRelationFilter
   usuarios?: Prisma.TrilhaUsuarioListRelationFilter
-  insignias?: Prisma.InsigniaUsuarioListRelationFilter
 }
 
 export type TrilhaOrderByWithRelationInput = {
@@ -284,21 +295,21 @@ export type TrilhaOrderByWithRelationInput = {
   proximasTrilhas?: Prisma.TrilhaOrderByRelationAggregateInput
   modulos?: Prisma.ModuloOrderByRelationAggregateInput
   usuarios?: Prisma.TrilhaUsuarioOrderByRelationAggregateInput
-  insignias?: Prisma.InsigniaUsuarioOrderByRelationAggregateInput
 }
 
 export type TrilhaWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  temaId_ordem?: Prisma.TrilhaTemaIdOrdemCompoundUniqueInput
   AND?: Prisma.TrilhaWhereInput | Prisma.TrilhaWhereInput[]
   OR?: Prisma.TrilhaWhereInput[]
   NOT?: Prisma.TrilhaWhereInput | Prisma.TrilhaWhereInput[]
-  temaId?: Prisma.StringFilter<"Trilha"> | string
+  temaId?: Prisma.IntFilter<"Trilha"> | number
   titulo?: Prisma.StringFilter<"Trilha"> | string
   descricao?: Prisma.StringNullableFilter<"Trilha"> | string | null
   nivel?: Prisma.EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
   ordem?: Prisma.IntFilter<"Trilha"> | number
   pontuacaoMinima?: Prisma.IntFilter<"Trilha"> | number
-  trilhaAnteriorId?: Prisma.StringNullableFilter<"Trilha"> | string | null
+  trilhaAnteriorId?: Prisma.IntNullableFilter<"Trilha"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
   tema?: Prisma.XOR<Prisma.TemaScalarRelationFilter, Prisma.TemaWhereInput>
@@ -306,8 +317,7 @@ export type TrilhaWhereUniqueInput = Prisma.AtLeast<{
   proximasTrilhas?: Prisma.TrilhaListRelationFilter
   modulos?: Prisma.ModuloListRelationFilter
   usuarios?: Prisma.TrilhaUsuarioListRelationFilter
-  insignias?: Prisma.InsigniaUsuarioListRelationFilter
-}, "id">
+}, "id" | "temaId_ordem">
 
 export type TrilhaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -331,20 +341,19 @@ export type TrilhaScalarWhereWithAggregatesInput = {
   AND?: Prisma.TrilhaScalarWhereWithAggregatesInput | Prisma.TrilhaScalarWhereWithAggregatesInput[]
   OR?: Prisma.TrilhaScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TrilhaScalarWhereWithAggregatesInput | Prisma.TrilhaScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Trilha"> | string
-  temaId?: Prisma.StringWithAggregatesFilter<"Trilha"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Trilha"> | number
+  temaId?: Prisma.IntWithAggregatesFilter<"Trilha"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"Trilha"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Trilha"> | string | null
   nivel?: Prisma.EnumNivelDificuldadeWithAggregatesFilter<"Trilha"> | $Enums.NivelDificuldade
   ordem?: Prisma.IntWithAggregatesFilter<"Trilha"> | number
   pontuacaoMinima?: Prisma.IntWithAggregatesFilter<"Trilha"> | number
-  trilhaAnteriorId?: Prisma.StringNullableWithAggregatesFilter<"Trilha"> | string | null
+  trilhaAnteriorId?: Prisma.IntNullableWithAggregatesFilter<"Trilha"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Trilha"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Trilha"> | Date | string
 }
 
 export type TrilhaCreateInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
@@ -357,28 +366,25 @@ export type TrilhaCreateInput = {
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaUncheckedCreateInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
-  trilhaAnteriorId?: string | null
+  trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -391,41 +397,38 @@ export type TrilhaUpdateInput = {
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  trilhaAnteriorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaCreateManyInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
-  trilhaAnteriorId?: string | null
+  trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type TrilhaUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -436,14 +439,14 @@ export type TrilhaUpdateManyMutationInput = {
 }
 
 export type TrilhaUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  trilhaAnteriorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -463,6 +466,11 @@ export type TrilhaNullableScalarRelationFilter = {
   isNot?: Prisma.TrilhaWhereInput | null
 }
 
+export type TrilhaTemaIdOrdemCompoundUniqueInput = {
+  temaId: number
+  ordem: number
+}
+
 export type TrilhaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   temaId?: Prisma.SortOrder
@@ -477,8 +485,11 @@ export type TrilhaCountOrderByAggregateInput = {
 }
 
 export type TrilhaAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  temaId?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   pontuacaoMinima?: Prisma.SortOrder
+  trilhaAnteriorId?: Prisma.SortOrder
 }
 
 export type TrilhaMaxOrderByAggregateInput = {
@@ -508,8 +519,11 @@ export type TrilhaMinOrderByAggregateInput = {
 }
 
 export type TrilhaSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  temaId?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   pontuacaoMinima?: Prisma.SortOrder
+  trilhaAnteriorId?: Prisma.SortOrder
 }
 
 export type TrilhaScalarRelationFilter = {
@@ -603,6 +617,14 @@ export type TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput = {
   deleteMany?: Prisma.TrilhaScalarWhereInput | Prisma.TrilhaScalarWhereInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput = {
   create?: Prisma.XOR<Prisma.TrilhaCreateWithoutTrilhaAnteriorInput, Prisma.TrilhaUncheckedCreateWithoutTrilhaAnteriorInput> | Prisma.TrilhaCreateWithoutTrilhaAnteriorInput[] | Prisma.TrilhaUncheckedCreateWithoutTrilhaAnteriorInput[]
   connectOrCreate?: Prisma.TrilhaCreateOrConnectWithoutTrilhaAnteriorInput | Prisma.TrilhaCreateOrConnectWithoutTrilhaAnteriorInput[]
@@ -645,24 +667,7 @@ export type TrilhaUpdateOneRequiredWithoutUsuariosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TrilhaUpdateToOneWithWhereWithoutUsuariosInput, Prisma.TrilhaUpdateWithoutUsuariosInput>, Prisma.TrilhaUncheckedUpdateWithoutUsuariosInput>
 }
 
-export type TrilhaCreateNestedOneWithoutInsigniasInput = {
-  create?: Prisma.XOR<Prisma.TrilhaCreateWithoutInsigniasInput, Prisma.TrilhaUncheckedCreateWithoutInsigniasInput>
-  connectOrCreate?: Prisma.TrilhaCreateOrConnectWithoutInsigniasInput
-  connect?: Prisma.TrilhaWhereUniqueInput
-}
-
-export type TrilhaUpdateOneWithoutInsigniasNestedInput = {
-  create?: Prisma.XOR<Prisma.TrilhaCreateWithoutInsigniasInput, Prisma.TrilhaUncheckedCreateWithoutInsigniasInput>
-  connectOrCreate?: Prisma.TrilhaCreateOrConnectWithoutInsigniasInput
-  upsert?: Prisma.TrilhaUpsertWithoutInsigniasInput
-  disconnect?: Prisma.TrilhaWhereInput | boolean
-  delete?: Prisma.TrilhaWhereInput | boolean
-  connect?: Prisma.TrilhaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TrilhaUpdateToOneWithWhereWithoutInsigniasInput, Prisma.TrilhaUpdateWithoutInsigniasInput>, Prisma.TrilhaUncheckedUpdateWithoutInsigniasInput>
-}
-
 export type TrilhaCreateWithoutTemaInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
@@ -674,23 +679,21 @@ export type TrilhaCreateWithoutTemaInput = {
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutTemaInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
-  trilhaAnteriorId?: string | null
+  trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutTemaInput = {
@@ -723,20 +726,19 @@ export type TrilhaScalarWhereInput = {
   AND?: Prisma.TrilhaScalarWhereInput | Prisma.TrilhaScalarWhereInput[]
   OR?: Prisma.TrilhaScalarWhereInput[]
   NOT?: Prisma.TrilhaScalarWhereInput | Prisma.TrilhaScalarWhereInput[]
-  id?: Prisma.StringFilter<"Trilha"> | string
-  temaId?: Prisma.StringFilter<"Trilha"> | string
+  id?: Prisma.IntFilter<"Trilha"> | number
+  temaId?: Prisma.IntFilter<"Trilha"> | number
   titulo?: Prisma.StringFilter<"Trilha"> | string
   descricao?: Prisma.StringNullableFilter<"Trilha"> | string | null
   nivel?: Prisma.EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
   ordem?: Prisma.IntFilter<"Trilha"> | number
   pontuacaoMinima?: Prisma.IntFilter<"Trilha"> | number
-  trilhaAnteriorId?: Prisma.StringNullableFilter<"Trilha"> | string | null
+  trilhaAnteriorId?: Prisma.IntNullableFilter<"Trilha"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
 }
 
 export type TrilhaCreateWithoutProximasTrilhasInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
@@ -748,23 +750,21 @@ export type TrilhaCreateWithoutProximasTrilhasInput = {
   trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutProximasTrilhasInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
-  trilhaAnteriorId?: string | null
+  trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutProximasTrilhasInput = {
@@ -773,7 +773,6 @@ export type TrilhaCreateOrConnectWithoutProximasTrilhasInput = {
 }
 
 export type TrilhaCreateWithoutTrilhaAnteriorInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
@@ -785,12 +784,11 @@ export type TrilhaCreateWithoutTrilhaAnteriorInput = {
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutTrilhaAnteriorInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
@@ -801,7 +799,6 @@ export type TrilhaUncheckedCreateWithoutTrilhaAnteriorInput = {
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutTrilhaAnteriorInput = {
@@ -826,7 +823,6 @@ export type TrilhaUpdateToOneWithWhereWithoutProximasTrilhasInput = {
 }
 
 export type TrilhaUpdateWithoutProximasTrilhasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -838,23 +834,21 @@ export type TrilhaUpdateWithoutProximasTrilhasInput = {
   trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutProximasTrilhasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  trilhaAnteriorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUpsertWithWhereUniqueWithoutTrilhaAnteriorInput = {
@@ -874,7 +868,6 @@ export type TrilhaUpdateManyWithWhereWithoutTrilhaAnteriorInput = {
 }
 
 export type TrilhaCreateWithoutModulosInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
@@ -886,23 +879,21 @@ export type TrilhaCreateWithoutModulosInput = {
   trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutModulosInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
-  trilhaAnteriorId?: string | null
+  trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutModulosInput = {
@@ -922,7 +913,6 @@ export type TrilhaUpdateToOneWithWhereWithoutModulosInput = {
 }
 
 export type TrilhaUpdateWithoutModulosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -934,27 +924,24 @@ export type TrilhaUpdateWithoutModulosInput = {
   trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutModulosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  trilhaAnteriorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaCreateWithoutUsuariosInput = {
-  id?: string
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
@@ -966,23 +953,21 @@ export type TrilhaCreateWithoutUsuariosInput = {
   trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutUsuariosInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
-  trilhaAnteriorId?: string | null
+  trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutUsuariosInput = {
@@ -1002,7 +987,6 @@ export type TrilhaUpdateToOneWithWhereWithoutUsuariosInput = {
 }
 
 export type TrilhaUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -1014,119 +998,36 @@ export type TrilhaUpdateWithoutUsuariosInput = {
   trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  trilhaAnteriorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
-}
-
-export type TrilhaCreateWithoutInsigniasInput = {
-  id?: string
-  titulo: string
-  descricao?: string | null
-  nivel: $Enums.NivelDificuldade
-  ordem: number
-  pontuacaoMinima: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  tema: Prisma.TemaCreateNestedOneWithoutTrilhasInput
-  trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
-  proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
-  modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
-  usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
-}
-
-export type TrilhaUncheckedCreateWithoutInsigniasInput = {
-  id?: string
-  temaId: string
-  titulo: string
-  descricao?: string | null
-  nivel: $Enums.NivelDificuldade
-  ordem: number
-  pontuacaoMinima: number
-  trilhaAnteriorId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
-  modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
-  usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
-}
-
-export type TrilhaCreateOrConnectWithoutInsigniasInput = {
-  where: Prisma.TrilhaWhereUniqueInput
-  create: Prisma.XOR<Prisma.TrilhaCreateWithoutInsigniasInput, Prisma.TrilhaUncheckedCreateWithoutInsigniasInput>
-}
-
-export type TrilhaUpsertWithoutInsigniasInput = {
-  update: Prisma.XOR<Prisma.TrilhaUpdateWithoutInsigniasInput, Prisma.TrilhaUncheckedUpdateWithoutInsigniasInput>
-  create: Prisma.XOR<Prisma.TrilhaCreateWithoutInsigniasInput, Prisma.TrilhaUncheckedCreateWithoutInsigniasInput>
-  where?: Prisma.TrilhaWhereInput
-}
-
-export type TrilhaUpdateToOneWithWhereWithoutInsigniasInput = {
-  where?: Prisma.TrilhaWhereInput
-  data: Prisma.XOR<Prisma.TrilhaUpdateWithoutInsigniasInput, Prisma.TrilhaUncheckedUpdateWithoutInsigniasInput>
-}
-
-export type TrilhaUpdateWithoutInsigniasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  titulo?: Prisma.StringFieldUpdateOperationsInput | string
-  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
-  ordem?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tema?: Prisma.TemaUpdateOneRequiredWithoutTrilhasNestedInput
-  trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
-  proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
-  modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
-  usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
-}
-
-export type TrilhaUncheckedUpdateWithoutInsigniasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
-  titulo?: Prisma.StringFieldUpdateOperationsInput | string
-  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
-  ordem?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  trilhaAnteriorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
-  modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
-  usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaCreateManyTemaInput = {
-  id?: string
+  id?: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
-  trilhaAnteriorId?: string | null
+  trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type TrilhaUpdateWithoutTemaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -1138,40 +1039,38 @@ export type TrilhaUpdateWithoutTemaInput = {
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutTemaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  trilhaAnteriorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateManyWithoutTemaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
-  trilhaAnteriorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TrilhaCreateManyTrilhaAnteriorInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
@@ -1182,7 +1081,6 @@ export type TrilhaCreateManyTrilhaAnteriorInput = {
 }
 
 export type TrilhaUpdateWithoutTrilhaAnteriorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -1194,12 +1092,11 @@ export type TrilhaUpdateWithoutTrilhaAnteriorInput = {
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutTrilhaAnteriorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -1210,12 +1107,11 @@ export type TrilhaUncheckedUpdateWithoutTrilhaAnteriorInput = {
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
-  insignias?: Prisma.InsigniaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -1234,14 +1130,12 @@ export type TrilhaCountOutputType = {
   proximasTrilhas: number
   modulos: number
   usuarios: number
-  insignias: number
 }
 
 export type TrilhaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   proximasTrilhas?: boolean | TrilhaCountOutputTypeCountProximasTrilhasArgs
   modulos?: boolean | TrilhaCountOutputTypeCountModulosArgs
   usuarios?: boolean | TrilhaCountOutputTypeCountUsuariosArgs
-  insignias?: boolean | TrilhaCountOutputTypeCountInsigniasArgs
 }
 
 /**
@@ -1275,13 +1169,6 @@ export type TrilhaCountOutputTypeCountUsuariosArgs<ExtArgs extends runtime.Types
   where?: Prisma.TrilhaUsuarioWhereInput
 }
 
-/**
- * TrilhaCountOutputType without action
- */
-export type TrilhaCountOutputTypeCountInsigniasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InsigniaUsuarioWhereInput
-}
-
 
 export type TrilhaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1299,7 +1186,6 @@ export type TrilhaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   proximasTrilhas?: boolean | Prisma.Trilha$proximasTrilhasArgs<ExtArgs>
   modulos?: boolean | Prisma.Trilha$modulosArgs<ExtArgs>
   usuarios?: boolean | Prisma.Trilha$usuariosArgs<ExtArgs>
-  insignias?: boolean | Prisma.Trilha$insigniasArgs<ExtArgs>
   _count?: boolean | Prisma.TrilhaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["trilha"]>
 
@@ -1353,7 +1239,6 @@ export type TrilhaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   proximasTrilhas?: boolean | Prisma.Trilha$proximasTrilhasArgs<ExtArgs>
   modulos?: boolean | Prisma.Trilha$modulosArgs<ExtArgs>
   usuarios?: boolean | Prisma.Trilha$usuariosArgs<ExtArgs>
-  insignias?: boolean | Prisma.Trilha$insigniasArgs<ExtArgs>
   _count?: boolean | Prisma.TrilhaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TrilhaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1373,17 +1258,16 @@ export type $TrilhaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     proximasTrilhas: Prisma.$TrilhaPayload<ExtArgs>[]
     modulos: Prisma.$ModuloPayload<ExtArgs>[]
     usuarios: Prisma.$TrilhaUsuarioPayload<ExtArgs>[]
-    insignias: Prisma.$InsigniaUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    temaId: string
+    id: number
+    temaId: number
     titulo: string
     descricao: string | null
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
-    trilhaAnteriorId: string | null
+    trilhaAnteriorId: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["trilha"]>
@@ -1785,7 +1669,6 @@ export interface Prisma__TrilhaClient<T, Null = never, ExtArgs extends runtime.T
   proximasTrilhas<T extends Prisma.Trilha$proximasTrilhasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trilha$proximasTrilhasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrilhaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   modulos<T extends Prisma.Trilha$modulosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trilha$modulosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ModuloPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usuarios<T extends Prisma.Trilha$usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trilha$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrilhaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  insignias<T extends Prisma.Trilha$insigniasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trilha$insigniasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InsigniaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1815,14 +1698,14 @@ export interface Prisma__TrilhaClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Trilha model
  */
 export interface TrilhaFieldRefs {
-  readonly id: Prisma.FieldRef<"Trilha", 'String'>
-  readonly temaId: Prisma.FieldRef<"Trilha", 'String'>
+  readonly id: Prisma.FieldRef<"Trilha", 'Int'>
+  readonly temaId: Prisma.FieldRef<"Trilha", 'Int'>
   readonly titulo: Prisma.FieldRef<"Trilha", 'String'>
   readonly descricao: Prisma.FieldRef<"Trilha", 'String'>
   readonly nivel: Prisma.FieldRef<"Trilha", 'NivelDificuldade'>
   readonly ordem: Prisma.FieldRef<"Trilha", 'Int'>
   readonly pontuacaoMinima: Prisma.FieldRef<"Trilha", 'Int'>
-  readonly trilhaAnteriorId: Prisma.FieldRef<"Trilha", 'String'>
+  readonly trilhaAnteriorId: Prisma.FieldRef<"Trilha", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Trilha", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Trilha", 'DateTime'>
 }
@@ -2314,30 +2197,6 @@ export type Trilha$usuariosArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.TrilhaUsuarioScalarFieldEnum | Prisma.TrilhaUsuarioScalarFieldEnum[]
-}
-
-/**
- * Trilha.insignias
- */
-export type Trilha$insigniasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the InsigniaUsuario
-   */
-  select?: Prisma.InsigniaUsuarioSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the InsigniaUsuario
-   */
-  omit?: Prisma.InsigniaUsuarioOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InsigniaUsuarioInclude<ExtArgs> | null
-  where?: Prisma.InsigniaUsuarioWhereInput
-  orderBy?: Prisma.InsigniaUsuarioOrderByWithRelationInput | Prisma.InsigniaUsuarioOrderByWithRelationInput[]
-  cursor?: Prisma.InsigniaUsuarioWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.InsigniaUsuarioScalarFieldEnum | Prisma.InsigniaUsuarioScalarFieldEnum[]
 }
 
 /**

@@ -20,18 +20,28 @@ export type HabilidadeModel = runtime.Types.Result.DefaultSelection<Prisma.$Habi
 
 export type AggregateHabilidade = {
   _count: HabilidadeCountAggregateOutputType | null
+  _avg: HabilidadeAvgAggregateOutputType | null
+  _sum: HabilidadeSumAggregateOutputType | null
   _min: HabilidadeMinAggregateOutputType | null
   _max: HabilidadeMaxAggregateOutputType | null
 }
 
+export type HabilidadeAvgAggregateOutputType = {
+  id: number | null
+}
+
+export type HabilidadeSumAggregateOutputType = {
+  id: number | null
+}
+
 export type HabilidadeMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   nome: string | null
   descricao: string | null
 }
 
 export type HabilidadeMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   nome: string | null
   descricao: string | null
 }
@@ -43,6 +53,14 @@ export type HabilidadeCountAggregateOutputType = {
   _all: number
 }
 
+
+export type HabilidadeAvgAggregateInputType = {
+  id?: true
+}
+
+export type HabilidadeSumAggregateInputType = {
+  id?: true
+}
 
 export type HabilidadeMinAggregateInputType = {
   id?: true
@@ -101,6 +119,18 @@ export type HabilidadeAggregateArgs<ExtArgs extends runtime.Types.Extensions.Int
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: HabilidadeAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: HabilidadeSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: HabilidadeMinAggregateInputType
@@ -131,15 +161,19 @@ export type HabilidadeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   _count?: HabilidadeCountAggregateInputType | true
+  _avg?: HabilidadeAvgAggregateInputType
+  _sum?: HabilidadeSumAggregateInputType
   _min?: HabilidadeMinAggregateInputType
   _max?: HabilidadeMaxAggregateInputType
 }
 
 export type HabilidadeGroupByOutputType = {
-  id: string
+  id: number
   nome: string
   descricao: string | null
   _count: HabilidadeCountAggregateOutputType | null
+  _avg: HabilidadeAvgAggregateOutputType | null
+  _sum: HabilidadeSumAggregateOutputType | null
   _min: HabilidadeMinAggregateOutputType | null
   _max: HabilidadeMaxAggregateOutputType | null
 }
@@ -163,7 +197,7 @@ export type HabilidadeWhereInput = {
   AND?: Prisma.HabilidadeWhereInput | Prisma.HabilidadeWhereInput[]
   OR?: Prisma.HabilidadeWhereInput[]
   NOT?: Prisma.HabilidadeWhereInput | Prisma.HabilidadeWhereInput[]
-  id?: Prisma.StringFilter<"Habilidade"> | string
+  id?: Prisma.IntFilter<"Habilidade"> | number
   nome?: Prisma.StringFilter<"Habilidade"> | string
   descricao?: Prisma.StringNullableFilter<"Habilidade"> | string | null
   usuarios?: Prisma.HabilidadeUsuarioListRelationFilter
@@ -177,75 +211,74 @@ export type HabilidadeOrderByWithRelationInput = {
 }
 
 export type HabilidadeWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  nome?: string
   AND?: Prisma.HabilidadeWhereInput | Prisma.HabilidadeWhereInput[]
   OR?: Prisma.HabilidadeWhereInput[]
   NOT?: Prisma.HabilidadeWhereInput | Prisma.HabilidadeWhereInput[]
-  nome?: Prisma.StringFilter<"Habilidade"> | string
   descricao?: Prisma.StringNullableFilter<"Habilidade"> | string | null
   usuarios?: Prisma.HabilidadeUsuarioListRelationFilter
-}, "id">
+}, "id" | "nome">
 
 export type HabilidadeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.HabilidadeCountOrderByAggregateInput
+  _avg?: Prisma.HabilidadeAvgOrderByAggregateInput
   _max?: Prisma.HabilidadeMaxOrderByAggregateInput
   _min?: Prisma.HabilidadeMinOrderByAggregateInput
+  _sum?: Prisma.HabilidadeSumOrderByAggregateInput
 }
 
 export type HabilidadeScalarWhereWithAggregatesInput = {
   AND?: Prisma.HabilidadeScalarWhereWithAggregatesInput | Prisma.HabilidadeScalarWhereWithAggregatesInput[]
   OR?: Prisma.HabilidadeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.HabilidadeScalarWhereWithAggregatesInput | Prisma.HabilidadeScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Habilidade"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Habilidade"> | number
   nome?: Prisma.StringWithAggregatesFilter<"Habilidade"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Habilidade"> | string | null
 }
 
 export type HabilidadeCreateInput = {
-  id?: string
   nome: string
   descricao?: string | null
   usuarios?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutHabilidadeInput
 }
 
 export type HabilidadeUncheckedCreateInput = {
-  id?: string
+  id?: number
   nome: string
   descricao?: string | null
   usuarios?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutHabilidadeInput
 }
 
 export type HabilidadeUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   usuarios?: Prisma.HabilidadeUsuarioUpdateManyWithoutHabilidadeNestedInput
 }
 
 export type HabilidadeUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   usuarios?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutHabilidadeNestedInput
 }
 
 export type HabilidadeCreateManyInput = {
-  id?: string
+  id?: number
   nome: string
   descricao?: string | null
 }
 
 export type HabilidadeUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HabilidadeUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -254,6 +287,10 @@ export type HabilidadeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+}
+
+export type HabilidadeAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
 }
 
 export type HabilidadeMaxOrderByAggregateInput = {
@@ -266,6 +303,10 @@ export type HabilidadeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+}
+
+export type HabilidadeSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
 }
 
 export type HabilidadeScalarRelationFilter = {
@@ -288,13 +329,12 @@ export type HabilidadeUpdateOneRequiredWithoutUsuariosNestedInput = {
 }
 
 export type HabilidadeCreateWithoutUsuariosInput = {
-  id?: string
   nome: string
   descricao?: string | null
 }
 
 export type HabilidadeUncheckedCreateWithoutUsuariosInput = {
-  id?: string
+  id?: number
   nome: string
   descricao?: string | null
 }
@@ -316,13 +356,12 @@ export type HabilidadeUpdateToOneWithWhereWithoutUsuariosInput = {
 }
 
 export type HabilidadeUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HabilidadeUncheckedUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -398,7 +437,7 @@ export type $HabilidadePayload<ExtArgs extends runtime.Types.Extensions.Internal
     usuarios: Prisma.$HabilidadeUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     nome: string
     descricao: string | null
   }, ExtArgs["result"]["habilidade"]>
@@ -825,7 +864,7 @@ export interface Prisma__HabilidadeClient<T, Null = never, ExtArgs extends runti
  * Fields of the Habilidade model
  */
 export interface HabilidadeFieldRefs {
-  readonly id: Prisma.FieldRef<"Habilidade", 'String'>
+  readonly id: Prisma.FieldRef<"Habilidade", 'Int'>
   readonly nome: Prisma.FieldRef<"Habilidade", 'String'>
   readonly descricao: Prisma.FieldRef<"Habilidade", 'String'>
 }

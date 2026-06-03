@@ -27,21 +27,25 @@ export type AggregateTemaUsuario = {
 }
 
 export type TemaUsuarioAvgAggregateOutputType = {
+  id: number | null
   usuarioId: number | null
+  temaId: number | null
   pontuacaoTotal: number | null
   trilhasConcluidas: number | null
 }
 
 export type TemaUsuarioSumAggregateOutputType = {
+  id: number | null
   usuarioId: number | null
+  temaId: number | null
   pontuacaoTotal: number | null
   trilhasConcluidas: number | null
 }
 
 export type TemaUsuarioMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   usuarioId: number | null
-  temaId: string | null
+  temaId: number | null
   pontuacaoTotal: number | null
   trilhasConcluidas: number | null
   nivelAtual: $Enums.NivelDificuldade | null
@@ -50,9 +54,9 @@ export type TemaUsuarioMinAggregateOutputType = {
 }
 
 export type TemaUsuarioMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   usuarioId: number | null
-  temaId: string | null
+  temaId: number | null
   pontuacaoTotal: number | null
   trilhasConcluidas: number | null
   nivelAtual: $Enums.NivelDificuldade | null
@@ -74,13 +78,17 @@ export type TemaUsuarioCountAggregateOutputType = {
 
 
 export type TemaUsuarioAvgAggregateInputType = {
+  id?: true
   usuarioId?: true
+  temaId?: true
   pontuacaoTotal?: true
   trilhasConcluidas?: true
 }
 
 export type TemaUsuarioSumAggregateInputType = {
+  id?: true
   usuarioId?: true
+  temaId?: true
   pontuacaoTotal?: true
   trilhasConcluidas?: true
 }
@@ -206,9 +214,9 @@ export type TemaUsuarioGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 export type TemaUsuarioGroupByOutputType = {
-  id: string
+  id: number
   usuarioId: number
-  temaId: string
+  temaId: number
   pontuacaoTotal: number
   trilhasConcluidas: number
   nivelAtual: $Enums.NivelDificuldade
@@ -240,9 +248,9 @@ export type TemaUsuarioWhereInput = {
   AND?: Prisma.TemaUsuarioWhereInput | Prisma.TemaUsuarioWhereInput[]
   OR?: Prisma.TemaUsuarioWhereInput[]
   NOT?: Prisma.TemaUsuarioWhereInput | Prisma.TemaUsuarioWhereInput[]
-  id?: Prisma.StringFilter<"TemaUsuario"> | string
+  id?: Prisma.IntFilter<"TemaUsuario"> | number
   usuarioId?: Prisma.IntFilter<"TemaUsuario"> | number
-  temaId?: Prisma.StringFilter<"TemaUsuario"> | string
+  temaId?: Prisma.IntFilter<"TemaUsuario"> | number
   pontuacaoTotal?: Prisma.IntFilter<"TemaUsuario"> | number
   trilhasConcluidas?: Prisma.IntFilter<"TemaUsuario"> | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFilter<"TemaUsuario"> | $Enums.NivelDificuldade
@@ -266,13 +274,13 @@ export type TemaUsuarioOrderByWithRelationInput = {
 }
 
 export type TemaUsuarioWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   usuarioId_temaId?: Prisma.TemaUsuarioUsuarioIdTemaIdCompoundUniqueInput
   AND?: Prisma.TemaUsuarioWhereInput | Prisma.TemaUsuarioWhereInput[]
   OR?: Prisma.TemaUsuarioWhereInput[]
   NOT?: Prisma.TemaUsuarioWhereInput | Prisma.TemaUsuarioWhereInput[]
   usuarioId?: Prisma.IntFilter<"TemaUsuario"> | number
-  temaId?: Prisma.StringFilter<"TemaUsuario"> | string
+  temaId?: Prisma.IntFilter<"TemaUsuario"> | number
   pontuacaoTotal?: Prisma.IntFilter<"TemaUsuario"> | number
   trilhasConcluidas?: Prisma.IntFilter<"TemaUsuario"> | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFilter<"TemaUsuario"> | $Enums.NivelDificuldade
@@ -302,9 +310,9 @@ export type TemaUsuarioScalarWhereWithAggregatesInput = {
   AND?: Prisma.TemaUsuarioScalarWhereWithAggregatesInput | Prisma.TemaUsuarioScalarWhereWithAggregatesInput[]
   OR?: Prisma.TemaUsuarioScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TemaUsuarioScalarWhereWithAggregatesInput | Prisma.TemaUsuarioScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"TemaUsuario"> | string
+  id?: Prisma.IntWithAggregatesFilter<"TemaUsuario"> | number
   usuarioId?: Prisma.IntWithAggregatesFilter<"TemaUsuario"> | number
-  temaId?: Prisma.StringWithAggregatesFilter<"TemaUsuario"> | string
+  temaId?: Prisma.IntWithAggregatesFilter<"TemaUsuario"> | number
   pontuacaoTotal?: Prisma.IntWithAggregatesFilter<"TemaUsuario"> | number
   trilhasConcluidas?: Prisma.IntWithAggregatesFilter<"TemaUsuario"> | number
   nivelAtual?: Prisma.EnumNivelDificuldadeWithAggregatesFilter<"TemaUsuario"> | $Enums.NivelDificuldade
@@ -313,7 +321,6 @@ export type TemaUsuarioScalarWhereWithAggregatesInput = {
 }
 
 export type TemaUsuarioCreateInput = {
-  id?: string
   pontuacaoTotal?: number
   trilhasConcluidas?: number
   nivelAtual?: $Enums.NivelDificuldade
@@ -324,9 +331,9 @@ export type TemaUsuarioCreateInput = {
 }
 
 export type TemaUsuarioUncheckedCreateInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  temaId: string
+  temaId: number
   pontuacaoTotal?: number
   trilhasConcluidas?: number
   nivelAtual?: $Enums.NivelDificuldade
@@ -335,7 +342,6 @@ export type TemaUsuarioUncheckedCreateInput = {
 }
 
 export type TemaUsuarioUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -346,9 +352,9 @@ export type TemaUsuarioUpdateInput = {
 }
 
 export type TemaUsuarioUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -357,9 +363,9 @@ export type TemaUsuarioUncheckedUpdateInput = {
 }
 
 export type TemaUsuarioCreateManyInput = {
-  id?: string
+  id?: number
   usuarioId: number
-  temaId: string
+  temaId: number
   pontuacaoTotal?: number
   trilhasConcluidas?: number
   nivelAtual?: $Enums.NivelDificuldade
@@ -368,7 +374,6 @@ export type TemaUsuarioCreateManyInput = {
 }
 
 export type TemaUsuarioUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -377,9 +382,9 @@ export type TemaUsuarioUpdateManyMutationInput = {
 }
 
 export type TemaUsuarioUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -399,7 +404,7 @@ export type TemaUsuarioOrderByRelationAggregateInput = {
 
 export type TemaUsuarioUsuarioIdTemaIdCompoundUniqueInput = {
   usuarioId: number
-  temaId: string
+  temaId: number
 }
 
 export type TemaUsuarioCountOrderByAggregateInput = {
@@ -414,7 +419,9 @@ export type TemaUsuarioCountOrderByAggregateInput = {
 }
 
 export type TemaUsuarioAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
+  temaId?: Prisma.SortOrder
   pontuacaoTotal?: Prisma.SortOrder
   trilhasConcluidas?: Prisma.SortOrder
 }
@@ -442,7 +449,9 @@ export type TemaUsuarioMinOrderByAggregateInput = {
 }
 
 export type TemaUsuarioSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   usuarioId?: Prisma.SortOrder
+  temaId?: Prisma.SortOrder
   pontuacaoTotal?: Prisma.SortOrder
   trilhasConcluidas?: Prisma.SortOrder
 }
@@ -536,7 +545,6 @@ export type EnumNivelDificuldadeFieldUpdateOperationsInput = {
 }
 
 export type TemaUsuarioCreateWithoutUsuarioInput = {
-  id?: string
   pontuacaoTotal?: number
   trilhasConcluidas?: number
   nivelAtual?: $Enums.NivelDificuldade
@@ -546,8 +554,8 @@ export type TemaUsuarioCreateWithoutUsuarioInput = {
 }
 
 export type TemaUsuarioUncheckedCreateWithoutUsuarioInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   pontuacaoTotal?: number
   trilhasConcluidas?: number
   nivelAtual?: $Enums.NivelDificuldade
@@ -585,9 +593,9 @@ export type TemaUsuarioScalarWhereInput = {
   AND?: Prisma.TemaUsuarioScalarWhereInput | Prisma.TemaUsuarioScalarWhereInput[]
   OR?: Prisma.TemaUsuarioScalarWhereInput[]
   NOT?: Prisma.TemaUsuarioScalarWhereInput | Prisma.TemaUsuarioScalarWhereInput[]
-  id?: Prisma.StringFilter<"TemaUsuario"> | string
+  id?: Prisma.IntFilter<"TemaUsuario"> | number
   usuarioId?: Prisma.IntFilter<"TemaUsuario"> | number
-  temaId?: Prisma.StringFilter<"TemaUsuario"> | string
+  temaId?: Prisma.IntFilter<"TemaUsuario"> | number
   pontuacaoTotal?: Prisma.IntFilter<"TemaUsuario"> | number
   trilhasConcluidas?: Prisma.IntFilter<"TemaUsuario"> | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFilter<"TemaUsuario"> | $Enums.NivelDificuldade
@@ -596,7 +604,6 @@ export type TemaUsuarioScalarWhereInput = {
 }
 
 export type TemaUsuarioCreateWithoutTemaInput = {
-  id?: string
   pontuacaoTotal?: number
   trilhasConcluidas?: number
   nivelAtual?: $Enums.NivelDificuldade
@@ -606,7 +613,7 @@ export type TemaUsuarioCreateWithoutTemaInput = {
 }
 
 export type TemaUsuarioUncheckedCreateWithoutTemaInput = {
-  id?: string
+  id?: number
   usuarioId: number
   pontuacaoTotal?: number
   trilhasConcluidas?: number
@@ -642,8 +649,8 @@ export type TemaUsuarioUpdateManyWithWhereWithoutTemaInput = {
 }
 
 export type TemaUsuarioCreateManyUsuarioInput = {
-  id?: string
-  temaId: string
+  id?: number
+  temaId: number
   pontuacaoTotal?: number
   trilhasConcluidas?: number
   nivelAtual?: $Enums.NivelDificuldade
@@ -652,7 +659,6 @@ export type TemaUsuarioCreateManyUsuarioInput = {
 }
 
 export type TemaUsuarioUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -662,8 +668,8 @@ export type TemaUsuarioUpdateWithoutUsuarioInput = {
 }
 
 export type TemaUsuarioUncheckedUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -672,8 +678,8 @@ export type TemaUsuarioUncheckedUpdateWithoutUsuarioInput = {
 }
 
 export type TemaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  temaId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -682,7 +688,7 @@ export type TemaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
 }
 
 export type TemaUsuarioCreateManyTemaInput = {
-  id?: string
+  id?: number
   usuarioId: number
   pontuacaoTotal?: number
   trilhasConcluidas?: number
@@ -692,7 +698,6 @@ export type TemaUsuarioCreateManyTemaInput = {
 }
 
 export type TemaUsuarioUpdateWithoutTemaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
   nivelAtual?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
@@ -702,7 +707,7 @@ export type TemaUsuarioUpdateWithoutTemaInput = {
 }
 
 export type TemaUsuarioUncheckedUpdateWithoutTemaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
@@ -712,7 +717,7 @@ export type TemaUsuarioUncheckedUpdateWithoutTemaInput = {
 }
 
 export type TemaUsuarioUncheckedUpdateManyWithoutTemaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
   trilhasConcluidas?: Prisma.IntFieldUpdateOperationsInput | number
@@ -794,9 +799,9 @@ export type $TemaUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Interna
     tema: Prisma.$TemaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     usuarioId: number
-    temaId: string
+    temaId: number
     pontuacaoTotal: number
     trilhasConcluidas: number
     nivelAtual: $Enums.NivelDificuldade
@@ -1227,9 +1232,9 @@ export interface Prisma__TemaUsuarioClient<T, Null = never, ExtArgs extends runt
  * Fields of the TemaUsuario model
  */
 export interface TemaUsuarioFieldRefs {
-  readonly id: Prisma.FieldRef<"TemaUsuario", 'String'>
+  readonly id: Prisma.FieldRef<"TemaUsuario", 'Int'>
   readonly usuarioId: Prisma.FieldRef<"TemaUsuario", 'Int'>
-  readonly temaId: Prisma.FieldRef<"TemaUsuario", 'String'>
+  readonly temaId: Prisma.FieldRef<"TemaUsuario", 'Int'>
   readonly pontuacaoTotal: Prisma.FieldRef<"TemaUsuario", 'Int'>
   readonly trilhasConcluidas: Prisma.FieldRef<"TemaUsuario", 'Int'>
   readonly nivelAtual: Prisma.FieldRef<"TemaUsuario", 'NivelDificuldade'>

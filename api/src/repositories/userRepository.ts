@@ -3,7 +3,7 @@ import {prisma} from "../prisma/prisma"
 
 export type Edicao ={
     id: number,
-    dadosAtualisado:string
+    dadosAtualizados:string
 
 }
 
@@ -41,50 +41,50 @@ export class UserRepository{
 
     }
 
-    async editarEmail({id,dadosAtualisado}:Edicao){
+    async editarEmail({id,dadosAtualizados}:Edicao){
 
         return await this.prisma.usuario.update({
             where:{
                 id:id
             },
             data:{
-                email:dadosAtualisado
+                email:dadosAtualizados
             }
         })
 
     }
-    async editarSenha({id,dadosAtualisado}:Edicao){
+    async editarSenha({id,dadosAtualizados}:Edicao){
 
         return await this.prisma.usuario.update({
             where:{
                 id:id
             },
             data:{
-                senha:dadosAtualisado
+                senha:dadosAtualizados
             }
         })
 
     }
-    async editarNome({id,dadosAtualisado}:Edicao){
+    async editarNome({id,dadosAtualizados}:Edicao){
 
         return await this.prisma.usuario.update({
             where:{
                 id:id
             },
             data:{
-                nome:dadosAtualisado
+                nome:dadosAtualizados
             }
         })
 
     }
-    async editarBio({id,dadosAtualisado}:Edicao){
+    async editarBio({id,dadosAtualizados}:Edicao){
 
         return await this.prisma.usuario.update({
             where:{
                 id:id
             },
             data:{
-                bio:dadosAtualisado
+                bio:dadosAtualizados
             }
         })
 
