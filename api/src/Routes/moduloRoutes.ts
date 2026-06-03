@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PrismaClient } from "../prisma/generated/prisma";
+import {prisma } from "../prisma/prisma";
 
 import { ModuloRepository } from "../Repositories/moduloRepository";
 import { ModuloService } from "../Services/moduloService";
@@ -7,7 +7,6 @@ import { ModuloController } from "../Controller/moduloController";
 
 const router = Router();
 
-const prisma = new PrismaClient();
 
 const repository = new ModuloRepository(prisma);
 const service = new ModuloService(repository);

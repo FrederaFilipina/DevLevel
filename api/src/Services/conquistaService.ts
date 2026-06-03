@@ -1,4 +1,4 @@
-import { type Conquista } from "../prisma/generated/prisma";
+import { type Conquista } from "../prisma/generated/prisma/client";
 import { ConquistaRepository } from "../Repositories/conquistaRepository";
 
 export class ConquistaService {

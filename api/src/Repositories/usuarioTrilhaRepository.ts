@@ -1,17 +1,17 @@
-import { PrismaClient, type TrilhaUsuario, type StatusTrilhaUsuario } from "../prisma/generated/prisma";
+import { PrismaClient, type TrilhaUsuario, type StatusTrilhaUsuario } from "../prisma/generated/prisma/client";
 
 export class TrilhaUsuarioRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async buscarPorId(id: string): Promise<TrilhaUsuario | null> {
+  async buscarPorId(id: number): Promise<TrilhaUsuario | null> {
     return await this.prisma.trilhaUsuario.findUnique({
       where: { id },
     });
   }
 
   async buscarPorUsuarioETrilha(
-    usuarioId: string,
-    trilhaId: string
+    usuarioId: number,
+    trilhaId: number
   ): Promise<TrilhaUsuario | null> {
     return await this.prisma.trilhaUsuario.findUnique({
       where: {
@@ -24,7 +24,7 @@ export class TrilhaUsuarioRepository {
   }
 
   async listarPorUsuario(
-    usuarioId: string
+    usuarioId: number
   ): Promise<TrilhaUsuario[]> {
     return await this.prisma.trilhaUsuario.findMany({
       where: { usuarioId },
@@ -35,7 +35,7 @@ export class TrilhaUsuarioRepository {
   }
 
   async listarPorTrilha(
-    trilhaId: string
+    trilhaId: number
   ): Promise<TrilhaUsuario[]> {
     return await this.prisma.trilhaUsuario.findMany({
       where: { trilhaId },

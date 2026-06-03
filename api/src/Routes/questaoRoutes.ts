@@ -1,13 +1,11 @@
 import { Router } from "express";
-import { PrismaClient } from "../prisma/generated/prisma";
-
 import { QuestaoRepository } from "../Repositories/questaoRepository";
 import { QuestaoService } from "../Services/questaoService";
 import { QuestaoController } from "../Controller/questaoController";
+import { prisma } from "../prisma/prisma";
 
 const router = Router();
 
-const prisma = new PrismaClient();
 
 const repository = new QuestaoRepository(prisma);
 const service = new QuestaoService(repository);

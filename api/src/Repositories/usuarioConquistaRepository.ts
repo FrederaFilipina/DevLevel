@@ -1,17 +1,17 @@
-import { PrismaClient, type ConquistaUsuario } from "../prisma/generated/prisma";
+import { PrismaClient, type ConquistaUsuario } from "../prisma/generated/prisma/client";
 
 export class ConquistaUsuarioRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async buscarPorId(id: string): Promise<ConquistaUsuario | null> {
+  async buscarPorId(id: number): Promise<ConquistaUsuario | null> {
     return await this.prisma.conquistaUsuario.findUnique({
       where: { id },
     });
   }
 
   async buscarPorUsuarioEConquista(
-    usuarioId: string,
-    conquistaId: string
+    usuarioId: number,
+    conquistaId: number
   ): Promise<ConquistaUsuario | null> {
     return await this.prisma.conquistaUsuario.findFirst({
       where: {
@@ -22,7 +22,7 @@ export class ConquistaUsuarioRepository {
   }
 
   async listarPorUsuario(
-    usuarioId: string
+    usuarioId: number
   ): Promise<ConquistaUsuario[]> {
     return await this.prisma.conquistaUsuario.findMany({
       where: { usuarioId },
@@ -33,7 +33,7 @@ export class ConquistaUsuarioRepository {
   }
 
   async listarPorConquista(
-    conquistaId: string
+    conquistaId: number
   ): Promise<ConquistaUsuario[]> {
     return await this.prisma.conquistaUsuario.findMany({
       where: { conquistaId },

@@ -9,8 +9,36 @@
 * 🟢 You can import this file directly.
 */
 
-export const NameAssunto = {
-  JS: 'JS'
+export const NivelDificuldade = {
+  INICIANTE: 'INICIANTE',
+  INTERMEDIARIO: 'INTERMEDIARIO',
+  AVANCADO: 'AVANCADO'
 } as const
 
-export type NameAssunto = (typeof NameAssunto)[keyof typeof NameAssunto]
+export type NivelDificuldade = (typeof NivelDificuldade)[keyof typeof NivelDificuldade]
+
+
+export const StatusTrilhaUsuario = {
+  EM_ANDAMENTO: 'EM_ANDAMENTO',
+  CONCLUIDA: 'CONCLUIDA',
+  AGUARDANDO_REVISAO: 'AGUARDANDO_REVISAO',
+  BLOQUEADA: 'BLOQUEADA'
+} as const
+
+export type StatusTrilhaUsuario = (typeof StatusTrilhaUsuario)[keyof typeof StatusTrilhaUsuario]
+
+
+export const Role = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const TypeToken = {
+  ACCESS: 'ACCESS',
+  REFRESH: 'REFRESH'
+} as const
+
+export type TypeToken = (typeof TypeToken)[keyof typeof TypeToken]

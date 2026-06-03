@@ -52,21 +52,19 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Usuario: 'Usuario',
-  Assunto: 'Assunto',
-  TrilhaAprendizado: 'TrilhaAprendizado',
+  Tema: 'Tema',
+  TemaUsuario: 'TemaUsuario',
+  Trilha: 'Trilha',
   Modulo: 'Modulo',
   Questao: 'Questao',
-  Resposta: 'Resposta',
+  RespostaQuestao: 'RespostaQuestao',
   RespostaUsuario: 'RespostaUsuario',
-  ProgressoTrilhaUsuario: 'ProgressoTrilhaUsuario',
-  BloqueioTrilhaUsuario: 'BloqueioTrilhaUsuario',
+  TrilhaUsuario: 'TrilhaUsuario',
   Conquista: 'Conquista',
   ConquistaUsuario: 'ConquistaUsuario',
-  Ranking: 'Ranking',
   Habilidade: 'Habilidade',
   HabilidadeUsuario: 'HabilidadeUsuario',
-  CriterioAvaliacao: 'CriterioAvaliacao',
-  AvaliacaoResposta: 'AvaliacaoResposta'
+  Token: 'Token'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -87,52 +85,71 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UsuarioScalarFieldEnum = {
   id: 'id',
-  username: 'username',
+  nome: 'nome',
   email: 'email',
-  password: 'password',
-  avatar_url: 'avatar_url',
+  senha: 'senha',
+  role: 'role',
+  avatarUrl: 'avatarUrl',
   bio: 'bio',
   xp: 'xp',
-  level: 'level',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  nivel: 'nivel',
+  pontuacaoTotal: 'pontuacaoTotal',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
 
 
-export const AssuntoScalarFieldEnum = {
+export const TemaScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  description: 'description',
-  created_at: 'created_at'
+  nome: 'nome',
+  descricao: 'descricao',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type AssuntoScalarFieldEnum = (typeof AssuntoScalarFieldEnum)[keyof typeof AssuntoScalarFieldEnum]
+export type TemaScalarFieldEnum = (typeof TemaScalarFieldEnum)[keyof typeof TemaScalarFieldEnum]
 
 
-export const TrilhaAprendizadoScalarFieldEnum = {
+export const TemaUsuarioScalarFieldEnum = {
   id: 'id',
-  subject_id: 'subject_id',
-  title: 'title',
-  description: 'description',
-  difficulty_level: 'difficulty_level',
-  minimum_score: 'minimum_score',
-  order_index: 'order_index',
-  is_locked: 'is_locked',
-  created_at: 'created_at'
+  usuarioId: 'usuarioId',
+  temaId: 'temaId',
+  pontuacaoTotal: 'pontuacaoTotal',
+  trilhasConcluidas: 'trilhasConcluidas',
+  nivelAtual: 'nivelAtual',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type TrilhaAprendizadoScalarFieldEnum = (typeof TrilhaAprendizadoScalarFieldEnum)[keyof typeof TrilhaAprendizadoScalarFieldEnum]
+export type TemaUsuarioScalarFieldEnum = (typeof TemaUsuarioScalarFieldEnum)[keyof typeof TemaUsuarioScalarFieldEnum]
+
+
+export const TrilhaScalarFieldEnum = {
+  id: 'id',
+  temaId: 'temaId',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  nivel: 'nivel',
+  ordem: 'ordem',
+  pontuacaoMinima: 'pontuacaoMinima',
+  trilhaAnteriorId: 'trilhaAnteriorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrilhaScalarFieldEnum = (typeof TrilhaScalarFieldEnum)[keyof typeof TrilhaScalarFieldEnum]
 
 
 export const ModuloScalarFieldEnum = {
   id: 'id',
-  track_id: 'track_id',
-  title: 'title',
-  description: 'description',
-  order_index: 'order_index',
-  created_at: 'created_at'
+  trilhaId: 'trilhaId',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  ordem: 'ordem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ModuloScalarFieldEnum = (typeof ModuloScalarFieldEnum)[keyof typeof ModuloScalarFieldEnum]
@@ -140,81 +157,76 @@ export type ModuloScalarFieldEnum = (typeof ModuloScalarFieldEnum)[keyof typeof 
 
 export const QuestaoScalarFieldEnum = {
   id: 'id',
-  module_id: 'module_id',
-  title: 'title',
-  description: 'description',
-  difficulty: 'difficulty',
-  xp_reward: 'xp_reward',
-  minimum_score: 'minimum_score',
-  order_index: 'order_index',
-  created_at: 'created_at'
+  moduloId: 'moduloId',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  dificuldade: 'dificuldade',
+  xpRecompensa: 'xpRecompensa',
+  ordem: 'ordem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type QuestaoScalarFieldEnum = (typeof QuestaoScalarFieldEnum)[keyof typeof QuestaoScalarFieldEnum]
 
 
-export const RespostaScalarFieldEnum = {
+export const RespostaQuestaoScalarFieldEnum = {
   id: 'id',
-  question_id: 'question_id',
-  answer_content: 'answer_content',
-  is_correct: 'is_correct',
-  clean_code_score: 'clean_code_score',
-  performance_score: 'performance_score',
-  readability_score: 'readability_score',
-  created_at: 'created_at'
+  questaoId: 'questaoId',
+  titulo: 'titulo',
+  codigoResposta: 'codigoResposta',
+  explicacao: 'explicacao',
+  pontuacao: 'pontuacao',
+  cleanCodeScore: 'cleanCodeScore',
+  performanceScore: 'performanceScore',
+  legibilidadeScore: 'legibilidadeScore',
+  pontosPositivos: 'pontosPositivos',
+  pontosNegativos: 'pontosNegativos',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type RespostaScalarFieldEnum = (typeof RespostaScalarFieldEnum)[keyof typeof RespostaScalarFieldEnum]
+export type RespostaQuestaoScalarFieldEnum = (typeof RespostaQuestaoScalarFieldEnum)[keyof typeof RespostaQuestaoScalarFieldEnum]
 
 
 export const RespostaUsuarioScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  question_id: 'question_id',
-  answer_id: 'answer_id',
-  final_score: 'final_score',
-  positive_feedback: 'positive_feedback',
-  negative_feedback: 'negative_feedback',
-  is_completed: 'is_completed',
-  answered_at: 'answered_at'
+  usuarioId: 'usuarioId',
+  questaoId: 'questaoId',
+  respostaQuestaoId: 'respostaQuestaoId',
+  pontuacaoRecebida: 'pontuacaoRecebida',
+  respondidaEm: 'respondidaEm'
 } as const
 
 export type RespostaUsuarioScalarFieldEnum = (typeof RespostaUsuarioScalarFieldEnum)[keyof typeof RespostaUsuarioScalarFieldEnum]
 
 
-export const ProgressoTrilhaUsuarioScalarFieldEnum = {
+export const TrilhaUsuarioScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  track_id: 'track_id',
-  current_module_id: 'current_module_id',
-  current_question_id: 'current_question_id',
-  progress_percentage: 'progress_percentage',
-  is_completed: 'is_completed',
-  started_at: 'started_at',
-  completed_at: 'completed_at'
+  usuarioId: 'usuarioId',
+  trilhaId: 'trilhaId',
+  status: 'status',
+  pontuacaoAtual: 'pontuacaoAtual',
+  pontuacaoNecessaria: 'pontuacaoNecessaria',
+  percentualConclusao: 'percentualConclusao',
+  podeDesbloquear: 'podeDesbloquear',
+  moduloAtualId: 'moduloAtualId',
+  questaoAtualId: 'questaoAtualId',
+  iniciadaEm: 'iniciadaEm',
+  concluidaEm: 'concluidaEm'
 } as const
 
-export type ProgressoTrilhaUsuarioScalarFieldEnum = (typeof ProgressoTrilhaUsuarioScalarFieldEnum)[keyof typeof ProgressoTrilhaUsuarioScalarFieldEnum]
-
-
-export const BloqueioTrilhaUsuarioScalarFieldEnum = {
-  id: 'id',
-  user_id: 'user_id',
-  track_id: 'track_id',
-  is_unlocked: 'is_unlocked',
-  unlocked_at: 'unlocked_at'
-} as const
-
-export type BloqueioTrilhaUsuarioScalarFieldEnum = (typeof BloqueioTrilhaUsuarioScalarFieldEnum)[keyof typeof BloqueioTrilhaUsuarioScalarFieldEnum]
+export type TrilhaUsuarioScalarFieldEnum = (typeof TrilhaUsuarioScalarFieldEnum)[keyof typeof TrilhaUsuarioScalarFieldEnum]
 
 
 export const ConquistaScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  description: 'description',
-  icon: 'icon',
-  xp_reward: 'xp_reward',
-  created_at: 'created_at'
+  titulo: 'titulo',
+  descricao: 'descricao',
+  icone: 'icone',
+  xpRecompensa: 'xpRecompensa',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ConquistaScalarFieldEnum = (typeof ConquistaScalarFieldEnum)[keyof typeof ConquistaScalarFieldEnum]
@@ -222,29 +234,18 @@ export type ConquistaScalarFieldEnum = (typeof ConquistaScalarFieldEnum)[keyof t
 
 export const ConquistaUsuarioScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  achievement_id: 'achievement_id',
-  unlocked_at: 'unlocked_at'
+  usuarioId: 'usuarioId',
+  conquistaId: 'conquistaId',
+  desbloqueadaEm: 'desbloqueadaEm'
 } as const
 
 export type ConquistaUsuarioScalarFieldEnum = (typeof ConquistaUsuarioScalarFieldEnum)[keyof typeof ConquistaUsuarioScalarFieldEnum]
 
 
-export const RankingScalarFieldEnum = {
-  id: 'id',
-  user_id: 'user_id',
-  total_xp: 'total_xp',
-  position: 'position',
-  updated_at: 'updated_at'
-} as const
-
-export type RankingScalarFieldEnum = (typeof RankingScalarFieldEnum)[keyof typeof RankingScalarFieldEnum]
-
-
 export const HabilidadeScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  description: 'description'
+  nome: 'nome',
+  descricao: 'descricao'
 } as const
 
 export type HabilidadeScalarFieldEnum = (typeof HabilidadeScalarFieldEnum)[keyof typeof HabilidadeScalarFieldEnum]
@@ -252,35 +253,26 @@ export type HabilidadeScalarFieldEnum = (typeof HabilidadeScalarFieldEnum)[keyof
 
 export const HabilidadeUsuarioScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  skill_id: 'skill_id',
-  score: 'score',
-  level: 'level',
-  updated_at: 'updated_at'
+  usuarioId: 'usuarioId',
+  habilidadeId: 'habilidadeId',
+  pontuacao: 'pontuacao',
+  nivel: 'nivel',
+  updatedAt: 'updatedAt'
 } as const
 
 export type HabilidadeUsuarioScalarFieldEnum = (typeof HabilidadeUsuarioScalarFieldEnum)[keyof typeof HabilidadeUsuarioScalarFieldEnum]
 
 
-export const CriterioAvaliacaoScalarFieldEnum = {
+export const TokenScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  description: 'description',
-  weight: 'weight'
+  token: 'token',
+  type: 'type',
+  revoked: 'revoked',
+  expiresAt: 'expiresAt',
+  usuarioId: 'usuarioId'
 } as const
 
-export type CriterioAvaliacaoScalarFieldEnum = (typeof CriterioAvaliacaoScalarFieldEnum)[keyof typeof CriterioAvaliacaoScalarFieldEnum]
-
-
-export const AvaliacaoRespostaScalarFieldEnum = {
-  id: 'id',
-  user_answer_id: 'user_answer_id',
-  criteria_id: 'criteria_id',
-  score: 'score',
-  feedback: 'feedback'
-} as const
-
-export type AvaliacaoRespostaScalarFieldEnum = (typeof AvaliacaoRespostaScalarFieldEnum)[keyof typeof AvaliacaoRespostaScalarFieldEnum]
+export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof TokenScalarFieldEnum]
 
 
 export const SortOrder = {

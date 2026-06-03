@@ -1,4 +1,4 @@
-import { type RespostaUsuario } from "../prisma/generated/prisma";
+import { type RespostaUsuario } from "../prisma/generated/prisma/client";
 import type { RespostaUsuarioRepository } from "../Repositories/usuarioRespostaRepository";
 
 
@@ -7,7 +7,7 @@ export class RespostaUsuarioService {
         private readonly respostaUsuarioRepository: RespostaUsuarioRepository
     ) {}
 
-    async buscarPorId(id: string): Promise<RespostaUsuario> {
+    async buscarPorId(id: number): Promise<RespostaUsuario> {
         const respostaUsuario =
             await this.respostaUsuarioRepository.buscarPorId(id);
 
@@ -19,8 +19,8 @@ export class RespostaUsuarioService {
     }
 
     async buscarPorUsuarioEQuestao(
-        usuarioId: string,
-        questaoId: string
+        usuarioId: number,
+        questaoId: number
     ): Promise<RespostaUsuario> {
         const respostaUsuario =
             await this.respostaUsuarioRepository.buscarPorUsuarioEQuestao(
@@ -36,7 +36,7 @@ export class RespostaUsuarioService {
     }
 
     async listarPorUsuario(
-        usuarioId: string
+        usuarioId: number
     ): Promise<RespostaUsuario[]> {
         return await this.respostaUsuarioRepository.listarPorUsuario(
             usuarioId
@@ -44,7 +44,7 @@ export class RespostaUsuarioService {
     }
 
     async listarPorQuestao(
-        questaoId: string
+        questaoId: number
     ): Promise<RespostaUsuario[]> {
         return await this.respostaUsuarioRepository.listarPorQuestao(
             questaoId
@@ -52,7 +52,7 @@ export class RespostaUsuarioService {
     }
 
     async listarPorRespostaQuestao(
-        respostaQuestaoId: string
+        respostaQuestaoId: number
     ): Promise<RespostaUsuario[]> {
         return await this.respostaUsuarioRepository.listarPorRespostaQuestao(
             respostaQuestaoId

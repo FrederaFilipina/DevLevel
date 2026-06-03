@@ -1,17 +1,17 @@
-import { PrismaClient, type RespostaUsuario } from "../prisma/generated/prisma";
+import { PrismaClient, type RespostaUsuario } from "../prisma/generated/prisma/client";
 
 export class RespostaUsuarioRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async buscarPorId(id: string): Promise<RespostaUsuario | null> {
+  async buscarPorId(id: number): Promise<RespostaUsuario | null> {
     return await this.prisma.respostaUsuario.findUnique({
       where: { id },
     });
   }
 
   async buscarPorUsuarioEQuestao(
-    usuarioId: string,
-    questaoId: string
+    usuarioId: number,
+    questaoId: number
   ): Promise<RespostaUsuario | null> {
     return await this.prisma.respostaUsuario.findUnique({
       where: {
@@ -24,7 +24,7 @@ export class RespostaUsuarioRepository {
   }
 
   async listarPorUsuario(
-    usuarioId: string
+    usuarioId: number
   ): Promise<RespostaUsuario[]> {
     return await this.prisma.respostaUsuario.findMany({
       where: { usuarioId },
@@ -35,7 +35,7 @@ export class RespostaUsuarioRepository {
   }
 
   async listarPorQuestao(
-    questaoId: string
+    questaoId: number
   ): Promise<RespostaUsuario[]> {
     return await this.prisma.respostaUsuario.findMany({
       where: { questaoId },
@@ -46,7 +46,7 @@ export class RespostaUsuarioRepository {
   }
 
   async listarPorRespostaQuestao(
-    respostaQuestaoId: string
+    respostaQuestaoId: number
   ): Promise<RespostaUsuario[]> {
     return await this.prisma.respostaUsuario.findMany({
       where: { respostaQuestaoId },

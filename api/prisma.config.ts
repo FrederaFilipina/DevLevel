@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
-const urlDataBase = process.env.DATABASE_URL || ""
+
 
 export default defineConfig({
   schema: "src/prisma/schema.prisma",
@@ -9,6 +9,6 @@ export default defineConfig({
     path: "src/prisma/migrations",
   },
   datasource: {
-    url: urlDataBase
+    url: "postgresql://postgres:senai@localhost:5432/dev-level?schema=public",
   }
 });

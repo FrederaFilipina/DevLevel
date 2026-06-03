@@ -27,75 +27,85 @@ export type AggregateConquista = {
 }
 
 export type ConquistaAvgAggregateOutputType = {
-  xp_reward: number | null
+  id: number | null
+  xpRecompensa: number | null
 }
 
 export type ConquistaSumAggregateOutputType = {
-  xp_reward: number | null
+  id: number | null
+  xpRecompensa: number | null
 }
 
 export type ConquistaMinAggregateOutputType = {
-  id: string | null
-  title: string | null
-  description: string | null
-  icon: string | null
-  xp_reward: number | null
-  created_at: Date | null
+  id: number | null
+  titulo: string | null
+  descricao: string | null
+  icone: string | null
+  xpRecompensa: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ConquistaMaxAggregateOutputType = {
-  id: string | null
-  title: string | null
-  description: string | null
-  icon: string | null
-  xp_reward: number | null
-  created_at: Date | null
+  id: number | null
+  titulo: string | null
+  descricao: string | null
+  icone: string | null
+  xpRecompensa: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ConquistaCountAggregateOutputType = {
   id: number
-  title: number
-  description: number
-  icon: number
-  xp_reward: number
-  created_at: number
+  titulo: number
+  descricao: number
+  icone: number
+  xpRecompensa: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type ConquistaAvgAggregateInputType = {
-  xp_reward?: true
+  id?: true
+  xpRecompensa?: true
 }
 
 export type ConquistaSumAggregateInputType = {
-  xp_reward?: true
+  id?: true
+  xpRecompensa?: true
 }
 
 export type ConquistaMinAggregateInputType = {
   id?: true
-  title?: true
-  description?: true
-  icon?: true
-  xp_reward?: true
-  created_at?: true
+  titulo?: true
+  descricao?: true
+  icone?: true
+  xpRecompensa?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ConquistaMaxAggregateInputType = {
   id?: true
-  title?: true
-  description?: true
-  icon?: true
-  xp_reward?: true
-  created_at?: true
+  titulo?: true
+  descricao?: true
+  icone?: true
+  xpRecompensa?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ConquistaCountAggregateInputType = {
   id?: true
-  title?: true
-  description?: true
-  icon?: true
-  xp_reward?: true
-  created_at?: true
+  titulo?: true
+  descricao?: true
+  icone?: true
+  xpRecompensa?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -186,12 +196,13 @@ export type ConquistaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 export type ConquistaGroupByOutputType = {
-  id: string
-  title: string
-  description: string | null
-  icon: string | null
-  xp_reward: number
-  created_at: Date
+  id: number
+  titulo: string
+  descricao: string | null
+  icone: string | null
+  xpRecompensa: number
+  createdAt: Date
+  updatedAt: Date
   _count: ConquistaCountAggregateOutputType | null
   _avg: ConquistaAvgAggregateOutputType | null
   _sum: ConquistaSumAggregateOutputType | null
@@ -218,45 +229,49 @@ export type ConquistaWhereInput = {
   AND?: Prisma.ConquistaWhereInput | Prisma.ConquistaWhereInput[]
   OR?: Prisma.ConquistaWhereInput[]
   NOT?: Prisma.ConquistaWhereInput | Prisma.ConquistaWhereInput[]
-  id?: Prisma.StringFilter<"Conquista"> | string
-  title?: Prisma.StringFilter<"Conquista"> | string
-  description?: Prisma.StringNullableFilter<"Conquista"> | string | null
-  icon?: Prisma.StringNullableFilter<"Conquista"> | string | null
-  xp_reward?: Prisma.IntFilter<"Conquista"> | number
-  created_at?: Prisma.DateTimeFilter<"Conquista"> | Date | string
+  id?: Prisma.IntFilter<"Conquista"> | number
+  titulo?: Prisma.StringFilter<"Conquista"> | string
+  descricao?: Prisma.StringNullableFilter<"Conquista"> | string | null
+  icone?: Prisma.StringNullableFilter<"Conquista"> | string | null
+  xpRecompensa?: Prisma.IntFilter<"Conquista"> | number
+  createdAt?: Prisma.DateTimeFilter<"Conquista"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Conquista"> | Date | string
   usuarios?: Prisma.ConquistaUsuarioListRelationFilter
 }
 
 export type ConquistaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  icon?: Prisma.SortOrderInput | Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  icone?: Prisma.SortOrderInput | Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   usuarios?: Prisma.ConquistaUsuarioOrderByRelationAggregateInput
 }
 
 export type ConquistaWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  titulo?: string
   AND?: Prisma.ConquistaWhereInput | Prisma.ConquistaWhereInput[]
   OR?: Prisma.ConquistaWhereInput[]
   NOT?: Prisma.ConquistaWhereInput | Prisma.ConquistaWhereInput[]
-  title?: Prisma.StringFilter<"Conquista"> | string
-  description?: Prisma.StringNullableFilter<"Conquista"> | string | null
-  icon?: Prisma.StringNullableFilter<"Conquista"> | string | null
-  xp_reward?: Prisma.IntFilter<"Conquista"> | number
-  created_at?: Prisma.DateTimeFilter<"Conquista"> | Date | string
+  descricao?: Prisma.StringNullableFilter<"Conquista"> | string | null
+  icone?: Prisma.StringNullableFilter<"Conquista"> | string | null
+  xpRecompensa?: Prisma.IntFilter<"Conquista"> | number
+  createdAt?: Prisma.DateTimeFilter<"Conquista"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Conquista"> | Date | string
   usuarios?: Prisma.ConquistaUsuarioListRelationFilter
-}, "id">
+}, "id" | "titulo">
 
 export type ConquistaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  icon?: Prisma.SortOrderInput | Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  icone?: Prisma.SortOrderInput | Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ConquistaCountOrderByAggregateInput
   _avg?: Prisma.ConquistaAvgOrderByAggregateInput
   _max?: Prisma.ConquistaMaxOrderByAggregateInput
@@ -268,114 +283,124 @@ export type ConquistaScalarWhereWithAggregatesInput = {
   AND?: Prisma.ConquistaScalarWhereWithAggregatesInput | Prisma.ConquistaScalarWhereWithAggregatesInput[]
   OR?: Prisma.ConquistaScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ConquistaScalarWhereWithAggregatesInput | Prisma.ConquistaScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Conquista"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Conquista"> | string
-  description?: Prisma.StringNullableWithAggregatesFilter<"Conquista"> | string | null
-  icon?: Prisma.StringNullableWithAggregatesFilter<"Conquista"> | string | null
-  xp_reward?: Prisma.IntWithAggregatesFilter<"Conquista"> | number
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"Conquista"> | Date | string
+  id?: Prisma.IntWithAggregatesFilter<"Conquista"> | number
+  titulo?: Prisma.StringWithAggregatesFilter<"Conquista"> | string
+  descricao?: Prisma.StringNullableWithAggregatesFilter<"Conquista"> | string | null
+  icone?: Prisma.StringNullableWithAggregatesFilter<"Conquista"> | string | null
+  xpRecompensa?: Prisma.IntWithAggregatesFilter<"Conquista"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Conquista"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Conquista"> | Date | string
 }
 
 export type ConquistaCreateInput = {
-  id?: string
-  title: string
-  description?: string | null
-  icon?: string | null
-  xp_reward: number
-  created_at?: Date | string
+  titulo: string
+  descricao?: string | null
+  icone?: string | null
+  xpRecompensa: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   usuarios?: Prisma.ConquistaUsuarioCreateNestedManyWithoutConquistaInput
 }
 
 export type ConquistaUncheckedCreateInput = {
-  id?: string
-  title: string
-  description?: string | null
-  icon?: string | null
-  xp_reward: number
-  created_at?: Date | string
+  id?: number
+  titulo: string
+  descricao?: string | null
+  icone?: string | null
+  xpRecompensa: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   usuarios?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutConquistaInput
 }
 
 export type ConquistaUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuarios?: Prisma.ConquistaUsuarioUpdateManyWithoutConquistaNestedInput
 }
 
 export type ConquistaUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuarios?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutConquistaNestedInput
 }
 
 export type ConquistaCreateManyInput = {
-  id?: string
-  title: string
-  description?: string | null
-  icon?: string | null
-  xp_reward: number
-  created_at?: Date | string
+  id?: number
+  titulo: string
+  descricao?: string | null
+  icone?: string | null
+  xpRecompensa: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ConquistaUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConquistaUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConquistaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  icon?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  icone?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ConquistaAvgOrderByAggregateInput = {
-  xp_reward?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
 }
 
 export type ConquistaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  icon?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  icone?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ConquistaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  icon?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  icone?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ConquistaSumOrderByAggregateInput = {
-  xp_reward?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
 }
 
 export type ConquistaScalarRelationFilter = {
@@ -398,21 +423,22 @@ export type ConquistaUpdateOneRequiredWithoutUsuariosNestedInput = {
 }
 
 export type ConquistaCreateWithoutUsuariosInput = {
-  id?: string
-  title: string
-  description?: string | null
-  icon?: string | null
-  xp_reward: number
-  created_at?: Date | string
+  titulo: string
+  descricao?: string | null
+  icone?: string | null
+  xpRecompensa: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ConquistaUncheckedCreateWithoutUsuariosInput = {
-  id?: string
-  title: string
-  description?: string | null
-  icon?: string | null
-  xp_reward: number
-  created_at?: Date | string
+  id?: number
+  titulo: string
+  descricao?: string | null
+  icone?: string | null
+  xpRecompensa: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ConquistaCreateOrConnectWithoutUsuariosInput = {
@@ -432,21 +458,22 @@ export type ConquistaUpdateToOneWithWhereWithoutUsuariosInput = {
 }
 
 export type ConquistaUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConquistaUncheckedUpdateWithoutUsuariosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -482,43 +509,47 @@ export type ConquistaCountOutputTypeCountUsuariosArgs<ExtArgs extends runtime.Ty
 
 export type ConquistaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
-  description?: boolean
-  icon?: boolean
-  xp_reward?: boolean
-  created_at?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  icone?: boolean
+  xpRecompensa?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   usuarios?: boolean | Prisma.Conquista$usuariosArgs<ExtArgs>
   _count?: boolean | Prisma.ConquistaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["conquista"]>
 
 export type ConquistaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
-  description?: boolean
-  icon?: boolean
-  xp_reward?: boolean
-  created_at?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  icone?: boolean
+  xpRecompensa?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["conquista"]>
 
 export type ConquistaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
-  description?: boolean
-  icon?: boolean
-  xp_reward?: boolean
-  created_at?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  icone?: boolean
+  xpRecompensa?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["conquista"]>
 
 export type ConquistaSelectScalar = {
   id?: boolean
-  title?: boolean
-  description?: boolean
-  icon?: boolean
-  xp_reward?: boolean
-  created_at?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  icone?: boolean
+  xpRecompensa?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ConquistaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "icon" | "xp_reward" | "created_at", ExtArgs["result"]["conquista"]>
+export type ConquistaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "descricao" | "icone" | "xpRecompensa" | "createdAt" | "updatedAt", ExtArgs["result"]["conquista"]>
 export type ConquistaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuarios?: boolean | Prisma.Conquista$usuariosArgs<ExtArgs>
   _count?: boolean | Prisma.ConquistaCountOutputTypeDefaultArgs<ExtArgs>
@@ -532,12 +563,13 @@ export type $ConquistaPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     usuarios: Prisma.$ConquistaUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    title: string
-    description: string | null
-    icon: string | null
-    xp_reward: number
-    created_at: Date
+    id: number
+    titulo: string
+    descricao: string | null
+    icone: string | null
+    xpRecompensa: number
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["conquista"]>
   composites: {}
 }
@@ -962,12 +994,13 @@ export interface Prisma__ConquistaClient<T, Null = never, ExtArgs extends runtim
  * Fields of the Conquista model
  */
 export interface ConquistaFieldRefs {
-  readonly id: Prisma.FieldRef<"Conquista", 'String'>
-  readonly title: Prisma.FieldRef<"Conquista", 'String'>
-  readonly description: Prisma.FieldRef<"Conquista", 'String'>
-  readonly icon: Prisma.FieldRef<"Conquista", 'String'>
-  readonly xp_reward: Prisma.FieldRef<"Conquista", 'Int'>
-  readonly created_at: Prisma.FieldRef<"Conquista", 'DateTime'>
+  readonly id: Prisma.FieldRef<"Conquista", 'Int'>
+  readonly titulo: Prisma.FieldRef<"Conquista", 'String'>
+  readonly descricao: Prisma.FieldRef<"Conquista", 'String'>
+  readonly icone: Prisma.FieldRef<"Conquista", 'String'>
+  readonly xpRecompensa: Prisma.FieldRef<"Conquista", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Conquista", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Conquista", 'DateTime'>
 }
     
 

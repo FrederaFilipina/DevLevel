@@ -46,31 +46,7 @@ export class QuestaoController {
     }
   }
 
-  async buscarPorModuloEOrdem(
-    req: Request,
-    res: Response
-  ) {
-    try {
-      const moduloId = Number(req.params.moduloId);
 
-      if (isNaN(moduloId)) {
-        return res.status(400).json({
-          erro: "ID do modulo invalido.",
-        });
-      }
-
-      const questoes =
-        await this.questaoService.listarPorModulo(
-          moduloId
-        );
-
-      return res.status(200).json(questoes);
-    } catch {
-      return res.status(500).json({
-        erro: "Erro ao listar questoes do modulo",
-      });
-    }
-  }
 
   async buscarPorModuloEOrdem(
     req: Request,
@@ -112,6 +88,23 @@ export class QuestaoController {
       });
     }
   }
+
+  async listarPorModulo(req: Request, res: Response) {
+  try {
+    const moduloId = Number(req.params.moduloId);
+    if (isNaN(moduloId)) {
+      return res.status(400).json({
+        erro: "ID do modulo invalido.",
+      });
+    }
+    const questoes = await this.questaoService.listarPorModulo(moduloId);
+    return res.status(200).json(questoes);
+  } catch {
+    return res.status(500).json({
+      erro: "Erro ao listar questoes por modulo",
+    });
+  }
+}
 
   async listarPorDificuldade(
     req: Request,
