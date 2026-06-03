@@ -27,105 +27,109 @@ export type AggregateQuestao = {
 }
 
 export type QuestaoAvgAggregateOutputType = {
-  difficulty: number | null
-  xp_reward: number | null
-  minimum_score: number | null
-  order_index: number | null
+  id: number | null
+  moduloId: number | null
+  dificuldade: number | null
+  xpRecompensa: number | null
+  ordem: number | null
 }
 
 export type QuestaoSumAggregateOutputType = {
-  difficulty: number | null
-  xp_reward: number | null
-  minimum_score: number | null
-  order_index: number | null
+  id: number | null
+  moduloId: number | null
+  dificuldade: number | null
+  xpRecompensa: number | null
+  ordem: number | null
 }
 
 export type QuestaoMinAggregateOutputType = {
-  id: string | null
-  module_id: string | null
-  title: string | null
-  description: string | null
-  difficulty: number | null
-  xp_reward: number | null
-  minimum_score: number | null
-  order_index: number | null
-  created_at: Date | null
+  id: number | null
+  moduloId: number | null
+  titulo: string | null
+  descricao: string | null
+  dificuldade: number | null
+  xpRecompensa: number | null
+  ordem: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type QuestaoMaxAggregateOutputType = {
-  id: string | null
-  module_id: string | null
-  title: string | null
-  description: string | null
-  difficulty: number | null
-  xp_reward: number | null
-  minimum_score: number | null
-  order_index: number | null
-  created_at: Date | null
+  id: number | null
+  moduloId: number | null
+  titulo: string | null
+  descricao: string | null
+  dificuldade: number | null
+  xpRecompensa: number | null
+  ordem: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type QuestaoCountAggregateOutputType = {
   id: number
-  module_id: number
-  title: number
-  description: number
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at: number
+  moduloId: number
+  titulo: number
+  descricao: number
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type QuestaoAvgAggregateInputType = {
-  difficulty?: true
-  xp_reward?: true
-  minimum_score?: true
-  order_index?: true
+  id?: true
+  moduloId?: true
+  dificuldade?: true
+  xpRecompensa?: true
+  ordem?: true
 }
 
 export type QuestaoSumAggregateInputType = {
-  difficulty?: true
-  xp_reward?: true
-  minimum_score?: true
-  order_index?: true
+  id?: true
+  moduloId?: true
+  dificuldade?: true
+  xpRecompensa?: true
+  ordem?: true
 }
 
 export type QuestaoMinAggregateInputType = {
   id?: true
-  module_id?: true
-  title?: true
-  description?: true
-  difficulty?: true
-  xp_reward?: true
-  minimum_score?: true
-  order_index?: true
-  created_at?: true
+  moduloId?: true
+  titulo?: true
+  descricao?: true
+  dificuldade?: true
+  xpRecompensa?: true
+  ordem?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type QuestaoMaxAggregateInputType = {
   id?: true
-  module_id?: true
-  title?: true
-  description?: true
-  difficulty?: true
-  xp_reward?: true
-  minimum_score?: true
-  order_index?: true
-  created_at?: true
+  moduloId?: true
+  titulo?: true
+  descricao?: true
+  dificuldade?: true
+  xpRecompensa?: true
+  ordem?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type QuestaoCountAggregateInputType = {
   id?: true
-  module_id?: true
-  title?: true
-  description?: true
-  difficulty?: true
-  xp_reward?: true
-  minimum_score?: true
-  order_index?: true
-  created_at?: true
+  moduloId?: true
+  titulo?: true
+  descricao?: true
+  dificuldade?: true
+  xpRecompensa?: true
+  ordem?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -216,15 +220,15 @@ export type QuestaoGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type QuestaoGroupByOutputType = {
-  id: string
-  module_id: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at: Date
+  id: number
+  moduloId: number
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt: Date
+  updatedAt: Date
   _count: QuestaoCountAggregateOutputType | null
   _avg: QuestaoAvgAggregateOutputType | null
   _sum: QuestaoSumAggregateOutputType | null
@@ -251,63 +255,64 @@ export type QuestaoWhereInput = {
   AND?: Prisma.QuestaoWhereInput | Prisma.QuestaoWhereInput[]
   OR?: Prisma.QuestaoWhereInput[]
   NOT?: Prisma.QuestaoWhereInput | Prisma.QuestaoWhereInput[]
-  id?: Prisma.StringFilter<"Questao"> | string
-  module_id?: Prisma.StringFilter<"Questao"> | string
-  title?: Prisma.StringFilter<"Questao"> | string
-  description?: Prisma.StringFilter<"Questao"> | string
-  difficulty?: Prisma.IntFilter<"Questao"> | number
-  xp_reward?: Prisma.IntFilter<"Questao"> | number
-  minimum_score?: Prisma.IntFilter<"Questao"> | number
-  order_index?: Prisma.IntFilter<"Questao"> | number
-  created_at?: Prisma.DateTimeFilter<"Questao"> | Date | string
+  id?: Prisma.IntFilter<"Questao"> | number
+  moduloId?: Prisma.IntFilter<"Questao"> | number
+  titulo?: Prisma.StringFilter<"Questao"> | string
+  descricao?: Prisma.StringFilter<"Questao"> | string
+  dificuldade?: Prisma.IntFilter<"Questao"> | number
+  xpRecompensa?: Prisma.IntFilter<"Questao"> | number
+  ordem?: Prisma.IntFilter<"Questao"> | number
+  createdAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
   modulo?: Prisma.XOR<Prisma.ModuloScalarRelationFilter, Prisma.ModuloWhereInput>
-  respostas?: Prisma.RespostaListRelationFilter
-  respostas_usuario?: Prisma.RespostaUsuarioListRelationFilter
+  respostas?: Prisma.RespostaQuestaoListRelationFilter
+  respostasUsuario?: Prisma.RespostaUsuarioListRelationFilter
 }
 
 export type QuestaoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  module_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  difficulty?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  minimum_score?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   modulo?: Prisma.ModuloOrderByWithRelationInput
-  respostas?: Prisma.RespostaOrderByRelationAggregateInput
-  respostas_usuario?: Prisma.RespostaUsuarioOrderByRelationAggregateInput
+  respostas?: Prisma.RespostaQuestaoOrderByRelationAggregateInput
+  respostasUsuario?: Prisma.RespostaUsuarioOrderByRelationAggregateInput
 }
 
 export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  moduloId_ordem?: Prisma.QuestaoModuloIdOrdemCompoundUniqueInput
   AND?: Prisma.QuestaoWhereInput | Prisma.QuestaoWhereInput[]
   OR?: Prisma.QuestaoWhereInput[]
   NOT?: Prisma.QuestaoWhereInput | Prisma.QuestaoWhereInput[]
-  module_id?: Prisma.StringFilter<"Questao"> | string
-  title?: Prisma.StringFilter<"Questao"> | string
-  description?: Prisma.StringFilter<"Questao"> | string
-  difficulty?: Prisma.IntFilter<"Questao"> | number
-  xp_reward?: Prisma.IntFilter<"Questao"> | number
-  minimum_score?: Prisma.IntFilter<"Questao"> | number
-  order_index?: Prisma.IntFilter<"Questao"> | number
-  created_at?: Prisma.DateTimeFilter<"Questao"> | Date | string
+  moduloId?: Prisma.IntFilter<"Questao"> | number
+  titulo?: Prisma.StringFilter<"Questao"> | string
+  descricao?: Prisma.StringFilter<"Questao"> | string
+  dificuldade?: Prisma.IntFilter<"Questao"> | number
+  xpRecompensa?: Prisma.IntFilter<"Questao"> | number
+  ordem?: Prisma.IntFilter<"Questao"> | number
+  createdAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
   modulo?: Prisma.XOR<Prisma.ModuloScalarRelationFilter, Prisma.ModuloWhereInput>
-  respostas?: Prisma.RespostaListRelationFilter
-  respostas_usuario?: Prisma.RespostaUsuarioListRelationFilter
-}, "id">
+  respostas?: Prisma.RespostaQuestaoListRelationFilter
+  respostasUsuario?: Prisma.RespostaUsuarioListRelationFilter
+}, "id" | "moduloId_ordem">
 
 export type QuestaoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  module_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  difficulty?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  minimum_score?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.QuestaoCountOrderByAggregateInput
   _avg?: Prisma.QuestaoAvgOrderByAggregateInput
   _max?: Prisma.QuestaoMaxOrderByAggregateInput
@@ -319,106 +324,103 @@ export type QuestaoScalarWhereWithAggregatesInput = {
   AND?: Prisma.QuestaoScalarWhereWithAggregatesInput | Prisma.QuestaoScalarWhereWithAggregatesInput[]
   OR?: Prisma.QuestaoScalarWhereWithAggregatesInput[]
   NOT?: Prisma.QuestaoScalarWhereWithAggregatesInput | Prisma.QuestaoScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Questao"> | string
-  module_id?: Prisma.StringWithAggregatesFilter<"Questao"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Questao"> | string
-  description?: Prisma.StringWithAggregatesFilter<"Questao"> | string
-  difficulty?: Prisma.IntWithAggregatesFilter<"Questao"> | number
-  xp_reward?: Prisma.IntWithAggregatesFilter<"Questao"> | number
-  minimum_score?: Prisma.IntWithAggregatesFilter<"Questao"> | number
-  order_index?: Prisma.IntWithAggregatesFilter<"Questao"> | number
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"Questao"> | Date | string
+  id?: Prisma.IntWithAggregatesFilter<"Questao"> | number
+  moduloId?: Prisma.IntWithAggregatesFilter<"Questao"> | number
+  titulo?: Prisma.StringWithAggregatesFilter<"Questao"> | string
+  descricao?: Prisma.StringWithAggregatesFilter<"Questao"> | string
+  dificuldade?: Prisma.IntWithAggregatesFilter<"Questao"> | number
+  xpRecompensa?: Prisma.IntWithAggregatesFilter<"Questao"> | number
+  ordem?: Prisma.IntWithAggregatesFilter<"Questao"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Questao"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Questao"> | Date | string
 }
 
 export type QuestaoCreateInput = {
-  id?: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   modulo: Prisma.ModuloCreateNestedOneWithoutQuestoesInput
-  respostas?: Prisma.RespostaCreateNestedManyWithoutQuestaoInput
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaQuestaoCreateNestedManyWithoutQuestaoInput
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateInput = {
-  id?: string
-  module_id: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
-  respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutQuestaoInput
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutQuestaoInput
+  id?: number
+  moduloId: number
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  respostas?: Prisma.RespostaQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulo?: Prisma.ModuloUpdateOneRequiredWithoutQuestoesNestedInput
-  respostas?: Prisma.RespostaUpdateManyWithoutQuestaoNestedInput
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaQuestaoUpdateManyWithoutQuestaoNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  module_id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas?: Prisma.RespostaUncheckedUpdateManyWithoutQuestaoNestedInput
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutQuestaoNestedInput
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  moduloId?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respostas?: Prisma.RespostaQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoCreateManyInput = {
-  id?: string
-  module_id: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
+  id?: number
+  moduloId: number
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type QuestaoUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuestaoUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  module_id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  moduloId?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuestaoListRelationFilter = {
@@ -431,54 +433,61 @@ export type QuestaoOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type QuestaoModuloIdOrdemCompoundUniqueInput = {
+  moduloId: number
+  ordem: number
+}
+
 export type QuestaoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  module_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  difficulty?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  minimum_score?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type QuestaoAvgOrderByAggregateInput = {
-  difficulty?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  minimum_score?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
 }
 
 export type QuestaoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  module_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  difficulty?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  minimum_score?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type QuestaoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  module_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  difficulty?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  minimum_score?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type QuestaoSumOrderByAggregateInput = {
-  difficulty?: Prisma.SortOrder
-  xp_reward?: Prisma.SortOrder
-  minimum_score?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  moduloId?: Prisma.SortOrder
+  dificuldade?: Prisma.SortOrder
+  xpRecompensa?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
 }
 
 export type QuestaoScalarRelationFilter = {
@@ -542,44 +551,43 @@ export type QuestaoUpdateOneRequiredWithoutRespostasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.QuestaoUpdateToOneWithWhereWithoutRespostasInput, Prisma.QuestaoUpdateWithoutRespostasInput>, Prisma.QuestaoUncheckedUpdateWithoutRespostasInput>
 }
 
-export type QuestaoCreateNestedOneWithoutRespostas_usuarioInput = {
-  create?: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostas_usuarioInput, Prisma.QuestaoUncheckedCreateWithoutRespostas_usuarioInput>
-  connectOrCreate?: Prisma.QuestaoCreateOrConnectWithoutRespostas_usuarioInput
+export type QuestaoCreateNestedOneWithoutRespostasUsuarioInput = {
+  create?: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostasUsuarioInput, Prisma.QuestaoUncheckedCreateWithoutRespostasUsuarioInput>
+  connectOrCreate?: Prisma.QuestaoCreateOrConnectWithoutRespostasUsuarioInput
   connect?: Prisma.QuestaoWhereUniqueInput
 }
 
-export type QuestaoUpdateOneRequiredWithoutRespostas_usuarioNestedInput = {
-  create?: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostas_usuarioInput, Prisma.QuestaoUncheckedCreateWithoutRespostas_usuarioInput>
-  connectOrCreate?: Prisma.QuestaoCreateOrConnectWithoutRespostas_usuarioInput
-  upsert?: Prisma.QuestaoUpsertWithoutRespostas_usuarioInput
+export type QuestaoUpdateOneRequiredWithoutRespostasUsuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostasUsuarioInput, Prisma.QuestaoUncheckedCreateWithoutRespostasUsuarioInput>
+  connectOrCreate?: Prisma.QuestaoCreateOrConnectWithoutRespostasUsuarioInput
+  upsert?: Prisma.QuestaoUpsertWithoutRespostasUsuarioInput
   connect?: Prisma.QuestaoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.QuestaoUpdateToOneWithWhereWithoutRespostas_usuarioInput, Prisma.QuestaoUpdateWithoutRespostas_usuarioInput>, Prisma.QuestaoUncheckedUpdateWithoutRespostas_usuarioInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuestaoUpdateToOneWithWhereWithoutRespostasUsuarioInput, Prisma.QuestaoUpdateWithoutRespostasUsuarioInput>, Prisma.QuestaoUncheckedUpdateWithoutRespostasUsuarioInput>
 }
 
 export type QuestaoCreateWithoutModuloInput = {
-  id?: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
-  respostas?: Prisma.RespostaCreateNestedManyWithoutQuestaoInput
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutQuestaoInput
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  respostas?: Prisma.RespostaQuestaoCreateNestedManyWithoutQuestaoInput
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutModuloInput = {
-  id?: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
-  respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutQuestaoInput
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutQuestaoInput
+  id?: number
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  respostas?: Prisma.RespostaQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutModuloInput = {
@@ -612,41 +620,40 @@ export type QuestaoScalarWhereInput = {
   AND?: Prisma.QuestaoScalarWhereInput | Prisma.QuestaoScalarWhereInput[]
   OR?: Prisma.QuestaoScalarWhereInput[]
   NOT?: Prisma.QuestaoScalarWhereInput | Prisma.QuestaoScalarWhereInput[]
-  id?: Prisma.StringFilter<"Questao"> | string
-  module_id?: Prisma.StringFilter<"Questao"> | string
-  title?: Prisma.StringFilter<"Questao"> | string
-  description?: Prisma.StringFilter<"Questao"> | string
-  difficulty?: Prisma.IntFilter<"Questao"> | number
-  xp_reward?: Prisma.IntFilter<"Questao"> | number
-  minimum_score?: Prisma.IntFilter<"Questao"> | number
-  order_index?: Prisma.IntFilter<"Questao"> | number
-  created_at?: Prisma.DateTimeFilter<"Questao"> | Date | string
+  id?: Prisma.IntFilter<"Questao"> | number
+  moduloId?: Prisma.IntFilter<"Questao"> | number
+  titulo?: Prisma.StringFilter<"Questao"> | string
+  descricao?: Prisma.StringFilter<"Questao"> | string
+  dificuldade?: Prisma.IntFilter<"Questao"> | number
+  xpRecompensa?: Prisma.IntFilter<"Questao"> | number
+  ordem?: Prisma.IntFilter<"Questao"> | number
+  createdAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
 }
 
 export type QuestaoCreateWithoutRespostasInput = {
-  id?: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   modulo: Prisma.ModuloCreateNestedOneWithoutQuestoesInput
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutQuestaoInput
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoUncheckedCreateWithoutRespostasInput = {
-  id?: string
-  module_id: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutQuestaoInput
+  id?: number
+  moduloId: number
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
 export type QuestaoCreateOrConnectWithoutRespostasInput = {
@@ -666,145 +673,141 @@ export type QuestaoUpdateToOneWithWhereWithoutRespostasInput = {
 }
 
 export type QuestaoUpdateWithoutRespostasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulo?: Prisma.ModuloUpdateOneRequiredWithoutQuestoesNestedInput
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutQuestaoNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutRespostasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  module_id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutQuestaoNestedInput
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  moduloId?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
-export type QuestaoCreateWithoutRespostas_usuarioInput = {
-  id?: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
+export type QuestaoCreateWithoutRespostasUsuarioInput = {
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   modulo: Prisma.ModuloCreateNestedOneWithoutQuestoesInput
-  respostas?: Prisma.RespostaCreateNestedManyWithoutQuestaoInput
+  respostas?: Prisma.RespostaQuestaoCreateNestedManyWithoutQuestaoInput
 }
 
-export type QuestaoUncheckedCreateWithoutRespostas_usuarioInput = {
-  id?: string
-  module_id: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
-  respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutQuestaoInput
+export type QuestaoUncheckedCreateWithoutRespostasUsuarioInput = {
+  id?: number
+  moduloId: number
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  respostas?: Prisma.RespostaQuestaoUncheckedCreateNestedManyWithoutQuestaoInput
 }
 
-export type QuestaoCreateOrConnectWithoutRespostas_usuarioInput = {
+export type QuestaoCreateOrConnectWithoutRespostasUsuarioInput = {
   where: Prisma.QuestaoWhereUniqueInput
-  create: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostas_usuarioInput, Prisma.QuestaoUncheckedCreateWithoutRespostas_usuarioInput>
+  create: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostasUsuarioInput, Prisma.QuestaoUncheckedCreateWithoutRespostasUsuarioInput>
 }
 
-export type QuestaoUpsertWithoutRespostas_usuarioInput = {
-  update: Prisma.XOR<Prisma.QuestaoUpdateWithoutRespostas_usuarioInput, Prisma.QuestaoUncheckedUpdateWithoutRespostas_usuarioInput>
-  create: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostas_usuarioInput, Prisma.QuestaoUncheckedCreateWithoutRespostas_usuarioInput>
+export type QuestaoUpsertWithoutRespostasUsuarioInput = {
+  update: Prisma.XOR<Prisma.QuestaoUpdateWithoutRespostasUsuarioInput, Prisma.QuestaoUncheckedUpdateWithoutRespostasUsuarioInput>
+  create: Prisma.XOR<Prisma.QuestaoCreateWithoutRespostasUsuarioInput, Prisma.QuestaoUncheckedCreateWithoutRespostasUsuarioInput>
   where?: Prisma.QuestaoWhereInput
 }
 
-export type QuestaoUpdateToOneWithWhereWithoutRespostas_usuarioInput = {
+export type QuestaoUpdateToOneWithWhereWithoutRespostasUsuarioInput = {
   where?: Prisma.QuestaoWhereInput
-  data: Prisma.XOR<Prisma.QuestaoUpdateWithoutRespostas_usuarioInput, Prisma.QuestaoUncheckedUpdateWithoutRespostas_usuarioInput>
+  data: Prisma.XOR<Prisma.QuestaoUpdateWithoutRespostasUsuarioInput, Prisma.QuestaoUncheckedUpdateWithoutRespostasUsuarioInput>
 }
 
-export type QuestaoUpdateWithoutRespostas_usuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type QuestaoUpdateWithoutRespostasUsuarioInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulo?: Prisma.ModuloUpdateOneRequiredWithoutQuestoesNestedInput
-  respostas?: Prisma.RespostaUpdateManyWithoutQuestaoNestedInput
+  respostas?: Prisma.RespostaQuestaoUpdateManyWithoutQuestaoNestedInput
 }
 
-export type QuestaoUncheckedUpdateWithoutRespostas_usuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  module_id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas?: Prisma.RespostaUncheckedUpdateManyWithoutQuestaoNestedInput
+export type QuestaoUncheckedUpdateWithoutRespostasUsuarioInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  moduloId?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respostas?: Prisma.RespostaQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoCreateManyModuloInput = {
-  id?: string
-  title: string
-  description: string
-  difficulty: number
-  xp_reward: number
-  minimum_score: number
-  order_index: number
-  created_at?: Date | string
+  id?: number
+  titulo: string
+  descricao: string
+  dificuldade: number
+  xpRecompensa: number
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type QuestaoUpdateWithoutModuloInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas?: Prisma.RespostaUpdateManyWithoutQuestaoNestedInput
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutQuestaoNestedInput
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respostas?: Prisma.RespostaQuestaoUpdateManyWithoutQuestaoNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateWithoutModuloInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas?: Prisma.RespostaUncheckedUpdateManyWithoutQuestaoNestedInput
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutQuestaoNestedInput
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respostas?: Prisma.RespostaQuestaoUncheckedUpdateManyWithoutQuestaoNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutQuestaoNestedInput
 }
 
 export type QuestaoUncheckedUpdateManyWithoutModuloInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.IntFieldUpdateOperationsInput | number
-  xp_reward?: Prisma.IntFieldUpdateOperationsInput | number
-  minimum_score?: Prisma.IntFieldUpdateOperationsInput | number
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -814,12 +817,12 @@ export type QuestaoUncheckedUpdateManyWithoutModuloInput = {
 
 export type QuestaoCountOutputType = {
   respostas: number
-  respostas_usuario: number
+  respostasUsuario: number
 }
 
 export type QuestaoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   respostas?: boolean | QuestaoCountOutputTypeCountRespostasArgs
-  respostas_usuario?: boolean | QuestaoCountOutputTypeCountRespostas_usuarioArgs
+  respostasUsuario?: boolean | QuestaoCountOutputTypeCountRespostasUsuarioArgs
 }
 
 /**
@@ -836,76 +839,76 @@ export type QuestaoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
  * QuestaoCountOutputType without action
  */
 export type QuestaoCountOutputTypeCountRespostasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RespostaWhereInput
+  where?: Prisma.RespostaQuestaoWhereInput
 }
 
 /**
  * QuestaoCountOutputType without action
  */
-export type QuestaoCountOutputTypeCountRespostas_usuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type QuestaoCountOutputTypeCountRespostasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RespostaUsuarioWhereInput
 }
 
 
 export type QuestaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  module_id?: boolean
-  title?: boolean
-  description?: boolean
-  difficulty?: boolean
-  xp_reward?: boolean
-  minimum_score?: boolean
-  order_index?: boolean
-  created_at?: boolean
+  moduloId?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  dificuldade?: boolean
+  xpRecompensa?: boolean
+  ordem?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   modulo?: boolean | Prisma.ModuloDefaultArgs<ExtArgs>
   respostas?: boolean | Prisma.Questao$respostasArgs<ExtArgs>
-  respostas_usuario?: boolean | Prisma.Questao$respostas_usuarioArgs<ExtArgs>
+  respostasUsuario?: boolean | Prisma.Questao$respostasUsuarioArgs<ExtArgs>
   _count?: boolean | Prisma.QuestaoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["questao"]>
 
 export type QuestaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  module_id?: boolean
-  title?: boolean
-  description?: boolean
-  difficulty?: boolean
-  xp_reward?: boolean
-  minimum_score?: boolean
-  order_index?: boolean
-  created_at?: boolean
+  moduloId?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  dificuldade?: boolean
+  xpRecompensa?: boolean
+  ordem?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   modulo?: boolean | Prisma.ModuloDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["questao"]>
 
 export type QuestaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  module_id?: boolean
-  title?: boolean
-  description?: boolean
-  difficulty?: boolean
-  xp_reward?: boolean
-  minimum_score?: boolean
-  order_index?: boolean
-  created_at?: boolean
+  moduloId?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  dificuldade?: boolean
+  xpRecompensa?: boolean
+  ordem?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   modulo?: boolean | Prisma.ModuloDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["questao"]>
 
 export type QuestaoSelectScalar = {
   id?: boolean
-  module_id?: boolean
-  title?: boolean
-  description?: boolean
-  difficulty?: boolean
-  xp_reward?: boolean
-  minimum_score?: boolean
-  order_index?: boolean
-  created_at?: boolean
+  moduloId?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  dificuldade?: boolean
+  xpRecompensa?: boolean
+  ordem?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type QuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "module_id" | "title" | "description" | "difficulty" | "xp_reward" | "minimum_score" | "order_index" | "created_at", ExtArgs["result"]["questao"]>
+export type QuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "moduloId" | "titulo" | "descricao" | "dificuldade" | "xpRecompensa" | "ordem" | "createdAt" | "updatedAt", ExtArgs["result"]["questao"]>
 export type QuestaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   modulo?: boolean | Prisma.ModuloDefaultArgs<ExtArgs>
   respostas?: boolean | Prisma.Questao$respostasArgs<ExtArgs>
-  respostas_usuario?: boolean | Prisma.Questao$respostas_usuarioArgs<ExtArgs>
+  respostasUsuario?: boolean | Prisma.Questao$respostasUsuarioArgs<ExtArgs>
   _count?: boolean | Prisma.QuestaoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type QuestaoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -919,19 +922,19 @@ export type $QuestaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Questao"
   objects: {
     modulo: Prisma.$ModuloPayload<ExtArgs>
-    respostas: Prisma.$RespostaPayload<ExtArgs>[]
-    respostas_usuario: Prisma.$RespostaUsuarioPayload<ExtArgs>[]
+    respostas: Prisma.$RespostaQuestaoPayload<ExtArgs>[]
+    respostasUsuario: Prisma.$RespostaUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    module_id: string
-    title: string
-    description: string
-    difficulty: number
-    xp_reward: number
-    minimum_score: number
-    order_index: number
-    created_at: Date
+    id: number
+    moduloId: number
+    titulo: string
+    descricao: string
+    dificuldade: number
+    xpRecompensa: number
+    ordem: number
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["questao"]>
   composites: {}
 }
@@ -1327,8 +1330,8 @@ readonly fields: QuestaoFieldRefs;
 export interface Prisma__QuestaoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   modulo<T extends Prisma.ModuloDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ModuloDefaultArgs<ExtArgs>>): Prisma.Prisma__ModuloClient<runtime.Types.Result.GetResult<Prisma.$ModuloPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  respostas<T extends Prisma.Questao$respostasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$respostasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RespostaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  respostas_usuario<T extends Prisma.Questao$respostas_usuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$respostas_usuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RespostaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  respostas<T extends Prisma.Questao$respostasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$respostasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RespostaQuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  respostasUsuario<T extends Prisma.Questao$respostasUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Questao$respostasUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RespostaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1358,15 +1361,15 @@ export interface Prisma__QuestaoClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Questao model
  */
 export interface QuestaoFieldRefs {
-  readonly id: Prisma.FieldRef<"Questao", 'String'>
-  readonly module_id: Prisma.FieldRef<"Questao", 'String'>
-  readonly title: Prisma.FieldRef<"Questao", 'String'>
-  readonly description: Prisma.FieldRef<"Questao", 'String'>
-  readonly difficulty: Prisma.FieldRef<"Questao", 'Int'>
-  readonly xp_reward: Prisma.FieldRef<"Questao", 'Int'>
-  readonly minimum_score: Prisma.FieldRef<"Questao", 'Int'>
-  readonly order_index: Prisma.FieldRef<"Questao", 'Int'>
-  readonly created_at: Prisma.FieldRef<"Questao", 'DateTime'>
+  readonly id: Prisma.FieldRef<"Questao", 'Int'>
+  readonly moduloId: Prisma.FieldRef<"Questao", 'Int'>
+  readonly titulo: Prisma.FieldRef<"Questao", 'String'>
+  readonly descricao: Prisma.FieldRef<"Questao", 'String'>
+  readonly dificuldade: Prisma.FieldRef<"Questao", 'Int'>
+  readonly xpRecompensa: Prisma.FieldRef<"Questao", 'Int'>
+  readonly ordem: Prisma.FieldRef<"Questao", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Questao", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Questao", 'DateTime'>
 }
     
 
@@ -1772,29 +1775,29 @@ export type QuestaoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
  */
 export type Questao$respostasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Resposta
+   * Select specific fields to fetch from the RespostaQuestao
    */
-  select?: Prisma.RespostaSelect<ExtArgs> | null
+  select?: Prisma.RespostaQuestaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Resposta
+   * Omit specific fields from the RespostaQuestao
    */
-  omit?: Prisma.RespostaOmit<ExtArgs> | null
+  omit?: Prisma.RespostaQuestaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.RespostaInclude<ExtArgs> | null
-  where?: Prisma.RespostaWhereInput
-  orderBy?: Prisma.RespostaOrderByWithRelationInput | Prisma.RespostaOrderByWithRelationInput[]
-  cursor?: Prisma.RespostaWhereUniqueInput
+  include?: Prisma.RespostaQuestaoInclude<ExtArgs> | null
+  where?: Prisma.RespostaQuestaoWhereInput
+  orderBy?: Prisma.RespostaQuestaoOrderByWithRelationInput | Prisma.RespostaQuestaoOrderByWithRelationInput[]
+  cursor?: Prisma.RespostaQuestaoWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.RespostaScalarFieldEnum | Prisma.RespostaScalarFieldEnum[]
+  distinct?: Prisma.RespostaQuestaoScalarFieldEnum | Prisma.RespostaQuestaoScalarFieldEnum[]
 }
 
 /**
- * Questao.respostas_usuario
+ * Questao.respostasUsuario
  */
-export type Questao$respostas_usuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Questao$respostasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the RespostaUsuario
    */

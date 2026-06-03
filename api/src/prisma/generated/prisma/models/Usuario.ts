@@ -27,103 +27,123 @@ export type AggregateUsuario = {
 }
 
 export type UsuarioAvgAggregateOutputType = {
+  id: number | null
   xp: number | null
-  level: number | null
+  nivel: number | null
+  pontuacaoTotal: number | null
 }
 
 export type UsuarioSumAggregateOutputType = {
+  id: number | null
   xp: number | null
-  level: number | null
+  nivel: number | null
+  pontuacaoTotal: number | null
 }
 
 export type UsuarioMinAggregateOutputType = {
-  id: string | null
-  username: string | null
+  id: number | null
+  nome: string | null
   email: string | null
-  password: string | null
-  avatar_url: string | null
+  senha: string | null
+  role: $Enums.Role | null
+  avatarUrl: string | null
   bio: string | null
   xp: number | null
-  level: number | null
-  created_at: Date | null
-  updated_at: Date | null
+  nivel: number | null
+  pontuacaoTotal: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UsuarioMaxAggregateOutputType = {
-  id: string | null
-  username: string | null
+  id: number | null
+  nome: string | null
   email: string | null
-  password: string | null
-  avatar_url: string | null
+  senha: string | null
+  role: $Enums.Role | null
+  avatarUrl: string | null
   bio: string | null
   xp: number | null
-  level: number | null
-  created_at: Date | null
-  updated_at: Date | null
+  nivel: number | null
+  pontuacaoTotal: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UsuarioCountAggregateOutputType = {
   id: number
-  username: number
+  nome: number
   email: number
-  password: number
-  avatar_url: number
+  senha: number
+  role: number
+  avatarUrl: number
   bio: number
   xp: number
-  level: number
-  created_at: number
-  updated_at: number
+  nivel: number
+  pontuacaoTotal: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type UsuarioAvgAggregateInputType = {
+  id?: true
   xp?: true
-  level?: true
+  nivel?: true
+  pontuacaoTotal?: true
 }
 
 export type UsuarioSumAggregateInputType = {
+  id?: true
   xp?: true
-  level?: true
+  nivel?: true
+  pontuacaoTotal?: true
 }
 
 export type UsuarioMinAggregateInputType = {
   id?: true
-  username?: true
+  nome?: true
   email?: true
-  password?: true
-  avatar_url?: true
+  senha?: true
+  role?: true
+  avatarUrl?: true
   bio?: true
   xp?: true
-  level?: true
-  created_at?: true
-  updated_at?: true
+  nivel?: true
+  pontuacaoTotal?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type UsuarioMaxAggregateInputType = {
   id?: true
-  username?: true
+  nome?: true
   email?: true
-  password?: true
-  avatar_url?: true
+  senha?: true
+  role?: true
+  avatarUrl?: true
   bio?: true
   xp?: true
-  level?: true
-  created_at?: true
-  updated_at?: true
+  nivel?: true
+  pontuacaoTotal?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type UsuarioCountAggregateInputType = {
   id?: true
-  username?: true
+  nome?: true
   email?: true
-  password?: true
-  avatar_url?: true
+  senha?: true
+  role?: true
+  avatarUrl?: true
   bio?: true
   xp?: true
-  level?: true
-  created_at?: true
-  updated_at?: true
+  nivel?: true
+  pontuacaoTotal?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -214,16 +234,18 @@ export type UsuarioGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type UsuarioGroupByOutputType = {
-  id: string
-  username: string
+  id: number
+  nome: string
   email: string
-  password: string
-  avatar_url: string | null
+  senha: string
+  role: $Enums.Role
+  avatarUrl: string | null
   bio: string | null
   xp: number
-  level: number
-  created_at: Date
-  updated_at: Date
+  nivel: number
+  pontuacaoTotal: number
+  createdAt: Date
+  updatedAt: Date
   _count: UsuarioCountAggregateOutputType | null
   _avg: UsuarioAvgAggregateOutputType | null
   _sum: UsuarioSumAggregateOutputType | null
@@ -250,76 +272,84 @@ export type UsuarioWhereInput = {
   AND?: Prisma.UsuarioWhereInput | Prisma.UsuarioWhereInput[]
   OR?: Prisma.UsuarioWhereInput[]
   NOT?: Prisma.UsuarioWhereInput | Prisma.UsuarioWhereInput[]
-  id?: Prisma.StringFilter<"Usuario"> | string
-  username?: Prisma.StringFilter<"Usuario"> | string
+  id?: Prisma.IntFilter<"Usuario"> | number
+  nome?: Prisma.StringFilter<"Usuario"> | string
   email?: Prisma.StringFilter<"Usuario"> | string
-  password?: Prisma.StringFilter<"Usuario"> | string
-  avatar_url?: Prisma.StringNullableFilter<"Usuario"> | string | null
+  senha?: Prisma.StringFilter<"Usuario"> | string
+  role?: Prisma.EnumRoleFilter<"Usuario"> | $Enums.Role
+  avatarUrl?: Prisma.StringNullableFilter<"Usuario"> | string | null
   bio?: Prisma.StringNullableFilter<"Usuario"> | string | null
   xp?: Prisma.IntFilter<"Usuario"> | number
-  level?: Prisma.IntFilter<"Usuario"> | number
-  created_at?: Prisma.DateTimeFilter<"Usuario"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Usuario"> | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioListRelationFilter
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioListRelationFilter
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioListRelationFilter
-  conquistas?: Prisma.ConquistaUsuarioListRelationFilter
-  rankings?: Prisma.RankingListRelationFilter
-  habilidades?: Prisma.HabilidadeUsuarioListRelationFilter
+  nivel?: Prisma.IntFilter<"Usuario"> | number
+  pontuacaoTotal?: Prisma.IntFilter<"Usuario"> | number
+  createdAt?: Prisma.DateTimeFilter<"Usuario"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Usuario"> | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioListRelationFilter
+  respostasUsuario?: Prisma.RespostaUsuarioListRelationFilter
+  temasUsuario?: Prisma.TemaUsuarioListRelationFilter
+  conquistasUsuario?: Prisma.ConquistaUsuarioListRelationFilter
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioListRelationFilter
+  tokens?: Prisma.TokenListRelationFilter
 }
 
 export type UsuarioOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
-  avatar_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  senha?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   xp?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
-  respostas_usuario?: Prisma.RespostaUsuarioOrderByRelationAggregateInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioOrderByRelationAggregateInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioOrderByRelationAggregateInput
-  conquistas?: Prisma.ConquistaUsuarioOrderByRelationAggregateInput
-  rankings?: Prisma.RankingOrderByRelationAggregateInput
-  habilidades?: Prisma.HabilidadeUsuarioOrderByRelationAggregateInput
+  nivel?: Prisma.SortOrder
+  pontuacaoTotal?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  trilhasUsuario?: Prisma.TrilhaUsuarioOrderByRelationAggregateInput
+  respostasUsuario?: Prisma.RespostaUsuarioOrderByRelationAggregateInput
+  temasUsuario?: Prisma.TemaUsuarioOrderByRelationAggregateInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioOrderByRelationAggregateInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioOrderByRelationAggregateInput
+  tokens?: Prisma.TokenOrderByRelationAggregateInput
 }
 
 export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   email?: string
   AND?: Prisma.UsuarioWhereInput | Prisma.UsuarioWhereInput[]
   OR?: Prisma.UsuarioWhereInput[]
   NOT?: Prisma.UsuarioWhereInput | Prisma.UsuarioWhereInput[]
-  username?: Prisma.StringFilter<"Usuario"> | string
-  password?: Prisma.StringFilter<"Usuario"> | string
-  avatar_url?: Prisma.StringNullableFilter<"Usuario"> | string | null
+  nome?: Prisma.StringFilter<"Usuario"> | string
+  senha?: Prisma.StringFilter<"Usuario"> | string
+  role?: Prisma.EnumRoleFilter<"Usuario"> | $Enums.Role
+  avatarUrl?: Prisma.StringNullableFilter<"Usuario"> | string | null
   bio?: Prisma.StringNullableFilter<"Usuario"> | string | null
   xp?: Prisma.IntFilter<"Usuario"> | number
-  level?: Prisma.IntFilter<"Usuario"> | number
-  created_at?: Prisma.DateTimeFilter<"Usuario"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Usuario"> | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioListRelationFilter
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioListRelationFilter
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioListRelationFilter
-  conquistas?: Prisma.ConquistaUsuarioListRelationFilter
-  rankings?: Prisma.RankingListRelationFilter
-  habilidades?: Prisma.HabilidadeUsuarioListRelationFilter
+  nivel?: Prisma.IntFilter<"Usuario"> | number
+  pontuacaoTotal?: Prisma.IntFilter<"Usuario"> | number
+  createdAt?: Prisma.DateTimeFilter<"Usuario"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Usuario"> | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioListRelationFilter
+  respostasUsuario?: Prisma.RespostaUsuarioListRelationFilter
+  temasUsuario?: Prisma.TemaUsuarioListRelationFilter
+  conquistasUsuario?: Prisma.ConquistaUsuarioListRelationFilter
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioListRelationFilter
+  tokens?: Prisma.TokenListRelationFilter
 }, "id" | "email">
 
 export type UsuarioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
-  avatar_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  senha?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   xp?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
+  pontuacaoTotal?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.UsuarioCountOrderByAggregateInput
   _avg?: Prisma.UsuarioAvgOrderByAggregateInput
   _max?: Prisma.UsuarioMaxOrderByAggregateInput
@@ -331,180 +361,203 @@ export type UsuarioScalarWhereWithAggregatesInput = {
   AND?: Prisma.UsuarioScalarWhereWithAggregatesInput | Prisma.UsuarioScalarWhereWithAggregatesInput[]
   OR?: Prisma.UsuarioScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UsuarioScalarWhereWithAggregatesInput | Prisma.UsuarioScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
-  username?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Usuario"> | number
+  nome?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
   email?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
-  password?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
-  avatar_url?: Prisma.StringNullableWithAggregatesFilter<"Usuario"> | string | null
+  senha?: Prisma.StringWithAggregatesFilter<"Usuario"> | string
+  role?: Prisma.EnumRoleWithAggregatesFilter<"Usuario"> | $Enums.Role
+  avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"Usuario"> | string | null
   bio?: Prisma.StringNullableWithAggregatesFilter<"Usuario"> | string | null
   xp?: Prisma.IntWithAggregatesFilter<"Usuario"> | number
-  level?: Prisma.IntWithAggregatesFilter<"Usuario"> | number
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
-  updated_at?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+  nivel?: Prisma.IntWithAggregatesFilter<"Usuario"> | number
+  pontuacaoTotal?: Prisma.IntWithAggregatesFilter<"Usuario"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Usuario"> | Date | string
 }
 
 export type UsuarioCreateInput = {
-  id?: string
-  username: string
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateInput = {
-  id?: string
-  username: string
+  id?: number
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateManyInput = {
-  id?: string
-  username: string
+  id?: number
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type UsuarioUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UsuarioUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UsuarioCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
-  avatar_url?: Prisma.SortOrder
+  senha?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   xp?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
+  pontuacaoTotal?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UsuarioAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   xp?: Prisma.SortOrder
-  level?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
+  pontuacaoTotal?: Prisma.SortOrder
 }
 
 export type UsuarioMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
-  avatar_url?: Prisma.SortOrder
+  senha?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   xp?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
+  pontuacaoTotal?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UsuarioMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
-  avatar_url?: Prisma.SortOrder
+  senha?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   xp?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
+  pontuacaoTotal?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UsuarioSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   xp?: Prisma.SortOrder
-  level?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
+  pontuacaoTotal?: Prisma.SortOrder
 }
 
 export type UsuarioScalarRelationFilter = {
@@ -514,6 +567,10 @@ export type UsuarioScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: $Enums.Role
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -532,616 +589,652 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type UsuarioCreateNestedOneWithoutRespostas_usuarioInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutRespostas_usuarioInput, Prisma.UsuarioUncheckedCreateWithoutRespostas_usuarioInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutRespostas_usuarioInput
+export type UsuarioCreateNestedOneWithoutTemasUsuarioInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTemasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutTemasUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTemasUsuarioInput
   connect?: Prisma.UsuarioWhereUniqueInput
 }
 
-export type UsuarioUpdateOneRequiredWithoutRespostas_usuarioNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutRespostas_usuarioInput, Prisma.UsuarioUncheckedCreateWithoutRespostas_usuarioInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutRespostas_usuarioInput
-  upsert?: Prisma.UsuarioUpsertWithoutRespostas_usuarioInput
+export type UsuarioUpdateOneRequiredWithoutTemasUsuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTemasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutTemasUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTemasUsuarioInput
+  upsert?: Prisma.UsuarioUpsertWithoutTemasUsuarioInput
   connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutRespostas_usuarioInput, Prisma.UsuarioUpdateWithoutRespostas_usuarioInput>, Prisma.UsuarioUncheckedUpdateWithoutRespostas_usuarioInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutTemasUsuarioInput, Prisma.UsuarioUpdateWithoutTemasUsuarioInput>, Prisma.UsuarioUncheckedUpdateWithoutTemasUsuarioInput>
 }
 
-export type UsuarioCreateNestedOneWithoutProgresso_trilhaInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutProgresso_trilhaInput, Prisma.UsuarioUncheckedCreateWithoutProgresso_trilhaInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutProgresso_trilhaInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-}
-
-export type UsuarioUpdateOneRequiredWithoutProgresso_trilhaNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutProgresso_trilhaInput, Prisma.UsuarioUncheckedCreateWithoutProgresso_trilhaInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutProgresso_trilhaInput
-  upsert?: Prisma.UsuarioUpsertWithoutProgresso_trilhaInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutProgresso_trilhaInput, Prisma.UsuarioUpdateWithoutProgresso_trilhaInput>, Prisma.UsuarioUncheckedUpdateWithoutProgresso_trilhaInput>
-}
-
-export type UsuarioCreateNestedOneWithoutBloqueios_trilhaInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutBloqueios_trilhaInput, Prisma.UsuarioUncheckedCreateWithoutBloqueios_trilhaInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutBloqueios_trilhaInput
+export type UsuarioCreateNestedOneWithoutRespostasUsuarioInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutRespostasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutRespostasUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutRespostasUsuarioInput
   connect?: Prisma.UsuarioWhereUniqueInput
 }
 
-export type UsuarioUpdateOneRequiredWithoutBloqueios_trilhaNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutBloqueios_trilhaInput, Prisma.UsuarioUncheckedCreateWithoutBloqueios_trilhaInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutBloqueios_trilhaInput
-  upsert?: Prisma.UsuarioUpsertWithoutBloqueios_trilhaInput
+export type UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutRespostasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutRespostasUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutRespostasUsuarioInput
+  upsert?: Prisma.UsuarioUpsertWithoutRespostasUsuarioInput
   connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutBloqueios_trilhaInput, Prisma.UsuarioUpdateWithoutBloqueios_trilhaInput>, Prisma.UsuarioUncheckedUpdateWithoutBloqueios_trilhaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutRespostasUsuarioInput, Prisma.UsuarioUpdateWithoutRespostasUsuarioInput>, Prisma.UsuarioUncheckedUpdateWithoutRespostasUsuarioInput>
 }
 
-export type UsuarioCreateNestedOneWithoutConquistasInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutConquistasInput, Prisma.UsuarioUncheckedCreateWithoutConquistasInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutConquistasInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-}
-
-export type UsuarioUpdateOneRequiredWithoutConquistasNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutConquistasInput, Prisma.UsuarioUncheckedCreateWithoutConquistasInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutConquistasInput
-  upsert?: Prisma.UsuarioUpsertWithoutConquistasInput
-  connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutConquistasInput, Prisma.UsuarioUpdateWithoutConquistasInput>, Prisma.UsuarioUncheckedUpdateWithoutConquistasInput>
-}
-
-export type UsuarioCreateNestedOneWithoutRankingsInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutRankingsInput, Prisma.UsuarioUncheckedCreateWithoutRankingsInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutRankingsInput
+export type UsuarioCreateNestedOneWithoutTrilhasUsuarioInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTrilhasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutTrilhasUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTrilhasUsuarioInput
   connect?: Prisma.UsuarioWhereUniqueInput
 }
 
-export type UsuarioUpdateOneRequiredWithoutRankingsNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutRankingsInput, Prisma.UsuarioUncheckedCreateWithoutRankingsInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutRankingsInput
-  upsert?: Prisma.UsuarioUpsertWithoutRankingsInput
+export type UsuarioUpdateOneRequiredWithoutTrilhasUsuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTrilhasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutTrilhasUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTrilhasUsuarioInput
+  upsert?: Prisma.UsuarioUpsertWithoutTrilhasUsuarioInput
   connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutRankingsInput, Prisma.UsuarioUpdateWithoutRankingsInput>, Prisma.UsuarioUncheckedUpdateWithoutRankingsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutTrilhasUsuarioInput, Prisma.UsuarioUpdateWithoutTrilhasUsuarioInput>, Prisma.UsuarioUncheckedUpdateWithoutTrilhasUsuarioInput>
 }
 
-export type UsuarioCreateNestedOneWithoutHabilidadesInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutHabilidadesInput, Prisma.UsuarioUncheckedCreateWithoutHabilidadesInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutHabilidadesInput
+export type UsuarioCreateNestedOneWithoutConquistasUsuarioInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutConquistasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutConquistasUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutConquistasUsuarioInput
   connect?: Prisma.UsuarioWhereUniqueInput
 }
 
-export type UsuarioUpdateOneRequiredWithoutHabilidadesNestedInput = {
-  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutHabilidadesInput, Prisma.UsuarioUncheckedCreateWithoutHabilidadesInput>
-  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutHabilidadesInput
-  upsert?: Prisma.UsuarioUpsertWithoutHabilidadesInput
+export type UsuarioUpdateOneRequiredWithoutConquistasUsuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutConquistasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutConquistasUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutConquistasUsuarioInput
+  upsert?: Prisma.UsuarioUpsertWithoutConquistasUsuarioInput
   connect?: Prisma.UsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutHabilidadesInput, Prisma.UsuarioUpdateWithoutHabilidadesInput>, Prisma.UsuarioUncheckedUpdateWithoutHabilidadesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutConquistasUsuarioInput, Prisma.UsuarioUpdateWithoutConquistasUsuarioInput>, Prisma.UsuarioUncheckedUpdateWithoutConquistasUsuarioInput>
 }
 
-export type UsuarioCreateWithoutRespostas_usuarioInput = {
-  id?: string
-  username: string
+export type UsuarioCreateNestedOneWithoutHabilidadesUsuarioInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutHabilidadesUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutHabilidadesUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutHabilidadesUsuarioInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutHabilidadesUsuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutHabilidadesUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutHabilidadesUsuarioInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutHabilidadesUsuarioInput
+  upsert?: Prisma.UsuarioUpsertWithoutHabilidadesUsuarioInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutHabilidadesUsuarioInput, Prisma.UsuarioUpdateWithoutHabilidadesUsuarioInput>, Prisma.UsuarioUncheckedUpdateWithoutHabilidadesUsuarioInput>
+}
+
+export type UsuarioCreateNestedOneWithoutTokensInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTokensInput, Prisma.UsuarioUncheckedCreateWithoutTokensInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTokensInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutTokensInput, Prisma.UsuarioUncheckedCreateWithoutTokensInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutTokensInput
+  upsert?: Prisma.UsuarioUpsertWithoutTokensInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutTokensInput, Prisma.UsuarioUpdateWithoutTokensInput>, Prisma.UsuarioUncheckedUpdateWithoutTokensInput>
+}
+
+export type UsuarioCreateWithoutTemasUsuarioInput = {
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioUncheckedCreateWithoutRespostas_usuarioInput = {
-  id?: string
-  username: string
+export type UsuarioUncheckedCreateWithoutTemasUsuarioInput = {
+  id?: number
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioCreateOrConnectWithoutRespostas_usuarioInput = {
+export type UsuarioCreateOrConnectWithoutTemasUsuarioInput = {
   where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutRespostas_usuarioInput, Prisma.UsuarioUncheckedCreateWithoutRespostas_usuarioInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTemasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutTemasUsuarioInput>
 }
 
-export type UsuarioUpsertWithoutRespostas_usuarioInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutRespostas_usuarioInput, Prisma.UsuarioUncheckedUpdateWithoutRespostas_usuarioInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutRespostas_usuarioInput, Prisma.UsuarioUncheckedCreateWithoutRespostas_usuarioInput>
+export type UsuarioUpsertWithoutTemasUsuarioInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutTemasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutTemasUsuarioInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTemasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutTemasUsuarioInput>
   where?: Prisma.UsuarioWhereInput
 }
 
-export type UsuarioUpdateToOneWithWhereWithoutRespostas_usuarioInput = {
+export type UsuarioUpdateToOneWithWhereWithoutTemasUsuarioInput = {
   where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutRespostas_usuarioInput, Prisma.UsuarioUncheckedUpdateWithoutRespostas_usuarioInput>
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutTemasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutTemasUsuarioInput>
 }
 
-export type UsuarioUpdateWithoutRespostas_usuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUpdateWithoutTemasUsuarioInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioUncheckedUpdateWithoutRespostas_usuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUncheckedUpdateWithoutTemasUsuarioInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioCreateWithoutProgresso_trilhaInput = {
-  id?: string
-  username: string
+export type UsuarioCreateWithoutRespostasUsuarioInput = {
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioUncheckedCreateWithoutProgresso_trilhaInput = {
-  id?: string
-  username: string
+export type UsuarioUncheckedCreateWithoutRespostasUsuarioInput = {
+  id?: number
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioCreateOrConnectWithoutProgresso_trilhaInput = {
+export type UsuarioCreateOrConnectWithoutRespostasUsuarioInput = {
   where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutProgresso_trilhaInput, Prisma.UsuarioUncheckedCreateWithoutProgresso_trilhaInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutRespostasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutRespostasUsuarioInput>
 }
 
-export type UsuarioUpsertWithoutProgresso_trilhaInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutProgresso_trilhaInput, Prisma.UsuarioUncheckedUpdateWithoutProgresso_trilhaInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutProgresso_trilhaInput, Prisma.UsuarioUncheckedCreateWithoutProgresso_trilhaInput>
+export type UsuarioUpsertWithoutRespostasUsuarioInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutRespostasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutRespostasUsuarioInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutRespostasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutRespostasUsuarioInput>
   where?: Prisma.UsuarioWhereInput
 }
 
-export type UsuarioUpdateToOneWithWhereWithoutProgresso_trilhaInput = {
+export type UsuarioUpdateToOneWithWhereWithoutRespostasUsuarioInput = {
   where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutProgresso_trilhaInput, Prisma.UsuarioUncheckedUpdateWithoutProgresso_trilhaInput>
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutRespostasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutRespostasUsuarioInput>
 }
 
-export type UsuarioUpdateWithoutProgresso_trilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUpdateWithoutRespostasUsuarioInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioUncheckedUpdateWithoutProgresso_trilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUncheckedUpdateWithoutRespostasUsuarioInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioCreateWithoutBloqueios_trilhaInput = {
-  id?: string
-  username: string
+export type UsuarioCreateWithoutTrilhasUsuarioInput = {
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioUncheckedCreateWithoutBloqueios_trilhaInput = {
-  id?: string
-  username: string
+export type UsuarioUncheckedCreateWithoutTrilhasUsuarioInput = {
+  id?: number
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioCreateOrConnectWithoutBloqueios_trilhaInput = {
+export type UsuarioCreateOrConnectWithoutTrilhasUsuarioInput = {
   where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutBloqueios_trilhaInput, Prisma.UsuarioUncheckedCreateWithoutBloqueios_trilhaInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTrilhasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutTrilhasUsuarioInput>
 }
 
-export type UsuarioUpsertWithoutBloqueios_trilhaInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutBloqueios_trilhaInput, Prisma.UsuarioUncheckedUpdateWithoutBloqueios_trilhaInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutBloqueios_trilhaInput, Prisma.UsuarioUncheckedCreateWithoutBloqueios_trilhaInput>
+export type UsuarioUpsertWithoutTrilhasUsuarioInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutTrilhasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutTrilhasUsuarioInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTrilhasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutTrilhasUsuarioInput>
   where?: Prisma.UsuarioWhereInput
 }
 
-export type UsuarioUpdateToOneWithWhereWithoutBloqueios_trilhaInput = {
+export type UsuarioUpdateToOneWithWhereWithoutTrilhasUsuarioInput = {
   where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutBloqueios_trilhaInput, Prisma.UsuarioUncheckedUpdateWithoutBloqueios_trilhaInput>
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutTrilhasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutTrilhasUsuarioInput>
 }
 
-export type UsuarioUpdateWithoutBloqueios_trilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUpdateWithoutTrilhasUsuarioInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioUncheckedUpdateWithoutBloqueios_trilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUncheckedUpdateWithoutTrilhasUsuarioInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioCreateWithoutConquistasInput = {
-  id?: string
-  username: string
+export type UsuarioCreateWithoutConquistasUsuarioInput = {
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioUncheckedCreateWithoutConquistasInput = {
-  id?: string
-  username: string
+export type UsuarioUncheckedCreateWithoutConquistasUsuarioInput = {
+  id?: number
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioCreateOrConnectWithoutConquistasInput = {
+export type UsuarioCreateOrConnectWithoutConquistasUsuarioInput = {
   where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutConquistasInput, Prisma.UsuarioUncheckedCreateWithoutConquistasInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutConquistasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutConquistasUsuarioInput>
 }
 
-export type UsuarioUpsertWithoutConquistasInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutConquistasInput, Prisma.UsuarioUncheckedUpdateWithoutConquistasInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutConquistasInput, Prisma.UsuarioUncheckedCreateWithoutConquistasInput>
+export type UsuarioUpsertWithoutConquistasUsuarioInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutConquistasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutConquistasUsuarioInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutConquistasUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutConquistasUsuarioInput>
   where?: Prisma.UsuarioWhereInput
 }
 
-export type UsuarioUpdateToOneWithWhereWithoutConquistasInput = {
+export type UsuarioUpdateToOneWithWhereWithoutConquistasUsuarioInput = {
   where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutConquistasInput, Prisma.UsuarioUncheckedUpdateWithoutConquistasInput>
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutConquistasUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutConquistasUsuarioInput>
 }
 
-export type UsuarioUpdateWithoutConquistasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUpdateWithoutConquistasUsuarioInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioUncheckedUpdateWithoutConquistasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUncheckedUpdateWithoutConquistasUsuarioInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioCreateWithoutRankingsInput = {
-  id?: string
-  username: string
+export type UsuarioCreateWithoutHabilidadesUsuarioInput = {
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioUncheckedCreateWithoutRankingsInput = {
-  id?: string
-  username: string
+export type UsuarioUncheckedCreateWithoutHabilidadesUsuarioInput = {
+  id?: number
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioCreateOrConnectWithoutRankingsInput = {
+export type UsuarioCreateOrConnectWithoutHabilidadesUsuarioInput = {
   where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutRankingsInput, Prisma.UsuarioUncheckedCreateWithoutRankingsInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutHabilidadesUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutHabilidadesUsuarioInput>
 }
 
-export type UsuarioUpsertWithoutRankingsInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutRankingsInput, Prisma.UsuarioUncheckedUpdateWithoutRankingsInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutRankingsInput, Prisma.UsuarioUncheckedCreateWithoutRankingsInput>
+export type UsuarioUpsertWithoutHabilidadesUsuarioInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutHabilidadesUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutHabilidadesUsuarioInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutHabilidadesUsuarioInput, Prisma.UsuarioUncheckedCreateWithoutHabilidadesUsuarioInput>
   where?: Prisma.UsuarioWhereInput
 }
 
-export type UsuarioUpdateToOneWithWhereWithoutRankingsInput = {
+export type UsuarioUpdateToOneWithWhereWithoutHabilidadesUsuarioInput = {
   where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutRankingsInput, Prisma.UsuarioUncheckedUpdateWithoutRankingsInput>
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutHabilidadesUsuarioInput, Prisma.UsuarioUncheckedUpdateWithoutHabilidadesUsuarioInput>
 }
 
-export type UsuarioUpdateWithoutRankingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUpdateWithoutHabilidadesUsuarioInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioUncheckedUpdateWithoutRankingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUncheckedUpdateWithoutHabilidadesUsuarioInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  habilidades?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioCreateWithoutHabilidadesInput = {
-  id?: string
-  username: string
+export type UsuarioCreateWithoutTokensInput = {
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioUncheckedCreateWithoutHabilidadesInput = {
-  id?: string
-  username: string
+export type UsuarioUncheckedCreateWithoutTokensInput = {
+  id?: number
+  nome: string
   email: string
-  password: string
-  avatar_url?: string | null
+  senha: string
+  role?: $Enums.Role
+  avatarUrl?: string | null
   bio?: string | null
   xp?: number
-  level?: number
-  created_at?: Date | string
-  updated_at?: Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
-  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUsuarioInput
+  nivel?: number
+  pontuacaoTotal?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
-export type UsuarioCreateOrConnectWithoutHabilidadesInput = {
+export type UsuarioCreateOrConnectWithoutTokensInput = {
   where: Prisma.UsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutHabilidadesInput, Prisma.UsuarioUncheckedCreateWithoutHabilidadesInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTokensInput, Prisma.UsuarioUncheckedCreateWithoutTokensInput>
 }
 
-export type UsuarioUpsertWithoutHabilidadesInput = {
-  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutHabilidadesInput, Prisma.UsuarioUncheckedUpdateWithoutHabilidadesInput>
-  create: Prisma.XOR<Prisma.UsuarioCreateWithoutHabilidadesInput, Prisma.UsuarioUncheckedCreateWithoutHabilidadesInput>
+export type UsuarioUpsertWithoutTokensInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutTokensInput, Prisma.UsuarioUncheckedUpdateWithoutTokensInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutTokensInput, Prisma.UsuarioUncheckedCreateWithoutTokensInput>
   where?: Prisma.UsuarioWhereInput
 }
 
-export type UsuarioUpdateToOneWithWhereWithoutHabilidadesInput = {
+export type UsuarioUpdateToOneWithWhereWithoutTokensInput = {
   where?: Prisma.UsuarioWhereInput
-  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutHabilidadesInput, Prisma.UsuarioUncheckedUpdateWithoutHabilidadesInput>
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutTokensInput, Prisma.UsuarioUncheckedUpdateWithoutTokensInput>
 }
 
-export type UsuarioUpdateWithoutHabilidadesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUpdateWithoutTokensInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUpdateManyWithoutUsuarioNestedInput
 }
 
-export type UsuarioUncheckedUpdateWithoutHabilidadesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+export type UsuarioUncheckedUpdateWithoutTokensInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   xp?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  respostas_usuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  progresso_trilha?: Prisma.ProgressoTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  bloqueios_trilha?: Prisma.BloqueioTrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  conquistas?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
-  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUsuarioNestedInput
+  nivel?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilhasUsuario?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  respostasUsuario?: Prisma.RespostaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  temasUsuario?: Prisma.TemaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  conquistasUsuario?: Prisma.ConquistaUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  habilidadesUsuario?: Prisma.HabilidadeUsuarioUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 
@@ -1150,21 +1243,21 @@ export type UsuarioUncheckedUpdateWithoutHabilidadesInput = {
  */
 
 export type UsuarioCountOutputType = {
-  respostas_usuario: number
-  progresso_trilha: number
-  bloqueios_trilha: number
-  conquistas: number
-  rankings: number
-  habilidades: number
+  trilhasUsuario: number
+  respostasUsuario: number
+  temasUsuario: number
+  conquistasUsuario: number
+  habilidadesUsuario: number
+  tokens: number
 }
 
 export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  respostas_usuario?: boolean | UsuarioCountOutputTypeCountRespostas_usuarioArgs
-  progresso_trilha?: boolean | UsuarioCountOutputTypeCountProgresso_trilhaArgs
-  bloqueios_trilha?: boolean | UsuarioCountOutputTypeCountBloqueios_trilhaArgs
-  conquistas?: boolean | UsuarioCountOutputTypeCountConquistasArgs
-  rankings?: boolean | UsuarioCountOutputTypeCountRankingsArgs
-  habilidades?: boolean | UsuarioCountOutputTypeCountHabilidadesArgs
+  trilhasUsuario?: boolean | UsuarioCountOutputTypeCountTrilhasUsuarioArgs
+  respostasUsuario?: boolean | UsuarioCountOutputTypeCountRespostasUsuarioArgs
+  temasUsuario?: boolean | UsuarioCountOutputTypeCountTemasUsuarioArgs
+  conquistasUsuario?: boolean | UsuarioCountOutputTypeCountConquistasUsuarioArgs
+  habilidadesUsuario?: boolean | UsuarioCountOutputTypeCountHabilidadesUsuarioArgs
+  tokens?: boolean | UsuarioCountOutputTypeCountTokensArgs
 }
 
 /**
@@ -1180,113 +1273,121 @@ export type UsuarioCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * UsuarioCountOutputType without action
  */
-export type UsuarioCountOutputTypeCountRespostas_usuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UsuarioCountOutputTypeCountTrilhasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrilhaUsuarioWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountRespostasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RespostaUsuarioWhereInput
 }
 
 /**
  * UsuarioCountOutputType without action
  */
-export type UsuarioCountOutputTypeCountProgresso_trilhaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProgressoTrilhaUsuarioWhereInput
+export type UsuarioCountOutputTypeCountTemasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TemaUsuarioWhereInput
 }
 
 /**
  * UsuarioCountOutputType without action
  */
-export type UsuarioCountOutputTypeCountBloqueios_trilhaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BloqueioTrilhaUsuarioWhereInput
-}
-
-/**
- * UsuarioCountOutputType without action
- */
-export type UsuarioCountOutputTypeCountConquistasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UsuarioCountOutputTypeCountConquistasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ConquistaUsuarioWhereInput
 }
 
 /**
  * UsuarioCountOutputType without action
  */
-export type UsuarioCountOutputTypeCountRankingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RankingWhereInput
+export type UsuarioCountOutputTypeCountHabilidadesUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HabilidadeUsuarioWhereInput
 }
 
 /**
  * UsuarioCountOutputType without action
  */
-export type UsuarioCountOutputTypeCountHabilidadesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.HabilidadeUsuarioWhereInput
+export type UsuarioCountOutputTypeCountTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TokenWhereInput
 }
 
 
 export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  username?: boolean
+  nome?: boolean
   email?: boolean
-  password?: boolean
-  avatar_url?: boolean
+  senha?: boolean
+  role?: boolean
+  avatarUrl?: boolean
   bio?: boolean
   xp?: boolean
-  level?: boolean
-  created_at?: boolean
-  updated_at?: boolean
-  respostas_usuario?: boolean | Prisma.Usuario$respostas_usuarioArgs<ExtArgs>
-  progresso_trilha?: boolean | Prisma.Usuario$progresso_trilhaArgs<ExtArgs>
-  bloqueios_trilha?: boolean | Prisma.Usuario$bloqueios_trilhaArgs<ExtArgs>
-  conquistas?: boolean | Prisma.Usuario$conquistasArgs<ExtArgs>
-  rankings?: boolean | Prisma.Usuario$rankingsArgs<ExtArgs>
-  habilidades?: boolean | Prisma.Usuario$habilidadesArgs<ExtArgs>
+  nivel?: boolean
+  pontuacaoTotal?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  trilhasUsuario?: boolean | Prisma.Usuario$trilhasUsuarioArgs<ExtArgs>
+  respostasUsuario?: boolean | Prisma.Usuario$respostasUsuarioArgs<ExtArgs>
+  temasUsuario?: boolean | Prisma.Usuario$temasUsuarioArgs<ExtArgs>
+  conquistasUsuario?: boolean | Prisma.Usuario$conquistasUsuarioArgs<ExtArgs>
+  habilidadesUsuario?: boolean | Prisma.Usuario$habilidadesUsuarioArgs<ExtArgs>
+  tokens?: boolean | Prisma.Usuario$tokensArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
 
 export type UsuarioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  username?: boolean
+  nome?: boolean
   email?: boolean
-  password?: boolean
-  avatar_url?: boolean
+  senha?: boolean
+  role?: boolean
+  avatarUrl?: boolean
   bio?: boolean
   xp?: boolean
-  level?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  nivel?: boolean
+  pontuacaoTotal?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["usuario"]>
 
 export type UsuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  username?: boolean
+  nome?: boolean
   email?: boolean
-  password?: boolean
-  avatar_url?: boolean
+  senha?: boolean
+  role?: boolean
+  avatarUrl?: boolean
   bio?: boolean
   xp?: boolean
-  level?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  nivel?: boolean
+  pontuacaoTotal?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["usuario"]>
 
 export type UsuarioSelectScalar = {
   id?: boolean
-  username?: boolean
+  nome?: boolean
   email?: boolean
-  password?: boolean
-  avatar_url?: boolean
+  senha?: boolean
+  role?: boolean
+  avatarUrl?: boolean
   bio?: boolean
   xp?: boolean
-  level?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  nivel?: boolean
+  pontuacaoTotal?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "email" | "password" | "avatar_url" | "bio" | "xp" | "level" | "created_at" | "updated_at", ExtArgs["result"]["usuario"]>
+export type UsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "role" | "avatarUrl" | "bio" | "xp" | "nivel" | "pontuacaoTotal" | "createdAt" | "updatedAt", ExtArgs["result"]["usuario"]>
 export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  respostas_usuario?: boolean | Prisma.Usuario$respostas_usuarioArgs<ExtArgs>
-  progresso_trilha?: boolean | Prisma.Usuario$progresso_trilhaArgs<ExtArgs>
-  bloqueios_trilha?: boolean | Prisma.Usuario$bloqueios_trilhaArgs<ExtArgs>
-  conquistas?: boolean | Prisma.Usuario$conquistasArgs<ExtArgs>
-  rankings?: boolean | Prisma.Usuario$rankingsArgs<ExtArgs>
-  habilidades?: boolean | Prisma.Usuario$habilidadesArgs<ExtArgs>
+  trilhasUsuario?: boolean | Prisma.Usuario$trilhasUsuarioArgs<ExtArgs>
+  respostasUsuario?: boolean | Prisma.Usuario$respostasUsuarioArgs<ExtArgs>
+  temasUsuario?: boolean | Prisma.Usuario$temasUsuarioArgs<ExtArgs>
+  conquistasUsuario?: boolean | Prisma.Usuario$conquistasUsuarioArgs<ExtArgs>
+  habilidadesUsuario?: boolean | Prisma.Usuario$habilidadesUsuarioArgs<ExtArgs>
+  tokens?: boolean | Prisma.Usuario$tokensArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1295,24 +1396,26 @@ export type UsuarioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Usuario"
   objects: {
-    respostas_usuario: Prisma.$RespostaUsuarioPayload<ExtArgs>[]
-    progresso_trilha: Prisma.$ProgressoTrilhaUsuarioPayload<ExtArgs>[]
-    bloqueios_trilha: Prisma.$BloqueioTrilhaUsuarioPayload<ExtArgs>[]
-    conquistas: Prisma.$ConquistaUsuarioPayload<ExtArgs>[]
-    rankings: Prisma.$RankingPayload<ExtArgs>[]
-    habilidades: Prisma.$HabilidadeUsuarioPayload<ExtArgs>[]
+    trilhasUsuario: Prisma.$TrilhaUsuarioPayload<ExtArgs>[]
+    respostasUsuario: Prisma.$RespostaUsuarioPayload<ExtArgs>[]
+    temasUsuario: Prisma.$TemaUsuarioPayload<ExtArgs>[]
+    conquistasUsuario: Prisma.$ConquistaUsuarioPayload<ExtArgs>[]
+    habilidadesUsuario: Prisma.$HabilidadeUsuarioPayload<ExtArgs>[]
+    tokens: Prisma.$TokenPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    username: string
+    id: number
+    nome: string
     email: string
-    password: string
-    avatar_url: string | null
+    senha: string
+    role: $Enums.Role
+    avatarUrl: string | null
     bio: string | null
     xp: number
-    level: number
-    created_at: Date
-    updated_at: Date
+    nivel: number
+    pontuacaoTotal: number
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["usuario"]>
   composites: {}
 }
@@ -1707,12 +1810,12 @@ readonly fields: UsuarioFieldRefs;
  */
 export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  respostas_usuario<T extends Prisma.Usuario$respostas_usuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$respostas_usuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RespostaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  progresso_trilha<T extends Prisma.Usuario$progresso_trilhaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$progresso_trilhaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgressoTrilhaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  bloqueios_trilha<T extends Prisma.Usuario$bloqueios_trilhaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$bloqueios_trilhaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BloqueioTrilhaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  conquistas<T extends Prisma.Usuario$conquistasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$conquistasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConquistaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  rankings<T extends Prisma.Usuario$rankingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$rankingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RankingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  habilidades<T extends Prisma.Usuario$habilidadesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$habilidadesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HabilidadeUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trilhasUsuario<T extends Prisma.Usuario$trilhasUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$trilhasUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrilhaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  respostasUsuario<T extends Prisma.Usuario$respostasUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$respostasUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RespostaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  temasUsuario<T extends Prisma.Usuario$temasUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$temasUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TemaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conquistasUsuario<T extends Prisma.Usuario$conquistasUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$conquistasUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConquistaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  habilidadesUsuario<T extends Prisma.Usuario$habilidadesUsuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$habilidadesUsuarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HabilidadeUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tokens<T extends Prisma.Usuario$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1742,16 +1845,18 @@ export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Usuario model
  */
 export interface UsuarioFieldRefs {
-  readonly id: Prisma.FieldRef<"Usuario", 'String'>
-  readonly username: Prisma.FieldRef<"Usuario", 'String'>
+  readonly id: Prisma.FieldRef<"Usuario", 'Int'>
+  readonly nome: Prisma.FieldRef<"Usuario", 'String'>
   readonly email: Prisma.FieldRef<"Usuario", 'String'>
-  readonly password: Prisma.FieldRef<"Usuario", 'String'>
-  readonly avatar_url: Prisma.FieldRef<"Usuario", 'String'>
+  readonly senha: Prisma.FieldRef<"Usuario", 'String'>
+  readonly role: Prisma.FieldRef<"Usuario", 'Role'>
+  readonly avatarUrl: Prisma.FieldRef<"Usuario", 'String'>
   readonly bio: Prisma.FieldRef<"Usuario", 'String'>
   readonly xp: Prisma.FieldRef<"Usuario", 'Int'>
-  readonly level: Prisma.FieldRef<"Usuario", 'Int'>
-  readonly created_at: Prisma.FieldRef<"Usuario", 'DateTime'>
-  readonly updated_at: Prisma.FieldRef<"Usuario", 'DateTime'>
+  readonly nivel: Prisma.FieldRef<"Usuario", 'Int'>
+  readonly pontuacaoTotal: Prisma.FieldRef<"Usuario", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Usuario", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Usuario", 'DateTime'>
 }
     
 
@@ -2145,9 +2250,33 @@ export type UsuarioDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Usuario.respostas_usuario
+ * Usuario.trilhasUsuario
  */
-export type Usuario$respostas_usuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Usuario$trilhasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrilhaUsuario
+   */
+  select?: Prisma.TrilhaUsuarioSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrilhaUsuario
+   */
+  omit?: Prisma.TrilhaUsuarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrilhaUsuarioInclude<ExtArgs> | null
+  where?: Prisma.TrilhaUsuarioWhereInput
+  orderBy?: Prisma.TrilhaUsuarioOrderByWithRelationInput | Prisma.TrilhaUsuarioOrderByWithRelationInput[]
+  cursor?: Prisma.TrilhaUsuarioWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrilhaUsuarioScalarFieldEnum | Prisma.TrilhaUsuarioScalarFieldEnum[]
+}
+
+/**
+ * Usuario.respostasUsuario
+ */
+export type Usuario$respostasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the RespostaUsuario
    */
@@ -2169,57 +2298,33 @@ export type Usuario$respostas_usuarioArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * Usuario.progresso_trilha
+ * Usuario.temasUsuario
  */
-export type Usuario$progresso_trilhaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Usuario$temasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ProgressoTrilhaUsuario
+   * Select specific fields to fetch from the TemaUsuario
    */
-  select?: Prisma.ProgressoTrilhaUsuarioSelect<ExtArgs> | null
+  select?: Prisma.TemaUsuarioSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ProgressoTrilhaUsuario
+   * Omit specific fields from the TemaUsuario
    */
-  omit?: Prisma.ProgressoTrilhaUsuarioOmit<ExtArgs> | null
+  omit?: Prisma.TemaUsuarioOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProgressoTrilhaUsuarioInclude<ExtArgs> | null
-  where?: Prisma.ProgressoTrilhaUsuarioWhereInput
-  orderBy?: Prisma.ProgressoTrilhaUsuarioOrderByWithRelationInput | Prisma.ProgressoTrilhaUsuarioOrderByWithRelationInput[]
-  cursor?: Prisma.ProgressoTrilhaUsuarioWhereUniqueInput
+  include?: Prisma.TemaUsuarioInclude<ExtArgs> | null
+  where?: Prisma.TemaUsuarioWhereInput
+  orderBy?: Prisma.TemaUsuarioOrderByWithRelationInput | Prisma.TemaUsuarioOrderByWithRelationInput[]
+  cursor?: Prisma.TemaUsuarioWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ProgressoTrilhaUsuarioScalarFieldEnum | Prisma.ProgressoTrilhaUsuarioScalarFieldEnum[]
+  distinct?: Prisma.TemaUsuarioScalarFieldEnum | Prisma.TemaUsuarioScalarFieldEnum[]
 }
 
 /**
- * Usuario.bloqueios_trilha
+ * Usuario.conquistasUsuario
  */
-export type Usuario$bloqueios_trilhaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the BloqueioTrilhaUsuario
-   */
-  select?: Prisma.BloqueioTrilhaUsuarioSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the BloqueioTrilhaUsuario
-   */
-  omit?: Prisma.BloqueioTrilhaUsuarioOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BloqueioTrilhaUsuarioInclude<ExtArgs> | null
-  where?: Prisma.BloqueioTrilhaUsuarioWhereInput
-  orderBy?: Prisma.BloqueioTrilhaUsuarioOrderByWithRelationInput | Prisma.BloqueioTrilhaUsuarioOrderByWithRelationInput[]
-  cursor?: Prisma.BloqueioTrilhaUsuarioWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BloqueioTrilhaUsuarioScalarFieldEnum | Prisma.BloqueioTrilhaUsuarioScalarFieldEnum[]
-}
-
-/**
- * Usuario.conquistas
- */
-export type Usuario$conquistasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Usuario$conquistasUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ConquistaUsuario
    */
@@ -2241,33 +2346,9 @@ export type Usuario$conquistasArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Usuario.rankings
+ * Usuario.habilidadesUsuario
  */
-export type Usuario$rankingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Ranking
-   */
-  select?: Prisma.RankingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Ranking
-   */
-  omit?: Prisma.RankingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RankingInclude<ExtArgs> | null
-  where?: Prisma.RankingWhereInput
-  orderBy?: Prisma.RankingOrderByWithRelationInput | Prisma.RankingOrderByWithRelationInput[]
-  cursor?: Prisma.RankingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.RankingScalarFieldEnum | Prisma.RankingScalarFieldEnum[]
-}
-
-/**
- * Usuario.habilidades
- */
-export type Usuario$habilidadesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Usuario$habilidadesUsuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the HabilidadeUsuario
    */
@@ -2286,6 +2367,30 @@ export type Usuario$habilidadesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.HabilidadeUsuarioScalarFieldEnum | Prisma.HabilidadeUsuarioScalarFieldEnum[]
+}
+
+/**
+ * Usuario.tokens
+ */
+export type Usuario$tokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Token
+   */
+  select?: Prisma.TokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Token
+   */
+  omit?: Prisma.TokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TokenInclude<ExtArgs> | null
+  where?: Prisma.TokenWhereInput
+  orderBy?: Prisma.TokenOrderByWithRelationInput | Prisma.TokenOrderByWithRelationInput[]
+  cursor?: Prisma.TokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TokenScalarFieldEnum | Prisma.TokenScalarFieldEnum[]
 }
 
 /**

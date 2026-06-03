@@ -27,75 +27,89 @@ export type AggregateModulo = {
 }
 
 export type ModuloAvgAggregateOutputType = {
-  order_index: number | null
+  id: number | null
+  trilhaId: number | null
+  ordem: number | null
 }
 
 export type ModuloSumAggregateOutputType = {
-  order_index: number | null
+  id: number | null
+  trilhaId: number | null
+  ordem: number | null
 }
 
 export type ModuloMinAggregateOutputType = {
-  id: string | null
-  track_id: string | null
-  title: string | null
-  description: string | null
-  order_index: number | null
-  created_at: Date | null
+  id: number | null
+  trilhaId: number | null
+  titulo: string | null
+  descricao: string | null
+  ordem: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ModuloMaxAggregateOutputType = {
-  id: string | null
-  track_id: string | null
-  title: string | null
-  description: string | null
-  order_index: number | null
-  created_at: Date | null
+  id: number | null
+  trilhaId: number | null
+  titulo: string | null
+  descricao: string | null
+  ordem: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ModuloCountAggregateOutputType = {
   id: number
-  track_id: number
-  title: number
-  description: number
-  order_index: number
-  created_at: number
+  trilhaId: number
+  titulo: number
+  descricao: number
+  ordem: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type ModuloAvgAggregateInputType = {
-  order_index?: true
+  id?: true
+  trilhaId?: true
+  ordem?: true
 }
 
 export type ModuloSumAggregateInputType = {
-  order_index?: true
+  id?: true
+  trilhaId?: true
+  ordem?: true
 }
 
 export type ModuloMinAggregateInputType = {
   id?: true
-  track_id?: true
-  title?: true
-  description?: true
-  order_index?: true
-  created_at?: true
+  trilhaId?: true
+  titulo?: true
+  descricao?: true
+  ordem?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ModuloMaxAggregateInputType = {
   id?: true
-  track_id?: true
-  title?: true
-  description?: true
-  order_index?: true
-  created_at?: true
+  trilhaId?: true
+  titulo?: true
+  descricao?: true
+  ordem?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ModuloCountAggregateInputType = {
   id?: true
-  track_id?: true
-  title?: true
-  description?: true
-  order_index?: true
-  created_at?: true
+  trilhaId?: true
+  titulo?: true
+  descricao?: true
+  ordem?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -186,12 +200,13 @@ export type ModuloGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type ModuloGroupByOutputType = {
-  id: string
-  track_id: string
-  title: string
-  description: string | null
-  order_index: number
-  created_at: Date
+  id: number
+  trilhaId: number
+  titulo: string
+  descricao: string | null
+  ordem: number
+  createdAt: Date
+  updatedAt: Date
   _count: ModuloCountAggregateOutputType | null
   _avg: ModuloAvgAggregateOutputType | null
   _sum: ModuloSumAggregateOutputType | null
@@ -218,48 +233,53 @@ export type ModuloWhereInput = {
   AND?: Prisma.ModuloWhereInput | Prisma.ModuloWhereInput[]
   OR?: Prisma.ModuloWhereInput[]
   NOT?: Prisma.ModuloWhereInput | Prisma.ModuloWhereInput[]
-  id?: Prisma.StringFilter<"Modulo"> | string
-  track_id?: Prisma.StringFilter<"Modulo"> | string
-  title?: Prisma.StringFilter<"Modulo"> | string
-  description?: Prisma.StringNullableFilter<"Modulo"> | string | null
-  order_index?: Prisma.IntFilter<"Modulo"> | number
-  created_at?: Prisma.DateTimeFilter<"Modulo"> | Date | string
-  trilha?: Prisma.XOR<Prisma.TrilhaAprendizadoScalarRelationFilter, Prisma.TrilhaAprendizadoWhereInput>
+  id?: Prisma.IntFilter<"Modulo"> | number
+  trilhaId?: Prisma.IntFilter<"Modulo"> | number
+  titulo?: Prisma.StringFilter<"Modulo"> | string
+  descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  ordem?: Prisma.IntFilter<"Modulo"> | number
+  createdAt?: Prisma.DateTimeFilter<"Modulo"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Modulo"> | Date | string
+  trilha?: Prisma.XOR<Prisma.TrilhaScalarRelationFilter, Prisma.TrilhaWhereInput>
   questoes?: Prisma.QuestaoListRelationFilter
 }
 
 export type ModuloOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  track_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  trilha?: Prisma.TrilhaAprendizadoOrderByWithRelationInput
+  trilhaId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  trilha?: Prisma.TrilhaOrderByWithRelationInput
   questoes?: Prisma.QuestaoOrderByRelationAggregateInput
 }
 
 export type ModuloWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  trilhaId_ordem?: Prisma.ModuloTrilhaIdOrdemCompoundUniqueInput
   AND?: Prisma.ModuloWhereInput | Prisma.ModuloWhereInput[]
   OR?: Prisma.ModuloWhereInput[]
   NOT?: Prisma.ModuloWhereInput | Prisma.ModuloWhereInput[]
-  track_id?: Prisma.StringFilter<"Modulo"> | string
-  title?: Prisma.StringFilter<"Modulo"> | string
-  description?: Prisma.StringNullableFilter<"Modulo"> | string | null
-  order_index?: Prisma.IntFilter<"Modulo"> | number
-  created_at?: Prisma.DateTimeFilter<"Modulo"> | Date | string
-  trilha?: Prisma.XOR<Prisma.TrilhaAprendizadoScalarRelationFilter, Prisma.TrilhaAprendizadoWhereInput>
+  trilhaId?: Prisma.IntFilter<"Modulo"> | number
+  titulo?: Prisma.StringFilter<"Modulo"> | string
+  descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  ordem?: Prisma.IntFilter<"Modulo"> | number
+  createdAt?: Prisma.DateTimeFilter<"Modulo"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Modulo"> | Date | string
+  trilha?: Prisma.XOR<Prisma.TrilhaScalarRelationFilter, Prisma.TrilhaWhereInput>
   questoes?: Prisma.QuestaoListRelationFilter
-}, "id">
+}, "id" | "trilhaId_ordem">
 
 export type ModuloOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  track_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  trilhaId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ModuloCountOrderByAggregateInput
   _avg?: Prisma.ModuloAvgOrderByAggregateInput
   _max?: Prisma.ModuloMaxOrderByAggregateInput
@@ -271,78 +291,83 @@ export type ModuloScalarWhereWithAggregatesInput = {
   AND?: Prisma.ModuloScalarWhereWithAggregatesInput | Prisma.ModuloScalarWhereWithAggregatesInput[]
   OR?: Prisma.ModuloScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ModuloScalarWhereWithAggregatesInput | Prisma.ModuloScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Modulo"> | string
-  track_id?: Prisma.StringWithAggregatesFilter<"Modulo"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Modulo"> | string
-  description?: Prisma.StringNullableWithAggregatesFilter<"Modulo"> | string | null
-  order_index?: Prisma.IntWithAggregatesFilter<"Modulo"> | number
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"Modulo"> | Date | string
+  id?: Prisma.IntWithAggregatesFilter<"Modulo"> | number
+  trilhaId?: Prisma.IntWithAggregatesFilter<"Modulo"> | number
+  titulo?: Prisma.StringWithAggregatesFilter<"Modulo"> | string
+  descricao?: Prisma.StringNullableWithAggregatesFilter<"Modulo"> | string | null
+  ordem?: Prisma.IntWithAggregatesFilter<"Modulo"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Modulo"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Modulo"> | Date | string
 }
 
 export type ModuloCreateInput = {
-  id?: string
-  title: string
-  description?: string | null
-  order_index: number
-  created_at?: Date | string
-  trilha: Prisma.TrilhaAprendizadoCreateNestedOneWithoutModulosInput
+  titulo: string
+  descricao?: string | null
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilha: Prisma.TrilhaCreateNestedOneWithoutModulosInput
   questoes?: Prisma.QuestaoCreateNestedManyWithoutModuloInput
 }
 
 export type ModuloUncheckedCreateInput = {
-  id?: string
-  track_id: string
-  title: string
-  description?: string | null
-  order_index: number
-  created_at?: Date | string
+  id?: number
+  trilhaId: number
+  titulo: string
+  descricao?: string | null
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   questoes?: Prisma.QuestaoUncheckedCreateNestedManyWithoutModuloInput
 }
 
 export type ModuloUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trilha?: Prisma.TrilhaAprendizadoUpdateOneRequiredWithoutModulosNestedInput
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilha?: Prisma.TrilhaUpdateOneRequiredWithoutModulosNestedInput
   questoes?: Prisma.QuestaoUpdateManyWithoutModuloNestedInput
 }
 
 export type ModuloUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  track_id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoes?: Prisma.QuestaoUncheckedUpdateManyWithoutModuloNestedInput
 }
 
 export type ModuloCreateManyInput = {
-  id?: string
-  track_id: string
-  title: string
-  description?: string | null
-  order_index: number
-  created_at?: Date | string
+  id?: number
+  trilhaId: number
+  titulo: string
+  descricao?: string | null
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ModuloUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ModuloUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  track_id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ModuloListRelationFilter = {
@@ -355,39 +380,51 @@ export type ModuloOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ModuloTrilhaIdOrdemCompoundUniqueInput = {
+  trilhaId: number
+  ordem: number
+}
+
 export type ModuloCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  track_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  trilhaId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ModuloAvgOrderByAggregateInput = {
-  order_index?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  trilhaId?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
 }
 
 export type ModuloMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  track_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  trilhaId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ModuloMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  track_id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  order_index?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
+  trilhaId?: Prisma.SortOrder
+  titulo?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ModuloSumOrderByAggregateInput = {
-  order_index?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  trilhaId?: Prisma.SortOrder
+  ordem?: Prisma.SortOrder
 }
 
 export type ModuloScalarRelationFilter = {
@@ -452,20 +489,21 @@ export type ModuloUpdateOneRequiredWithoutQuestoesNestedInput = {
 }
 
 export type ModuloCreateWithoutTrilhaInput = {
-  id?: string
-  title: string
-  description?: string | null
-  order_index: number
-  created_at?: Date | string
+  titulo: string
+  descricao?: string | null
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   questoes?: Prisma.QuestaoCreateNestedManyWithoutModuloInput
 }
 
 export type ModuloUncheckedCreateWithoutTrilhaInput = {
-  id?: string
-  title: string
-  description?: string | null
-  order_index: number
-  created_at?: Date | string
+  id?: number
+  titulo: string
+  descricao?: string | null
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   questoes?: Prisma.QuestaoUncheckedCreateNestedManyWithoutModuloInput
 }
 
@@ -499,30 +537,32 @@ export type ModuloScalarWhereInput = {
   AND?: Prisma.ModuloScalarWhereInput | Prisma.ModuloScalarWhereInput[]
   OR?: Prisma.ModuloScalarWhereInput[]
   NOT?: Prisma.ModuloScalarWhereInput | Prisma.ModuloScalarWhereInput[]
-  id?: Prisma.StringFilter<"Modulo"> | string
-  track_id?: Prisma.StringFilter<"Modulo"> | string
-  title?: Prisma.StringFilter<"Modulo"> | string
-  description?: Prisma.StringNullableFilter<"Modulo"> | string | null
-  order_index?: Prisma.IntFilter<"Modulo"> | number
-  created_at?: Prisma.DateTimeFilter<"Modulo"> | Date | string
+  id?: Prisma.IntFilter<"Modulo"> | number
+  trilhaId?: Prisma.IntFilter<"Modulo"> | number
+  titulo?: Prisma.StringFilter<"Modulo"> | string
+  descricao?: Prisma.StringNullableFilter<"Modulo"> | string | null
+  ordem?: Prisma.IntFilter<"Modulo"> | number
+  createdAt?: Prisma.DateTimeFilter<"Modulo"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Modulo"> | Date | string
 }
 
 export type ModuloCreateWithoutQuestoesInput = {
-  id?: string
-  title: string
-  description?: string | null
-  order_index: number
-  created_at?: Date | string
-  trilha: Prisma.TrilhaAprendizadoCreateNestedOneWithoutModulosInput
+  titulo: string
+  descricao?: string | null
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trilha: Prisma.TrilhaCreateNestedOneWithoutModulosInput
 }
 
 export type ModuloUncheckedCreateWithoutQuestoesInput = {
-  id?: string
-  track_id: string
-  title: string
-  description?: string | null
-  order_index: number
-  created_at?: Date | string
+  id?: number
+  trilhaId: number
+  titulo: string
+  descricao?: string | null
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ModuloCreateOrConnectWithoutQuestoesInput = {
@@ -542,55 +582,59 @@ export type ModuloUpdateToOneWithWhereWithoutQuestoesInput = {
 }
 
 export type ModuloUpdateWithoutQuestoesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trilha?: Prisma.TrilhaAprendizadoUpdateOneRequiredWithoutModulosNestedInput
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trilha?: Prisma.TrilhaUpdateOneRequiredWithoutModulosNestedInput
 }
 
 export type ModuloUncheckedUpdateWithoutQuestoesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  track_id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ModuloCreateManyTrilhaInput = {
-  id?: string
-  title: string
-  description?: string | null
-  order_index: number
-  created_at?: Date | string
+  id?: number
+  titulo: string
+  descricao?: string | null
+  ordem: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ModuloUpdateWithoutTrilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoes?: Prisma.QuestaoUpdateManyWithoutModuloNestedInput
 }
 
 export type ModuloUncheckedUpdateWithoutTrilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questoes?: Prisma.QuestaoUncheckedUpdateManyWithoutModuloNestedInput
 }
 
 export type ModuloUncheckedUpdateManyWithoutTrilhaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  order_index?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -626,71 +670,76 @@ export type ModuloCountOutputTypeCountQuestoesArgs<ExtArgs extends runtime.Types
 
 export type ModuloSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  track_id?: boolean
-  title?: boolean
-  description?: boolean
-  order_index?: boolean
-  created_at?: boolean
-  trilha?: boolean | Prisma.TrilhaAprendizadoDefaultArgs<ExtArgs>
+  trilhaId?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  ordem?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
   questoes?: boolean | Prisma.Modulo$questoesArgs<ExtArgs>
   _count?: boolean | Prisma.ModuloCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["modulo"]>
 
 export type ModuloSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  track_id?: boolean
-  title?: boolean
-  description?: boolean
-  order_index?: boolean
-  created_at?: boolean
-  trilha?: boolean | Prisma.TrilhaAprendizadoDefaultArgs<ExtArgs>
+  trilhaId?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  ordem?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["modulo"]>
 
 export type ModuloSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  track_id?: boolean
-  title?: boolean
-  description?: boolean
-  order_index?: boolean
-  created_at?: boolean
-  trilha?: boolean | Prisma.TrilhaAprendizadoDefaultArgs<ExtArgs>
+  trilhaId?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  ordem?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["modulo"]>
 
 export type ModuloSelectScalar = {
   id?: boolean
-  track_id?: boolean
-  title?: boolean
-  description?: boolean
-  order_index?: boolean
-  created_at?: boolean
+  trilhaId?: boolean
+  titulo?: boolean
+  descricao?: boolean
+  ordem?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ModuloOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "track_id" | "title" | "description" | "order_index" | "created_at", ExtArgs["result"]["modulo"]>
+export type ModuloOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trilhaId" | "titulo" | "descricao" | "ordem" | "createdAt" | "updatedAt", ExtArgs["result"]["modulo"]>
 export type ModuloInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trilha?: boolean | Prisma.TrilhaAprendizadoDefaultArgs<ExtArgs>
+  trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
   questoes?: boolean | Prisma.Modulo$questoesArgs<ExtArgs>
   _count?: boolean | Prisma.ModuloCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ModuloIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trilha?: boolean | Prisma.TrilhaAprendizadoDefaultArgs<ExtArgs>
+  trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
 }
 export type ModuloIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trilha?: boolean | Prisma.TrilhaAprendizadoDefaultArgs<ExtArgs>
+  trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
 }
 
 export type $ModuloPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Modulo"
   objects: {
-    trilha: Prisma.$TrilhaAprendizadoPayload<ExtArgs>
+    trilha: Prisma.$TrilhaPayload<ExtArgs>
     questoes: Prisma.$QuestaoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    track_id: string
-    title: string
-    description: string | null
-    order_index: number
-    created_at: Date
+    id: number
+    trilhaId: number
+    titulo: string
+    descricao: string | null
+    ordem: number
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["modulo"]>
   composites: {}
 }
@@ -1085,7 +1134,7 @@ readonly fields: ModuloFieldRefs;
  */
 export interface Prisma__ModuloClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  trilha<T extends Prisma.TrilhaAprendizadoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrilhaAprendizadoDefaultArgs<ExtArgs>>): Prisma.Prisma__TrilhaAprendizadoClient<runtime.Types.Result.GetResult<Prisma.$TrilhaAprendizadoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  trilha<T extends Prisma.TrilhaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrilhaDefaultArgs<ExtArgs>>): Prisma.Prisma__TrilhaClient<runtime.Types.Result.GetResult<Prisma.$TrilhaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   questoes<T extends Prisma.Modulo$questoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Modulo$questoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1116,12 +1165,13 @@ export interface Prisma__ModuloClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Modulo model
  */
 export interface ModuloFieldRefs {
-  readonly id: Prisma.FieldRef<"Modulo", 'String'>
-  readonly track_id: Prisma.FieldRef<"Modulo", 'String'>
-  readonly title: Prisma.FieldRef<"Modulo", 'String'>
-  readonly description: Prisma.FieldRef<"Modulo", 'String'>
-  readonly order_index: Prisma.FieldRef<"Modulo", 'Int'>
-  readonly created_at: Prisma.FieldRef<"Modulo", 'DateTime'>
+  readonly id: Prisma.FieldRef<"Modulo", 'Int'>
+  readonly trilhaId: Prisma.FieldRef<"Modulo", 'Int'>
+  readonly titulo: Prisma.FieldRef<"Modulo", 'String'>
+  readonly descricao: Prisma.FieldRef<"Modulo", 'String'>
+  readonly ordem: Prisma.FieldRef<"Modulo", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Modulo", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Modulo", 'DateTime'>
 }
     
 

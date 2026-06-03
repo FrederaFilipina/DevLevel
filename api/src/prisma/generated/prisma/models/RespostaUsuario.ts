@@ -27,93 +27,91 @@ export type AggregateRespostaUsuario = {
 }
 
 export type RespostaUsuarioAvgAggregateOutputType = {
-  final_score: number | null
+  id: number | null
+  usuarioId: number | null
+  questaoId: number | null
+  respostaQuestaoId: number | null
+  pontuacaoRecebida: number | null
 }
 
 export type RespostaUsuarioSumAggregateOutputType = {
-  final_score: number | null
+  id: number | null
+  usuarioId: number | null
+  questaoId: number | null
+  respostaQuestaoId: number | null
+  pontuacaoRecebida: number | null
 }
 
 export type RespostaUsuarioMinAggregateOutputType = {
-  id: string | null
-  user_id: string | null
-  question_id: string | null
-  answer_id: string | null
-  final_score: number | null
-  positive_feedback: string | null
-  negative_feedback: string | null
-  is_completed: boolean | null
-  answered_at: Date | null
+  id: number | null
+  usuarioId: number | null
+  questaoId: number | null
+  respostaQuestaoId: number | null
+  pontuacaoRecebida: number | null
+  respondidaEm: Date | null
 }
 
 export type RespostaUsuarioMaxAggregateOutputType = {
-  id: string | null
-  user_id: string | null
-  question_id: string | null
-  answer_id: string | null
-  final_score: number | null
-  positive_feedback: string | null
-  negative_feedback: string | null
-  is_completed: boolean | null
-  answered_at: Date | null
+  id: number | null
+  usuarioId: number | null
+  questaoId: number | null
+  respostaQuestaoId: number | null
+  pontuacaoRecebida: number | null
+  respondidaEm: Date | null
 }
 
 export type RespostaUsuarioCountAggregateOutputType = {
   id: number
-  user_id: number
-  question_id: number
-  answer_id: number
-  final_score: number
-  positive_feedback: number
-  negative_feedback: number
-  is_completed: number
-  answered_at: number
+  usuarioId: number
+  questaoId: number
+  respostaQuestaoId: number
+  pontuacaoRecebida: number
+  respondidaEm: number
   _all: number
 }
 
 
 export type RespostaUsuarioAvgAggregateInputType = {
-  final_score?: true
+  id?: true
+  usuarioId?: true
+  questaoId?: true
+  respostaQuestaoId?: true
+  pontuacaoRecebida?: true
 }
 
 export type RespostaUsuarioSumAggregateInputType = {
-  final_score?: true
+  id?: true
+  usuarioId?: true
+  questaoId?: true
+  respostaQuestaoId?: true
+  pontuacaoRecebida?: true
 }
 
 export type RespostaUsuarioMinAggregateInputType = {
   id?: true
-  user_id?: true
-  question_id?: true
-  answer_id?: true
-  final_score?: true
-  positive_feedback?: true
-  negative_feedback?: true
-  is_completed?: true
-  answered_at?: true
+  usuarioId?: true
+  questaoId?: true
+  respostaQuestaoId?: true
+  pontuacaoRecebida?: true
+  respondidaEm?: true
 }
 
 export type RespostaUsuarioMaxAggregateInputType = {
   id?: true
-  user_id?: true
-  question_id?: true
-  answer_id?: true
-  final_score?: true
-  positive_feedback?: true
-  negative_feedback?: true
-  is_completed?: true
-  answered_at?: true
+  usuarioId?: true
+  questaoId?: true
+  respostaQuestaoId?: true
+  pontuacaoRecebida?: true
+  respondidaEm?: true
 }
 
 export type RespostaUsuarioCountAggregateInputType = {
   id?: true
-  user_id?: true
-  question_id?: true
-  answer_id?: true
-  final_score?: true
-  positive_feedback?: true
-  negative_feedback?: true
-  is_completed?: true
-  answered_at?: true
+  usuarioId?: true
+  questaoId?: true
+  respostaQuestaoId?: true
+  pontuacaoRecebida?: true
+  respondidaEm?: true
   _all?: true
 }
 
@@ -204,15 +202,12 @@ export type RespostaUsuarioGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type RespostaUsuarioGroupByOutputType = {
-  id: string
-  user_id: string
-  question_id: string
-  answer_id: string
-  final_score: number
-  positive_feedback: string | null
-  negative_feedback: string | null
-  is_completed: boolean
-  answered_at: Date
+  id: number
+  usuarioId: number
+  questaoId: number
+  respostaQuestaoId: number
+  pontuacaoRecebida: number
+  respondidaEm: Date
   _count: RespostaUsuarioCountAggregateOutputType | null
   _avg: RespostaUsuarioAvgAggregateOutputType | null
   _sum: RespostaUsuarioSumAggregateOutputType | null
@@ -239,66 +234,52 @@ export type RespostaUsuarioWhereInput = {
   AND?: Prisma.RespostaUsuarioWhereInput | Prisma.RespostaUsuarioWhereInput[]
   OR?: Prisma.RespostaUsuarioWhereInput[]
   NOT?: Prisma.RespostaUsuarioWhereInput | Prisma.RespostaUsuarioWhereInput[]
-  id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  user_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  question_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  answer_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  final_score?: Prisma.IntFilter<"RespostaUsuario"> | number
-  positive_feedback?: Prisma.StringNullableFilter<"RespostaUsuario"> | string | null
-  negative_feedback?: Prisma.StringNullableFilter<"RespostaUsuario"> | string | null
-  is_completed?: Prisma.BoolFilter<"RespostaUsuario"> | boolean
-  answered_at?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
+  id?: Prisma.IntFilter<"RespostaUsuario"> | number
+  usuarioId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  questaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respostaQuestaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  pontuacaoRecebida?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respondidaEm?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   questao?: Prisma.XOR<Prisma.QuestaoScalarRelationFilter, Prisma.QuestaoWhereInput>
-  resposta?: Prisma.XOR<Prisma.RespostaScalarRelationFilter, Prisma.RespostaWhereInput>
-  avaliacoes?: Prisma.AvaliacaoRespostaListRelationFilter
+  respostaQuestao?: Prisma.XOR<Prisma.RespostaQuestaoScalarRelationFilter, Prisma.RespostaQuestaoWhereInput>
 }
 
 export type RespostaUsuarioOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
-  question_id?: Prisma.SortOrder
-  answer_id?: Prisma.SortOrder
-  final_score?: Prisma.SortOrder
-  positive_feedback?: Prisma.SortOrderInput | Prisma.SortOrder
-  negative_feedback?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_completed?: Prisma.SortOrder
-  answered_at?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
+  pontuacaoRecebida?: Prisma.SortOrder
+  respondidaEm?: Prisma.SortOrder
   usuario?: Prisma.UsuarioOrderByWithRelationInput
   questao?: Prisma.QuestaoOrderByWithRelationInput
-  resposta?: Prisma.RespostaOrderByWithRelationInput
-  avaliacoes?: Prisma.AvaliacaoRespostaOrderByRelationAggregateInput
+  respostaQuestao?: Prisma.RespostaQuestaoOrderByWithRelationInput
 }
 
 export type RespostaUsuarioWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  usuarioId_questaoId?: Prisma.RespostaUsuarioUsuarioIdQuestaoIdCompoundUniqueInput
   AND?: Prisma.RespostaUsuarioWhereInput | Prisma.RespostaUsuarioWhereInput[]
   OR?: Prisma.RespostaUsuarioWhereInput[]
   NOT?: Prisma.RespostaUsuarioWhereInput | Prisma.RespostaUsuarioWhereInput[]
-  user_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  question_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  answer_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  final_score?: Prisma.IntFilter<"RespostaUsuario"> | number
-  positive_feedback?: Prisma.StringNullableFilter<"RespostaUsuario"> | string | null
-  negative_feedback?: Prisma.StringNullableFilter<"RespostaUsuario"> | string | null
-  is_completed?: Prisma.BoolFilter<"RespostaUsuario"> | boolean
-  answered_at?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
+  usuarioId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  questaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respostaQuestaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  pontuacaoRecebida?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respondidaEm?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   questao?: Prisma.XOR<Prisma.QuestaoScalarRelationFilter, Prisma.QuestaoWhereInput>
-  resposta?: Prisma.XOR<Prisma.RespostaScalarRelationFilter, Prisma.RespostaWhereInput>
-  avaliacoes?: Prisma.AvaliacaoRespostaListRelationFilter
-}, "id">
+  respostaQuestao?: Prisma.XOR<Prisma.RespostaQuestaoScalarRelationFilter, Prisma.RespostaQuestaoWhereInput>
+}, "id" | "usuarioId_questaoId">
 
 export type RespostaUsuarioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
-  question_id?: Prisma.SortOrder
-  answer_id?: Prisma.SortOrder
-  final_score?: Prisma.SortOrder
-  positive_feedback?: Prisma.SortOrderInput | Prisma.SortOrder
-  negative_feedback?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_completed?: Prisma.SortOrder
-  answered_at?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
+  pontuacaoRecebida?: Prisma.SortOrder
+  respondidaEm?: Prisma.SortOrder
   _count?: Prisma.RespostaUsuarioCountOrderByAggregateInput
   _avg?: Prisma.RespostaUsuarioAvgOrderByAggregateInput
   _max?: Prisma.RespostaUsuarioMaxOrderByAggregateInput
@@ -310,100 +291,69 @@ export type RespostaUsuarioScalarWhereWithAggregatesInput = {
   AND?: Prisma.RespostaUsuarioScalarWhereWithAggregatesInput | Prisma.RespostaUsuarioScalarWhereWithAggregatesInput[]
   OR?: Prisma.RespostaUsuarioScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RespostaUsuarioScalarWhereWithAggregatesInput | Prisma.RespostaUsuarioScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"RespostaUsuario"> | string
-  user_id?: Prisma.StringWithAggregatesFilter<"RespostaUsuario"> | string
-  question_id?: Prisma.StringWithAggregatesFilter<"RespostaUsuario"> | string
-  answer_id?: Prisma.StringWithAggregatesFilter<"RespostaUsuario"> | string
-  final_score?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
-  positive_feedback?: Prisma.StringNullableWithAggregatesFilter<"RespostaUsuario"> | string | null
-  negative_feedback?: Prisma.StringNullableWithAggregatesFilter<"RespostaUsuario"> | string | null
-  is_completed?: Prisma.BoolWithAggregatesFilter<"RespostaUsuario"> | boolean
-  answered_at?: Prisma.DateTimeWithAggregatesFilter<"RespostaUsuario"> | Date | string
+  id?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
+  usuarioId?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
+  questaoId?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
+  respostaQuestaoId?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
+  pontuacaoRecebida?: Prisma.IntWithAggregatesFilter<"RespostaUsuario"> | number
+  respondidaEm?: Prisma.DateTimeWithAggregatesFilter<"RespostaUsuario"> | Date | string
 }
 
 export type RespostaUsuarioCreateInput = {
-  id?: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  usuario: Prisma.UsuarioCreateNestedOneWithoutRespostas_usuarioInput
-  questao: Prisma.QuestaoCreateNestedOneWithoutRespostas_usuarioInput
-  resposta: Prisma.RespostaCreateNestedOneWithoutRespostas_usuarioInput
-  avaliacoes?: Prisma.AvaliacaoRespostaCreateNestedManyWithoutResposta_usuarioInput
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
+  usuario: Prisma.UsuarioCreateNestedOneWithoutRespostasUsuarioInput
+  questao: Prisma.QuestaoCreateNestedOneWithoutRespostasUsuarioInput
+  respostaQuestao: Prisma.RespostaQuestaoCreateNestedOneWithoutRespostasUsuariosInput
 }
 
 export type RespostaUsuarioUncheckedCreateInput = {
-  id?: string
-  user_id: string
-  question_id: string
-  answer_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  avaliacoes?: Prisma.AvaliacaoRespostaUncheckedCreateNestedManyWithoutResposta_usuarioInput
+  id?: number
+  usuarioId: number
+  questaoId: number
+  respostaQuestaoId: number
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  questao?: Prisma.QuestaoUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  resposta?: Prisma.RespostaUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  avaliacoes?: Prisma.AvaliacaoRespostaUpdateManyWithoutResposta_usuarioNestedInput
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
+  questao?: Prisma.QuestaoUpdateOneRequiredWithoutRespostasUsuarioNestedInput
+  respostaQuestao?: Prisma.RespostaQuestaoUpdateOneRequiredWithoutRespostasUsuariosNestedInput
 }
 
 export type RespostaUsuarioUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  question_id?: Prisma.StringFieldUpdateOperationsInput | string
-  answer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  avaliacoes?: Prisma.AvaliacaoRespostaUncheckedUpdateManyWithoutResposta_usuarioNestedInput
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioCreateManyInput = {
-  id?: string
-  user_id: string
-  question_id: string
-  answer_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
+  id?: number
+  usuarioId: number
+  questaoId: number
+  respostaQuestaoId: number
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  question_id?: Prisma.StringFieldUpdateOperationsInput | string
-  answer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioListRelationFilter = {
@@ -416,53 +366,52 @@ export type RespostaUsuarioOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type RespostaUsuarioUsuarioIdQuestaoIdCompoundUniqueInput = {
+  usuarioId: number
+  questaoId: number
+}
+
 export type RespostaUsuarioCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
-  question_id?: Prisma.SortOrder
-  answer_id?: Prisma.SortOrder
-  final_score?: Prisma.SortOrder
-  positive_feedback?: Prisma.SortOrder
-  negative_feedback?: Prisma.SortOrder
-  is_completed?: Prisma.SortOrder
-  answered_at?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
+  pontuacaoRecebida?: Prisma.SortOrder
+  respondidaEm?: Prisma.SortOrder
 }
 
 export type RespostaUsuarioAvgOrderByAggregateInput = {
-  final_score?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
+  pontuacaoRecebida?: Prisma.SortOrder
 }
 
 export type RespostaUsuarioMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
-  question_id?: Prisma.SortOrder
-  answer_id?: Prisma.SortOrder
-  final_score?: Prisma.SortOrder
-  positive_feedback?: Prisma.SortOrder
-  negative_feedback?: Prisma.SortOrder
-  is_completed?: Prisma.SortOrder
-  answered_at?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
+  pontuacaoRecebida?: Prisma.SortOrder
+  respondidaEm?: Prisma.SortOrder
 }
 
 export type RespostaUsuarioMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
-  question_id?: Prisma.SortOrder
-  answer_id?: Prisma.SortOrder
-  final_score?: Prisma.SortOrder
-  positive_feedback?: Prisma.SortOrder
-  negative_feedback?: Prisma.SortOrder
-  is_completed?: Prisma.SortOrder
-  answered_at?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
+  pontuacaoRecebida?: Prisma.SortOrder
+  respondidaEm?: Prisma.SortOrder
 }
 
 export type RespostaUsuarioSumOrderByAggregateInput = {
-  final_score?: Prisma.SortOrder
-}
-
-export type RespostaUsuarioScalarRelationFilter = {
-  is?: Prisma.RespostaUsuarioWhereInput
-  isNot?: Prisma.RespostaUsuarioWhereInput
+  id?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
+  questaoId?: Prisma.SortOrder
+  respostaQuestaoId?: Prisma.SortOrder
+  pontuacaoRecebida?: Prisma.SortOrder
 }
 
 export type RespostaUsuarioCreateNestedManyWithoutUsuarioInput = {
@@ -549,84 +498,61 @@ export type RespostaUsuarioUncheckedUpdateManyWithoutQuestaoNestedInput = {
   deleteMany?: Prisma.RespostaUsuarioScalarWhereInput | Prisma.RespostaUsuarioScalarWhereInput[]
 }
 
-export type RespostaUsuarioCreateNestedManyWithoutRespostaInput = {
-  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput> | Prisma.RespostaUsuarioCreateWithoutRespostaInput[] | Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput[]
-  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaInput | Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaInput[]
-  createMany?: Prisma.RespostaUsuarioCreateManyRespostaInputEnvelope
+export type RespostaUsuarioCreateNestedManyWithoutRespostaQuestaoInput = {
+  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput> | Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput[] | Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput[]
+  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput[]
+  createMany?: Prisma.RespostaUsuarioCreateManyRespostaQuestaoInputEnvelope
   connect?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
 }
 
-export type RespostaUsuarioUncheckedCreateNestedManyWithoutRespostaInput = {
-  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput> | Prisma.RespostaUsuarioCreateWithoutRespostaInput[] | Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput[]
-  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaInput | Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaInput[]
-  createMany?: Prisma.RespostaUsuarioCreateManyRespostaInputEnvelope
+export type RespostaUsuarioUncheckedCreateNestedManyWithoutRespostaQuestaoInput = {
+  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput> | Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput[] | Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput[]
+  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput[]
+  createMany?: Prisma.RespostaUsuarioCreateManyRespostaQuestaoInputEnvelope
   connect?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
 }
 
-export type RespostaUsuarioUpdateManyWithoutRespostaNestedInput = {
-  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput> | Prisma.RespostaUsuarioCreateWithoutRespostaInput[] | Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput[]
-  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaInput | Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaInput[]
-  upsert?: Prisma.RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaInput | Prisma.RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaInput[]
-  createMany?: Prisma.RespostaUsuarioCreateManyRespostaInputEnvelope
+export type RespostaUsuarioUpdateManyWithoutRespostaQuestaoNestedInput = {
+  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput> | Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput[] | Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput[]
+  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput[]
+  upsert?: Prisma.RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaQuestaoInput[]
+  createMany?: Prisma.RespostaUsuarioCreateManyRespostaQuestaoInputEnvelope
   set?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
   disconnect?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
   delete?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
   connect?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
-  update?: Prisma.RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaInput | Prisma.RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaInput[]
-  updateMany?: Prisma.RespostaUsuarioUpdateManyWithWhereWithoutRespostaInput | Prisma.RespostaUsuarioUpdateManyWithWhereWithoutRespostaInput[]
+  update?: Prisma.RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaQuestaoInput[]
+  updateMany?: Prisma.RespostaUsuarioUpdateManyWithWhereWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioUpdateManyWithWhereWithoutRespostaQuestaoInput[]
   deleteMany?: Prisma.RespostaUsuarioScalarWhereInput | Prisma.RespostaUsuarioScalarWhereInput[]
 }
 
-export type RespostaUsuarioUncheckedUpdateManyWithoutRespostaNestedInput = {
-  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput> | Prisma.RespostaUsuarioCreateWithoutRespostaInput[] | Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput[]
-  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaInput | Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaInput[]
-  upsert?: Prisma.RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaInput | Prisma.RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaInput[]
-  createMany?: Prisma.RespostaUsuarioCreateManyRespostaInputEnvelope
+export type RespostaUsuarioUncheckedUpdateManyWithoutRespostaQuestaoNestedInput = {
+  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput> | Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput[] | Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput[]
+  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput[]
+  upsert?: Prisma.RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaQuestaoInput[]
+  createMany?: Prisma.RespostaUsuarioCreateManyRespostaQuestaoInputEnvelope
   set?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
   disconnect?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
   delete?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
   connect?: Prisma.RespostaUsuarioWhereUniqueInput | Prisma.RespostaUsuarioWhereUniqueInput[]
-  update?: Prisma.RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaInput | Prisma.RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaInput[]
-  updateMany?: Prisma.RespostaUsuarioUpdateManyWithWhereWithoutRespostaInput | Prisma.RespostaUsuarioUpdateManyWithWhereWithoutRespostaInput[]
+  update?: Prisma.RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaQuestaoInput[]
+  updateMany?: Prisma.RespostaUsuarioUpdateManyWithWhereWithoutRespostaQuestaoInput | Prisma.RespostaUsuarioUpdateManyWithWhereWithoutRespostaQuestaoInput[]
   deleteMany?: Prisma.RespostaUsuarioScalarWhereInput | Prisma.RespostaUsuarioScalarWhereInput[]
-}
-
-export type RespostaUsuarioCreateNestedOneWithoutAvaliacoesInput = {
-  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutAvaliacoesInput, Prisma.RespostaUsuarioUncheckedCreateWithoutAvaliacoesInput>
-  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutAvaliacoesInput
-  connect?: Prisma.RespostaUsuarioWhereUniqueInput
-}
-
-export type RespostaUsuarioUpdateOneRequiredWithoutAvaliacoesNestedInput = {
-  create?: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutAvaliacoesInput, Prisma.RespostaUsuarioUncheckedCreateWithoutAvaliacoesInput>
-  connectOrCreate?: Prisma.RespostaUsuarioCreateOrConnectWithoutAvaliacoesInput
-  upsert?: Prisma.RespostaUsuarioUpsertWithoutAvaliacoesInput
-  connect?: Prisma.RespostaUsuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.RespostaUsuarioUpdateToOneWithWhereWithoutAvaliacoesInput, Prisma.RespostaUsuarioUpdateWithoutAvaliacoesInput>, Prisma.RespostaUsuarioUncheckedUpdateWithoutAvaliacoesInput>
 }
 
 export type RespostaUsuarioCreateWithoutUsuarioInput = {
-  id?: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  questao: Prisma.QuestaoCreateNestedOneWithoutRespostas_usuarioInput
-  resposta: Prisma.RespostaCreateNestedOneWithoutRespostas_usuarioInput
-  avaliacoes?: Prisma.AvaliacaoRespostaCreateNestedManyWithoutResposta_usuarioInput
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
+  questao: Prisma.QuestaoCreateNestedOneWithoutRespostasUsuarioInput
+  respostaQuestao: Prisma.RespostaQuestaoCreateNestedOneWithoutRespostasUsuariosInput
 }
 
 export type RespostaUsuarioUncheckedCreateWithoutUsuarioInput = {
-  id?: string
-  question_id: string
-  answer_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  avaliacoes?: Prisma.AvaliacaoRespostaUncheckedCreateNestedManyWithoutResposta_usuarioInput
+  id?: number
+  questaoId: number
+  respostaQuestaoId: number
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioCreateOrConnectWithoutUsuarioInput = {
@@ -659,39 +585,27 @@ export type RespostaUsuarioScalarWhereInput = {
   AND?: Prisma.RespostaUsuarioScalarWhereInput | Prisma.RespostaUsuarioScalarWhereInput[]
   OR?: Prisma.RespostaUsuarioScalarWhereInput[]
   NOT?: Prisma.RespostaUsuarioScalarWhereInput | Prisma.RespostaUsuarioScalarWhereInput[]
-  id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  user_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  question_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  answer_id?: Prisma.StringFilter<"RespostaUsuario"> | string
-  final_score?: Prisma.IntFilter<"RespostaUsuario"> | number
-  positive_feedback?: Prisma.StringNullableFilter<"RespostaUsuario"> | string | null
-  negative_feedback?: Prisma.StringNullableFilter<"RespostaUsuario"> | string | null
-  is_completed?: Prisma.BoolFilter<"RespostaUsuario"> | boolean
-  answered_at?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
+  id?: Prisma.IntFilter<"RespostaUsuario"> | number
+  usuarioId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  questaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respostaQuestaoId?: Prisma.IntFilter<"RespostaUsuario"> | number
+  pontuacaoRecebida?: Prisma.IntFilter<"RespostaUsuario"> | number
+  respondidaEm?: Prisma.DateTimeFilter<"RespostaUsuario"> | Date | string
 }
 
 export type RespostaUsuarioCreateWithoutQuestaoInput = {
-  id?: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  usuario: Prisma.UsuarioCreateNestedOneWithoutRespostas_usuarioInput
-  resposta: Prisma.RespostaCreateNestedOneWithoutRespostas_usuarioInput
-  avaliacoes?: Prisma.AvaliacaoRespostaCreateNestedManyWithoutResposta_usuarioInput
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
+  usuario: Prisma.UsuarioCreateNestedOneWithoutRespostasUsuarioInput
+  respostaQuestao: Prisma.RespostaQuestaoCreateNestedOneWithoutRespostasUsuariosInput
 }
 
 export type RespostaUsuarioUncheckedCreateWithoutQuestaoInput = {
-  id?: string
-  user_id: string
-  answer_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  avaliacoes?: Prisma.AvaliacaoRespostaUncheckedCreateNestedManyWithoutResposta_usuarioInput
+  id?: number
+  usuarioId: number
+  respostaQuestaoId: number
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioCreateOrConnectWithoutQuestaoInput = {
@@ -720,365 +634,202 @@ export type RespostaUsuarioUpdateManyWithWhereWithoutQuestaoInput = {
   data: Prisma.XOR<Prisma.RespostaUsuarioUpdateManyMutationInput, Prisma.RespostaUsuarioUncheckedUpdateManyWithoutQuestaoInput>
 }
 
-export type RespostaUsuarioCreateWithoutRespostaInput = {
-  id?: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  usuario: Prisma.UsuarioCreateNestedOneWithoutRespostas_usuarioInput
-  questao: Prisma.QuestaoCreateNestedOneWithoutRespostas_usuarioInput
-  avaliacoes?: Prisma.AvaliacaoRespostaCreateNestedManyWithoutResposta_usuarioInput
+export type RespostaUsuarioCreateWithoutRespostaQuestaoInput = {
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
+  usuario: Prisma.UsuarioCreateNestedOneWithoutRespostasUsuarioInput
+  questao: Prisma.QuestaoCreateNestedOneWithoutRespostasUsuarioInput
 }
 
-export type RespostaUsuarioUncheckedCreateWithoutRespostaInput = {
-  id?: string
-  user_id: string
-  question_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  avaliacoes?: Prisma.AvaliacaoRespostaUncheckedCreateNestedManyWithoutResposta_usuarioInput
+export type RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput = {
+  id?: number
+  usuarioId: number
+  questaoId: number
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
 }
 
-export type RespostaUsuarioCreateOrConnectWithoutRespostaInput = {
+export type RespostaUsuarioCreateOrConnectWithoutRespostaQuestaoInput = {
   where: Prisma.RespostaUsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput>
+  create: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput>
 }
 
-export type RespostaUsuarioCreateManyRespostaInputEnvelope = {
-  data: Prisma.RespostaUsuarioCreateManyRespostaInput | Prisma.RespostaUsuarioCreateManyRespostaInput[]
+export type RespostaUsuarioCreateManyRespostaQuestaoInputEnvelope = {
+  data: Prisma.RespostaUsuarioCreateManyRespostaQuestaoInput | Prisma.RespostaUsuarioCreateManyRespostaQuestaoInput[]
   skipDuplicates?: boolean
 }
 
-export type RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaInput = {
+export type RespostaUsuarioUpsertWithWhereUniqueWithoutRespostaQuestaoInput = {
   where: Prisma.RespostaUsuarioWhereUniqueInput
-  update: Prisma.XOR<Prisma.RespostaUsuarioUpdateWithoutRespostaInput, Prisma.RespostaUsuarioUncheckedUpdateWithoutRespostaInput>
-  create: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaInput>
+  update: Prisma.XOR<Prisma.RespostaUsuarioUpdateWithoutRespostaQuestaoInput, Prisma.RespostaUsuarioUncheckedUpdateWithoutRespostaQuestaoInput>
+  create: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutRespostaQuestaoInput, Prisma.RespostaUsuarioUncheckedCreateWithoutRespostaQuestaoInput>
 }
 
-export type RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaInput = {
+export type RespostaUsuarioUpdateWithWhereUniqueWithoutRespostaQuestaoInput = {
   where: Prisma.RespostaUsuarioWhereUniqueInput
-  data: Prisma.XOR<Prisma.RespostaUsuarioUpdateWithoutRespostaInput, Prisma.RespostaUsuarioUncheckedUpdateWithoutRespostaInput>
+  data: Prisma.XOR<Prisma.RespostaUsuarioUpdateWithoutRespostaQuestaoInput, Prisma.RespostaUsuarioUncheckedUpdateWithoutRespostaQuestaoInput>
 }
 
-export type RespostaUsuarioUpdateManyWithWhereWithoutRespostaInput = {
+export type RespostaUsuarioUpdateManyWithWhereWithoutRespostaQuestaoInput = {
   where: Prisma.RespostaUsuarioScalarWhereInput
-  data: Prisma.XOR<Prisma.RespostaUsuarioUpdateManyMutationInput, Prisma.RespostaUsuarioUncheckedUpdateManyWithoutRespostaInput>
-}
-
-export type RespostaUsuarioCreateWithoutAvaliacoesInput = {
-  id?: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-  usuario: Prisma.UsuarioCreateNestedOneWithoutRespostas_usuarioInput
-  questao: Prisma.QuestaoCreateNestedOneWithoutRespostas_usuarioInput
-  resposta: Prisma.RespostaCreateNestedOneWithoutRespostas_usuarioInput
-}
-
-export type RespostaUsuarioUncheckedCreateWithoutAvaliacoesInput = {
-  id?: string
-  user_id: string
-  question_id: string
-  answer_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
-}
-
-export type RespostaUsuarioCreateOrConnectWithoutAvaliacoesInput = {
-  where: Prisma.RespostaUsuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutAvaliacoesInput, Prisma.RespostaUsuarioUncheckedCreateWithoutAvaliacoesInput>
-}
-
-export type RespostaUsuarioUpsertWithoutAvaliacoesInput = {
-  update: Prisma.XOR<Prisma.RespostaUsuarioUpdateWithoutAvaliacoesInput, Prisma.RespostaUsuarioUncheckedUpdateWithoutAvaliacoesInput>
-  create: Prisma.XOR<Prisma.RespostaUsuarioCreateWithoutAvaliacoesInput, Prisma.RespostaUsuarioUncheckedCreateWithoutAvaliacoesInput>
-  where?: Prisma.RespostaUsuarioWhereInput
-}
-
-export type RespostaUsuarioUpdateToOneWithWhereWithoutAvaliacoesInput = {
-  where?: Prisma.RespostaUsuarioWhereInput
-  data: Prisma.XOR<Prisma.RespostaUsuarioUpdateWithoutAvaliacoesInput, Prisma.RespostaUsuarioUncheckedUpdateWithoutAvaliacoesInput>
-}
-
-export type RespostaUsuarioUpdateWithoutAvaliacoesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  questao?: Prisma.QuestaoUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  resposta?: Prisma.RespostaUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-}
-
-export type RespostaUsuarioUncheckedUpdateWithoutAvaliacoesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  question_id?: Prisma.StringFieldUpdateOperationsInput | string
-  answer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  data: Prisma.XOR<Prisma.RespostaUsuarioUpdateManyMutationInput, Prisma.RespostaUsuarioUncheckedUpdateManyWithoutRespostaQuestaoInput>
 }
 
 export type RespostaUsuarioCreateManyUsuarioInput = {
-  id?: string
-  question_id: string
-  answer_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
+  id?: number
+  questaoId: number
+  respostaQuestaoId: number
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  questao?: Prisma.QuestaoUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  resposta?: Prisma.RespostaUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  avaliacoes?: Prisma.AvaliacaoRespostaUpdateManyWithoutResposta_usuarioNestedInput
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  questao?: Prisma.QuestaoUpdateOneRequiredWithoutRespostasUsuarioNestedInput
+  respostaQuestao?: Prisma.RespostaQuestaoUpdateOneRequiredWithoutRespostasUsuariosNestedInput
 }
 
 export type RespostaUsuarioUncheckedUpdateWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  question_id?: Prisma.StringFieldUpdateOperationsInput | string
-  answer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  avaliacoes?: Prisma.AvaliacaoRespostaUncheckedUpdateManyWithoutResposta_usuarioNestedInput
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  question_id?: Prisma.StringFieldUpdateOperationsInput | string
-  answer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioCreateManyQuestaoInput = {
-  id?: string
-  user_id: string
-  answer_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
+  id?: number
+  usuarioId: number
+  respostaQuestaoId: number
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
 }
 
 export type RespostaUsuarioUpdateWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  resposta?: Prisma.RespostaUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  avaliacoes?: Prisma.AvaliacaoRespostaUpdateManyWithoutResposta_usuarioNestedInput
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
+  respostaQuestao?: Prisma.RespostaQuestaoUpdateOneRequiredWithoutRespostasUsuariosNestedInput
 }
 
 export type RespostaUsuarioUncheckedUpdateWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  answer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  avaliacoes?: Prisma.AvaliacaoRespostaUncheckedUpdateManyWithoutResposta_usuarioNestedInput
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RespostaUsuarioUncheckedUpdateManyWithoutQuestaoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  answer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  respostaQuestaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type RespostaUsuarioCreateManyRespostaInput = {
-  id?: string
-  user_id: string
-  question_id: string
-  final_score: number
-  positive_feedback?: string | null
-  negative_feedback?: string | null
-  is_completed?: boolean
-  answered_at?: Date | string
+export type RespostaUsuarioCreateManyRespostaQuestaoInput = {
+  id?: number
+  usuarioId: number
+  questaoId: number
+  pontuacaoRecebida: number
+  respondidaEm?: Date | string
 }
 
-export type RespostaUsuarioUpdateWithoutRespostaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  questao?: Prisma.QuestaoUpdateOneRequiredWithoutRespostas_usuarioNestedInput
-  avaliacoes?: Prisma.AvaliacaoRespostaUpdateManyWithoutResposta_usuarioNestedInput
+export type RespostaUsuarioUpdateWithoutRespostaQuestaoInput = {
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRespostasUsuarioNestedInput
+  questao?: Prisma.QuestaoUpdateOneRequiredWithoutRespostasUsuarioNestedInput
 }
 
-export type RespostaUsuarioUncheckedUpdateWithoutRespostaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  question_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  avaliacoes?: Prisma.AvaliacaoRespostaUncheckedUpdateManyWithoutResposta_usuarioNestedInput
+export type RespostaUsuarioUncheckedUpdateWithoutRespostaQuestaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type RespostaUsuarioUncheckedUpdateManyWithoutRespostaInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  question_id?: Prisma.StringFieldUpdateOperationsInput | string
-  final_score?: Prisma.IntFieldUpdateOperationsInput | number
-  positive_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  negative_feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  answered_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type RespostaUsuarioUncheckedUpdateManyWithoutRespostaQuestaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  questaoId?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoRecebida?: Prisma.IntFieldUpdateOperationsInput | number
+  respondidaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type RespostaUsuarioCountOutputType
- */
-
-export type RespostaUsuarioCountOutputType = {
-  avaliacoes: number
-}
-
-export type RespostaUsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  avaliacoes?: boolean | RespostaUsuarioCountOutputTypeCountAvaliacoesArgs
-}
-
-/**
- * RespostaUsuarioCountOutputType without action
- */
-export type RespostaUsuarioCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the RespostaUsuarioCountOutputType
-   */
-  select?: Prisma.RespostaUsuarioCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * RespostaUsuarioCountOutputType without action
- */
-export type RespostaUsuarioCountOutputTypeCountAvaliacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AvaliacaoRespostaWhereInput
-}
 
 
 export type RespostaUsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  user_id?: boolean
-  question_id?: boolean
-  answer_id?: boolean
-  final_score?: boolean
-  positive_feedback?: boolean
-  negative_feedback?: boolean
-  is_completed?: boolean
-  answered_at?: boolean
+  usuarioId?: boolean
+  questaoId?: boolean
+  respostaQuestaoId?: boolean
+  pontuacaoRecebida?: boolean
+  respondidaEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
-  resposta?: boolean | Prisma.RespostaDefaultArgs<ExtArgs>
-  avaliacoes?: boolean | Prisma.RespostaUsuario$avaliacoesArgs<ExtArgs>
-  _count?: boolean | Prisma.RespostaUsuarioCountOutputTypeDefaultArgs<ExtArgs>
+  respostaQuestao?: boolean | Prisma.RespostaQuestaoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["respostaUsuario"]>
 
 export type RespostaUsuarioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  user_id?: boolean
-  question_id?: boolean
-  answer_id?: boolean
-  final_score?: boolean
-  positive_feedback?: boolean
-  negative_feedback?: boolean
-  is_completed?: boolean
-  answered_at?: boolean
+  usuarioId?: boolean
+  questaoId?: boolean
+  respostaQuestaoId?: boolean
+  pontuacaoRecebida?: boolean
+  respondidaEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
-  resposta?: boolean | Prisma.RespostaDefaultArgs<ExtArgs>
+  respostaQuestao?: boolean | Prisma.RespostaQuestaoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["respostaUsuario"]>
 
 export type RespostaUsuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  user_id?: boolean
-  question_id?: boolean
-  answer_id?: boolean
-  final_score?: boolean
-  positive_feedback?: boolean
-  negative_feedback?: boolean
-  is_completed?: boolean
-  answered_at?: boolean
+  usuarioId?: boolean
+  questaoId?: boolean
+  respostaQuestaoId?: boolean
+  pontuacaoRecebida?: boolean
+  respondidaEm?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
-  resposta?: boolean | Prisma.RespostaDefaultArgs<ExtArgs>
+  respostaQuestao?: boolean | Prisma.RespostaQuestaoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["respostaUsuario"]>
 
 export type RespostaUsuarioSelectScalar = {
   id?: boolean
-  user_id?: boolean
-  question_id?: boolean
-  answer_id?: boolean
-  final_score?: boolean
-  positive_feedback?: boolean
-  negative_feedback?: boolean
-  is_completed?: boolean
-  answered_at?: boolean
+  usuarioId?: boolean
+  questaoId?: boolean
+  respostaQuestaoId?: boolean
+  pontuacaoRecebida?: boolean
+  respondidaEm?: boolean
 }
 
-export type RespostaUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "question_id" | "answer_id" | "final_score" | "positive_feedback" | "negative_feedback" | "is_completed" | "answered_at", ExtArgs["result"]["respostaUsuario"]>
+export type RespostaUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "usuarioId" | "questaoId" | "respostaQuestaoId" | "pontuacaoRecebida" | "respondidaEm", ExtArgs["result"]["respostaUsuario"]>
 export type RespostaUsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
-  resposta?: boolean | Prisma.RespostaDefaultArgs<ExtArgs>
-  avaliacoes?: boolean | Prisma.RespostaUsuario$avaliacoesArgs<ExtArgs>
-  _count?: boolean | Prisma.RespostaUsuarioCountOutputTypeDefaultArgs<ExtArgs>
+  respostaQuestao?: boolean | Prisma.RespostaQuestaoDefaultArgs<ExtArgs>
 }
 export type RespostaUsuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
-  resposta?: boolean | Prisma.RespostaDefaultArgs<ExtArgs>
+  respostaQuestao?: boolean | Prisma.RespostaQuestaoDefaultArgs<ExtArgs>
 }
 export type RespostaUsuarioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   questao?: boolean | Prisma.QuestaoDefaultArgs<ExtArgs>
-  resposta?: boolean | Prisma.RespostaDefaultArgs<ExtArgs>
+  respostaQuestao?: boolean | Prisma.RespostaQuestaoDefaultArgs<ExtArgs>
 }
 
 export type $RespostaUsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1086,19 +837,15 @@ export type $RespostaUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     usuario: Prisma.$UsuarioPayload<ExtArgs>
     questao: Prisma.$QuestaoPayload<ExtArgs>
-    resposta: Prisma.$RespostaPayload<ExtArgs>
-    avaliacoes: Prisma.$AvaliacaoRespostaPayload<ExtArgs>[]
+    respostaQuestao: Prisma.$RespostaQuestaoPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    user_id: string
-    question_id: string
-    answer_id: string
-    final_score: number
-    positive_feedback: string | null
-    negative_feedback: string | null
-    is_completed: boolean
-    answered_at: Date
+    id: number
+    usuarioId: number
+    questaoId: number
+    respostaQuestaoId: number
+    pontuacaoRecebida: number
+    respondidaEm: Date
   }, ExtArgs["result"]["respostaUsuario"]>
   composites: {}
 }
@@ -1495,8 +1242,7 @@ export interface Prisma__RespostaUsuarioClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   usuario<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   questao<T extends Prisma.QuestaoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuestaoDefaultArgs<ExtArgs>>): Prisma.Prisma__QuestaoClient<runtime.Types.Result.GetResult<Prisma.$QuestaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  resposta<T extends Prisma.RespostaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RespostaDefaultArgs<ExtArgs>>): Prisma.Prisma__RespostaClient<runtime.Types.Result.GetResult<Prisma.$RespostaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  avaliacoes<T extends Prisma.RespostaUsuario$avaliacoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RespostaUsuario$avaliacoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvaliacaoRespostaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  respostaQuestao<T extends Prisma.RespostaQuestaoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RespostaQuestaoDefaultArgs<ExtArgs>>): Prisma.Prisma__RespostaQuestaoClient<runtime.Types.Result.GetResult<Prisma.$RespostaQuestaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1526,15 +1272,12 @@ export interface Prisma__RespostaUsuarioClient<T, Null = never, ExtArgs extends 
  * Fields of the RespostaUsuario model
  */
 export interface RespostaUsuarioFieldRefs {
-  readonly id: Prisma.FieldRef<"RespostaUsuario", 'String'>
-  readonly user_id: Prisma.FieldRef<"RespostaUsuario", 'String'>
-  readonly question_id: Prisma.FieldRef<"RespostaUsuario", 'String'>
-  readonly answer_id: Prisma.FieldRef<"RespostaUsuario", 'String'>
-  readonly final_score: Prisma.FieldRef<"RespostaUsuario", 'Int'>
-  readonly positive_feedback: Prisma.FieldRef<"RespostaUsuario", 'String'>
-  readonly negative_feedback: Prisma.FieldRef<"RespostaUsuario", 'String'>
-  readonly is_completed: Prisma.FieldRef<"RespostaUsuario", 'Boolean'>
-  readonly answered_at: Prisma.FieldRef<"RespostaUsuario", 'DateTime'>
+  readonly id: Prisma.FieldRef<"RespostaUsuario", 'Int'>
+  readonly usuarioId: Prisma.FieldRef<"RespostaUsuario", 'Int'>
+  readonly questaoId: Prisma.FieldRef<"RespostaUsuario", 'Int'>
+  readonly respostaQuestaoId: Prisma.FieldRef<"RespostaUsuario", 'Int'>
+  readonly pontuacaoRecebida: Prisma.FieldRef<"RespostaUsuario", 'Int'>
+  readonly respondidaEm: Prisma.FieldRef<"RespostaUsuario", 'DateTime'>
 }
     
 
@@ -1933,30 +1676,6 @@ export type RespostaUsuarioDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many RespostaUsuarios to delete.
    */
   limit?: number
-}
-
-/**
- * RespostaUsuario.avaliacoes
- */
-export type RespostaUsuario$avaliacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AvaliacaoResposta
-   */
-  select?: Prisma.AvaliacaoRespostaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AvaliacaoResposta
-   */
-  omit?: Prisma.AvaliacaoRespostaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AvaliacaoRespostaInclude<ExtArgs> | null
-  where?: Prisma.AvaliacaoRespostaWhereInput
-  orderBy?: Prisma.AvaliacaoRespostaOrderByWithRelationInput | Prisma.AvaliacaoRespostaOrderByWithRelationInput[]
-  cursor?: Prisma.AvaliacaoRespostaWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AvaliacaoRespostaScalarFieldEnum | Prisma.AvaliacaoRespostaScalarFieldEnum[]
 }
 
 /**

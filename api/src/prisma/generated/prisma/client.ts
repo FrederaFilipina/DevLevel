@@ -47,15 +47,20 @@ export { Prisma }
  */
 export type Usuario = Prisma.UsuarioModel
 /**
- * Model Assunto
+ * Model Tema
  * 
  */
-export type Assunto = Prisma.AssuntoModel
+export type Tema = Prisma.TemaModel
 /**
- * Model TrilhaAprendizado
+ * Model TemaUsuario
  * 
  */
-export type TrilhaAprendizado = Prisma.TrilhaAprendizadoModel
+export type TemaUsuario = Prisma.TemaUsuarioModel
+/**
+ * Model Trilha
+ * 
+ */
+export type Trilha = Prisma.TrilhaModel
 /**
  * Model Modulo
  * 
@@ -67,25 +72,20 @@ export type Modulo = Prisma.ModuloModel
  */
 export type Questao = Prisma.QuestaoModel
 /**
- * Model Resposta
+ * Model RespostaQuestao
  * 
  */
-export type Resposta = Prisma.RespostaModel
+export type RespostaQuestao = Prisma.RespostaQuestaoModel
 /**
  * Model RespostaUsuario
  * 
  */
 export type RespostaUsuario = Prisma.RespostaUsuarioModel
 /**
- * Model ProgressoTrilhaUsuario
+ * Model TrilhaUsuario
  * 
  */
-export type ProgressoTrilhaUsuario = Prisma.ProgressoTrilhaUsuarioModel
-/**
- * Model BloqueioTrilhaUsuario
- * 
- */
-export type BloqueioTrilhaUsuario = Prisma.BloqueioTrilhaUsuarioModel
+export type TrilhaUsuario = Prisma.TrilhaUsuarioModel
 /**
  * Model Conquista
  * 
@@ -97,11 +97,6 @@ export type Conquista = Prisma.ConquistaModel
  */
 export type ConquistaUsuario = Prisma.ConquistaUsuarioModel
 /**
- * Model Ranking
- * 
- */
-export type Ranking = Prisma.RankingModel
-/**
  * Model Habilidade
  * 
  */
@@ -112,12 +107,7 @@ export type Habilidade = Prisma.HabilidadeModel
  */
 export type HabilidadeUsuario = Prisma.HabilidadeUsuarioModel
 /**
- * Model CriterioAvaliacao
+ * Model Token
  * 
  */
-export type CriterioAvaliacao = Prisma.CriterioAvaliacaoModel
-/**
- * Model AvaliacaoResposta
- * 
- */
-export type AvaliacaoResposta = Prisma.AvaliacaoRespostaModel
+export type Token = Prisma.TokenModel
