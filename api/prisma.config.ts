@@ -8,7 +8,7 @@ import {env} from "./src/env"
 export default defineConfig({
   schema: "src/prisma/schema.prisma",
   migrations: {
-    path: "prisma/migrations",
+    path: "src/prisma/migrations",
   },
   datasource: {
     url:  env.dbDevLevel

@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/prisma"
+  provider = "prisma-client"
+  output   = "./generated"
 }
 
 datasource db {
@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Usuario {
-  id Int @id @default(autoincrement()) 
+  id Int @id @default(autoincrement())
 
   nome  String
   email String @unique
