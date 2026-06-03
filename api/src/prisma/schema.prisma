@@ -34,16 +34,14 @@ model Usuario {
 
   conquistasUsuario  ConquistaUsuario[]
   habilidadesUsuario HabilidadeUsuario[]
-  insigniasUsuario   InsigniaUsuario[]
 
-  rankings Ranking[]
-  tokens   Token[]
+  tokens Token[]
 
   @@map("usuario")
 }
 
 model Tema {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   nome      String  @unique
   descricao String?
@@ -54,19 +52,17 @@ model Tema {
   trilhas  Trilha[]
   usuarios TemaUsuario[]
 
-  insignias InsigniaUsuario[]
-
   @@map("tema")
 }
 
 model TemaUsuario {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  temaId String
-  tema   Tema   @relation(fields: [temaId], references: [id])
+  temaId Int
+  tema   Tema @relation(fields: [temaId], references: [id])
 
   pontuacaoTotal Int @default(0)
 
@@ -82,10 +78,10 @@ model TemaUsuario {
 }
 
 model Trilha {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
-  temaId String
-  tema   Tema   @relation(fields: [temaId], references: [id])
+  temaId Int
+  tema   Tema @relation(fields: [temaId], references: [id])
 
   titulo    String
   descricao String?
@@ -96,19 +92,19 @@ model Trilha {
 
   pontuacaoMinima Int
 
-  trilhaAnteriorId String?
-  trilhaAnterior   Trilha? @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
+  trilhaAnteriorId Int?
+
+  trilhaAnterior Trilha? @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
 
   proximasTrilhas Trilha[] @relation("ProgressaoTrilha")
 
   modulos  Modulo[]
   usuarios TrilhaUsuario[]
 
-  insignias InsigniaUsuario[]
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([temaId, ordem])
   @@map("trilha")
 }
 
@@ -119,9 +115,9 @@ enum NivelDificuldade {
 }
 
 model Modulo {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
-  trilhaId String
+  trilhaId Int
   trilha   Trilha @relation(fields: [trilhaId], references: [id])
 
   titulo    String
@@ -134,13 +130,14 @@ model Modulo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([trilhaId, ordem])
   @@map("modulo")
 }
 
 model Questao {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
-  moduloId String
+  moduloId Int
   modulo   Modulo @relation(fields: [moduloId], references: [id])
 
   titulo    String
@@ -158,13 +155,14 @@ model Questao {
   respostas        RespostaQuestao[]
   respostasUsuario RespostaUsuario[]
 
+  @@unique([moduloId, ordem])
   @@map("questao")
 }
 
 model RespostaQuestao {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
-  questaoId String
+  questaoId Int
   questao   Questao @relation(fields: [questaoId], references: [id])
 
   titulo String
@@ -191,15 +189,15 @@ model RespostaQuestao {
 }
 
 model RespostaUsuario {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  questaoId String
+  questaoId Int
   questao   Questao @relation(fields: [questaoId], references: [id])
 
-  respostaQuestaoId String
+  respostaQuestaoId Int
   respostaQuestao   RespostaQuestao @relation(fields: [respostaQuestaoId], references: [id])
 
   pontuacaoRecebida Int
@@ -211,12 +209,12 @@ model RespostaUsuario {
 }
 
 model TrilhaUsuario {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  trilhaId String
+  trilhaId Int
   trilha   Trilha @relation(fields: [trilhaId], references: [id])
 
   status StatusTrilhaUsuario @default(EM_ANDAMENTO)
@@ -229,8 +227,8 @@ model TrilhaUsuario {
 
   podeDesbloquear Boolean @default(false)
 
-  moduloAtualId  String?
-  questaoAtualId String?
+  moduloAtualId  Int?
+  questaoAtualId Int?
 
   iniciadaEm  DateTime  @default(now())
   concluidaEm DateTime?
@@ -247,9 +245,9 @@ enum StatusTrilhaUsuario {
 }
 
 model Conquista {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
-  titulo    String
+  titulo    String  @unique
   descricao String?
 
   icone String?
@@ -265,12 +263,12 @@ model Conquista {
 }
 
 model ConquistaUsuario {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  conquistaId String
+  conquistaId Int
   conquista   Conquista @relation(fields: [conquistaId], references: [id])
 
   desbloqueadaEm DateTime @default(now())
@@ -279,9 +277,9 @@ model ConquistaUsuario {
 }
 
 model Habilidade {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
-  nome      String
+  nome      String  @unique
   descricao String?
 
   usuarios HabilidadeUsuario[]
@@ -290,12 +288,12 @@ model Habilidade {
 }
 
 model HabilidadeUsuario {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  habilidadeId String
+  habilidadeId Int
   habilidade   Habilidade @relation(fields: [habilidadeId], references: [id])
 
   pontuacao Int @default(0)
@@ -304,9 +302,11 @@ model HabilidadeUsuario {
 
   updatedAt DateTime @updatedAt
 
+  @@unique([usuarioId, habilidadeId])
   @@map("habilidade_usuario")
 }
 
+<<<<<<< HEAD
 model Insignia {
   id String @id @default(uuid())
 
@@ -368,6 +368,8 @@ model Ranking {
   @@map("ranking")
 }
 
+=======
+>>>>>>> feat/camadas
 enum Role {
   USER
   ADMIN
@@ -379,11 +381,19 @@ enum TypeToken {
 }
 
 model Token {
-  id        Int       @id @default(autoincrement())
-  token     String    @db.Text
-  type      TypeToken @default(ACCESS)
-  revoked   Boolean   @default(false)
+  id Int @id @default(autoincrement())
+
+  token String @db.Text
+
+  type TypeToken @default(ACCESS)
+
+  revoked Boolean @default(false)
+
   expiresAt DateTime
+<<<<<<< HEAD
+=======
+
+>>>>>>> feat/camadas
   usuarioId Int
 
   usuario Usuario @relation(fields: [usuarioId], references: [id])

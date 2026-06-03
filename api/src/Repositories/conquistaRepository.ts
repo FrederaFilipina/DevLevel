@@ -1,0 +1,29 @@
+import { PrismaClient, type Conquista } from "../prisma/generated/prisma/client";
+
+export class ConquistaRepository {
+  constructor(private readonly prisma: PrismaClient) {}
+
+  async listarTodas(): Promise<Conquista[]> {
+    return await this.prisma.conquista.findMany({
+      orderBy: {
+        titulo: "asc",
+      },
+    });
+  }
+
+  async buscarPorId(id: number): Promise<Conquista | null> {
+    return await this.prisma.conquista.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
+  async buscarPorTitulo(titulo: string): Promise<Conquista | null> {
+    return await this.prisma.conquista.findUnique({
+      where: {
+        titulo,
+      },
+    });
+  }
+}
