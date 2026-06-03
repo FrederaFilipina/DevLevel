@@ -1,0 +1,60 @@
+ALTER TABLE tema
+ALTER COLUMN "createdAt" SET DEFAULT NOW();
+
+ALTER TABLE tema
+ALTER COLUMN "updatedAt" SET DEFAULT NOW();
+
+
+ALTER TABLE trilha
+ALTER COLUMN "createdAt" SET DEFAULT NOW();
+
+ALTER TABLE trilha
+ALTER COLUMN "updatedAt" SET DEFAULT NOW();
+
+
+ALTER TABLE modulo
+ALTER COLUMN "createdAt" SET DEFAULT NOW();
+
+ALTER TABLE modulo
+ALTER COLUMN "updatedAt" SET DEFAULT NOW();
+
+
+ALTER TABLE questao
+ALTER COLUMN "createdAt" SET DEFAULT NOW();
+
+ALTER TABLE questao
+ALTER COLUMN "updatedAt" SET DEFAULT NOW();
+
+
+ALTER TABLE resposta_questao
+ALTER COLUMN "createdAt" SET DEFAULT NOW();
+
+ALTER TABLE resposta_questao
+ALTER COLUMN "updatedAt" SET DEFAULT NOW();
+
+
+ALTER TABLE resposta_usuario
+ALTER COLUMN "respondidaEm" SET DEFAULT NOW();
+
+
+ALTER TABLE trilha_usuario
+ALTER COLUMN "iniciadaEm" SET DEFAULT NOW();
+
+
+ALTER TABLE conquista
+ALTER COLUMN "createdAt" SET DEFAULT NOW();
+
+ALTER TABLE conquista
+ALTER COLUMN "updatedAt" SET DEFAULT NOW();
+
+
+ALTER TABLE conquista_usuario
+ALTER COLUMN "desbloqueadaEm" SET DEFAULT NOW();
+
+
+ALTER TABLE habilidade_usuario
+ALTER COLUMN "updatedAt" SET DEFAULT NOW();
+
+
+ALTER TABLE token
+ALTER COLUMN "expiresAt" SET DEFAULT NOW();
