@@ -1,6 +1,6 @@
 import type { Response, Request } from "express";
 import { authServices, type AuthServices } from "../Services/AuthServices";
-import { Prisma, type Usuario } from "../prisma/generated/prisma";
+import { Prisma, type Usuario } from "../prisma/generated/prisma/client";
 import { ZodError } from "zod";
 
 

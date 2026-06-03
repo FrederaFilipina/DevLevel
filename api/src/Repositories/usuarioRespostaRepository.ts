@@ -1,4 +1,4 @@
-import { PrismaClient, type RespostaUsuario } from "../prisma/generated/prisma";
+import { PrismaClient, type RespostaUsuario } from "../prisma/generated/prisma/client";
 
 export class RespostaUsuarioRepository {
   constructor(private readonly prisma: PrismaClient) {}

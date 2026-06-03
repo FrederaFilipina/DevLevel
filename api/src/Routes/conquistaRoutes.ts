@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PrismaClient } from "../prisma/generated/prisma";
+import { prisma } from "../prisma/prisma";
 
 import { ConquistaRepository } from "../Repositories/conquistaRepository";
 import { ConquistaService } from "../Services/conquistaService";
@@ -7,7 +7,7 @@ import { ConquistaController } from "../Controller/conquistaController";
 
 const router = Router();
 
-const prisma = new PrismaClient();
+
 
 const repository = new ConquistaRepository(prisma);
 const service = new ConquistaService(repository);

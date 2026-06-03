@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PrismaClient } from "../prisma/generated/prisma";
+
 
 import { TemaRepository } from "../Repositories/temaRepository";
 import { TemaService } from "../Services/temaService";
@@ -7,7 +7,7 @@ import { TemaController } from "../Controller/temaController";
 
 const router = Router();
 
-const prisma = new PrismaClient();
+import { prisma } from "../prisma/prisma";
 
 const repository = new TemaRepository(prisma);
 const service = new TemaService(repository);
@@ -20,12 +20,12 @@ router.get(
 
 router.get(
   "/nome/:nome",
-  controller.obter.bind(controller)
+  controller.buscarPorNome.bind(controller)
 );
 
 router.get(
    "/:id",
-  controller.buscarPorNome.bind(controller)
+  controller.obter.bind(controller)
 );
 
 export default router;

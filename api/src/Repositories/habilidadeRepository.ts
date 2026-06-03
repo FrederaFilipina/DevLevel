@@ -1,4 +1,4 @@
-import { PrismaClient, type Habilidade } from "../prisma/generated/prisma";
+import { PrismaClient, type Habilidade } from "../prisma/generated/prisma/client";
 
 export class HabilidadeRepository {
   constructor(private readonly prisma: PrismaClient) {}

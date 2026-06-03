@@ -1,4 +1,4 @@
-import { type RespostaQuestao } from "../prisma/generated/prisma";
+import { type RespostaQuestao } from "../prisma/generated/prisma/client";
 import type { RespostaQuestaoRepository } from "../Repositories/questaoRespostaRepository";
 
 export class RespostaQuestaoService {

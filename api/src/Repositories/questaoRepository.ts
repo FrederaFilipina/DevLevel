@@ -1,4 +1,4 @@
-import { PrismaClient, type Questao } from "../prisma/generated/prisma";
+import { PrismaClient, type Questao } from "../prisma/generated/prisma/client";
 
 export class QuestaoRepository {
   constructor(private prisma: PrismaClient) {}

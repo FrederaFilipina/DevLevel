@@ -1,7 +1,7 @@
 import type {
   PrismaClient,
   Tema,
-} from "../prisma/generated/prisma";
+} from "../prisma/generated/prisma/client";
 
 export class TemaRepository {
   constructor(private readonly prisma: PrismaClient) {}

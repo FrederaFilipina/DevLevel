@@ -1,7 +1,7 @@
 import type {
   PrismaClient,
   Trilha,
-} from "../prisma/generated/prisma";
+} from "../prisma/generated/prisma/client";
 
 export class TrilhaRepository {
   constructor(private prisma: PrismaClient) {}

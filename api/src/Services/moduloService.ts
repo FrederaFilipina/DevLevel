@@ -1,4 +1,4 @@
-import { type Modulo } from "../prisma/generated/prisma";
+import { type Modulo } from "../prisma/generated/prisma/client";
 import { ModuloRepository } from "../Repositories/moduloRepository";
 
 export class ModuloService {
