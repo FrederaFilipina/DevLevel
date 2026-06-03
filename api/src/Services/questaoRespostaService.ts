@@ -1,76 +1,63 @@
-import { type RespostaQuestao } from "../prisma/generated/client";
-import type { RespostaQuestaoRepository } from "../repositories/questaoRespostaRepository";
+import z from "zod";
+import type { RespostaQuestao } from "../prisma/generated/client";
+import {
+  questaoRespostaRepository,
+  QuestaoRespostaRepository,
+} from "../repositories/questaoRespostaRepository";
 
-export class RespostaQuestaoService {
-  constructor(
-    private readonly respostaQuestaoRepository: RespostaQuestaoRepository
-  ) {}
+export class QuestaoRespostaService {
+  constructor(private readonly repository: QuestaoRespostaRepository) {}
 
-  async buscarPorId(
-    id: number
-  ): Promise<RespostaQuestao> {
-    const respostaQuestao =
-      await this.respostaQuestaoRepository.buscarPorId(
-        id
-      );
-
-    if (!respostaQuestao) {
-      throw new Error(
-        "Resposta da questão não encontrada."
-      );
+  async listarTodas(): Promise<RespostaQuestao[]> {
+    try {
+      return await this.repository.listarTodas();
+    } catch (error) {
+      console.error("Erro no service ao listar respostas:", error);
+      throw new Error("Não foi possível listar as respostas.");
     }
-
-    return respostaQuestao;
   }
 
-  async listarPorQuestao(
-    questaoId: number
-  ): Promise<RespostaQuestao[]> {
-    return await this.respostaQuestaoRepository.listarPorQuestao(
-      questaoId
-    );
-  }
+  async buscarPorId(id: number): Promise<RespostaQuestao | null> {
+    const schema = z.number().int().positive("ID inválido");
+    const idValidated = schema.parse(id);
 
-  async buscarPorQuestaoETitulo(
-    questaoId: number,
-    titulo: string
-  ): Promise<RespostaQuestao> {
-    const respostaQuestao =
-      await this.respostaQuestaoRepository.buscarPorQuestaoETitulo(
-        questaoId,
-        titulo
-      );
-
-    if (!respostaQuestao) {
-      throw new Error(
-        "Resposta da questão não encontrada."
-      );
+    try {
+      return await this.repository.buscarPorId(idValidated);
+    } catch (error) {
+      console.error("Erro no service ao buscar resposta por ID:", error);
+      throw new Error("Não foi possível buscar a resposta.");
     }
-
-    return respostaQuestao;
   }
 
-  async listarMelhoresRespostas(
-    questaoId: number
-  ): Promise<RespostaQuestao[]> {
-    return await this.respostaQuestaoRepository.listarMelhoresRespostas(
-      questaoId
-    );
+  async listarPorQuestao(questaoId: number): Promise<RespostaQuestao[]> {
+    const schema = z.number().int().positive("QuestaoId inválido");
+    const questaoIdValidated = schema.parse(questaoId);
+
+    try {
+      return await this.repository.listarPorQuestao(questaoIdValidated);
+    } catch (error) {
+      console.error("Erro no service ao listar respostas por questão:", error);
+      throw new Error("Não foi possível listar as respostas da questão.");
+    }
   }
 
-  async listarPorPerformance(
+  async buscarCorretasPorQuestao(
     questaoId: number
   ): Promise<RespostaQuestao[]> {
-    return await this.respostaQuestaoRepository.listarPorPerformance(
-      questaoId
-    );
-  }
+    const schema = z.number().int().positive("QuestaoId inválido");
+    const questaoIdValidated = schema.parse(questaoId);
 
-  async listarPorCleanCode(
-    questaoId: number
-  ): Promise<RespostaQuestao[]> {
-    return await this.respostaQuestaoRepository.listarPorCleanCode(
-      questaoId
-    );
+    try {
+      return await this.repository.buscarCorretasPorQuestao(
+        questaoIdValidated
+      );
+    } catch (error) {
+      console.error("Erro no service ao buscar respostas corretas:", error);
+      throw new Error("Não foi possível buscar as respostas corretas.");
+    }
   }
 }
+
+export const questaoRespostaService = new QuestaoRespostaService(
+  questaoRespostaRepository
+);

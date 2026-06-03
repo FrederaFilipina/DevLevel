@@ -1,133 +1,181 @@
-import { Router } from "express";
 import type { Request, Response } from "express";
-import { ConquistaUsuarioService } from "../services/usuarioConquistaService";
-import { ConquistaUsuarioRepository } from "../repositories/usuarioConquistaRepository";
-import { prisma } from "../prisma/prisma";
+import { z, ZodError } from "zod";
+import { usuarioConquistaService } from "../services/usuarioConquistaService";
 
-export class ConquistaUsuarioController {
-  private router: Router;
-  private conquistaUsuarioService: ConquistaUsuarioService;
+const idSchema = z.object({
+  id: z.coerce.number().int().positive("ID inválido"),
+});
 
-  constructor() {
-    this.router = Router();
-    const conquistaUsuarioRepository = new ConquistaUsuarioRepository(prisma);
-    this.conquistaUsuarioService = new ConquistaUsuarioService(
-      conquistaUsuarioRepository
-    );
-    this.initRoutes();
-  }
+const usuarioConquistaSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  conquistaId: z.coerce.number().int().positive("ConquistaId inválido"),
+});
 
-  private initRoutes(): void {
-    this.router.get("/", this.listarTodos.bind(this));
-    this.router.get("/usuario/:usuarioId", this.listarPorUsuario.bind(this));
-    this.router.get("/conquista/:conquistaId", this.listarPorConquista.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-  }
+export class UsuarioConquistaController {
+  // =========================
+  // LEITURA
+  // =========================
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+  async listarTodos(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const idNumero = Number(id);
-
-      if (isNaN(idNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "ID deve ser um número",
-        });
-        return;
-      }
-
-      const conquistaUsuario = await this.conquistaUsuarioService.buscarPorId(idNumero);
-
-      res.status(200).json({
-        success: true,
-        data: conquistaUsuario,
-      });
+      const result = await usuarioConquistaService.listarTodos();
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Conquista não encontrada",
+      return res.status(500).json({
+        message: "Erro ao listar conquistas do usuário.",
       });
     }
   }
 
-  private async listarPorUsuario(req: Request, res: Response): Promise<void> {
+  async buscarPorId(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      const usuarioIdNumero = Number(usuarioId);
+      const { id } = idSchema.parse(req.params);
 
-      if (isNaN(usuarioIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "usuarioId deve ser um número",
+      const result = await usuarioConquistaService.buscarPorId(id);
+
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const conquistasUsuario = await this.conquistaUsuarioService.listarPorUsuario(
-        usuarioIdNumero
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "ID inválido.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao buscar registro.",
+      });
+    }
+  }
+
+  async buscarPorUsuarioEConquista(req: Request, res: Response) {
+    try {
+      const { usuarioId, conquistaId } = usuarioConquistaSchema.parse(
+        req.params
       );
 
-      res.status(200).json({
-        success: true,
-        data: conquistasUsuario,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar conquistas",
-      });
-    }
-  }
+      const result =
+        await usuarioConquistaService.buscarPorUsuarioEConquista(
+          usuarioId,
+          conquistaId
+        );
 
-  private async listarPorConquista(req: Request, res: Response): Promise<void> {
-    try {
-      const { conquistaId } = req.params;
-      const conquistaIdNumero = Number(conquistaId);
-
-      if (isNaN(conquistaIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "conquistaId deve ser um número",
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const conquistasUsuario = await this.conquistaUsuarioService.listarPorConquista(
-        conquistaIdNumero
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao buscar conquista do usuário.",
+      });
+    }
+  }
+
+  // =========================
+  // DESBLOQUEIO / UPDATE
+  // =========================
+
+  async desbloquearConquista(req: Request, res: Response) {
+    try {
+      const { usuarioId, conquistaId } = usuarioConquistaSchema.parse(
+        req.body
       );
 
-      res.status(200).json({
-        success: true,
-        data: conquistasUsuario,
-      });
+      const result =
+        await usuarioConquistaService.desbloquearConquista(
+          usuarioId,
+          conquistaId
+        );
+
+      return res.status(201).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar conquistas",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao desbloquear conquista.",
       });
     }
   }
 
-  private async listarTodos(req: Request, res: Response): Promise<void> {
+  async atualizarDesbloqueio(req: Request, res: Response) {
     try {
-      const conquistasUsuario = await this.conquistaUsuarioService.listarTodos();
+      const { usuarioId, conquistaId } = usuarioConquistaSchema.parse(
+        req.params
+      );
 
-      res.status(200).json({
-        success: true,
-        data: conquistasUsuario,
-      });
+      const result =
+        await usuarioConquistaService.atualizarDesbloqueio(
+          usuarioId,
+          conquistaId,
+          req.body
+        );
+
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar conquistas",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao atualizar conquista do usuário.",
       });
     }
   }
 
-  public getRouter(): Router {
-    return this.router;
+  async verificarSeDesbloqueada(req: Request, res: Response) {
+    try {
+      const { usuarioId, conquistaId } = usuarioConquistaSchema.parse(
+        req.params
+      );
+
+      const result =
+        await usuarioConquistaService.verificarSeDesbloqueada(
+          usuarioId,
+          conquistaId
+        );
+
+      return res.status(200).json({
+        usuarioId,
+        conquistaId,
+        desbloqueada: result,
+      });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao verificar conquista.",
+      });
+    }
   }
 }
 
-export const conquistaUsuarioController = new ConquistaUsuarioController();
+export const usuarioConquistaController = new UsuarioConquistaController();

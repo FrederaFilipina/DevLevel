@@ -1543,6 +1543,7 @@ export const TrilhaScalarFieldEnum = {
   nivel: 'nivel',
   ordem: 'ordem',
   pontuacaoMinima: 'pontuacaoMinima',
+  tipoDesbloqueio: 'tipoDesbloqueio',
   trilhaAnteriorId: 'trilhaAnteriorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1569,7 +1570,7 @@ export const QuestaoScalarFieldEnum = {
   moduloId: 'moduloId',
   titulo: 'titulo',
   descricao: 'descricao',
-  dificuldade: 'dificuldade',
+  nivel: 'nivel',
   xpRecompensa: 'xpRecompensa',
   ordem: 'ordem',
   createdAt: 'createdAt',
@@ -1616,13 +1617,13 @@ export const TrilhaUsuarioScalarFieldEnum = {
   trilhaId: 'trilhaId',
   status: 'status',
   pontuacaoAtual: 'pontuacaoAtual',
-  pontuacaoNecessaria: 'pontuacaoNecessaria',
   percentualConclusao: 'percentualConclusao',
   podeDesbloquear: 'podeDesbloquear',
   moduloAtualId: 'moduloAtualId',
   questaoAtualId: 'questaoAtualId',
   iniciadaEm: 'iniciadaEm',
-  concluidaEm: 'concluidaEm'
+  concluidaEm: 'concluidaEm',
+  desbloqueadaPorTrilhaId: 'desbloqueadaPorTrilhaId'
 } as const
 
 export type TrilhaUsuarioScalarFieldEnum = (typeof TrilhaUsuarioScalarFieldEnum)[keyof typeof TrilhaUsuarioScalarFieldEnum]
@@ -1781,6 +1782,20 @@ export type EnumNivelDificuldadeFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'NivelDificuldade[]'
  */
 export type ListEnumNivelDificuldadeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NivelDificuldade[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TipoDesbloqueio'
+ */
+export type EnumTipoDesbloqueioFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoDesbloqueio'>
+    
+
+
+/**
+ * Reference to a field of type 'TipoDesbloqueio[]'
+ */
+export type ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoDesbloqueio[]'>
     
 
 

@@ -31,10 +31,10 @@ export type TrilhaUsuarioAvgAggregateOutputType = {
   usuarioId: number | null
   trilhaId: number | null
   pontuacaoAtual: number | null
-  pontuacaoNecessaria: number | null
   percentualConclusao: number | null
   moduloAtualId: number | null
   questaoAtualId: number | null
+  desbloqueadaPorTrilhaId: number | null
 }
 
 export type TrilhaUsuarioSumAggregateOutputType = {
@@ -42,10 +42,10 @@ export type TrilhaUsuarioSumAggregateOutputType = {
   usuarioId: number | null
   trilhaId: number | null
   pontuacaoAtual: number | null
-  pontuacaoNecessaria: number | null
   percentualConclusao: number | null
   moduloAtualId: number | null
   questaoAtualId: number | null
+  desbloqueadaPorTrilhaId: number | null
 }
 
 export type TrilhaUsuarioMinAggregateOutputType = {
@@ -54,13 +54,13 @@ export type TrilhaUsuarioMinAggregateOutputType = {
   trilhaId: number | null
   status: $Enums.StatusTrilhaUsuario | null
   pontuacaoAtual: number | null
-  pontuacaoNecessaria: number | null
   percentualConclusao: number | null
   podeDesbloquear: boolean | null
   moduloAtualId: number | null
   questaoAtualId: number | null
   iniciadaEm: Date | null
   concluidaEm: Date | null
+  desbloqueadaPorTrilhaId: number | null
 }
 
 export type TrilhaUsuarioMaxAggregateOutputType = {
@@ -69,13 +69,13 @@ export type TrilhaUsuarioMaxAggregateOutputType = {
   trilhaId: number | null
   status: $Enums.StatusTrilhaUsuario | null
   pontuacaoAtual: number | null
-  pontuacaoNecessaria: number | null
   percentualConclusao: number | null
   podeDesbloquear: boolean | null
   moduloAtualId: number | null
   questaoAtualId: number | null
   iniciadaEm: Date | null
   concluidaEm: Date | null
+  desbloqueadaPorTrilhaId: number | null
 }
 
 export type TrilhaUsuarioCountAggregateOutputType = {
@@ -84,13 +84,13 @@ export type TrilhaUsuarioCountAggregateOutputType = {
   trilhaId: number
   status: number
   pontuacaoAtual: number
-  pontuacaoNecessaria: number
   percentualConclusao: number
   podeDesbloquear: number
   moduloAtualId: number
   questaoAtualId: number
   iniciadaEm: number
   concluidaEm: number
+  desbloqueadaPorTrilhaId: number
   _all: number
 }
 
@@ -100,10 +100,10 @@ export type TrilhaUsuarioAvgAggregateInputType = {
   usuarioId?: true
   trilhaId?: true
   pontuacaoAtual?: true
-  pontuacaoNecessaria?: true
   percentualConclusao?: true
   moduloAtualId?: true
   questaoAtualId?: true
+  desbloqueadaPorTrilhaId?: true
 }
 
 export type TrilhaUsuarioSumAggregateInputType = {
@@ -111,10 +111,10 @@ export type TrilhaUsuarioSumAggregateInputType = {
   usuarioId?: true
   trilhaId?: true
   pontuacaoAtual?: true
-  pontuacaoNecessaria?: true
   percentualConclusao?: true
   moduloAtualId?: true
   questaoAtualId?: true
+  desbloqueadaPorTrilhaId?: true
 }
 
 export type TrilhaUsuarioMinAggregateInputType = {
@@ -123,13 +123,13 @@ export type TrilhaUsuarioMinAggregateInputType = {
   trilhaId?: true
   status?: true
   pontuacaoAtual?: true
-  pontuacaoNecessaria?: true
   percentualConclusao?: true
   podeDesbloquear?: true
   moduloAtualId?: true
   questaoAtualId?: true
   iniciadaEm?: true
   concluidaEm?: true
+  desbloqueadaPorTrilhaId?: true
 }
 
 export type TrilhaUsuarioMaxAggregateInputType = {
@@ -138,13 +138,13 @@ export type TrilhaUsuarioMaxAggregateInputType = {
   trilhaId?: true
   status?: true
   pontuacaoAtual?: true
-  pontuacaoNecessaria?: true
   percentualConclusao?: true
   podeDesbloquear?: true
   moduloAtualId?: true
   questaoAtualId?: true
   iniciadaEm?: true
   concluidaEm?: true
+  desbloqueadaPorTrilhaId?: true
 }
 
 export type TrilhaUsuarioCountAggregateInputType = {
@@ -153,13 +153,13 @@ export type TrilhaUsuarioCountAggregateInputType = {
   trilhaId?: true
   status?: true
   pontuacaoAtual?: true
-  pontuacaoNecessaria?: true
   percentualConclusao?: true
   podeDesbloquear?: true
   moduloAtualId?: true
   questaoAtualId?: true
   iniciadaEm?: true
   concluidaEm?: true
+  desbloqueadaPorTrilhaId?: true
   _all?: true
 }
 
@@ -255,13 +255,13 @@ export type TrilhaUsuarioGroupByOutputType = {
   trilhaId: number
   status: $Enums.StatusTrilhaUsuario
   pontuacaoAtual: number
-  pontuacaoNecessaria: number
   percentualConclusao: number
   podeDesbloquear: boolean
   moduloAtualId: number | null
   questaoAtualId: number | null
   iniciadaEm: Date
   concluidaEm: Date | null
+  desbloqueadaPorTrilhaId: number | null
   _count: TrilhaUsuarioCountAggregateOutputType | null
   _avg: TrilhaUsuarioAvgAggregateOutputType | null
   _sum: TrilhaUsuarioSumAggregateOutputType | null
@@ -293,15 +293,16 @@ export type TrilhaUsuarioWhereInput = {
   trilhaId?: Prisma.IntFilter<"TrilhaUsuario"> | number
   status?: Prisma.EnumStatusTrilhaUsuarioFilter<"TrilhaUsuario"> | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFilter<"TrilhaUsuario"> | number
-  pontuacaoNecessaria?: Prisma.IntFilter<"TrilhaUsuario"> | number
   percentualConclusao?: Prisma.IntFilter<"TrilhaUsuario"> | number
   podeDesbloquear?: Prisma.BoolFilter<"TrilhaUsuario"> | boolean
   moduloAtualId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
   questaoAtualId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
   iniciadaEm?: Prisma.DateTimeFilter<"TrilhaUsuario"> | Date | string
   concluidaEm?: Prisma.DateTimeNullableFilter<"TrilhaUsuario"> | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   trilha?: Prisma.XOR<Prisma.TrilhaScalarRelationFilter, Prisma.TrilhaWhereInput>
+  desbloqueadaPorTrilha?: Prisma.XOR<Prisma.TrilhaNullableScalarRelationFilter, Prisma.TrilhaWhereInput> | null
 }
 
 export type TrilhaUsuarioOrderByWithRelationInput = {
@@ -310,15 +311,16 @@ export type TrilhaUsuarioOrderByWithRelationInput = {
   trilhaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   pontuacaoAtual?: Prisma.SortOrder
-  pontuacaoNecessaria?: Prisma.SortOrder
   percentualConclusao?: Prisma.SortOrder
   podeDesbloquear?: Prisma.SortOrder
   moduloAtualId?: Prisma.SortOrderInput | Prisma.SortOrder
   questaoAtualId?: Prisma.SortOrderInput | Prisma.SortOrder
   iniciadaEm?: Prisma.SortOrder
   concluidaEm?: Prisma.SortOrderInput | Prisma.SortOrder
+  desbloqueadaPorTrilhaId?: Prisma.SortOrderInput | Prisma.SortOrder
   usuario?: Prisma.UsuarioOrderByWithRelationInput
   trilha?: Prisma.TrilhaOrderByWithRelationInput
+  desbloqueadaPorTrilha?: Prisma.TrilhaOrderByWithRelationInput
 }
 
 export type TrilhaUsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -331,15 +333,16 @@ export type TrilhaUsuarioWhereUniqueInput = Prisma.AtLeast<{
   trilhaId?: Prisma.IntFilter<"TrilhaUsuario"> | number
   status?: Prisma.EnumStatusTrilhaUsuarioFilter<"TrilhaUsuario"> | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFilter<"TrilhaUsuario"> | number
-  pontuacaoNecessaria?: Prisma.IntFilter<"TrilhaUsuario"> | number
   percentualConclusao?: Prisma.IntFilter<"TrilhaUsuario"> | number
   podeDesbloquear?: Prisma.BoolFilter<"TrilhaUsuario"> | boolean
   moduloAtualId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
   questaoAtualId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
   iniciadaEm?: Prisma.DateTimeFilter<"TrilhaUsuario"> | Date | string
   concluidaEm?: Prisma.DateTimeNullableFilter<"TrilhaUsuario"> | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   trilha?: Prisma.XOR<Prisma.TrilhaScalarRelationFilter, Prisma.TrilhaWhereInput>
+  desbloqueadaPorTrilha?: Prisma.XOR<Prisma.TrilhaNullableScalarRelationFilter, Prisma.TrilhaWhereInput> | null
 }, "id" | "usuarioId_trilhaId">
 
 export type TrilhaUsuarioOrderByWithAggregationInput = {
@@ -348,13 +351,13 @@ export type TrilhaUsuarioOrderByWithAggregationInput = {
   trilhaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   pontuacaoAtual?: Prisma.SortOrder
-  pontuacaoNecessaria?: Prisma.SortOrder
   percentualConclusao?: Prisma.SortOrder
   podeDesbloquear?: Prisma.SortOrder
   moduloAtualId?: Prisma.SortOrderInput | Prisma.SortOrder
   questaoAtualId?: Prisma.SortOrderInput | Prisma.SortOrder
   iniciadaEm?: Prisma.SortOrder
   concluidaEm?: Prisma.SortOrderInput | Prisma.SortOrder
+  desbloqueadaPorTrilhaId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TrilhaUsuarioCountOrderByAggregateInput
   _avg?: Prisma.TrilhaUsuarioAvgOrderByAggregateInput
   _max?: Prisma.TrilhaUsuarioMaxOrderByAggregateInput
@@ -371,19 +374,18 @@ export type TrilhaUsuarioScalarWhereWithAggregatesInput = {
   trilhaId?: Prisma.IntWithAggregatesFilter<"TrilhaUsuario"> | number
   status?: Prisma.EnumStatusTrilhaUsuarioWithAggregatesFilter<"TrilhaUsuario"> | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntWithAggregatesFilter<"TrilhaUsuario"> | number
-  pontuacaoNecessaria?: Prisma.IntWithAggregatesFilter<"TrilhaUsuario"> | number
   percentualConclusao?: Prisma.IntWithAggregatesFilter<"TrilhaUsuario"> | number
   podeDesbloquear?: Prisma.BoolWithAggregatesFilter<"TrilhaUsuario"> | boolean
   moduloAtualId?: Prisma.IntNullableWithAggregatesFilter<"TrilhaUsuario"> | number | null
   questaoAtualId?: Prisma.IntNullableWithAggregatesFilter<"TrilhaUsuario"> | number | null
   iniciadaEm?: Prisma.DateTimeWithAggregatesFilter<"TrilhaUsuario"> | Date | string
   concluidaEm?: Prisma.DateTimeNullableWithAggregatesFilter<"TrilhaUsuario"> | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.IntNullableWithAggregatesFilter<"TrilhaUsuario"> | number | null
 }
 
 export type TrilhaUsuarioCreateInput = {
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
@@ -392,6 +394,7 @@ export type TrilhaUsuarioCreateInput = {
   concluidaEm?: Date | string | null
   usuario: Prisma.UsuarioCreateNestedOneWithoutTrilhasUsuarioInput
   trilha: Prisma.TrilhaCreateNestedOneWithoutUsuariosInput
+  desbloqueadaPorTrilha?: Prisma.TrilhaCreateNestedOneWithoutTrilhasQueDesbloqueiamInput
 }
 
 export type TrilhaUsuarioUncheckedCreateInput = {
@@ -400,19 +403,18 @@ export type TrilhaUsuarioUncheckedCreateInput = {
   trilhaId: number
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
   questaoAtualId?: number | null
   iniciadaEm?: Date | string
   concluidaEm?: Date | string | null
+  desbloqueadaPorTrilhaId?: number | null
 }
 
 export type TrilhaUsuarioUpdateInput = {
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -421,6 +423,7 @@ export type TrilhaUsuarioUpdateInput = {
   concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutTrilhasUsuarioNestedInput
   trilha?: Prisma.TrilhaUpdateOneRequiredWithoutUsuariosNestedInput
+  desbloqueadaPorTrilha?: Prisma.TrilhaUpdateOneWithoutTrilhasQueDesbloqueiamNestedInput
 }
 
 export type TrilhaUsuarioUncheckedUpdateInput = {
@@ -429,13 +432,13 @@ export type TrilhaUsuarioUncheckedUpdateInput = {
   trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   questaoAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TrilhaUsuarioCreateManyInput = {
@@ -444,19 +447,18 @@ export type TrilhaUsuarioCreateManyInput = {
   trilhaId: number
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
   questaoAtualId?: number | null
   iniciadaEm?: Date | string
   concluidaEm?: Date | string | null
+  desbloqueadaPorTrilhaId?: number | null
 }
 
 export type TrilhaUsuarioUpdateManyMutationInput = {
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -471,13 +473,13 @@ export type TrilhaUsuarioUncheckedUpdateManyInput = {
   trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   questaoAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TrilhaUsuarioListRelationFilter = {
@@ -501,13 +503,13 @@ export type TrilhaUsuarioCountOrderByAggregateInput = {
   trilhaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   pontuacaoAtual?: Prisma.SortOrder
-  pontuacaoNecessaria?: Prisma.SortOrder
   percentualConclusao?: Prisma.SortOrder
   podeDesbloquear?: Prisma.SortOrder
   moduloAtualId?: Prisma.SortOrder
   questaoAtualId?: Prisma.SortOrder
   iniciadaEm?: Prisma.SortOrder
   concluidaEm?: Prisma.SortOrder
+  desbloqueadaPorTrilhaId?: Prisma.SortOrder
 }
 
 export type TrilhaUsuarioAvgOrderByAggregateInput = {
@@ -515,10 +517,10 @@ export type TrilhaUsuarioAvgOrderByAggregateInput = {
   usuarioId?: Prisma.SortOrder
   trilhaId?: Prisma.SortOrder
   pontuacaoAtual?: Prisma.SortOrder
-  pontuacaoNecessaria?: Prisma.SortOrder
   percentualConclusao?: Prisma.SortOrder
   moduloAtualId?: Prisma.SortOrder
   questaoAtualId?: Prisma.SortOrder
+  desbloqueadaPorTrilhaId?: Prisma.SortOrder
 }
 
 export type TrilhaUsuarioMaxOrderByAggregateInput = {
@@ -527,13 +529,13 @@ export type TrilhaUsuarioMaxOrderByAggregateInput = {
   trilhaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   pontuacaoAtual?: Prisma.SortOrder
-  pontuacaoNecessaria?: Prisma.SortOrder
   percentualConclusao?: Prisma.SortOrder
   podeDesbloquear?: Prisma.SortOrder
   moduloAtualId?: Prisma.SortOrder
   questaoAtualId?: Prisma.SortOrder
   iniciadaEm?: Prisma.SortOrder
   concluidaEm?: Prisma.SortOrder
+  desbloqueadaPorTrilhaId?: Prisma.SortOrder
 }
 
 export type TrilhaUsuarioMinOrderByAggregateInput = {
@@ -542,13 +544,13 @@ export type TrilhaUsuarioMinOrderByAggregateInput = {
   trilhaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   pontuacaoAtual?: Prisma.SortOrder
-  pontuacaoNecessaria?: Prisma.SortOrder
   percentualConclusao?: Prisma.SortOrder
   podeDesbloquear?: Prisma.SortOrder
   moduloAtualId?: Prisma.SortOrder
   questaoAtualId?: Prisma.SortOrder
   iniciadaEm?: Prisma.SortOrder
   concluidaEm?: Prisma.SortOrder
+  desbloqueadaPorTrilhaId?: Prisma.SortOrder
 }
 
 export type TrilhaUsuarioSumOrderByAggregateInput = {
@@ -556,10 +558,10 @@ export type TrilhaUsuarioSumOrderByAggregateInput = {
   usuarioId?: Prisma.SortOrder
   trilhaId?: Prisma.SortOrder
   pontuacaoAtual?: Prisma.SortOrder
-  pontuacaoNecessaria?: Prisma.SortOrder
   percentualConclusao?: Prisma.SortOrder
   moduloAtualId?: Prisma.SortOrder
   questaoAtualId?: Prisma.SortOrder
+  desbloqueadaPorTrilhaId?: Prisma.SortOrder
 }
 
 export type TrilhaUsuarioCreateNestedManyWithoutUsuarioInput = {
@@ -611,10 +613,24 @@ export type TrilhaUsuarioCreateNestedManyWithoutTrilhaInput = {
   connect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
 }
 
+export type TrilhaUsuarioCreateNestedManyWithoutDesbloqueadaPorTrilhaInput = {
+  create?: Prisma.XOR<Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput, Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput> | Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput[] | Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput[]
+  connectOrCreate?: Prisma.TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput[]
+  createMany?: Prisma.TrilhaUsuarioCreateManyDesbloqueadaPorTrilhaInputEnvelope
+  connect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+}
+
 export type TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput = {
   create?: Prisma.XOR<Prisma.TrilhaUsuarioCreateWithoutTrilhaInput, Prisma.TrilhaUsuarioUncheckedCreateWithoutTrilhaInput> | Prisma.TrilhaUsuarioCreateWithoutTrilhaInput[] | Prisma.TrilhaUsuarioUncheckedCreateWithoutTrilhaInput[]
   connectOrCreate?: Prisma.TrilhaUsuarioCreateOrConnectWithoutTrilhaInput | Prisma.TrilhaUsuarioCreateOrConnectWithoutTrilhaInput[]
   createMany?: Prisma.TrilhaUsuarioCreateManyTrilhaInputEnvelope
+  connect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+}
+
+export type TrilhaUsuarioUncheckedCreateNestedManyWithoutDesbloqueadaPorTrilhaInput = {
+  create?: Prisma.XOR<Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput, Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput> | Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput[] | Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput[]
+  connectOrCreate?: Prisma.TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput[]
+  createMany?: Prisma.TrilhaUsuarioCreateManyDesbloqueadaPorTrilhaInputEnvelope
   connect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
 }
 
@@ -632,6 +648,20 @@ export type TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput = {
   deleteMany?: Prisma.TrilhaUsuarioScalarWhereInput | Prisma.TrilhaUsuarioScalarWhereInput[]
 }
 
+export type TrilhaUsuarioUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput = {
+  create?: Prisma.XOR<Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput, Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput> | Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput[] | Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput[]
+  connectOrCreate?: Prisma.TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput[]
+  upsert?: Prisma.TrilhaUsuarioUpsertWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioUpsertWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput[]
+  createMany?: Prisma.TrilhaUsuarioCreateManyDesbloqueadaPorTrilhaInputEnvelope
+  set?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+  disconnect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+  delete?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+  connect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+  update?: Prisma.TrilhaUsuarioUpdateWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioUpdateWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput[]
+  updateMany?: Prisma.TrilhaUsuarioUpdateManyWithWhereWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioUpdateManyWithWhereWithoutDesbloqueadaPorTrilhaInput[]
+  deleteMany?: Prisma.TrilhaUsuarioScalarWhereInput | Prisma.TrilhaUsuarioScalarWhereInput[]
+}
+
 export type TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput = {
   create?: Prisma.XOR<Prisma.TrilhaUsuarioCreateWithoutTrilhaInput, Prisma.TrilhaUsuarioUncheckedCreateWithoutTrilhaInput> | Prisma.TrilhaUsuarioCreateWithoutTrilhaInput[] | Prisma.TrilhaUsuarioUncheckedCreateWithoutTrilhaInput[]
   connectOrCreate?: Prisma.TrilhaUsuarioCreateOrConnectWithoutTrilhaInput | Prisma.TrilhaUsuarioCreateOrConnectWithoutTrilhaInput[]
@@ -643,6 +673,20 @@ export type TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput = {
   connect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
   update?: Prisma.TrilhaUsuarioUpdateWithWhereUniqueWithoutTrilhaInput | Prisma.TrilhaUsuarioUpdateWithWhereUniqueWithoutTrilhaInput[]
   updateMany?: Prisma.TrilhaUsuarioUpdateManyWithWhereWithoutTrilhaInput | Prisma.TrilhaUsuarioUpdateManyWithWhereWithoutTrilhaInput[]
+  deleteMany?: Prisma.TrilhaUsuarioScalarWhereInput | Prisma.TrilhaUsuarioScalarWhereInput[]
+}
+
+export type TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput = {
+  create?: Prisma.XOR<Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput, Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput> | Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput[] | Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput[]
+  connectOrCreate?: Prisma.TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput[]
+  upsert?: Prisma.TrilhaUsuarioUpsertWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioUpsertWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput[]
+  createMany?: Prisma.TrilhaUsuarioCreateManyDesbloqueadaPorTrilhaInputEnvelope
+  set?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+  disconnect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+  delete?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+  connect?: Prisma.TrilhaUsuarioWhereUniqueInput | Prisma.TrilhaUsuarioWhereUniqueInput[]
+  update?: Prisma.TrilhaUsuarioUpdateWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioUpdateWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput[]
+  updateMany?: Prisma.TrilhaUsuarioUpdateManyWithWhereWithoutDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioUpdateManyWithWhereWithoutDesbloqueadaPorTrilhaInput[]
   deleteMany?: Prisma.TrilhaUsuarioScalarWhereInput | Prisma.TrilhaUsuarioScalarWhereInput[]
 }
 
@@ -661,7 +705,6 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 export type TrilhaUsuarioCreateWithoutUsuarioInput = {
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
@@ -669,6 +712,7 @@ export type TrilhaUsuarioCreateWithoutUsuarioInput = {
   iniciadaEm?: Date | string
   concluidaEm?: Date | string | null
   trilha: Prisma.TrilhaCreateNestedOneWithoutUsuariosInput
+  desbloqueadaPorTrilha?: Prisma.TrilhaCreateNestedOneWithoutTrilhasQueDesbloqueiamInput
 }
 
 export type TrilhaUsuarioUncheckedCreateWithoutUsuarioInput = {
@@ -676,13 +720,13 @@ export type TrilhaUsuarioUncheckedCreateWithoutUsuarioInput = {
   trilhaId: number
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
   questaoAtualId?: number | null
   iniciadaEm?: Date | string
   concluidaEm?: Date | string | null
+  desbloqueadaPorTrilhaId?: number | null
 }
 
 export type TrilhaUsuarioCreateOrConnectWithoutUsuarioInput = {
@@ -720,19 +764,18 @@ export type TrilhaUsuarioScalarWhereInput = {
   trilhaId?: Prisma.IntFilter<"TrilhaUsuario"> | number
   status?: Prisma.EnumStatusTrilhaUsuarioFilter<"TrilhaUsuario"> | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFilter<"TrilhaUsuario"> | number
-  pontuacaoNecessaria?: Prisma.IntFilter<"TrilhaUsuario"> | number
   percentualConclusao?: Prisma.IntFilter<"TrilhaUsuario"> | number
   podeDesbloquear?: Prisma.BoolFilter<"TrilhaUsuario"> | boolean
   moduloAtualId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
   questaoAtualId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
   iniciadaEm?: Prisma.DateTimeFilter<"TrilhaUsuario"> | Date | string
   concluidaEm?: Prisma.DateTimeNullableFilter<"TrilhaUsuario"> | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.IntNullableFilter<"TrilhaUsuario"> | number | null
 }
 
 export type TrilhaUsuarioCreateWithoutTrilhaInput = {
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
@@ -740,6 +783,7 @@ export type TrilhaUsuarioCreateWithoutTrilhaInput = {
   iniciadaEm?: Date | string
   concluidaEm?: Date | string | null
   usuario: Prisma.UsuarioCreateNestedOneWithoutTrilhasUsuarioInput
+  desbloqueadaPorTrilha?: Prisma.TrilhaCreateNestedOneWithoutTrilhasQueDesbloqueiamInput
 }
 
 export type TrilhaUsuarioUncheckedCreateWithoutTrilhaInput = {
@@ -747,13 +791,13 @@ export type TrilhaUsuarioUncheckedCreateWithoutTrilhaInput = {
   usuarioId: number
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
   questaoAtualId?: number | null
   iniciadaEm?: Date | string
   concluidaEm?: Date | string | null
+  desbloqueadaPorTrilhaId?: number | null
 }
 
 export type TrilhaUsuarioCreateOrConnectWithoutTrilhaInput = {
@@ -763,6 +807,43 @@ export type TrilhaUsuarioCreateOrConnectWithoutTrilhaInput = {
 
 export type TrilhaUsuarioCreateManyTrilhaInputEnvelope = {
   data: Prisma.TrilhaUsuarioCreateManyTrilhaInput | Prisma.TrilhaUsuarioCreateManyTrilhaInput[]
+  skipDuplicates?: boolean
+}
+
+export type TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput = {
+  status?: $Enums.StatusTrilhaUsuario
+  pontuacaoAtual?: number
+  percentualConclusao?: number
+  podeDesbloquear?: boolean
+  moduloAtualId?: number | null
+  questaoAtualId?: number | null
+  iniciadaEm?: Date | string
+  concluidaEm?: Date | string | null
+  usuario: Prisma.UsuarioCreateNestedOneWithoutTrilhasUsuarioInput
+  trilha: Prisma.TrilhaCreateNestedOneWithoutUsuariosInput
+}
+
+export type TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput = {
+  id?: number
+  usuarioId: number
+  trilhaId: number
+  status?: $Enums.StatusTrilhaUsuario
+  pontuacaoAtual?: number
+  percentualConclusao?: number
+  podeDesbloquear?: boolean
+  moduloAtualId?: number | null
+  questaoAtualId?: number | null
+  iniciadaEm?: Date | string
+  concluidaEm?: Date | string | null
+}
+
+export type TrilhaUsuarioCreateOrConnectWithoutDesbloqueadaPorTrilhaInput = {
+  where: Prisma.TrilhaUsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput, Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput>
+}
+
+export type TrilhaUsuarioCreateManyDesbloqueadaPorTrilhaInputEnvelope = {
+  data: Prisma.TrilhaUsuarioCreateManyDesbloqueadaPorTrilhaInput | Prisma.TrilhaUsuarioCreateManyDesbloqueadaPorTrilhaInput[]
   skipDuplicates?: boolean
 }
 
@@ -782,24 +863,39 @@ export type TrilhaUsuarioUpdateManyWithWhereWithoutTrilhaInput = {
   data: Prisma.XOR<Prisma.TrilhaUsuarioUpdateManyMutationInput, Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaInput>
 }
 
+export type TrilhaUsuarioUpsertWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput = {
+  where: Prisma.TrilhaUsuarioWhereUniqueInput
+  update: Prisma.XOR<Prisma.TrilhaUsuarioUpdateWithoutDesbloqueadaPorTrilhaInput, Prisma.TrilhaUsuarioUncheckedUpdateWithoutDesbloqueadaPorTrilhaInput>
+  create: Prisma.XOR<Prisma.TrilhaUsuarioCreateWithoutDesbloqueadaPorTrilhaInput, Prisma.TrilhaUsuarioUncheckedCreateWithoutDesbloqueadaPorTrilhaInput>
+}
+
+export type TrilhaUsuarioUpdateWithWhereUniqueWithoutDesbloqueadaPorTrilhaInput = {
+  where: Prisma.TrilhaUsuarioWhereUniqueInput
+  data: Prisma.XOR<Prisma.TrilhaUsuarioUpdateWithoutDesbloqueadaPorTrilhaInput, Prisma.TrilhaUsuarioUncheckedUpdateWithoutDesbloqueadaPorTrilhaInput>
+}
+
+export type TrilhaUsuarioUpdateManyWithWhereWithoutDesbloqueadaPorTrilhaInput = {
+  where: Prisma.TrilhaUsuarioScalarWhereInput
+  data: Prisma.XOR<Prisma.TrilhaUsuarioUpdateManyMutationInput, Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaInput>
+}
+
 export type TrilhaUsuarioCreateManyUsuarioInput = {
   id?: number
   trilhaId: number
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
   questaoAtualId?: number | null
   iniciadaEm?: Date | string
   concluidaEm?: Date | string | null
+  desbloqueadaPorTrilhaId?: number | null
 }
 
 export type TrilhaUsuarioUpdateWithoutUsuarioInput = {
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -807,6 +903,7 @@ export type TrilhaUsuarioUpdateWithoutUsuarioInput = {
   iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trilha?: Prisma.TrilhaUpdateOneRequiredWithoutUsuariosNestedInput
+  desbloqueadaPorTrilha?: Prisma.TrilhaUpdateOneWithoutTrilhasQueDesbloqueiamNestedInput
 }
 
 export type TrilhaUsuarioUncheckedUpdateWithoutUsuarioInput = {
@@ -814,13 +911,13 @@ export type TrilhaUsuarioUncheckedUpdateWithoutUsuarioInput = {
   trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   questaoAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
@@ -828,13 +925,13 @@ export type TrilhaUsuarioUncheckedUpdateManyWithoutUsuarioInput = {
   trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   questaoAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TrilhaUsuarioCreateManyTrilhaInput = {
@@ -842,7 +939,21 @@ export type TrilhaUsuarioCreateManyTrilhaInput = {
   usuarioId: number
   status?: $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: number
-  pontuacaoNecessaria: number
+  percentualConclusao?: number
+  podeDesbloquear?: boolean
+  moduloAtualId?: number | null
+  questaoAtualId?: number | null
+  iniciadaEm?: Date | string
+  concluidaEm?: Date | string | null
+  desbloqueadaPorTrilhaId?: number | null
+}
+
+export type TrilhaUsuarioCreateManyDesbloqueadaPorTrilhaInput = {
+  id?: number
+  usuarioId: number
+  trilhaId: number
+  status?: $Enums.StatusTrilhaUsuario
+  pontuacaoAtual?: number
   percentualConclusao?: number
   podeDesbloquear?: boolean
   moduloAtualId?: number | null
@@ -854,7 +965,6 @@ export type TrilhaUsuarioCreateManyTrilhaInput = {
 export type TrilhaUsuarioUpdateWithoutTrilhaInput = {
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -862,6 +972,7 @@ export type TrilhaUsuarioUpdateWithoutTrilhaInput = {
   iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutTrilhasUsuarioNestedInput
+  desbloqueadaPorTrilha?: Prisma.TrilhaUpdateOneWithoutTrilhasQueDesbloqueiamNestedInput
 }
 
 export type TrilhaUsuarioUncheckedUpdateWithoutTrilhaInput = {
@@ -869,7 +980,48 @@ export type TrilhaUsuarioUncheckedUpdateWithoutTrilhaInput = {
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
+  percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
+  podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  questaoAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
+  pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
+  percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
+  podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  questaoAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  desbloqueadaPorTrilhaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type TrilhaUsuarioUpdateWithoutDesbloqueadaPorTrilhaInput = {
+  status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
+  pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
+  percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
+  podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  questaoAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  iniciadaEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutTrilhasUsuarioNestedInput
+  trilha?: Prisma.TrilhaUpdateOneRequiredWithoutUsuariosNestedInput
+}
+
+export type TrilhaUsuarioUncheckedUpdateWithoutDesbloqueadaPorTrilhaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
+  pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -878,12 +1030,12 @@ export type TrilhaUsuarioUncheckedUpdateWithoutTrilhaInput = {
   concluidaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaInput = {
+export type TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   usuarioId?: Prisma.IntFieldUpdateOperationsInput | number
+  trilhaId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusTrilhaUsuarioFieldUpdateOperationsInput | $Enums.StatusTrilhaUsuario
   pontuacaoAtual?: Prisma.IntFieldUpdateOperationsInput | number
-  pontuacaoNecessaria?: Prisma.IntFieldUpdateOperationsInput | number
   percentualConclusao?: Prisma.IntFieldUpdateOperationsInput | number
   podeDesbloquear?: Prisma.BoolFieldUpdateOperationsInput | boolean
   moduloAtualId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -900,15 +1052,16 @@ export type TrilhaUsuarioSelect<ExtArgs extends runtime.Types.Extensions.Interna
   trilhaId?: boolean
   status?: boolean
   pontuacaoAtual?: boolean
-  pontuacaoNecessaria?: boolean
   percentualConclusao?: boolean
   podeDesbloquear?: boolean
   moduloAtualId?: boolean
   questaoAtualId?: boolean
   iniciadaEm?: boolean
   concluidaEm?: boolean
+  desbloqueadaPorTrilhaId?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
+  desbloqueadaPorTrilha?: boolean | Prisma.TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs>
 }, ExtArgs["result"]["trilhaUsuario"]>
 
 export type TrilhaUsuarioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -917,15 +1070,16 @@ export type TrilhaUsuarioSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   trilhaId?: boolean
   status?: boolean
   pontuacaoAtual?: boolean
-  pontuacaoNecessaria?: boolean
   percentualConclusao?: boolean
   podeDesbloquear?: boolean
   moduloAtualId?: boolean
   questaoAtualId?: boolean
   iniciadaEm?: boolean
   concluidaEm?: boolean
+  desbloqueadaPorTrilhaId?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
+  desbloqueadaPorTrilha?: boolean | Prisma.TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs>
 }, ExtArgs["result"]["trilhaUsuario"]>
 
 export type TrilhaUsuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -934,15 +1088,16 @@ export type TrilhaUsuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   trilhaId?: boolean
   status?: boolean
   pontuacaoAtual?: boolean
-  pontuacaoNecessaria?: boolean
   percentualConclusao?: boolean
   podeDesbloquear?: boolean
   moduloAtualId?: boolean
   questaoAtualId?: boolean
   iniciadaEm?: boolean
   concluidaEm?: boolean
+  desbloqueadaPorTrilhaId?: boolean
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
+  desbloqueadaPorTrilha?: boolean | Prisma.TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs>
 }, ExtArgs["result"]["trilhaUsuario"]>
 
 export type TrilhaUsuarioSelectScalar = {
@@ -951,27 +1106,30 @@ export type TrilhaUsuarioSelectScalar = {
   trilhaId?: boolean
   status?: boolean
   pontuacaoAtual?: boolean
-  pontuacaoNecessaria?: boolean
   percentualConclusao?: boolean
   podeDesbloquear?: boolean
   moduloAtualId?: boolean
   questaoAtualId?: boolean
   iniciadaEm?: boolean
   concluidaEm?: boolean
+  desbloqueadaPorTrilhaId?: boolean
 }
 
-export type TrilhaUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "usuarioId" | "trilhaId" | "status" | "pontuacaoAtual" | "pontuacaoNecessaria" | "percentualConclusao" | "podeDesbloquear" | "moduloAtualId" | "questaoAtualId" | "iniciadaEm" | "concluidaEm", ExtArgs["result"]["trilhaUsuario"]>
+export type TrilhaUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "usuarioId" | "trilhaId" | "status" | "pontuacaoAtual" | "percentualConclusao" | "podeDesbloquear" | "moduloAtualId" | "questaoAtualId" | "iniciadaEm" | "concluidaEm" | "desbloqueadaPorTrilhaId", ExtArgs["result"]["trilhaUsuario"]>
 export type TrilhaUsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
+  desbloqueadaPorTrilha?: boolean | Prisma.TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs>
 }
 export type TrilhaUsuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
+  desbloqueadaPorTrilha?: boolean | Prisma.TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs>
 }
 export type TrilhaUsuarioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   trilha?: boolean | Prisma.TrilhaDefaultArgs<ExtArgs>
+  desbloqueadaPorTrilha?: boolean | Prisma.TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs>
 }
 
 export type $TrilhaUsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -979,6 +1137,7 @@ export type $TrilhaUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Inter
   objects: {
     usuario: Prisma.$UsuarioPayload<ExtArgs>
     trilha: Prisma.$TrilhaPayload<ExtArgs>
+    desbloqueadaPorTrilha: Prisma.$TrilhaPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -986,13 +1145,13 @@ export type $TrilhaUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Inter
     trilhaId: number
     status: $Enums.StatusTrilhaUsuario
     pontuacaoAtual: number
-    pontuacaoNecessaria: number
     percentualConclusao: number
     podeDesbloquear: boolean
     moduloAtualId: number | null
     questaoAtualId: number | null
     iniciadaEm: Date
     concluidaEm: Date | null
+    desbloqueadaPorTrilhaId: number | null
   }, ExtArgs["result"]["trilhaUsuario"]>
   composites: {}
 }
@@ -1389,6 +1548,7 @@ export interface Prisma__TrilhaUsuarioClient<T, Null = never, ExtArgs extends ru
   readonly [Symbol.toStringTag]: "PrismaPromise"
   usuario<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   trilha<T extends Prisma.TrilhaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrilhaDefaultArgs<ExtArgs>>): Prisma.Prisma__TrilhaClient<runtime.Types.Result.GetResult<Prisma.$TrilhaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  desbloqueadaPorTrilha<T extends Prisma.TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs>>): Prisma.Prisma__TrilhaClient<runtime.Types.Result.GetResult<Prisma.$TrilhaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1423,13 +1583,13 @@ export interface TrilhaUsuarioFieldRefs {
   readonly trilhaId: Prisma.FieldRef<"TrilhaUsuario", 'Int'>
   readonly status: Prisma.FieldRef<"TrilhaUsuario", 'StatusTrilhaUsuario'>
   readonly pontuacaoAtual: Prisma.FieldRef<"TrilhaUsuario", 'Int'>
-  readonly pontuacaoNecessaria: Prisma.FieldRef<"TrilhaUsuario", 'Int'>
   readonly percentualConclusao: Prisma.FieldRef<"TrilhaUsuario", 'Int'>
   readonly podeDesbloquear: Prisma.FieldRef<"TrilhaUsuario", 'Boolean'>
   readonly moduloAtualId: Prisma.FieldRef<"TrilhaUsuario", 'Int'>
   readonly questaoAtualId: Prisma.FieldRef<"TrilhaUsuario", 'Int'>
   readonly iniciadaEm: Prisma.FieldRef<"TrilhaUsuario", 'DateTime'>
   readonly concluidaEm: Prisma.FieldRef<"TrilhaUsuario", 'DateTime'>
+  readonly desbloqueadaPorTrilhaId: Prisma.FieldRef<"TrilhaUsuario", 'Int'>
 }
     
 
@@ -1828,6 +1988,25 @@ export type TrilhaUsuarioDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many TrilhaUsuarios to delete.
    */
   limit?: number
+}
+
+/**
+ * TrilhaUsuario.desbloqueadaPorTrilha
+ */
+export type TrilhaUsuario$desbloqueadaPorTrilhaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Trilha
+   */
+  select?: Prisma.TrilhaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Trilha
+   */
+  omit?: Prisma.TrilhaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrilhaInclude<ExtArgs> | null
+  where?: Prisma.TrilhaWhereInput
 }
 
 /**

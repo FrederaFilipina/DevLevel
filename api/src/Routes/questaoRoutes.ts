@@ -1,39 +1,38 @@
 import { Router } from "express";
-import { QuestaoRepository } from "../repositories/questaoRepository";
-import { QuestaoService } from "../services/questaoService";
-import { QuestaoController } from "../controller/questaoController";
-import { prisma } from "../prisma/prisma";
+import { questaoController } from "../controller/questaoController";
 
 const router = Router();
 
+/**
+ * Listar todas as questões
+ * GET /questoes
+ */
+router.get("/", (req, res) => {
+  return questaoController.listarTodas(req, res);
+});
 
-const repository = new QuestaoRepository(prisma);
-const service = new QuestaoService(repository);
-const controller = new QuestaoController(service);
+/**
+ * Buscar questão por ID
+ * GET /questoes/:id
+ */
+router.get("/:id", (req, res) => {
+  return questaoController.buscarPorId(req, res);
+});
 
-router.get(
-  "/",
-  controller.listar.bind(controller)
-);
+/**
+ * Listar questões por módulo
+ * GET /questoes/modulo/:moduloId
+ */
+router.get("/modulo/:moduloId", (req, res) => {
+  return questaoController.listarPorModulo(req, res);
+});
 
-router.get(
-  "/modulo/:moduloId",
-  controller.listarPorModulo.bind(controller)
-);
-
-router.get(
-  "/modulo/:moduloId/ordem/:ordem",
-  controller.buscarPorModuloEOrdem.bind(controller)
-);
-
-router.get(
-  "/dificuldade/:dificuldade",
-  controller.listarPorDificuldade.bind(controller)
-);
-
-router.get(
-  "/:id",
-  controller.obter.bind(controller)
-);
+/**
+ * Buscar questão por módulo e ordem
+ * GET /questoes/modulo/:moduloId/ordem/:ordem
+ */
+router.get("/modulo/:moduloId/ordem/:ordem", (req, res) => {
+  return questaoController.buscarPorModuloEOrdem(req, res);
+});
 
 export default router;

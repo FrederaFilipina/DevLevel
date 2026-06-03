@@ -64,8 +64,7 @@ model TemaUsuario {
   temaId Int
   tema   Tema @relation(fields: [temaId], references: [id])
 
-  pontuacaoTotal Int @default(0)
-
+  pontuacaoTotal    Int @default(0)
   trilhasConcluidas Int @default(0)
 
   nivelAtual NivelDificuldade @default(INICIANTE)
@@ -74,6 +73,8 @@ model TemaUsuario {
   updatedAt DateTime @updatedAt
 
   @@unique([usuarioId, temaId])
+  @@index([usuarioId])
+  @@index([temaId])
   @@map("tema_usuario")
 }
 
@@ -87,25 +88,32 @@ model Trilha {
   descricao String?
 
   nivel NivelDificuldade
-
   ordem Int
 
   pontuacaoMinima Int
 
+  tipoDesbloqueio TipoDesbloqueio @default(SEQUENCIAL)
+
   trilhaAnteriorId Int?
+  trilhaAnterior   Trilha?  @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
+  proximasTrilhas  Trilha[] @relation("ProgressaoTrilha")
 
-  trilhaAnterior Trilha? @relation("ProgressaoTrilha", fields: [trilhaAnteriorId], references: [id])
+  modulos Modulo[]
 
-  proximasTrilhas Trilha[] @relation("ProgressaoTrilha")
-
-  modulos  Modulo[]
-  usuarios TrilhaUsuario[]
+  usuarios               TrilhaUsuario[] @relation("TrilhaUsuarios")
+  // 🔥 FIX NECESSÁRIO
+  trilhasQueDesbloqueiam TrilhaUsuario[] @relation("DesbloqueioOrigem")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([temaId, ordem])
-  @@map("trilha")
+  @@index([temaId])
+}
+
+enum TipoDesbloqueio {
+  SEQUENCIAL
+  LIVRE
 }
 
 enum NivelDificuldade {
@@ -131,6 +139,7 @@ model Modulo {
   updatedAt DateTime @updatedAt
 
   @@unique([trilhaId, ordem])
+  @@index([trilhaId])
   @@map("modulo")
 }
 
@@ -143,7 +152,7 @@ model Questao {
   titulo    String
   descricao String @db.Text
 
-  dificuldade Int
+  nivel NivelDificuldade
 
   xpRecompensa Int
 
@@ -156,6 +165,7 @@ model Questao {
   respostasUsuario RespostaUsuario[]
 
   @@unique([moduloId, ordem])
+  @@index([moduloId])
   @@map("questao")
 }
 
@@ -167,9 +177,8 @@ model RespostaQuestao {
 
   titulo String
 
-  codigoResposta String @db.Text
-
-  explicacao String? @db.Text
+  codigoResposta String  @db.Text
+  explicacao     String? @db.Text
 
   pontuacao Int
 
@@ -185,6 +194,7 @@ model RespostaQuestao {
 
   respostasUsuarios RespostaUsuario[]
 
+  @@index([questaoId])
   @@map("resposta_questao")
 }
 
@@ -205,6 +215,8 @@ model RespostaUsuario {
   respondidaEm DateTime @default(now())
 
   @@unique([usuarioId, questaoId])
+  @@index([usuarioId])
+  @@index([questaoId])
   @@map("resposta_usuario")
 }
 
@@ -215,14 +227,11 @@ model TrilhaUsuario {
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
   trilhaId Int
-  trilha   Trilha @relation(fields: [trilhaId], references: [id])
+  trilha   Trilha @relation("TrilhaUsuarios", fields: [trilhaId], references: [id])
 
   status StatusTrilhaUsuario @default(EM_ANDAMENTO)
 
-  pontuacaoAtual Int @default(0)
-
-  pontuacaoNecessaria Int
-
+  pontuacaoAtual      Int @default(0)
   percentualConclusao Int @default(0)
 
   podeDesbloquear Boolean @default(false)
@@ -233,7 +242,12 @@ model TrilhaUsuario {
   iniciadaEm  DateTime  @default(now())
   concluidaEm DateTime?
 
+  desbloqueadaPorTrilhaId Int?
+  desbloqueadaPorTrilha   Trilha? @relation("DesbloqueioOrigem", fields: [desbloqueadaPorTrilhaId], references: [id])
+
   @@unique([usuarioId, trilhaId])
+  @@index([usuarioId])
+  @@index([trilhaId])
   @@map("trilha_usuario")
 }
 
@@ -249,8 +263,7 @@ model Conquista {
 
   titulo    String  @unique
   descricao String?
-
-  icone String?
+  icone     String?
 
   xpRecompensa Int
 
@@ -273,6 +286,9 @@ model ConquistaUsuario {
 
   desbloqueadaEm DateTime @default(now())
 
+  @@unique([usuarioId, conquistaId])
+  @@index([usuarioId])
+  @@index([conquistaId])
   @@map("conquista_usuario")
 }
 
@@ -297,12 +313,13 @@ model HabilidadeUsuario {
   habilidade   Habilidade @relation(fields: [habilidadeId], references: [id])
 
   pontuacao Int @default(0)
-
-  nivel Int @default(1)
+  nivel     Int @default(1)
 
   updatedAt DateTime @updatedAt
 
   @@unique([usuarioId, habilidadeId])
+  @@index([usuarioId])
+  @@index([habilidadeId])
   @@map("habilidade_usuario")
 }
 
@@ -321,14 +338,14 @@ model Token {
 
   token String @db.Text
 
-  type TypeToken @default(ACCESS)
-
-  revoked Boolean @default(false)
+  type    TypeToken @default(ACCESS)
+  revoked Boolean   @default(false)
 
   expiresAt DateTime
+
   usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 
-  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-
+  @@index([usuarioId])
   @@map("token")
 }

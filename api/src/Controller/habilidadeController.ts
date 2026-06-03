@@ -1,76 +1,80 @@
 import type { Request, Response } from "express";
-import type { HabilidadeService } from "../services/habilidadeService";
+import { z, ZodError } from "zod";
+import { habilidadeService } from "../services/habilidadeService";
+
+const idSchema = z.object({
+  id: z.coerce.number().int().positive("ID inválido"),
+});
+
+const nomeSchema = z.object({
+  nome: z.string().min(1, "Nome inválido"),
+});
 
 export class HabilidadeController {
-  constructor(
-    private readonly habilidadeService: HabilidadeService
-  ) { }
-
-  async listar(_req: Request, res: Response) {
+  async listarTodas(req: Request, res: Response) {
     try {
-      const habilidades =
-        await this.habilidadeService.listarTodas();
-
-      return res.status(200).json(habilidades);
-    } catch {
+      const result = await habilidadeService.listarTodas();
+      return res.status(200).json(result);
+    } catch (error) {
       return res.status(500).json({
-        erro: "Erro ao listar habilidades",
+        message: "Erro ao listar habilidades.",
       });
     }
   }
 
-  async obter(req: Request, res: Response) {
+  async buscarPorId(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const { id } = idSchema.parse(req.params);
 
-      if (isNaN(id)) {
-        return res.status(400).json({
-          erro: "ID invalido.",
-        });
-      }
+      const result = await habilidadeService.buscarPorId(id);
 
-      const habilidade =
-        await this.habilidadeService.buscarPorId(id);
-      if (!habilidade) {
+      if (!result) {
         return res.status(404).json({
-          erro: "Habilidade não encontrada."
+          message: "Habilidade não encontrada.",
         });
       }
 
-      return res.status(200).json(habilidade);
-    } catch {
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "ID inválido.",
+          errors: error.issues,
+        });
+      }
+
       return res.status(500).json({
-        erro: "Erro ao obter habilidade",
+        message: "Erro ao buscar habilidade por ID.",
       });
     }
   }
 
   async buscarPorNome(req: Request, res: Response) {
     try {
-      const nome = String(req.params.nome ?? "");
-if (!nome.trim()) {
-        return res.status(400).json({
-          erro: "Nome inválido."
-        });
-      }
+      const { nome } = nomeSchema.parse(req.params);
 
-      const habilidade =
-        await this.habilidadeService.buscarPorNome(
-          nome
-        );
+      const result = await habilidadeService.buscarPorNome(nome);
 
-
-      if (!habilidade) {
+      if (!result) {
         return res.status(404).json({
-          erro: "Habilidade não encontrada."
+          message: "Habilidade não encontrada.",
         });
       }
 
-      return res.status(200).json(habilidade);
-    } catch {
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Nome inválido.",
+          errors: error.issues,
+        });
+      }
+
       return res.status(500).json({
-        erro: "Erro ao buscar habilidade por nome",
+        message: "Erro ao buscar habilidade por nome.",
       });
     }
   }
 }
+
+export const habilidadeController = new HabilidadeController();

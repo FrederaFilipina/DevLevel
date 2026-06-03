@@ -1,46 +1,38 @@
 import { Router } from "express";
-
-import { RespostaQuestaoRepository } from "../repositories/questaoRespostaRepository";
-import { RespostaQuestaoService } from "../services/questaoRespostaService";
-import { QuestaoRespostaController } from "../controller/questaoRespostaController";
-import { prisma } from "../prisma/prisma";
+import { questaoRespostaController } from "../controller/questaoRespostaController";
 
 const router = Router();
 
+/**
+ * Listar todas as respostas
+ * GET /questao-respostas
+ */
+router.get("/", (req, res) => {
+  return questaoRespostaController.listarTodas(req, res);
+});
 
+/**
+ * Buscar resposta por ID
+ * GET /questao-respostas/:id
+ */
+router.get("/:id", (req, res) => {
+  return questaoRespostaController.buscarPorId(req, res);
+});
 
-const repository = new RespostaQuestaoRepository(prisma);
-const service = new RespostaQuestaoService(repository);
-const controller = new QuestaoRespostaController(service);
+/**
+ * Listar respostas por questão
+ * GET /questao-respostas/questao/:questaoId
+ */
+router.get("/questao/:questaoId", (req, res) => {
+  return questaoRespostaController.listarPorQuestao(req, res);
+});
 
-router.get(
-  "/questao/:questaoId",
-  controller.listarPorQuestao.bind(controller)
-);
-
-router.get(
-  "/questao/:questaoId/titulo/:titulo",
-  controller.buscarPorQuestaoETitulo.bind(controller)
-);
-
-router.get(
-  "/questao/:questaoId/melhores",
-  controller.listarMelhoresRespostas.bind(controller)
-);
-
-router.get(
-  "/questao/:questaoId/performance",
-  controller.listarPorPerformance.bind(controller)
-);
-
-router.get(
-  "/questao/:questaoId/clean-code",
-  controller.listarPorCleanCode.bind(controller)
-);
-
-router.get(
-  "/:id",
-  controller.obter.bind(controller)
-);
+/**
+ * Buscar respostas corretas por questão
+ * GET /questao-respostas/questao/:questaoId/corretas
+ */
+router.get("/questao/:questaoId/corretas", (req, res) => {
+  return questaoRespostaController.buscarCorretasPorQuestao(req, res);
+});
 
 export default router;

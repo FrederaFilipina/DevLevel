@@ -1,34 +1,42 @@
-import { type Tema } from "../prisma/generated/client";
-import type { TemaRepository } from "../repositories/temaRepository";
+import z from "zod";
+import type { Tema } from "../prisma/generated/client";
+import { temaRepository, TemaRepository } from "../repositories/temaRepository";
 
 export class TemaService {
-  constructor(
-    private readonly temaRepository: TemaRepository
-  ) {}
+  constructor(private readonly repository: TemaRepository) {}
 
   async listarTodos(): Promise<Tema[]> {
-    return await this.temaRepository.listarTodos();
+    try {
+      return await this.repository.listarTodos();
+    } catch (error) {
+      console.error("Erro no service ao listar temas:", error);
+      throw new Error("Não foi possível listar os temas.");
+    }
   }
 
-  async buscarPorId(id: number): Promise<Tema> {
-    const tema =
-      await this.temaRepository.buscarPorId(id);
+  async buscarPorId(id: number): Promise<Tema | null> {
+    const schema = z.number().int().positive("ID inválido");
+    const idValidated = schema.parse(id);
 
-    if (!tema) {
-      throw new Error("Tema não encontrado.");
+    try {
+      return await this.repository.buscarPorId(idValidated);
+    } catch (error) {
+      console.error("Erro no service ao buscar tema por ID:", error);
+      throw new Error("Não foi possível buscar o tema.");
     }
-
-    return tema;
   }
 
-  async buscarPorNome(nome: string): Promise<Tema> {
-    const tema =
-      await this.temaRepository.buscarPorNome(nome);
+  async buscarPorNome(nome: string): Promise<Tema | null> {
+    const schema = z.string().min(1, "Nome inválido");
+    const nomeValidated = schema.parse(nome);
 
-    if (!tema) {
-      throw new Error("Tema não encontrado.");
+    try {
+      return await this.repository.buscarPorNome(nomeValidated);
+    } catch (error) {
+      console.error("Erro no service ao buscar tema por nome:", error);
+      throw new Error("Não foi possível buscar o tema.");
     }
-
-    return tema;
   }
 }
+
+export const temaService = new TemaService(temaRepository);

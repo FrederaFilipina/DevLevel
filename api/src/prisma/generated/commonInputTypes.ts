@@ -171,6 +171,13 @@ export type EnumNivelDificuldadeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumNivelDificuldadeFilter<$PrismaModel>
 }
 
+export type EnumTipoDesbloqueioFilter<$PrismaModel = never> = {
+  equals?: $Enums.TipoDesbloqueio | Prisma.EnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  in?: $Enums.TipoDesbloqueio[] | Prisma.ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TipoDesbloqueio[] | Prisma.ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTipoDesbloqueioFilter<$PrismaModel> | $Enums.TipoDesbloqueio
+}
+
 export type IntNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
@@ -180,6 +187,16 @@ export type IntNullableFilter<$PrismaModel = never> = {
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
+}
+
+export type EnumTipoDesbloqueioWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TipoDesbloqueio | Prisma.EnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  in?: $Enums.TipoDesbloqueio[] | Prisma.ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TipoDesbloqueio[] | Prisma.ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTipoDesbloqueioWithAggregatesFilter<$PrismaModel> | $Enums.TipoDesbloqueio
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTipoDesbloqueioFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTipoDesbloqueioFilter<$PrismaModel>
 }
 
 export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -438,6 +455,23 @@ export type NestedEnumNivelDificuldadeWithAggregatesFilter<$PrismaModel = never>
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumNivelDificuldadeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumNivelDificuldadeFilter<$PrismaModel>
+}
+
+export type NestedEnumTipoDesbloqueioFilter<$PrismaModel = never> = {
+  equals?: $Enums.TipoDesbloqueio | Prisma.EnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  in?: $Enums.TipoDesbloqueio[] | Prisma.ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TipoDesbloqueio[] | Prisma.ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTipoDesbloqueioFilter<$PrismaModel> | $Enums.TipoDesbloqueio
+}
+
+export type NestedEnumTipoDesbloqueioWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TipoDesbloqueio | Prisma.EnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  in?: $Enums.TipoDesbloqueio[] | Prisma.ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TipoDesbloqueio[] | Prisma.ListEnumTipoDesbloqueioFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTipoDesbloqueioWithAggregatesFilter<$PrismaModel> | $Enums.TipoDesbloqueio
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTipoDesbloqueioFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTipoDesbloqueioFilter<$PrismaModel>
 }
 
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {

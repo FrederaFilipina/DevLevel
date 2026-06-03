@@ -1,28 +1,38 @@
 import { Router } from "express";
-import { prisma } from "../prisma/prisma";
-
-import { ConquistaRepository } from "../repositories/conquistaRepository";
-import { ConquistaService } from "../services/conquistaService";
-import { ConquistaController } from "../controller/conquistaController";
+import { conquistaController } from "../controller/conquistaController";
 
 const router = Router();
 
+/**
+ * Listar todas as conquistas
+ * GET /conquistas
+ */
+router.get("/", (req, res) => {
+  return conquistaController.listarTodas(req, res);
+});
 
+/**
+ * Buscar conquista por ID
+ * GET /conquistas/:id
+ */
+router.get("/:id", (req, res) => {
+  return conquistaController.buscarPorId(req, res);
+});
 
-const repository = new ConquistaRepository(prisma);
-const service = new ConquistaService(repository);
-const controller = new ConquistaController(service);
+/**
+ * Buscar conquista por título
+ * GET /conquistas/titulo/:titulo
+ */
+router.get("/titulo/:titulo", (req, res) => {
+  return conquistaController.buscarPorTitulo(req, res);
+});
 
-router.get("/", controller.listar.bind(controller));
-
-router.get(
-  "/titulo/:titulo",
-  controller.buscarPorTitulo.bind(controller)
-);
-
-router.get(
-  "/:id",
-  controller.obter.bind(controller)
-);
+/**
+ * Listar conquistas ordenadas por XP
+ * GET /conquistas/ordenadas/xp
+ */
+router.get("/ordenadas/xp", (req, res) => {
+  return conquistaController.listarOrdenadasPorXp(req, res);
+});
 
 export default router;

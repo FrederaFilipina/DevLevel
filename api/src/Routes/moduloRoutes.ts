@@ -1,35 +1,38 @@
 import { Router } from "express";
-import {prisma } from "../prisma/prisma";
-
-import { ModuloRepository } from "../repositories/moduloRepository";
-import { ModuloService } from "../services/moduloService";
-import { ModuloController } from "../controller/moduloController";
+import { moduloController } from "../controller/moduloController";
 
 const router = Router();
 
+/**
+ * Listar todos os módulos
+ * GET /modulos
+ */
+router.get("/", (req, res) => {
+  return moduloController.listarTodos(req, res);
+});
 
-const repository = new ModuloRepository(prisma);
-const service = new ModuloService(repository);
-const controller = new ModuloController(service);
+/**
+ * Buscar módulo por ID
+ * GET /modulos/:id
+ */
+router.get("/:id", (req, res) => {
+  return moduloController.buscarPorId(req, res);
+});
 
-router.get(
-  "/",
-  controller.listar.bind(controller)
-);
+/**
+ * Listar módulos por trilha
+ * GET /modulos/trilha/:trilhaId
+ */
+router.get("/trilha/:trilhaId", (req, res) => {
+  return moduloController.listarPorTrilha(req, res);
+});
 
-router.get(
-  "/trilha/:trilhaId",
-  controller.listarPorTrilha.bind(controller)
-);
-
-router.get(
-  "/trilha/:trilhaId/ordem/:ordem",
-  controller.buscarPorTrilhaEOrdem.bind(controller)
-);
-
-router.get(
-  "/:id",
-  controller.obter.bind(controller)
-);
+/**
+ * Buscar módulo por trilha e ordem
+ * GET /modulos/trilha/:trilhaId/ordem/:ordem
+ */
+router.get("/trilha/:trilhaId/ordem/:ordem", (req, res) => {
+  return moduloController.buscarPorTrilhaEOrdem(req, res);
+});
 
 export default router;

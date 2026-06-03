@@ -1,44 +1,62 @@
 import { Router } from "express";
-import { TrilhaRepository } from "../repositories/trilhaRepository";
-import { TrilhaService } from "../services/trilhaService";
-import { TrilhaController } from "../controller/trilhaController";
+import { trilhaController } from "../controller/trilhaController";
 
 const router = Router();
-import { prisma } from "../prisma/prisma";
 
-const repository = new TrilhaRepository(prisma);
-const service = new TrilhaService(repository);
-const controller = new TrilhaController(service);
+/**
+ * Listar todas as trilhas
+ * GET /trilhas
+ */
+router.get("/", (req, res) => {
+  return trilhaController.listarTodas(req, res);
+});
 
-router.get(
-  "/",
-  controller.listar.bind(controller)
-);
+/**
+ * Buscar trilha por ID
+ * GET /trilhas/:id
+ */
+router.get("/:id", (req, res) => {
+  return trilhaController.buscarPorId(req, res);
+});
 
-router.get(
-  "/tema/:temaId",
-  controller.listarPorTema.bind(controller)
-);
+/**
+ * Buscar trilhas por tema
+ * GET /trilhas/tema/:temaId
+ */
+router.get("/tema/:temaId", (req, res) => {
+  return trilhaController.listarPorTema(req, res);
+});
 
-router.get(
-  "/tema/:temaId/ordem/:ordem",
-  controller.buscarPorTemaEOrdem.bind(controller)
-);
+/**
+ * Buscar trilha por tema e ordem
+ * GET /trilhas/tema/:temaId/ordem/:ordem
+ */
+router.get("/tema/:temaId/ordem/:ordem", (req, res) => {
+  return trilhaController.buscarPorTemaEOrdem(req, res);
+});
 
+/**
+ * Buscar trilha com dependências
+ * GET /trilhas/:id/dependencias
+ */
+router.get("/:id/dependencias", (req, res) => {
+  return trilhaController.buscarComDependencias(req, res);
+});
 
-router.get(
-  "/:id/anterior",
-  controller.buscarTrilhaAnterior.bind(controller)
-);
+/**
+ * Listar trilhas com regras por tema
+ * GET /trilhas/tema/:temaId/regras
+ */
+router.get("/tema/:temaId/regras", (req, res) => {
+  return trilhaController.listarComRegrasPorTema(req, res);
+});
 
-router.get(
-  "/:id/proximas",
-  controller.buscarProximasTrilhas.bind(controller)
-);
-
-router.get(
-  "/:id",
-  controller.obter.bind(controller)
-);
+/**
+ * Validar acesso à trilha
+ * GET /trilhas/:id/acesso
+ */
+router.get("/:id/acesso", (req, res) => {
+  return trilhaController.validarAcessoTrilha(req, res);
+});
 
 export default router;

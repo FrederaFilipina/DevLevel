@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const TipoDesbloqueio = {
+  SEQUENCIAL: 'SEQUENCIAL',
+  LIVRE: 'LIVRE'
+} as const
+
+export type TipoDesbloqueio = (typeof TipoDesbloqueio)[keyof typeof TipoDesbloqueio]
+
+
 export const NivelDificuldade = {
   INICIANTE: 'INICIANTE',
   INTERMEDIARIO: 'INTERMEDIARIO',

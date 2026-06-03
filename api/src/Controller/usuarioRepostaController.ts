@@ -1,112 +1,155 @@
-import { Router } from "express";
 import type { Request, Response } from "express";
-import { RespostaUsuarioService } from "../services/usuarioRespostaService";
-import { RespostaUsuarioRepository } from "../repositories/usuarioRespostaRepository";
-import { prisma } from "../prisma/prisma";
+import { z, ZodError } from "zod";
+import { usuarioRespostaService } from "../services/usuarioRespostaService";
 
-export class RespostaUsuarioController {
-  private router: Router;
-  private respostaUsuarioService: RespostaUsuarioService;
+const idSchema = z.object({
+  id: z.coerce.number().int().positive("ID inválido"),
+});
 
-  constructor() {
-    this.router = Router();
-    const respostaUsuarioRepository = new RespostaUsuarioRepository(prisma);
-    this.respostaUsuarioService = new RespostaUsuarioService(
-      respostaUsuarioRepository
-    );
-    this.initRoutes();
-  }
+const usuarioQuestaoSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  questaoId: z.coerce.number().int().positive("QuestaoId inválido"),
+});
 
-  private initRoutes(): void {
-    this.router.get("/usuario/:usuarioId", this.listarPorUsuario.bind(this));
-    this.router.get("/questao/:questaoId", this.listarPorQuestao.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-  }
+const registroRespostaSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  questaoId: z.coerce.number().int().positive("QuestaoId inválido"),
+  respostaQuestaoId: z.coerce.number().int().positive("RespostaQuestaoId inválido"),
+  pontuacaoRecebida: z.coerce.number().nonnegative("Pontuação inválida"),
+});
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+const pontuacaoSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  questaoId: z.coerce.number().int().positive("QuestaoId inválido"),
+  pontuacao: z.coerce.number().nonnegative("Pontuação inválida"),
+});
+
+export class UsuarioRespostaController {
+  // =========================
+  // LEITURA
+  // =========================
+
+  async listarTodos(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const idNumero = Number(id);
-
-      if (isNaN(idNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "ID deve ser um número",
-        });
-        return;
-      }
-
-      const resposta = await this.respostaUsuarioService.buscarPorId(idNumero);
-
-      res.status(200).json({
-        success: true,
-        data: resposta,
-      });
+      const result = await usuarioRespostaService.listarTodos();
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Resposta não encontrada",
+      return res.status(500).json({
+        message: "Erro ao listar respostas do usuário.",
       });
     }
   }
 
-  private async listarPorUsuario(req: Request, res: Response): Promise<void> {
+  async buscarPorId(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      const usuarioIdNumero = Number(usuarioId);
+      const { id } = idSchema.parse(req.params);
 
-      if (isNaN(usuarioIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "usuarioId deve ser um número",
+      const result = await usuarioRespostaService.buscarPorId(id);
+
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const respostas = await this.respostaUsuarioService.listarPorUsuario(usuarioIdNumero);
-
-      res.status(200).json({
-        success: true,
-        data: respostas,
-      });
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar respostas",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "ID inválido.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao buscar registro.",
       });
     }
   }
 
-  private async listarPorQuestao(req: Request, res: Response): Promise<void> {
+  async buscarPorUsuarioEQuestao(req: Request, res: Response) {
     try {
-      const { questaoId } = req.params;
-      const questaoIdNumero = Number(questaoId);
+      const { usuarioId, questaoId } = usuarioQuestaoSchema.parse(
+        req.params
+      );
 
-      if (isNaN(questaoIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "questaoId deve ser um número",
+      const result =
+        await usuarioRespostaService.buscarPorUsuarioEQuestao(
+          usuarioId,
+          questaoId
+        );
+
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const respostas = await this.respostaUsuarioService.listarPorQuestao(questaoIdNumero);
-
-      res.status(200).json({
-        success: true,
-        data: respostas,
-      });
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar respostas",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao buscar resposta do usuário.",
       });
     }
   }
 
-  public getRouter(): Router {
-    return this.router;
+  // =========================
+  // REGISTRO / UPSERT
+  // =========================
+
+  async registrarResposta(req: Request, res: Response) {
+    try {
+      const data = registroRespostaSchema.parse(req.body);
+
+      const result = await usuarioRespostaService.registrarResposta(data);
+
+      return res.status(201).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao registrar resposta.",
+      });
+    }
+  }
+
+  async atualizarPontuacao(req: Request, res: Response) {
+    try {
+      const { usuarioId, questaoId, pontuacao } =
+        pontuacaoSchema.parse(req.body);
+
+      const result = await usuarioRespostaService.atualizarPontuacao(
+        usuarioId,
+        questaoId,
+        pontuacao
+      );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao atualizar pontuação.",
+      });
+    }
   }
 }
 
-export const respostaUsuarioController = new RespostaUsuarioController();
+export const usuarioRespostaController = new UsuarioRespostaController();

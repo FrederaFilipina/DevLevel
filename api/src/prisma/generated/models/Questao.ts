@@ -29,7 +29,6 @@ export type AggregateQuestao = {
 export type QuestaoAvgAggregateOutputType = {
   id: number | null
   moduloId: number | null
-  dificuldade: number | null
   xpRecompensa: number | null
   ordem: number | null
 }
@@ -37,7 +36,6 @@ export type QuestaoAvgAggregateOutputType = {
 export type QuestaoSumAggregateOutputType = {
   id: number | null
   moduloId: number | null
-  dificuldade: number | null
   xpRecompensa: number | null
   ordem: number | null
 }
@@ -47,7 +45,7 @@ export type QuestaoMinAggregateOutputType = {
   moduloId: number | null
   titulo: string | null
   descricao: string | null
-  dificuldade: number | null
+  nivel: $Enums.NivelDificuldade | null
   xpRecompensa: number | null
   ordem: number | null
   createdAt: Date | null
@@ -59,7 +57,7 @@ export type QuestaoMaxAggregateOutputType = {
   moduloId: number | null
   titulo: string | null
   descricao: string | null
-  dificuldade: number | null
+  nivel: $Enums.NivelDificuldade | null
   xpRecompensa: number | null
   ordem: number | null
   createdAt: Date | null
@@ -71,7 +69,7 @@ export type QuestaoCountAggregateOutputType = {
   moduloId: number
   titulo: number
   descricao: number
-  dificuldade: number
+  nivel: number
   xpRecompensa: number
   ordem: number
   createdAt: number
@@ -83,7 +81,6 @@ export type QuestaoCountAggregateOutputType = {
 export type QuestaoAvgAggregateInputType = {
   id?: true
   moduloId?: true
-  dificuldade?: true
   xpRecompensa?: true
   ordem?: true
 }
@@ -91,7 +88,6 @@ export type QuestaoAvgAggregateInputType = {
 export type QuestaoSumAggregateInputType = {
   id?: true
   moduloId?: true
-  dificuldade?: true
   xpRecompensa?: true
   ordem?: true
 }
@@ -101,7 +97,7 @@ export type QuestaoMinAggregateInputType = {
   moduloId?: true
   titulo?: true
   descricao?: true
-  dificuldade?: true
+  nivel?: true
   xpRecompensa?: true
   ordem?: true
   createdAt?: true
@@ -113,7 +109,7 @@ export type QuestaoMaxAggregateInputType = {
   moduloId?: true
   titulo?: true
   descricao?: true
-  dificuldade?: true
+  nivel?: true
   xpRecompensa?: true
   ordem?: true
   createdAt?: true
@@ -125,7 +121,7 @@ export type QuestaoCountAggregateInputType = {
   moduloId?: true
   titulo?: true
   descricao?: true
-  dificuldade?: true
+  nivel?: true
   xpRecompensa?: true
   ordem?: true
   createdAt?: true
@@ -224,7 +220,7 @@ export type QuestaoGroupByOutputType = {
   moduloId: number
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt: Date
@@ -259,7 +255,7 @@ export type QuestaoWhereInput = {
   moduloId?: Prisma.IntFilter<"Questao"> | number
   titulo?: Prisma.StringFilter<"Questao"> | string
   descricao?: Prisma.StringFilter<"Questao"> | string
-  dificuldade?: Prisma.IntFilter<"Questao"> | number
+  nivel?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFilter<"Questao"> | number
   ordem?: Prisma.IntFilter<"Questao"> | number
   createdAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
@@ -274,7 +270,7 @@ export type QuestaoOrderByWithRelationInput = {
   moduloId?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
-  dificuldade?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -293,7 +289,7 @@ export type QuestaoWhereUniqueInput = Prisma.AtLeast<{
   moduloId?: Prisma.IntFilter<"Questao"> | number
   titulo?: Prisma.StringFilter<"Questao"> | string
   descricao?: Prisma.StringFilter<"Questao"> | string
-  dificuldade?: Prisma.IntFilter<"Questao"> | number
+  nivel?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFilter<"Questao"> | number
   ordem?: Prisma.IntFilter<"Questao"> | number
   createdAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
@@ -308,7 +304,7 @@ export type QuestaoOrderByWithAggregationInput = {
   moduloId?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
-  dificuldade?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -328,7 +324,7 @@ export type QuestaoScalarWhereWithAggregatesInput = {
   moduloId?: Prisma.IntWithAggregatesFilter<"Questao"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"Questao"> | string
   descricao?: Prisma.StringWithAggregatesFilter<"Questao"> | string
-  dificuldade?: Prisma.IntWithAggregatesFilter<"Questao"> | number
+  nivel?: Prisma.EnumNivelDificuldadeWithAggregatesFilter<"Questao"> | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntWithAggregatesFilter<"Questao"> | number
   ordem?: Prisma.IntWithAggregatesFilter<"Questao"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Questao"> | Date | string
@@ -338,7 +334,7 @@ export type QuestaoScalarWhereWithAggregatesInput = {
 export type QuestaoCreateInput = {
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -353,7 +349,7 @@ export type QuestaoUncheckedCreateInput = {
   moduloId: number
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -365,7 +361,7 @@ export type QuestaoUncheckedCreateInput = {
 export type QuestaoUpdateInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -380,7 +376,7 @@ export type QuestaoUncheckedUpdateInput = {
   moduloId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -394,7 +390,7 @@ export type QuestaoCreateManyInput = {
   moduloId: number
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -404,7 +400,7 @@ export type QuestaoCreateManyInput = {
 export type QuestaoUpdateManyMutationInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -416,7 +412,7 @@ export type QuestaoUncheckedUpdateManyInput = {
   moduloId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -443,7 +439,7 @@ export type QuestaoCountOrderByAggregateInput = {
   moduloId?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
-  dificuldade?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -453,7 +449,6 @@ export type QuestaoCountOrderByAggregateInput = {
 export type QuestaoAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   moduloId?: Prisma.SortOrder
-  dificuldade?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
 }
@@ -463,7 +458,7 @@ export type QuestaoMaxOrderByAggregateInput = {
   moduloId?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
-  dificuldade?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -475,7 +470,7 @@ export type QuestaoMinOrderByAggregateInput = {
   moduloId?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
-  dificuldade?: Prisma.SortOrder
+  nivel?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -485,7 +480,6 @@ export type QuestaoMinOrderByAggregateInput = {
 export type QuestaoSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   moduloId?: Prisma.SortOrder
-  dificuldade?: Prisma.SortOrder
   xpRecompensa?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
 }
@@ -568,7 +562,7 @@ export type QuestaoUpdateOneRequiredWithoutRespostasUsuarioNestedInput = {
 export type QuestaoCreateWithoutModuloInput = {
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -581,7 +575,7 @@ export type QuestaoUncheckedCreateWithoutModuloInput = {
   id?: number
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -624,7 +618,7 @@ export type QuestaoScalarWhereInput = {
   moduloId?: Prisma.IntFilter<"Questao"> | number
   titulo?: Prisma.StringFilter<"Questao"> | string
   descricao?: Prisma.StringFilter<"Questao"> | string
-  dificuldade?: Prisma.IntFilter<"Questao"> | number
+  nivel?: Prisma.EnumNivelDificuldadeFilter<"Questao"> | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFilter<"Questao"> | number
   ordem?: Prisma.IntFilter<"Questao"> | number
   createdAt?: Prisma.DateTimeFilter<"Questao"> | Date | string
@@ -634,7 +628,7 @@ export type QuestaoScalarWhereInput = {
 export type QuestaoCreateWithoutRespostasInput = {
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -648,7 +642,7 @@ export type QuestaoUncheckedCreateWithoutRespostasInput = {
   moduloId: number
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -675,7 +669,7 @@ export type QuestaoUpdateToOneWithWhereWithoutRespostasInput = {
 export type QuestaoUpdateWithoutRespostasInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -689,7 +683,7 @@ export type QuestaoUncheckedUpdateWithoutRespostasInput = {
   moduloId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -700,7 +694,7 @@ export type QuestaoUncheckedUpdateWithoutRespostasInput = {
 export type QuestaoCreateWithoutRespostasUsuarioInput = {
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -714,7 +708,7 @@ export type QuestaoUncheckedCreateWithoutRespostasUsuarioInput = {
   moduloId: number
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -741,7 +735,7 @@ export type QuestaoUpdateToOneWithWhereWithoutRespostasUsuarioInput = {
 export type QuestaoUpdateWithoutRespostasUsuarioInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -755,7 +749,7 @@ export type QuestaoUncheckedUpdateWithoutRespostasUsuarioInput = {
   moduloId?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -767,7 +761,7 @@ export type QuestaoCreateManyModuloInput = {
   id?: number
   titulo: string
   descricao: string
-  dificuldade: number
+  nivel: $Enums.NivelDificuldade
   xpRecompensa: number
   ordem: number
   createdAt?: Date | string
@@ -777,7 +771,7 @@ export type QuestaoCreateManyModuloInput = {
 export type QuestaoUpdateWithoutModuloInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -790,7 +784,7 @@ export type QuestaoUncheckedUpdateWithoutModuloInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -803,7 +797,7 @@ export type QuestaoUncheckedUpdateManyWithoutModuloInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
-  dificuldade?: Prisma.IntFieldUpdateOperationsInput | number
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   xpRecompensa?: Prisma.IntFieldUpdateOperationsInput | number
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -855,7 +849,7 @@ export type QuestaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   moduloId?: boolean
   titulo?: boolean
   descricao?: boolean
-  dificuldade?: boolean
+  nivel?: boolean
   xpRecompensa?: boolean
   ordem?: boolean
   createdAt?: boolean
@@ -871,7 +865,7 @@ export type QuestaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   moduloId?: boolean
   titulo?: boolean
   descricao?: boolean
-  dificuldade?: boolean
+  nivel?: boolean
   xpRecompensa?: boolean
   ordem?: boolean
   createdAt?: boolean
@@ -884,7 +878,7 @@ export type QuestaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   moduloId?: boolean
   titulo?: boolean
   descricao?: boolean
-  dificuldade?: boolean
+  nivel?: boolean
   xpRecompensa?: boolean
   ordem?: boolean
   createdAt?: boolean
@@ -897,14 +891,14 @@ export type QuestaoSelectScalar = {
   moduloId?: boolean
   titulo?: boolean
   descricao?: boolean
-  dificuldade?: boolean
+  nivel?: boolean
   xpRecompensa?: boolean
   ordem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type QuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "moduloId" | "titulo" | "descricao" | "dificuldade" | "xpRecompensa" | "ordem" | "createdAt" | "updatedAt", ExtArgs["result"]["questao"]>
+export type QuestaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "moduloId" | "titulo" | "descricao" | "nivel" | "xpRecompensa" | "ordem" | "createdAt" | "updatedAt", ExtArgs["result"]["questao"]>
 export type QuestaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   modulo?: boolean | Prisma.ModuloDefaultArgs<ExtArgs>
   respostas?: boolean | Prisma.Questao$respostasArgs<ExtArgs>
@@ -930,7 +924,7 @@ export type $QuestaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     moduloId: number
     titulo: string
     descricao: string
-    dificuldade: number
+    nivel: $Enums.NivelDificuldade
     xpRecompensa: number
     ordem: number
     createdAt: Date
@@ -1365,7 +1359,7 @@ export interface QuestaoFieldRefs {
   readonly moduloId: Prisma.FieldRef<"Questao", 'Int'>
   readonly titulo: Prisma.FieldRef<"Questao", 'String'>
   readonly descricao: Prisma.FieldRef<"Questao", 'String'>
-  readonly dificuldade: Prisma.FieldRef<"Questao", 'Int'>
+  readonly nivel: Prisma.FieldRef<"Questao", 'NivelDificuldade'>
   readonly xpRecompensa: Prisma.FieldRef<"Questao", 'Int'>
   readonly ordem: Prisma.FieldRef<"Questao", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Questao", 'DateTime'>

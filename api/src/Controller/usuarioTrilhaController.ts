@@ -1,134 +1,240 @@
-import { Router } from "express";
 import type { Request, Response } from "express";
-import { TrilhaUsuarioService } from "../services/usuarioTrilhaService";
-import { TrilhaUsuarioRepository } from "../repositories/usuarioTrilhaRepository";
-import { prisma } from "../prisma/prisma";
+import { z, ZodError } from "zod";
+import { usuarioTrilhaService } from "../services/usuarioTrilhaService";
 
-export class TrilhaUsuarioController {
-  private router: Router;
-  private trilhaUsuarioService: TrilhaUsuarioService;
+const idSchema = z.object({
+  id: z.coerce.number().int().positive("ID inválido"),
+});
 
-  constructor() {
-    this.router = Router();
-    const trilhaUsuarioRepository = new TrilhaUsuarioRepository(prisma);
-    this.trilhaUsuarioService = new TrilhaUsuarioService(trilhaUsuarioRepository);
-    this.initRoutes();
-  }
+const usuarioTrilhaSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  trilhaId: z.coerce.number().int().positive("TrilhaId inválido"),
+});
 
-  private initRoutes(): void {
-    this.router.get("/usuario/:usuarioId", this.listarPorUsuario.bind(this));
-    this.router.get("/trilha/:trilhaId", this.listarPorTrilha.bind(this));
-    this.router.get("/status/:status", this.listarPorStatus.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-  }
+const statusSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  trilhaId: z.coerce.number().int().positive("TrilhaId inválido"),
+  status: z.enum([
+    "EM_ANDAMENTO",
+    "CONCLUIDA",
+    "AGUARDANDO_REVISAO",
+    "BLOQUEADA",
+  ]),
+});
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+const progressoNumericoSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  trilhaId: z.coerce.number().int().positive("TrilhaId inválido"),
+  dados: z.object({
+    pontuacaoAtual: z.number().nonnegative().optional(),
+    percentualConclusao: z.number().min(0).max(100).optional(),
+    moduloAtualId: z.number().int().positive().optional(),
+    questaoAtualId: z.number().int().positive().optional(),
+    podeDesbloquear: z.boolean().optional(),
+    desbloqueadaPorTrilhaId: z.number().int().positive().optional(),
+  }),
+});
+
+export class UsuarioTrilhaController {
+  // =========================
+  // LEITURA
+  // =========================
+
+  async listarTodos(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const idNumero = Number(id);
+      const result = await usuarioTrilhaService.listarTodos();
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(500).json({
+        message: "Erro ao listar trilhas do usuário.",
+      });
+    }
+  }
 
-      if (isNaN(idNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "ID deve ser um número",
+  async buscarPorId(req: Request, res: Response) {
+    try {
+      const { id } = idSchema.parse(req.params);
+
+      const result = await usuarioTrilhaService.buscarPorId(id);
+
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const trilhaUsuario = await this.trilhaUsuarioService.buscarPorId(idNumero);
-
-      res.status(200).json({
-        success: true,
-        data: trilhaUsuario,
-      });
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Progresso não encontrado",
-      });
-    }
-  }
-
-  private async listarPorUsuario(req: Request, res: Response): Promise<void> {
-    try {
-      const { usuarioId } = req.params;
-      const usuarioIdNumero = Number(usuarioId);
-
-      if (isNaN(usuarioIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "usuarioId deve ser um número",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "ID inválido.",
+          errors: error.issues,
         });
-        return;
       }
 
-      const trilhasUsuario = await this.trilhaUsuarioService.listarPorUsuario(
-        usuarioIdNumero
-      );
-
-      res.status(200).json({
-        success: true,
-        data: trilhasUsuario,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar trilhas",
+      return res.status(500).json({
+        message: "Erro ao buscar registro.",
       });
     }
   }
 
-  private async listarPorTrilha(req: Request, res: Response): Promise<void> {
+  async buscarPorUsuarioETrilha(req: Request, res: Response) {
     try {
-      const { trilhaId } = req.params;
-      const trilhaIdNumero = Number(trilhaId);
+      const { usuarioId, trilhaId } = usuarioTrilhaSchema.parse(req.params);
 
-      if (isNaN(trilhaIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "trilhaId deve ser um número",
+      const result =
+        await usuarioTrilhaService.buscarPorUsuarioETrilha(
+          usuarioId,
+          trilhaId
+        );
+
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const trilhasUsuario = await this.trilhaUsuarioService.listarPorTrilha(
-        trilhaIdNumero
-      );
-
-      res.status(200).json({
-        success: true,
-        data: trilhasUsuario,
-      });
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar progressos",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao buscar trilha do usuário.",
       });
     }
   }
 
-  private async listarPorStatus(req: Request, res: Response): Promise<void> {
+  // =========================
+  // PROGRESSO
+  // =========================
+
+  async atualizarProgresso(req: Request, res: Response) {
     try {
-      const { status } = req.params;
-      const trilhasUsuario = await this.trilhaUsuarioService.listarPorStatus(
-        status as any
-      );
+      const { usuarioId, trilhaId } = usuarioTrilhaSchema.parse(req.params);
 
-      res.status(200).json({
-        success: true,
-        data: trilhasUsuario,
-      });
+      const result =
+        await usuarioTrilhaService.atualizarProgresso(
+          usuarioId,
+          trilhaId,
+          req.body
+        );
+
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar progressos",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao atualizar progresso da trilha.",
       });
     }
   }
 
-  public getRouter(): Router {
-    return this.router;
+  async atualizarStatus(req: Request, res: Response) {
+    try {
+      const { usuarioId, trilhaId, status } = statusSchema.parse(req.body);
+
+      const result =
+        await usuarioTrilhaService.atualizarStatus(
+          usuarioId,
+          trilhaId,
+          status
+        );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao atualizar status da trilha.",
+      });
+    }
+  }
+
+  // =========================
+  // PROGRESSO NUMÉRICO
+  // =========================
+
+  async atualizarProgressoNumerico(req: Request, res: Response) {
+    try {
+      const { usuarioId, trilhaId, dados } =
+        progressoNumericoSchema.parse(req.body);
+
+      const cleanDados = Object.fromEntries(
+        Object.entries(dados).filter(([_, value]) => value !== undefined)
+      ) as {
+        pontuacaoAtual?: number;
+        percentualConclusao?: number;
+        moduloAtualId?: number;
+        questaoAtualId?: number;
+        podeDesbloquear?: boolean;
+        desbloqueadaPorTrilhaId?: number;
+      };
+
+      const result =
+        await usuarioTrilhaService.atualizarProgressoNumerico(
+          usuarioId,
+          trilhaId,
+          cleanDados
+        );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao atualizar progresso numérico.",
+      });
+    }
+  }
+
+  // =========================
+  // CONCLUSÃO
+  // =========================
+
+  async concluirTrilha(req: Request, res: Response) {
+    try {
+      const { usuarioId, trilhaId } = usuarioTrilhaSchema.parse(req.body);
+
+      const result =
+        await usuarioTrilhaService.concluirTrilha(
+          usuarioId,
+          trilhaId
+        );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao concluir trilha.",
+      });
+    }
   }
 }
 
-export const trilhaUsuarioController = new TrilhaUsuarioController();
+export const usuarioTrilhaController = new UsuarioTrilhaController();

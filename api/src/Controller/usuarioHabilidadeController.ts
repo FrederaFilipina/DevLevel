@@ -1,146 +1,217 @@
-import { Router } from "express";
 import type { Request, Response } from "express";
-import { HabilidadeUsuarioService } from "../services/usuarioHabilidadeService";
-import { HabilidadeUsuarioRepository } from "../repositories/usuarioHabilidadeRepository";
-import { prisma } from "../prisma/prisma";
+import { z, ZodError } from "zod";
+import { usuarioHabilidadeService } from "../services/usuarioHabilidadeService";
 
-export class HabilidadeUsuarioController {
-  private router: Router;
-  private habilidadeUsuarioService: HabilidadeUsuarioService;
+const idSchema = z.object({
+  id: z.coerce.number().int().positive("ID inválido"),
+});
 
-  constructor() {
-    this.router = Router();
-    const habilidadeUsuarioRepository = new HabilidadeUsuarioRepository(prisma);
-    this.habilidadeUsuarioService = new HabilidadeUsuarioService(
-      habilidadeUsuarioRepository
-    );
-    this.initRoutes();
-  }
+const usuarioHabilidadeSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  habilidadeId: z.coerce.number().int().positive("HabilidadeId inválido"),
+});
 
-  private initRoutes(): void {
-    this.router.get("/usuario/:usuarioId", this.listarPorUsuario.bind(this));
-    this.router.get("/habilidade/:habilidadeId", this.listarPorHabilidade.bind(this));
-    this.router.get("/nivel/:nivel", this.listarPorNivel.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-  }
+const incrementoSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  habilidadeId: z.coerce.number().int().positive("HabilidadeId inválido"),
+  pontos: z.coerce.number().int().positive("Pontos inválidos"),
+});
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+const nivelSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  habilidadeId: z.coerce.number().int().positive("HabilidadeId inválido"),
+  incremento: z.coerce.number().int().positive().optional(),
+});
+
+export class UsuarioHabilidadeController {
+  // =========================
+  // LEITURA
+  // =========================
+
+  async listarTodos(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const idNumero = Number(id);
-
-      if (isNaN(idNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "ID deve ser um número",
-        });
-        return;
-      }
-
-      const habilidadeUsuario = await this.habilidadeUsuarioService.buscarPorId(idNumero);
-
-      res.status(200).json({
-        success: true,
-        data: habilidadeUsuario,
-      });
+      const result = await usuarioHabilidadeService.listarTodos();
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Habilidade não encontrada",
+      return res.status(500).json({
+        message: "Erro ao listar habilidades do usuário.",
       });
     }
   }
 
-  private async listarPorUsuario(req: Request, res: Response): Promise<void> {
+  async buscarPorId(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      const usuarioIdNumero = Number(usuarioId);
+      const { id } = idSchema.parse(req.params);
 
-      if (isNaN(usuarioIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "usuarioId deve ser um número",
+      const result = await usuarioHabilidadeService.buscarPorId(id);
+
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const habilidadesUsuario = await this.habilidadeUsuarioService.listarPorUsuario(
-        usuarioIdNumero
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "ID inválido.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao buscar registro.",
+      });
+    }
+  }
+
+  async buscarPorUsuarioEHabilidade(req: Request, res: Response) {
+    try {
+      const { usuarioId, habilidadeId } = usuarioHabilidadeSchema.parse(
+        req.params
       );
 
-      res.status(200).json({
-        success: true,
-        data: habilidadesUsuario,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar habilidades",
-      });
-    }
-  }
+      const result =
+        await usuarioHabilidadeService.buscarPorUsuarioEHabilidade(
+          usuarioId,
+          habilidadeId
+        );
 
-  private async listarPorHabilidade(req: Request, res: Response): Promise<void> {
-    try {
-      const { habilidadeId } = req.params;
-      const habilidadeIdNumero = Number(habilidadeId);
-
-      if (isNaN(habilidadeIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "habilidadeId deve ser um número",
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const habilidadesUsuario = await this.habilidadeUsuarioService.listarPorHabilidade(
-        habilidadeIdNumero
-      );
-
-      res.status(200).json({
-        success: true,
-        data: habilidadesUsuario,
-      });
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar habilidades",
-      });
-    }
-  }
-
-  private async listarPorNivel(req: Request, res: Response): Promise<void> {
-    try {
-      const { nivel } = req.params;
-      const nivelNumero = Number(nivel);
-
-      if (isNaN(nivelNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "nivel deve ser um número",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
         });
-        return;
       }
 
-      const habilidadesUsuario = await this.habilidadeUsuarioService.listarPorNivel(
-        nivelNumero
-      );
-
-      res.status(200).json({
-        success: true,
-        data: habilidadesUsuario,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar habilidades",
+      return res.status(500).json({
+        message: "Erro ao buscar habilidade do usuário.",
       });
     }
   }
 
-  public getRouter(): Router {
-    return this.router;
+  // =========================
+  // PROGRESSO
+  // =========================
+
+  async atualizarProgresso(req: Request, res: Response) {
+    try {
+      const { usuarioId, habilidadeId } = usuarioHabilidadeSchema.parse(
+        req.params
+      );
+
+      const result =
+        await usuarioHabilidadeService.atualizarProgresso(
+          usuarioId,
+          habilidadeId,
+          req.body
+        );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao atualizar progresso da habilidade.",
+      });
+    }
+  }
+
+  async incrementarPontuacao(req: Request, res: Response) {
+    try {
+      const { usuarioId, habilidadeId, pontos } = incrementoSchema.parse(
+        req.body
+      );
+
+      const result =
+        await usuarioHabilidadeService.incrementarPontuacao(
+          usuarioId,
+          habilidadeId,
+          pontos
+        );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao incrementar pontuação.",
+      });
+    }
+  }
+
+  async subirNivel(req: Request, res: Response) {
+    try {
+      const { usuarioId, habilidadeId, incremento } = nivelSchema.parse(
+        req.body
+      );
+
+      const result = await usuarioHabilidadeService.subirNivel(
+        usuarioId,
+        habilidadeId,
+        incremento
+      );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao subir nível da habilidade.",
+      });
+    }
+  }
+
+  async resetarProgresso(req: Request, res: Response) {
+    try {
+      const { usuarioId, habilidadeId } = usuarioHabilidadeSchema.parse(
+        req.params
+      );
+
+      const result =
+        await usuarioHabilidadeService.resetarProgresso(
+          usuarioId,
+          habilidadeId
+        );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao resetar progresso da habilidade.",
+      });
+    }
   }
 }
 
-export const habilidadeUsuarioController = new HabilidadeUsuarioController();
+export const usuarioHabilidadeController = new UsuarioHabilidadeController();

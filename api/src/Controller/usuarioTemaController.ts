@@ -1,130 +1,177 @@
-import { Router } from "express";
 import type { Request, Response } from "express";
-import { TemaUsuarioService } from "../services/usuarioTemaService";
-import { TemaUsuarioRepository } from "../repositories/usuarioTemaRepository";
-import { prisma } from "../prisma/prisma";
+import { z, ZodError } from "zod";
+import { usuarioTemaService } from "../services/usuarioTemaService";
 
-export class TemaUsuarioController {
-  private router: Router;
-  private temaUsuarioService: TemaUsuarioService;
+const idSchema = z.object({
+  id: z.coerce.number().int().positive("ID inválido"),
+});
 
-  constructor() {
-    this.router = Router();
-    const temaUsuarioRepository = new TemaUsuarioRepository(prisma);
-    this.temaUsuarioService = new TemaUsuarioService(temaUsuarioRepository);
-    this.initRoutes();
-  }
+const usuarioTemaSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  temaId: z.coerce.number().int().positive("TemaId inválido"),
+});
 
-  private initRoutes(): void {
-    this.router.get("/usuario/:usuarioId", this.listarPorUsuario.bind(this));
-    this.router.get("/tema/:temaId", this.listarPorTema.bind(this));
-    this.router.get("/nivel/:nivel", this.listarPorNivel.bind(this));
-    this.router.get("/:id", this.buscarPorId.bind(this));
-  }
+const incrementoSchema = z.object({
+  usuarioId: z.coerce.number().int().positive("UsuarioId inválido"),
+  temaId: z.coerce.number().int().positive("TemaId inválido"),
+  pontos: z.coerce.number().int().positive("Pontos inválidos"),
+});
 
-  private async buscarPorId(req: Request, res: Response): Promise<void> {
+export class UsuarioTemaController {
+  // =========================
+  // LEITURA
+  // =========================
+
+  async listarTodos(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const idNumero = Number(id);
-
-      if (isNaN(idNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "ID deve ser um número",
-        });
-        return;
-      }
-
-      const temaUsuario = await this.temaUsuarioService.buscarPorId(idNumero);
-
-      res.status(200).json({
-        success: true,
-        data: temaUsuario,
-      });
+      const result = await usuarioTemaService.listarTodos();
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(404).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Progresso não encontrado",
+      return res.status(500).json({
+        message: "Erro ao listar temas do usuário.",
       });
     }
   }
 
-  private async listarPorUsuario(req: Request, res: Response): Promise<void> {
+  async buscarPorId(req: Request, res: Response) {
     try {
-      const { usuarioId } = req.params;
-      const usuarioIdNumero = Number(usuarioId);
+      const { id } = idSchema.parse(req.params);
 
-      if (isNaN(usuarioIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "usuarioId deve ser um número",
+      const result = await usuarioTemaService.buscarPorId(id);
+
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const temasUsuario = await this.temaUsuarioService.listarPorUsuario(usuarioIdNumero);
-
-      res.status(200).json({
-        success: true,
-        data: temasUsuario,
-      });
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar temas",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "ID inválido.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao buscar registro.",
       });
     }
   }
 
-  private async listarPorTema(req: Request, res: Response): Promise<void> {
+  async buscarPorUsuarioETema(req: Request, res: Response) {
     try {
-      const { temaId } = req.params;
-      const temaIdNumero = Number(temaId);
+      const { usuarioId, temaId } = usuarioTemaSchema.parse(req.params);
 
-      if (isNaN(temaIdNumero)) {
-        res.status(400).json({
-          success: false,
-          message: "temaId deve ser um número",
+      const result =
+        await usuarioTemaService.buscarPorUsuarioETema(
+          usuarioId,
+          temaId
+        );
+
+      if (!result) {
+        return res.status(404).json({
+          message: "Registro não encontrado.",
         });
-        return;
       }
 
-      const temasUsuario = await this.temaUsuarioService.listarPorTema(temaIdNumero);
-
-      res.status(200).json({
-        success: true,
-        data: temasUsuario,
-      });
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar progressos",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao buscar tema do usuário.",
       });
     }
   }
 
-  private async listarPorNivel(req: Request, res: Response): Promise<void> {
+  // =========================
+  // PROGRESSO DO TEMA
+  // =========================
+
+  async atualizarProgresso(req: Request, res: Response) {
     try {
-      const { nivel } = req.params;
-      const temasUsuario = await this.temaUsuarioService.listarPorNivel(
-        nivel as any
+      const { usuarioId, temaId } = usuarioTemaSchema.parse(req.params);
+
+      const result = await usuarioTemaService.atualizarProgresso(
+        usuarioId,
+        temaId,
+        req.body
       );
 
-      res.status(200).json({
-        success: true,
-        data: temasUsuario,
-      });
+      return res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: error instanceof Error ? error.message : "Erro ao listar progressos",
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao atualizar progresso do tema.",
       });
     }
   }
 
-  public getRouter(): Router {
-    return this.router;
+  async incrementarPontuacao(req: Request, res: Response) {
+    try {
+      const { usuarioId, temaId, pontos } = incrementoSchema.parse(
+        req.body
+      );
+
+      const result =
+        await usuarioTemaService.incrementarPontuacao(
+          usuarioId,
+          temaId,
+          pontos
+        );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao incrementar pontuação.",
+      });
+    }
+  }
+
+  async incrementarTrilhasConcluidas(req: Request, res: Response) {
+    try {
+      const { usuarioId, temaId } = usuarioTemaSchema.parse(req.body);
+
+      const result =
+        await usuarioTemaService.incrementarTrilhasConcluidas(
+          usuarioId,
+          temaId
+        );
+
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos.",
+          errors: error.issues,
+        });
+      }
+
+      return res.status(500).json({
+        message: "Erro ao atualizar trilhas concluídas.",
+      });
+    }
   }
 }
 
-export const temaUsuarioController = new TemaUsuarioController();
+export const usuarioTemaController = new UsuarioTemaController();

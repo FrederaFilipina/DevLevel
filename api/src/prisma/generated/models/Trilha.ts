@@ -50,6 +50,7 @@ export type TrilhaMinAggregateOutputType = {
   nivel: $Enums.NivelDificuldade | null
   ordem: number | null
   pontuacaoMinima: number | null
+  tipoDesbloqueio: $Enums.TipoDesbloqueio | null
   trilhaAnteriorId: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -63,6 +64,7 @@ export type TrilhaMaxAggregateOutputType = {
   nivel: $Enums.NivelDificuldade | null
   ordem: number | null
   pontuacaoMinima: number | null
+  tipoDesbloqueio: $Enums.TipoDesbloqueio | null
   trilhaAnteriorId: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -76,6 +78,7 @@ export type TrilhaCountAggregateOutputType = {
   nivel: number
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio: number
   trilhaAnteriorId: number
   createdAt: number
   updatedAt: number
@@ -107,6 +110,7 @@ export type TrilhaMinAggregateInputType = {
   nivel?: true
   ordem?: true
   pontuacaoMinima?: true
+  tipoDesbloqueio?: true
   trilhaAnteriorId?: true
   createdAt?: true
   updatedAt?: true
@@ -120,6 +124,7 @@ export type TrilhaMaxAggregateInputType = {
   nivel?: true
   ordem?: true
   pontuacaoMinima?: true
+  tipoDesbloqueio?: true
   trilhaAnteriorId?: true
   createdAt?: true
   updatedAt?: true
@@ -133,6 +138,7 @@ export type TrilhaCountAggregateInputType = {
   nivel?: true
   ordem?: true
   pontuacaoMinima?: true
+  tipoDesbloqueio?: true
   trilhaAnteriorId?: true
   createdAt?: true
   updatedAt?: true
@@ -233,6 +239,7 @@ export type TrilhaGroupByOutputType = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio: $Enums.TipoDesbloqueio
   trilhaAnteriorId: number | null
   createdAt: Date
   updatedAt: Date
@@ -269,6 +276,7 @@ export type TrilhaWhereInput = {
   nivel?: Prisma.EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
   ordem?: Prisma.IntFilter<"Trilha"> | number
   pontuacaoMinima?: Prisma.IntFilter<"Trilha"> | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFilter<"Trilha"> | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.IntNullableFilter<"Trilha"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
@@ -277,6 +285,7 @@ export type TrilhaWhereInput = {
   proximasTrilhas?: Prisma.TrilhaListRelationFilter
   modulos?: Prisma.ModuloListRelationFilter
   usuarios?: Prisma.TrilhaUsuarioListRelationFilter
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioListRelationFilter
 }
 
 export type TrilhaOrderByWithRelationInput = {
@@ -287,6 +296,7 @@ export type TrilhaOrderByWithRelationInput = {
   nivel?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   pontuacaoMinima?: Prisma.SortOrder
+  tipoDesbloqueio?: Prisma.SortOrder
   trilhaAnteriorId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -295,6 +305,7 @@ export type TrilhaOrderByWithRelationInput = {
   proximasTrilhas?: Prisma.TrilhaOrderByRelationAggregateInput
   modulos?: Prisma.ModuloOrderByRelationAggregateInput
   usuarios?: Prisma.TrilhaUsuarioOrderByRelationAggregateInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioOrderByRelationAggregateInput
 }
 
 export type TrilhaWhereUniqueInput = Prisma.AtLeast<{
@@ -309,6 +320,7 @@ export type TrilhaWhereUniqueInput = Prisma.AtLeast<{
   nivel?: Prisma.EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
   ordem?: Prisma.IntFilter<"Trilha"> | number
   pontuacaoMinima?: Prisma.IntFilter<"Trilha"> | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFilter<"Trilha"> | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.IntNullableFilter<"Trilha"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
@@ -317,6 +329,7 @@ export type TrilhaWhereUniqueInput = Prisma.AtLeast<{
   proximasTrilhas?: Prisma.TrilhaListRelationFilter
   modulos?: Prisma.ModuloListRelationFilter
   usuarios?: Prisma.TrilhaUsuarioListRelationFilter
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioListRelationFilter
 }, "id" | "temaId_ordem">
 
 export type TrilhaOrderByWithAggregationInput = {
@@ -327,6 +340,7 @@ export type TrilhaOrderByWithAggregationInput = {
   nivel?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   pontuacaoMinima?: Prisma.SortOrder
+  tipoDesbloqueio?: Prisma.SortOrder
   trilhaAnteriorId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -348,6 +362,7 @@ export type TrilhaScalarWhereWithAggregatesInput = {
   nivel?: Prisma.EnumNivelDificuldadeWithAggregatesFilter<"Trilha"> | $Enums.NivelDificuldade
   ordem?: Prisma.IntWithAggregatesFilter<"Trilha"> | number
   pontuacaoMinima?: Prisma.IntWithAggregatesFilter<"Trilha"> | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioWithAggregatesFilter<"Trilha"> | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.IntNullableWithAggregatesFilter<"Trilha"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Trilha"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Trilha"> | Date | string
@@ -359,6 +374,7 @@ export type TrilhaCreateInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   createdAt?: Date | string
   updatedAt?: Date | string
   tema: Prisma.TemaCreateNestedOneWithoutTrilhasInput
@@ -366,6 +382,7 @@ export type TrilhaCreateInput = {
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaUncheckedCreateInput = {
@@ -376,12 +393,14 @@ export type TrilhaUncheckedCreateInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaUpdateInput = {
@@ -390,6 +409,7 @@ export type TrilhaUpdateInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tema?: Prisma.TemaUpdateOneRequiredWithoutTrilhasNestedInput
@@ -397,6 +417,7 @@ export type TrilhaUpdateInput = {
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateInput = {
@@ -407,12 +428,14 @@ export type TrilhaUncheckedUpdateInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaCreateManyInput = {
@@ -423,6 +446,7 @@ export type TrilhaCreateManyInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -434,6 +458,7 @@ export type TrilhaUpdateManyMutationInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -446,6 +471,7 @@ export type TrilhaUncheckedUpdateManyInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -479,6 +505,7 @@ export type TrilhaCountOrderByAggregateInput = {
   nivel?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   pontuacaoMinima?: Prisma.SortOrder
+  tipoDesbloqueio?: Prisma.SortOrder
   trilhaAnteriorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -500,6 +527,7 @@ export type TrilhaMaxOrderByAggregateInput = {
   nivel?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   pontuacaoMinima?: Prisma.SortOrder
+  tipoDesbloqueio?: Prisma.SortOrder
   trilhaAnteriorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -513,6 +541,7 @@ export type TrilhaMinOrderByAggregateInput = {
   nivel?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   pontuacaoMinima?: Prisma.SortOrder
+  tipoDesbloqueio?: Prisma.SortOrder
   trilhaAnteriorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -593,6 +622,10 @@ export type TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput = {
   connect?: Prisma.TrilhaWhereUniqueInput | Prisma.TrilhaWhereUniqueInput[]
 }
 
+export type EnumTipoDesbloqueioFieldUpdateOperationsInput = {
+  set?: $Enums.TipoDesbloqueio
+}
+
 export type TrilhaUpdateOneWithoutProximasTrilhasNestedInput = {
   create?: Prisma.XOR<Prisma.TrilhaCreateWithoutProximasTrilhasInput, Prisma.TrilhaUncheckedCreateWithoutProximasTrilhasInput>
   connectOrCreate?: Prisma.TrilhaCreateOrConnectWithoutProximasTrilhasInput
@@ -659,6 +692,12 @@ export type TrilhaCreateNestedOneWithoutUsuariosInput = {
   connect?: Prisma.TrilhaWhereUniqueInput
 }
 
+export type TrilhaCreateNestedOneWithoutTrilhasQueDesbloqueiamInput = {
+  create?: Prisma.XOR<Prisma.TrilhaCreateWithoutTrilhasQueDesbloqueiamInput, Prisma.TrilhaUncheckedCreateWithoutTrilhasQueDesbloqueiamInput>
+  connectOrCreate?: Prisma.TrilhaCreateOrConnectWithoutTrilhasQueDesbloqueiamInput
+  connect?: Prisma.TrilhaWhereUniqueInput
+}
+
 export type TrilhaUpdateOneRequiredWithoutUsuariosNestedInput = {
   create?: Prisma.XOR<Prisma.TrilhaCreateWithoutUsuariosInput, Prisma.TrilhaUncheckedCreateWithoutUsuariosInput>
   connectOrCreate?: Prisma.TrilhaCreateOrConnectWithoutUsuariosInput
@@ -667,18 +706,30 @@ export type TrilhaUpdateOneRequiredWithoutUsuariosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TrilhaUpdateToOneWithWhereWithoutUsuariosInput, Prisma.TrilhaUpdateWithoutUsuariosInput>, Prisma.TrilhaUncheckedUpdateWithoutUsuariosInput>
 }
 
+export type TrilhaUpdateOneWithoutTrilhasQueDesbloqueiamNestedInput = {
+  create?: Prisma.XOR<Prisma.TrilhaCreateWithoutTrilhasQueDesbloqueiamInput, Prisma.TrilhaUncheckedCreateWithoutTrilhasQueDesbloqueiamInput>
+  connectOrCreate?: Prisma.TrilhaCreateOrConnectWithoutTrilhasQueDesbloqueiamInput
+  upsert?: Prisma.TrilhaUpsertWithoutTrilhasQueDesbloqueiamInput
+  disconnect?: Prisma.TrilhaWhereInput | boolean
+  delete?: Prisma.TrilhaWhereInput | boolean
+  connect?: Prisma.TrilhaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TrilhaUpdateToOneWithWhereWithoutTrilhasQueDesbloqueiamInput, Prisma.TrilhaUpdateWithoutTrilhasQueDesbloqueiamInput>, Prisma.TrilhaUncheckedUpdateWithoutTrilhasQueDesbloqueiamInput>
+}
+
 export type TrilhaCreateWithoutTemaInput = {
   titulo: string
   descricao?: string | null
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   createdAt?: Date | string
   updatedAt?: Date | string
   trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutTemaInput = {
@@ -688,12 +739,14 @@ export type TrilhaUncheckedCreateWithoutTemaInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutTemaInput = {
@@ -733,6 +786,7 @@ export type TrilhaScalarWhereInput = {
   nivel?: Prisma.EnumNivelDificuldadeFilter<"Trilha"> | $Enums.NivelDificuldade
   ordem?: Prisma.IntFilter<"Trilha"> | number
   pontuacaoMinima?: Prisma.IntFilter<"Trilha"> | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFilter<"Trilha"> | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.IntNullableFilter<"Trilha"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trilha"> | Date | string
@@ -744,12 +798,14 @@ export type TrilhaCreateWithoutProximasTrilhasInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   createdAt?: Date | string
   updatedAt?: Date | string
   tema: Prisma.TemaCreateNestedOneWithoutTrilhasInput
   trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutProximasTrilhasInput = {
@@ -760,11 +816,13 @@ export type TrilhaUncheckedCreateWithoutProximasTrilhasInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutProximasTrilhasInput = {
@@ -778,12 +836,14 @@ export type TrilhaCreateWithoutTrilhaAnteriorInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   createdAt?: Date | string
   updatedAt?: Date | string
   tema: Prisma.TemaCreateNestedOneWithoutTrilhasInput
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutTrilhaAnteriorInput = {
@@ -794,11 +854,13 @@ export type TrilhaUncheckedCreateWithoutTrilhaAnteriorInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutTrilhaAnteriorInput = {
@@ -828,12 +890,14 @@ export type TrilhaUpdateWithoutProximasTrilhasInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tema?: Prisma.TemaUpdateOneRequiredWithoutTrilhasNestedInput
   trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutProximasTrilhasInput = {
@@ -844,11 +908,13 @@ export type TrilhaUncheckedUpdateWithoutProximasTrilhasInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUpsertWithWhereUniqueWithoutTrilhaAnteriorInput = {
@@ -873,12 +939,14 @@ export type TrilhaCreateWithoutModulosInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   createdAt?: Date | string
   updatedAt?: Date | string
   tema: Prisma.TemaCreateNestedOneWithoutTrilhasInput
   trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutModulosInput = {
@@ -889,11 +957,13 @@ export type TrilhaUncheckedCreateWithoutModulosInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutModulosInput = {
@@ -918,12 +988,14 @@ export type TrilhaUpdateWithoutModulosInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tema?: Prisma.TemaUpdateOneRequiredWithoutTrilhasNestedInput
   trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutModulosInput = {
@@ -934,11 +1006,13 @@ export type TrilhaUncheckedUpdateWithoutModulosInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaCreateWithoutUsuariosInput = {
@@ -947,12 +1021,14 @@ export type TrilhaCreateWithoutUsuariosInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   createdAt?: Date | string
   updatedAt?: Date | string
   tema: Prisma.TemaCreateNestedOneWithoutTrilhasInput
   trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
   proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaUncheckedCreateWithoutUsuariosInput = {
@@ -963,16 +1039,56 @@ export type TrilhaUncheckedCreateWithoutUsuariosInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
   modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutDesbloqueadaPorTrilhaInput
 }
 
 export type TrilhaCreateOrConnectWithoutUsuariosInput = {
   where: Prisma.TrilhaWhereUniqueInput
   create: Prisma.XOR<Prisma.TrilhaCreateWithoutUsuariosInput, Prisma.TrilhaUncheckedCreateWithoutUsuariosInput>
+}
+
+export type TrilhaCreateWithoutTrilhasQueDesbloqueiamInput = {
+  titulo: string
+  descricao?: string | null
+  nivel: $Enums.NivelDificuldade
+  ordem: number
+  pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tema: Prisma.TemaCreateNestedOneWithoutTrilhasInput
+  trilhaAnterior?: Prisma.TrilhaCreateNestedOneWithoutProximasTrilhasInput
+  proximasTrilhas?: Prisma.TrilhaCreateNestedManyWithoutTrilhaAnteriorInput
+  modulos?: Prisma.ModuloCreateNestedManyWithoutTrilhaInput
+  usuarios?: Prisma.TrilhaUsuarioCreateNestedManyWithoutTrilhaInput
+}
+
+export type TrilhaUncheckedCreateWithoutTrilhasQueDesbloqueiamInput = {
+  id?: number
+  temaId: number
+  titulo: string
+  descricao?: string | null
+  nivel: $Enums.NivelDificuldade
+  ordem: number
+  pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
+  trilhaAnteriorId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  proximasTrilhas?: Prisma.TrilhaUncheckedCreateNestedManyWithoutTrilhaAnteriorInput
+  modulos?: Prisma.ModuloUncheckedCreateNestedManyWithoutTrilhaInput
+  usuarios?: Prisma.TrilhaUsuarioUncheckedCreateNestedManyWithoutTrilhaInput
+}
+
+export type TrilhaCreateOrConnectWithoutTrilhasQueDesbloqueiamInput = {
+  where: Prisma.TrilhaWhereUniqueInput
+  create: Prisma.XOR<Prisma.TrilhaCreateWithoutTrilhasQueDesbloqueiamInput, Prisma.TrilhaUncheckedCreateWithoutTrilhasQueDesbloqueiamInput>
 }
 
 export type TrilhaUpsertWithoutUsuariosInput = {
@@ -992,12 +1108,14 @@ export type TrilhaUpdateWithoutUsuariosInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tema?: Prisma.TemaUpdateOneRequiredWithoutTrilhasNestedInput
   trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutUsuariosInput = {
@@ -1008,11 +1126,57 @@ export type TrilhaUncheckedUpdateWithoutUsuariosInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
+}
+
+export type TrilhaUpsertWithoutTrilhasQueDesbloqueiamInput = {
+  update: Prisma.XOR<Prisma.TrilhaUpdateWithoutTrilhasQueDesbloqueiamInput, Prisma.TrilhaUncheckedUpdateWithoutTrilhasQueDesbloqueiamInput>
+  create: Prisma.XOR<Prisma.TrilhaCreateWithoutTrilhasQueDesbloqueiamInput, Prisma.TrilhaUncheckedCreateWithoutTrilhasQueDesbloqueiamInput>
+  where?: Prisma.TrilhaWhereInput
+}
+
+export type TrilhaUpdateToOneWithWhereWithoutTrilhasQueDesbloqueiamInput = {
+  where?: Prisma.TrilhaWhereInput
+  data: Prisma.XOR<Prisma.TrilhaUpdateWithoutTrilhasQueDesbloqueiamInput, Prisma.TrilhaUncheckedUpdateWithoutTrilhasQueDesbloqueiamInput>
+}
+
+export type TrilhaUpdateWithoutTrilhasQueDesbloqueiamInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tema?: Prisma.TemaUpdateOneRequiredWithoutTrilhasNestedInput
+  trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
+  proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
+  modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
+  usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
+}
+
+export type TrilhaUncheckedUpdateWithoutTrilhasQueDesbloqueiamInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  temaId?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
+  trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
+  modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
+  usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
 }
 
 export type TrilhaCreateManyTemaInput = {
@@ -1022,6 +1186,7 @@ export type TrilhaCreateManyTemaInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   trilhaAnteriorId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1033,12 +1198,14 @@ export type TrilhaUpdateWithoutTemaInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trilhaAnterior?: Prisma.TrilhaUpdateOneWithoutProximasTrilhasNestedInput
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutTemaInput = {
@@ -1048,12 +1215,14 @@ export type TrilhaUncheckedUpdateWithoutTemaInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateManyWithoutTemaInput = {
@@ -1063,6 +1232,7 @@ export type TrilhaUncheckedUpdateManyWithoutTemaInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   trilhaAnteriorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1076,6 +1246,7 @@ export type TrilhaCreateManyTrilhaAnteriorInput = {
   nivel: $Enums.NivelDificuldade
   ordem: number
   pontuacaoMinima: number
+  tipoDesbloqueio?: $Enums.TipoDesbloqueio
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1086,12 +1257,14 @@ export type TrilhaUpdateWithoutTrilhaAnteriorInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tema?: Prisma.TemaUpdateOneRequiredWithoutTrilhasNestedInput
   proximasTrilhas?: Prisma.TrilhaUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateWithoutTrilhaAnteriorInput = {
@@ -1102,11 +1275,13 @@ export type TrilhaUncheckedUpdateWithoutTrilhaAnteriorInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   proximasTrilhas?: Prisma.TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorNestedInput
   modulos?: Prisma.ModuloUncheckedUpdateManyWithoutTrilhaNestedInput
   usuarios?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutTrilhaNestedInput
+  trilhasQueDesbloqueiam?: Prisma.TrilhaUsuarioUncheckedUpdateManyWithoutDesbloqueadaPorTrilhaNestedInput
 }
 
 export type TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorInput = {
@@ -1117,6 +1292,7 @@ export type TrilhaUncheckedUpdateManyWithoutTrilhaAnteriorInput = {
   nivel?: Prisma.EnumNivelDificuldadeFieldUpdateOperationsInput | $Enums.NivelDificuldade
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   pontuacaoMinima?: Prisma.IntFieldUpdateOperationsInput | number
+  tipoDesbloqueio?: Prisma.EnumTipoDesbloqueioFieldUpdateOperationsInput | $Enums.TipoDesbloqueio
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1130,12 +1306,14 @@ export type TrilhaCountOutputType = {
   proximasTrilhas: number
   modulos: number
   usuarios: number
+  trilhasQueDesbloqueiam: number
 }
 
 export type TrilhaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   proximasTrilhas?: boolean | TrilhaCountOutputTypeCountProximasTrilhasArgs
   modulos?: boolean | TrilhaCountOutputTypeCountModulosArgs
   usuarios?: boolean | TrilhaCountOutputTypeCountUsuariosArgs
+  trilhasQueDesbloqueiam?: boolean | TrilhaCountOutputTypeCountTrilhasQueDesbloqueiamArgs
 }
 
 /**
@@ -1169,6 +1347,13 @@ export type TrilhaCountOutputTypeCountUsuariosArgs<ExtArgs extends runtime.Types
   where?: Prisma.TrilhaUsuarioWhereInput
 }
 
+/**
+ * TrilhaCountOutputType without action
+ */
+export type TrilhaCountOutputTypeCountTrilhasQueDesbloqueiamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrilhaUsuarioWhereInput
+}
+
 
 export type TrilhaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1178,6 +1363,7 @@ export type TrilhaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   nivel?: boolean
   ordem?: boolean
   pontuacaoMinima?: boolean
+  tipoDesbloqueio?: boolean
   trilhaAnteriorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1186,6 +1372,7 @@ export type TrilhaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   proximasTrilhas?: boolean | Prisma.Trilha$proximasTrilhasArgs<ExtArgs>
   modulos?: boolean | Prisma.Trilha$modulosArgs<ExtArgs>
   usuarios?: boolean | Prisma.Trilha$usuariosArgs<ExtArgs>
+  trilhasQueDesbloqueiam?: boolean | Prisma.Trilha$trilhasQueDesbloqueiamArgs<ExtArgs>
   _count?: boolean | Prisma.TrilhaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["trilha"]>
 
@@ -1197,6 +1384,7 @@ export type TrilhaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   nivel?: boolean
   ordem?: boolean
   pontuacaoMinima?: boolean
+  tipoDesbloqueio?: boolean
   trilhaAnteriorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1212,6 +1400,7 @@ export type TrilhaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   nivel?: boolean
   ordem?: boolean
   pontuacaoMinima?: boolean
+  tipoDesbloqueio?: boolean
   trilhaAnteriorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1227,18 +1416,20 @@ export type TrilhaSelectScalar = {
   nivel?: boolean
   ordem?: boolean
   pontuacaoMinima?: boolean
+  tipoDesbloqueio?: boolean
   trilhaAnteriorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type TrilhaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "temaId" | "titulo" | "descricao" | "nivel" | "ordem" | "pontuacaoMinima" | "trilhaAnteriorId" | "createdAt" | "updatedAt", ExtArgs["result"]["trilha"]>
+export type TrilhaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "temaId" | "titulo" | "descricao" | "nivel" | "ordem" | "pontuacaoMinima" | "tipoDesbloqueio" | "trilhaAnteriorId" | "createdAt" | "updatedAt", ExtArgs["result"]["trilha"]>
 export type TrilhaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tema?: boolean | Prisma.TemaDefaultArgs<ExtArgs>
   trilhaAnterior?: boolean | Prisma.Trilha$trilhaAnteriorArgs<ExtArgs>
   proximasTrilhas?: boolean | Prisma.Trilha$proximasTrilhasArgs<ExtArgs>
   modulos?: boolean | Prisma.Trilha$modulosArgs<ExtArgs>
   usuarios?: boolean | Prisma.Trilha$usuariosArgs<ExtArgs>
+  trilhasQueDesbloqueiam?: boolean | Prisma.Trilha$trilhasQueDesbloqueiamArgs<ExtArgs>
   _count?: boolean | Prisma.TrilhaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TrilhaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1258,6 +1449,7 @@ export type $TrilhaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     proximasTrilhas: Prisma.$TrilhaPayload<ExtArgs>[]
     modulos: Prisma.$ModuloPayload<ExtArgs>[]
     usuarios: Prisma.$TrilhaUsuarioPayload<ExtArgs>[]
+    trilhasQueDesbloqueiam: Prisma.$TrilhaUsuarioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1267,6 +1459,7 @@ export type $TrilhaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     nivel: $Enums.NivelDificuldade
     ordem: number
     pontuacaoMinima: number
+    tipoDesbloqueio: $Enums.TipoDesbloqueio
     trilhaAnteriorId: number | null
     createdAt: Date
     updatedAt: Date
@@ -1669,6 +1862,7 @@ export interface Prisma__TrilhaClient<T, Null = never, ExtArgs extends runtime.T
   proximasTrilhas<T extends Prisma.Trilha$proximasTrilhasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trilha$proximasTrilhasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrilhaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   modulos<T extends Prisma.Trilha$modulosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trilha$modulosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ModuloPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usuarios<T extends Prisma.Trilha$usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trilha$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrilhaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trilhasQueDesbloqueiam<T extends Prisma.Trilha$trilhasQueDesbloqueiamArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trilha$trilhasQueDesbloqueiamArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrilhaUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1705,6 +1899,7 @@ export interface TrilhaFieldRefs {
   readonly nivel: Prisma.FieldRef<"Trilha", 'NivelDificuldade'>
   readonly ordem: Prisma.FieldRef<"Trilha", 'Int'>
   readonly pontuacaoMinima: Prisma.FieldRef<"Trilha", 'Int'>
+  readonly tipoDesbloqueio: Prisma.FieldRef<"Trilha", 'TipoDesbloqueio'>
   readonly trilhaAnteriorId: Prisma.FieldRef<"Trilha", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Trilha", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Trilha", 'DateTime'>
@@ -2179,6 +2374,30 @@ export type Trilha$modulosArgs<ExtArgs extends runtime.Types.Extensions.Internal
  * Trilha.usuarios
  */
 export type Trilha$usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrilhaUsuario
+   */
+  select?: Prisma.TrilhaUsuarioSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrilhaUsuario
+   */
+  omit?: Prisma.TrilhaUsuarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrilhaUsuarioInclude<ExtArgs> | null
+  where?: Prisma.TrilhaUsuarioWhereInput
+  orderBy?: Prisma.TrilhaUsuarioOrderByWithRelationInput | Prisma.TrilhaUsuarioOrderByWithRelationInput[]
+  cursor?: Prisma.TrilhaUsuarioWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrilhaUsuarioScalarFieldEnum | Prisma.TrilhaUsuarioScalarFieldEnum[]
+}
+
+/**
+ * Trilha.trilhasQueDesbloqueiam
+ */
+export type Trilha$trilhasQueDesbloqueiamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TrilhaUsuario
    */

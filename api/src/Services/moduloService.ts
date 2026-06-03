@@ -1,48 +1,67 @@
-import { type Modulo } from "../prisma/generated/client";
-import { ModuloRepository } from "../repositories/moduloRepository";
+import z from "zod";
+import type { Modulo } from "../prisma/generated/client";
+import { moduloRepository, ModuloRepository } from "../repositories/moduloRepository";
 
 export class ModuloService {
-  constructor(
-    private readonly moduloRepository: ModuloRepository
-  ) {}
+  constructor(private readonly repository: ModuloRepository) {}
 
   async listarTodos(): Promise<Modulo[]> {
-    return await this.moduloRepository.listarTodos();
-  }
-
-  async buscarPorId(id: number): Promise<Modulo> {
-    const modulo =
-      await this.moduloRepository.buscarPorId(id);
-
-    if (!modulo) {
-      throw new Error("Módulo não encontrado.");
+    try {
+      return await this.repository.listarTodos();
+    } catch (error) {
+      console.error("Erro no service ao listar módulos:", error);
+      throw new Error("Não foi possível listar os módulos.");
     }
-
-    return modulo;
   }
 
-  async listarPorTrilha(
-    trilhaId: number
-  ): Promise<Modulo[]> {
-    return await this.moduloRepository.listarPorTrilha(
-      trilhaId
-    );
+  async buscarPorId(id: number): Promise<Modulo | null> {
+    const schema = z.number().int().positive("ID inválido");
+    const idValidated = schema.parse(id);
+
+    try {
+      return await this.repository.buscarPorId(idValidated);
+    } catch (error) {
+      console.error("Erro no service ao buscar módulo por ID:", error);
+      throw new Error("Não foi possível buscar o módulo.");
+    }
+  }
+
+  async listarPorTrilha(trilhaId: number): Promise<Modulo[]> {
+    const schema = z.number().int().positive("TrilhaId inválido");
+    const trilhaIdValidated = schema.parse(trilhaId);
+
+    try {
+      return await this.repository.listarPorTrilha(trilhaIdValidated);
+    } catch (error) {
+      console.error("Erro no service ao listar módulos por trilha:", error);
+      throw new Error("Não foi possível listar os módulos da trilha.");
+    }
   }
 
   async buscarPorTrilhaEOrdem(
     trilhaId: number,
     ordem: number
-  ): Promise<Modulo> {
-    const modulo =
-      await this.moduloRepository.buscarPorTrilhaEOrdem(
-        trilhaId,
-        ordem
+  ): Promise<Modulo | null> {
+    const schema = z.object({
+      trilhaId: z.number().int().positive("TrilhaId inválido"),
+      ordem: z.number().int().nonnegative("Ordem inválida"),
+    });
+
+    const validated = schema.parse({ trilhaId, ordem });
+
+    try {
+      return await this.repository.buscarPorTrilhaEOrdem(
+        validated.trilhaId,
+        validated.ordem
       );
-
-    if (!modulo) {
-      throw new Error("Módulo não encontrado.");
+    } catch (error) {
+      console.error(
+        "Erro no service ao buscar módulo por trilha e ordem:",
+        error
+      );
+      throw new Error("Não foi possível buscar o módulo.");
     }
-
-    return modulo;
   }
 }
+
+export const moduloService = new ModuloService(moduloRepository);

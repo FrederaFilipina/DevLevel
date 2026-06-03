@@ -1,34 +1,45 @@
-import { type Habilidade } from "../prisma/generated/client";
-import { HabilidadeRepository } from "../repositories/habilidadeRepository";
+import z from "zod";
+import type { Habilidade } from "../prisma/generated/client";
+import {
+  habilidadeRepository,
+  HabilidadeRepository,
+} from "../repositories/habilidadeRepository";
 
 export class HabilidadeService {
-  constructor(
-    private readonly habilidadeRepository: HabilidadeRepository
-  ) {}
+  constructor(private readonly repository: HabilidadeRepository) {}
 
   async listarTodas(): Promise<Habilidade[]> {
-    return await this.habilidadeRepository.listarTodas();
+    try {
+      return await this.repository.listarTodas();
+    } catch (error) {
+      console.error("Erro no service ao listar habilidades:", error);
+      throw new Error("Não foi possível listar as habilidades.");
+    }
   }
 
-  async buscarPorId(id: number): Promise<Habilidade> {
-    const habilidade =
-      await this.habilidadeRepository.buscarPorId(id);
+  async buscarPorId(id: number): Promise<Habilidade | null> {
+    const schema = z.number().int().positive("ID inválido");
+    const idValidated = schema.parse(id);
 
-    if (!habilidade) {
-      throw new Error("Habilidade não encontrada.");
+    try {
+      return await this.repository.buscarPorId(idValidated);
+    } catch (error) {
+      console.error("Erro no service ao buscar habilidade por ID:", error);
+      throw new Error("Não foi possível buscar a habilidade.");
     }
-
-    return habilidade;
   }
 
-  async buscarPorNome(nome: string): Promise<Habilidade> {
-    const habilidade =
-      await this.habilidadeRepository.buscarPorNome(nome);
+  async buscarPorNome(nome: string): Promise<Habilidade | null> {
+    const schema = z.string().min(1, "Nome inválido");
+    const nomeValidated = schema.parse(nome);
 
-    if (!habilidade) {
-      throw new Error("Habilidade não encontrada.");
+    try {
+      return await this.repository.buscarPorNome(nomeValidated);
+    } catch (error) {
+      console.error("Erro no service ao buscar habilidade por nome:", error);
+      throw new Error("Não foi possível buscar a habilidade.");
     }
-
-    return habilidade;
   }
 }
+
+export const habilidadeService = new HabilidadeService(habilidadeRepository);

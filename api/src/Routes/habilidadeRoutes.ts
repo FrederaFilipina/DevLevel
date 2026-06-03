@@ -1,31 +1,30 @@
 import { Router } from "express";
-import { prisma } from "../prisma/prisma";
-
-import { HabilidadeRepository } from "../repositories/habilidadeRepository";
-import { HabilidadeService } from "../services/habilidadeService";
-import { HabilidadeController } from "../controller/habilidadeController";
+import { habilidadeController } from "../controller/habilidadeController";
 
 const router = Router();
 
+/**
+ * Listar todas as habilidades
+ * GET /habilidades
+ */
+router.get("/", (req, res) => {
+  return habilidadeController.listarTodas(req, res);
+});
 
+/**
+ * Buscar habilidade por ID
+ * GET /habilidades/:id
+ */
+router.get("/:id", (req, res) => {
+  return habilidadeController.buscarPorId(req, res);
+});
 
-const repository = new HabilidadeRepository(prisma);
-const service = new HabilidadeService(repository);
-const controller = new HabilidadeController(service);
-
-router.get(
-  "/",
-  controller.listar.bind(controller)
-);
-
-router.get(
-  "/nome/:nome",
-  controller.buscarPorNome.bind(controller)
-);
-
-router.get(
-  "/:id",
-  controller.obter.bind(controller)
-);
+/**
+ * Buscar habilidade por nome
+ * GET /habilidades/nome/:nome
+ */
+router.get("/nome/:nome", (req, res) => {
+  return habilidadeController.buscarPorNome(req, res);
+});
 
 export default router;

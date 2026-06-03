@@ -1,61 +1,180 @@
-import { type HabilidadeUsuario } from "../prisma/generated/client";
-import type { HabilidadeUsuarioRepository } from "../repositories/usuarioHabilidadeRepository";
+import z from "zod";
+import type { HabilidadeUsuario } from "../prisma/generated/client";
+import {
+  usuarioHabilidadeRepository,
+  UsuarioHabilidadeRepository,
+} from "../repositories/usuarioHabilidadeRepository";
 
+export class UsuarioHabilidadeService {
+  constructor(private readonly repository: UsuarioHabilidadeRepository) {}
 
-export class HabilidadeUsuarioService {
-    constructor(
-        private readonly habilidadeUsuarioRepository: HabilidadeUsuarioRepository
-    ) {}
+  // =========================
+  // LEITURA
+  // =========================
 
-    async buscarPorId(id: number): Promise<HabilidadeUsuario> {
-        const habilidadeUsuario =
-            await this.habilidadeUsuarioRepository.buscarPorId(id);
-
-        if (!habilidadeUsuario) {
-            throw new Error("Habilidade do usuário não encontrada.");
-        }
-
-        return habilidadeUsuario;
+  async listarTodos(): Promise<HabilidadeUsuario[]> {
+    try {
+      return await this.repository.listarTodos();
+    } catch (error) {
+      console.error("Erro no service ao listar habilidades do usuário:", error);
+      throw new Error("Não foi possível listar as habilidades do usuário.");
     }
+  }
 
-    async buscarPorUsuarioEHabilidade(
-        usuarioId: number,
-        habilidadeId: number
-    ): Promise<HabilidadeUsuario> {
-        const habilidadeUsuario =
-            await this.habilidadeUsuarioRepository.buscarPorUsuarioEHabilidade(
-                usuarioId,
-                habilidadeId
-            );
+  async buscarPorId(id: number): Promise<HabilidadeUsuario | null> {
+    const schema = z.number().int().positive("ID inválido");
+    const idValidated = schema.parse(id);
 
-        if (!habilidadeUsuario) {
-            throw new Error("Habilidade do usuário não encontrada.");
-        }
-
-        return habilidadeUsuario;
+    try {
+      return await this.repository.buscarPorId(idValidated);
+    } catch (error) {
+      console.error(
+        "Erro no service ao buscar habilidade do usuário por ID:",
+        error
+      );
+      throw new Error("Não foi possível buscar o registro.");
     }
+  }
 
-    async listarPorUsuario(
-        usuarioId: number
-    ): Promise<HabilidadeUsuario[]> {
-        return await this.habilidadeUsuarioRepository.listarPorUsuario(
-            usuarioId
-        );
-    }
+  async buscarPorUsuarioEHabilidade(
+    usuarioId: number,
+    habilidadeId: number
+  ): Promise<HabilidadeUsuario | null> {
+    const schema = z.object({
+      usuarioId: z.number().int().positive("UsuarioId inválido"),
+      habilidadeId: z.number().int().positive("HabilidadeId inválido"),
+    });
 
-    async listarPorHabilidade(
-        habilidadeId: number
-    ): Promise<HabilidadeUsuario[]> {
-        return await this.habilidadeUsuarioRepository.listarPorHabilidade(
-            habilidadeId
-        );
-    }
+    const validated = schema.parse({ usuarioId, habilidadeId });
 
-    async listarPorNivel(
-        nivel: number
-    ): Promise<HabilidadeUsuario[]> {
-        return await this.habilidadeUsuarioRepository.listarPorNivel(
-            nivel
-        );
+    try {
+      return await this.repository.buscarPorUsuarioEHabilidade(
+        validated.usuarioId,
+        validated.habilidadeId
+      );
+    } catch (error) {
+      console.error(
+        "Erro no service ao buscar habilidade do usuário (composta):",
+        error
+      );
+      throw new Error("Não foi possível buscar o registro.");
     }
+  }
+
+  // =========================
+  // PROGRESSO
+  // =========================
+
+  async atualizarProgresso(
+    usuarioId: number,
+    habilidadeId: number,
+    data: Partial<HabilidadeUsuario>
+  ): Promise<HabilidadeUsuario> {
+    const schema = z.object({
+      usuarioId: z.number().int().positive("UsuarioId inválido"),
+      habilidadeId: z.number().int().positive("HabilidadeId inválido"),
+    });
+
+    schema.parse({ usuarioId, habilidadeId });
+
+    try {
+      return await this.repository.atualizarProgresso(
+        usuarioId,
+        habilidadeId,
+        data
+      );
+    } catch (error) {
+      console.error(
+        "Erro no service ao atualizar progresso da habilidade:",
+        error
+      );
+      throw new Error("Não foi possível atualizar o progresso da habilidade.");
+    }
+  }
+
+  async incrementarPontuacao(
+    usuarioId: number,
+    habilidadeId: number,
+    pontos: number
+  ): Promise<HabilidadeUsuario> {
+    const schema = z.object({
+      usuarioId: z.number().int().positive("UsuarioId inválido"),
+      habilidadeId: z.number().int().positive("HabilidadeId inválido"),
+      pontos: z.number().int().positive("Pontos inválidos"),
+    });
+
+    const validated = schema.parse({ usuarioId, habilidadeId, pontos });
+
+    try {
+      return await this.repository.incrementarPontuacao(
+        validated.usuarioId,
+        validated.habilidadeId,
+        validated.pontos
+      );
+    } catch (error) {
+      console.error(
+        "Erro no service ao incrementar pontuação da habilidade:",
+        error
+      );
+      throw new Error("Não foi possível incrementar a pontuação.");
+    }
+  }
+
+  async subirNivel(
+    usuarioId: number,
+    habilidadeId: number,
+    incremento?: number
+  ): Promise<HabilidadeUsuario> {
+    const schema = z.object({
+      usuarioId: z.number().int().positive("UsuarioId inválido"),
+      habilidadeId: z.number().int().positive("HabilidadeId inválido"),
+      incremento: z.number().int().positive().optional(),
+    });
+
+    const validated = schema.parse({
+      usuarioId,
+      habilidadeId,
+      incremento,
+    });
+
+    try {
+      return await this.repository.subirNivel(
+        validated.usuarioId,
+        validated.habilidadeId,
+        validated.incremento
+      );
+    } catch (error) {
+      console.error("Erro no service ao subir nível da habilidade:", error);
+      throw new Error("Não foi possível atualizar o nível da habilidade.");
+    }
+  }
+
+  async resetarProgresso(
+    usuarioId: number,
+    habilidadeId: number
+  ): Promise<HabilidadeUsuario> {
+    const schema = z.object({
+      usuarioId: z.number().int().positive("UsuarioId inválido"),
+      habilidadeId: z.number().int().positive("HabilidadeId inválido"),
+    });
+
+    const validated = schema.parse({ usuarioId, habilidadeId });
+
+    try {
+      return await this.repository.resetarProgresso(
+        validated.usuarioId,
+        validated.habilidadeId
+      );
+    } catch (error) {
+      console.error(
+        "Erro no service ao resetar progresso da habilidade:",
+        error
+      );
+      throw new Error("Não foi possível resetar o progresso.");
+    }
+  }
 }
+
+export const usuarioHabilidadeService = new UsuarioHabilidadeService(
+  usuarioHabilidadeRepository
+);

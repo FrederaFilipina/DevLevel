@@ -1,31 +1,30 @@
 import { Router } from "express";
-
-
-import { TemaRepository } from "../repositories/temaRepository";
-import { TemaService } from "../services/temaService";
-import { TemaController } from "../controller/temaController";
+import { temaController } from "../controller/temaController";
 
 const router = Router();
 
-import { prisma } from "../prisma/prisma";
+/**
+ * Listar todos os temas
+ * GET /temas
+ */
+router.get("/", (req, res) => {
+  return temaController.listarTodos(req, res);
+});
 
-const repository = new TemaRepository(prisma);
-const service = new TemaService(repository);
-const controller = new TemaController(service);
+/**
+ * Buscar tema por ID
+ * GET /temas/:id
+ */
+router.get("/:id", (req, res) => {
+  return temaController.buscarPorId(req, res);
+});
 
-router.get(
-  "/",
-  controller.listar.bind(controller)
-);
-
-router.get(
-  "/nome/:nome",
-  controller.buscarPorNome.bind(controller)
-);
-
-router.get(
-   "/:id",
-  controller.obter.bind(controller)
-);
+/**
+ * Buscar tema por nome
+ * GET /temas/nome/:nome
+ */
+router.get("/nome/:nome", (req, res) => {
+  return temaController.buscarPorNome(req, res);
+});
 
 export default router;

@@ -1,85 +1,71 @@
-import {
-  PrismaClient,
-  type RespostaQuestao,
-} from "../prisma/generated/client";
+import type { PrismaClient, RespostaQuestao } from "../prisma/generated/client";
+import { prisma } from "../prisma/prisma";
 
-export class RespostaQuestaoRepository {
-  constructor(private readonly prisma: PrismaClient) {}
-
-  async buscarPorId(
-    id: number
-  ): Promise<RespostaQuestao | null> {
-    return await this.prisma.respostaQuestao.findUnique({
-      where: {
-        id,
-      },
-    });
+export class QuestaoRespostaRepository {
+  constructor(private readonly prisma: PrismaClient) {
+    this.prisma;
   }
 
-  async listarPorQuestao(
-    questaoId: number
-  ): Promise<RespostaQuestao[]> {
-    return await this.prisma.respostaQuestao.findMany({
-      where: {
-        questaoId,
-      },
-      orderBy: {
-        pontuacao: "desc",
-      },
-    });
+  async listarTodas(): Promise<RespostaQuestao[]> {
+    try {
+      return await this.prisma.respostaQuestao.findMany({
+        orderBy: {
+          id: "asc",
+        },
+      });
+    } catch (error) {
+      console.error("Erro ao listar respostas de questão:", error);
+      throw new Error("Não foi possível listar as respostas.");
+    }
   }
 
-  async buscarPorQuestaoETitulo(
-    questaoId: number,
-    titulo: string
-  ): Promise<RespostaQuestao | null> {
-    return await this.prisma.respostaQuestao.findFirst({
-      where: {
-        questaoId,
-        titulo,
-      },
-    });
+  async buscarPorId(id: number): Promise<RespostaQuestao | null> {
+    try {
+      return await this.prisma.respostaQuestao.findUnique({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      console.error("Erro ao buscar resposta por ID:", error);
+      throw new Error("Não foi possível buscar a resposta.");
+    }
   }
 
-  async listarMelhoresRespostas(
-    questaoId: number
-  ): Promise<RespostaQuestao[]> {
-    return await this.prisma.respostaQuestao.findMany({
-      where: {
-        questaoId,
-      },
-      orderBy: [
-        { pontuacao: "desc" },
-        { cleanCodeScore: "desc" },
-        { performanceScore: "desc" },
-        { legibilidadeScore: "desc" },
-      ],
-    });
+  async listarPorQuestao(questaoId: number): Promise<RespostaQuestao[]> {
+    try {
+      return await this.prisma.respostaQuestao.findMany({
+        where: {
+          questaoId,
+        },
+        orderBy: {
+          id: "asc",
+        },
+      });
+    } catch (error) {
+      console.error("Erro ao listar respostas por questão:", error);
+      throw new Error("Não foi possível listar as respostas da questão.");
+    }
   }
 
-  async listarPorPerformance(
-    questaoId: number
-  ): Promise<RespostaQuestao[]> {
-    return await this.prisma.respostaQuestao.findMany({
-      where: {
-        questaoId,
-      },
-      orderBy: {
-        performanceScore: "desc",
-      },
-    });
-  }
-
-  async listarPorCleanCode(
-    questaoId: number
-  ): Promise<RespostaQuestao[]> {
-    return await this.prisma.respostaQuestao.findMany({
-      where: {
-        questaoId,
-      },
-      orderBy: {
-        cleanCodeScore: "desc",
-      },
-    });
+  async buscarCorretasPorQuestao(questaoId: number): Promise<RespostaQuestao[]> {
+    try {
+      return await this.prisma.respostaQuestao.findMany({
+        where: {
+          questaoId,
+          pontuacao: {
+            gt: 0,
+          },
+        },
+        orderBy: {
+          pontuacao: "desc",
+        },
+      });
+    } catch (error) {
+      console.error("Erro ao buscar respostas corretas:", error);
+      throw new Error("Não foi possível buscar as respostas corretas.");
+    }
   }
 }
+
+export const questaoRespostaRepository = new QuestaoRespostaRepository(prisma);

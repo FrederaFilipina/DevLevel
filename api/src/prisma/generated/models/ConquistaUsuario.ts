@@ -231,6 +231,7 @@ export type ConquistaUsuarioOrderByWithRelationInput = {
 
 export type ConquistaUsuarioWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  usuarioId_conquistaId?: Prisma.ConquistaUsuarioUsuarioIdConquistaIdCompoundUniqueInput
   AND?: Prisma.ConquistaUsuarioWhereInput | Prisma.ConquistaUsuarioWhereInput[]
   OR?: Prisma.ConquistaUsuarioWhereInput[]
   NOT?: Prisma.ConquistaUsuarioWhereInput | Prisma.ConquistaUsuarioWhereInput[]
@@ -239,7 +240,7 @@ export type ConquistaUsuarioWhereUniqueInput = Prisma.AtLeast<{
   desbloqueadaEm?: Prisma.DateTimeFilter<"ConquistaUsuario"> | Date | string
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
   conquista?: Prisma.XOR<Prisma.ConquistaScalarRelationFilter, Prisma.ConquistaWhereInput>
-}, "id">
+}, "id" | "usuarioId_conquistaId">
 
 export type ConquistaUsuarioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -315,6 +316,11 @@ export type ConquistaUsuarioListRelationFilter = {
 
 export type ConquistaUsuarioOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ConquistaUsuarioUsuarioIdConquistaIdCompoundUniqueInput = {
+  usuarioId: number
+  conquistaId: number
 }
 
 export type ConquistaUsuarioCountOrderByAggregateInput = {
